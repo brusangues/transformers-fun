@@ -3,29 +3,34 @@ import torch.nn as nn
 from torch.nn import functional as F
 
 # hyperparameters
-batch_size = 16 # how many independent sequences will we process in parallel?
+batch_size = 32 # how many independent sequences will we process in parallel?
 block_size = 128 # what is the maximum context length for predictions?
-max_iters = 1000
-eval_interval = 10
+max_iters = 5000
+eval_interval = 100
 learning_rate = 3e-4
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(f"{device=}")
-eval_iters = 100
+eval_iters = 200
 n_embd = 384
-n_head = 6
-n_layer = 6
+n_head = 2
+n_layer = 2
 dropout = 0.2
+INPUT_FILE = "lovecraft.txt"
 # ------------
 
 torch.manual_seed(1337)
 
 # wget https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt
-with open('input.txt', 'r', encoding='utf-8') as f:
+with open(INPUT_FILE, 'r', encoding='utf-8') as f:
     text = f.read()
+print(f"{text[:10_000]=}")
 
 # here are all the unique characters that occur in this text
+print(f"{len(text)=}")
 chars = sorted(list(set(text)))
+print(f"{chars=}")
 vocab_size = len(chars)
+print(f"{vocab_size=}")
 # create a mapping from characters to integers
 stoi = { ch:i for i,ch in enumerate(chars) }
 itos = { i:ch for i,ch in enumerate(chars) }
@@ -222,5 +227,5 @@ for iter in range(max_iters):
 
 # generate from the model
 context = torch.zeros((1, 1), dtype=torch.long, device=device)
-print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
-#open('more.txt', 'w').write(decode(m.generate(context, max_new_tokens=10000)[0].tolist()))
+print(decode(m.generate(context, max_new_tokens=1000)[0].tolist()))
+open('more_v2.txt', 'w').write(decode(m.generate(context, max_new_tokens=10000)[0].tolist()))
