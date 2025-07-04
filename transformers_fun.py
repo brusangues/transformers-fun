@@ -1,0 +1,129 @@
+# ! pip install unidecode
+# ! git clone https://github.com/brusangues/transformers-fun.git
+import re
+from unidecode import unidecode
+import pandas as pd
+
+
+INPUT_FILE = 'transformers-fun/input.txt'
+with open(INPUT_FILE, 'r', encoding='utf-8') as f:
+    shake = f.read()
+chars = sorted(list(set(shake)))
+print(f"{len(shake)=}")
+print(f"{len(chars)=}")
+print(f"{chars=}")
+
+INPUT_FILE = 'lovecraft biblioteca vol 1.txt'
+with open(INPUT_FILE, 'r', encoding='utf-8') as f:
+    text = f.read()
+chars = sorted(list(set(text)))
+print(f"{len(text)=}")
+print(f"{len(chars)=}")
+print(f"{chars=}")
+
+id_start = re.search("DAGON", text).span(0)[0]
+print(text[id_start:id_start+1000])
+
+id_end = re.search("FONTES DOS TEXTOS", text).span(0)[0]-1
+print(text[-1000+id_end:id_end])
+
+text_cropped = text[id_start:id_end]
+
+def clean_text(s):
+    s = unidecode(s)
+    s = re.sub("\n+", "\n", s)
+    s = re.sub("\t+", "\t", s)
+    s = re.sub(" +", " ", s)
+    return s
+
+text_clean = clean_text(text_cropped)
+
+chars = sorted(list(set(text_cropped)))
+print(f"{len(text)=}")
+print(f"{len(text_cropped)=}")
+print(f"{len(chars)=}")
+print(f"{chars=}")
+
+chars = sorted(list(set(text_clean)))
+print(f"{len(text_clean)=}")
+print(f"{len(chars)=}")
+print(f"{chars=}")
+
+text_clean[:1000]
+
+
+pd.Series(list(text_clean)).value_counts().iloc[:5]
+
+pd.Series(text_clean.split()).value_counts().iloc[:5]
+
+out_file = 'lovecraft_clean.txt'
+with open(out_file, 'w') as f:
+    f.write(text_clean)
+
+# ! python -m transformers-fun.gpt
+
+# step 4300: train loss 1.4856, val loss 1.7450
+# step 4400: train loss 1.4864, val loss 1.7374
+# step 4500: train loss 1.4936, val loss 1.7504
+# step 4600: train loss 1.4835, val loss 1.7394
+# step 4700: train loss 1.4797, val loss 1.7366
+# step 4800: train loss 1.4821, val loss 1.7377
+# step 4900: train loss 1.4796, val loss 1.7393
+# step 4999: train loss 1.4787, val loss 1.7401
+
+# Pockrift that vestant, and man, and I was hated toward
+# the plor escoxings of some of my eyed, fronted from feature resolved, away, he
+# cooliness
+# resud and
+# poetratril ty on h for Yel thatewever mad y kill of Hed, and agol,
+# Bown in this arow by hamber in Its had been one. Singular with been dream to say woman had visited, been began to to repr from thust twife I heared without sented and
+# time I say wrear awaked this with a first wered
+# emuture on the Marlau
+# Amulucia beings and the hill ong hand sens
+
+# 93% 2800/3000 [05:15<00:11, 16.91it/s]step 2800: train loss 1.2919, val loss 1.3542
+#  97% 2900/3000 [05:26<00:05, 16.95it/s]step 2900: train loss 1.2897, val loss 1.3596
+# 100% 2998/3000 [05:37<00:00, 16.81it/s]step 2999: train loss 1.2788, val loss 1.3571
+# 100% 3000/3000 [05:43<00:00,  8.74it/s]
+# 	-- e um de matermineural os bulgaos, eram vi	me ainda e a salinha que das mecantaturas notar da poucas cruxas e forma perceber a estu-se vidrada pelo alcedade. O outrorro da ua Saoth Ceam cologite, pero de o meu pedixar demoniaco que havia mais e dia -- maior havia procificio de funde tudo o que dessar qualee casasse tita. Elicho que tampoucos de dilher estojar suasseme arca do caso mencas passiticos de vez ou ouvida esso da marcacaba intimagem de umao auciotia que um inoxeginquea Innsmouth -- ate cercoes proprios e pequartes intervas os eram tojoveiras ficios vertas a universidadedores."
+# 	Ao dr. Haviam entado ende escontrei de a primite incipio da estrada anoitetura."
+# 	Os homens me sobreveus im suurpesso esponhavo relonge de para a gniguida da de ruas plelas agenira pessoas. Senome da contua casa da vomentatia, era uma se blasfibro natimos visas a vidra chegejado a alcubar e a por doibilidanca, percebi, lugarao da mais acidade do que mundo poderia os aquele com unda havia um perado quecidio um tudo, aguanto deslocultas parecia, quase se essas seita pelensa exercantecta e titeo bem-no demoria uma igreja restossimos de ficar bem senolvidas. Ao mais a croxplar dar poderio. Alguns ca abas atas ajuntas. Sem aspensar ao tetras estremecivio, e outro anfimada periedade que aparecader, arres do que eu estivesse angulh. Havia meus superior dizer mais repeticas de que pu por jamais ou terrmou sempre e eles, hou revelou-se para o convecimentos e parecia de rumo amento a visitar descoberte -- a pessoa coisa em volta ausava se pseudomente.
+# 	Nunca apodrar uma cavez de discutidao algumas prega-descientos e um marca. Proi por onquor nem. O tema que talvez dirocultos pedra em 15 de. Esta crias naveso vaziam as uma parte, poisa as cregamentificaram essencia viros da Umanidade novio grorossados, nas agua criaturas que estoves as protalidades de fora tracs a ingraves tabuas facos e garordaves e nas melhor que tinha de livradade, todos os paredeser ponto ver o palios esquista e nao solvia. Nao eu tante quem nao os homens flascou a vence-lhe conji gargafia; se, ou nenhum ou rarto, comentado descuidado pela cuja acoisa minha estante coisa praca tocabeu uma doastre.
+# 	Pecemitisficaca em parte teve feitude dui algum doculo aquele ja partimos multidos prometentas dar minha davam para lua. Que tinho contindo idiam igreja, em ainda vas la tras! O El.. Isso Waite simpoles tambe muita favia ouvi soes es ilhetivos dams, e feituo em relevos seu cha quase um parte avir antigustrais como uma forca que srae semimada estigios; altguna listr de repotecnisofundos -- para qualquer nao boas mais suporem que os propraximo cometer do mais impedia ou em deseridos antigo muiterras elenhas humanas que o incretimante o solto esas homens que venem a minhacoes ou nao traneo-ra da das tenue ninguemoria o contico. Foi uma fortesceu du ano som sicas em deve temposio. Enhuma vi criada crenciados minuziu com o maioribolio foco volta da marca...
+# 	Entao porem e maparecer no temiteria um alugar esquero; que supos iltimagens lumistram os escritos promposeguia, na amente obscura destruida, e possialhos com todos interrores um ais momento na nos.
+# 	"Tud, ergupouco ruchaminato que de tambem contrno e nao dia -- pr'ofece saba ficar entao as mundorma e tentacios de viagas repledoradas -- que nao mais a aguina meimia;
+# 	Essim paregas morrosacos por dificilitivos as nositeralios fruntei que e que Wasl Spoximanto-se as negra. Meu nossa vez maior aprofundaria. Enao intervos dever aude contortan o vila. Quanto inssolverado pilar coios sem as labia da estalindo com tamem trecido a alticao integravel dentropremento ciencia sobsse e perceber em vertigia que ainda mais torres. Em a Alguel entao a funcoa esse decepcoesos tecnicos e oriamentosos entidao de mais alugar -- ao seguinte passos as pavoros invoofumes e talas superipnentes jornas -- um direta fios haviam tempo tremerenas pra meior detrastalhees o Ambora fiqueia que conheceiro de os elementosos; epois as milogias depois de trestou enle que cinavam os lobjetos insistigantes.
+# 	O estava nao Deve de, no enorme terror um incanamente indefinitivel de conseguro e eu a cacaba -- depode silumir erei chavia mondestria de e sua multrios, e como a visitas encontrei com meus sens dado adminha interio, nenrolado pedra meada muito de funcaca-se terra pelo menos mal-chas detacuriosas falavar um tampo da se cuida. Dimpessou de um vapor pedrmina e, com metudalheiro, porem algum e e do mador, no edra em latico apilhar os rovicos do a procfo humana epor levecis, porem algum que se apincipito contita desloferra que intentemeriva a enterolacao.
+# 	Ao novo decidado, nao desda epocabuir que aberta nos amontoas e mantinha morto lugares do Marsh, sonhao e algurer visou na momuninha em cripata de William toda a na escar das de um chavor. O viral estava certal que o fora dia 2 gigalou a navipude desava de sem estanhos o informatos tilados espensadas extremos forca. Ah. As mas parecia fus jeito que se a oestes as noite locos logo a trustuto de calar palegar daqui tenta imais lhe ensatua falar. Os meundo pontos de uma enorme conseguio sao morte ninguem de sindo livrosia. Eu ve fazia pesairo, uma vez sentir que uma conjuntodeu idezia a cousa em direcionas sao de grupo-se, esprerancar o coral, nao sobre vi com umas alongente e intrituivosa atotecar nas. Acorachas nizuir umo era agarduvida para ao modes espereito. Os ceditarios das cresceiranitas boatos. O conhecido biblinos. Minha vinha made criatas de memoria, mesmo que ou es eu nunca em alivio am sobre da casa desagar prefluxa e o grande deslocuculta a que as menliar que ele es fosse erguia vislumprendendo espedrado camiticou no meso que seria, em aquisiptico de um ouconsto.
+# 	Quantro que nadve, mesmo haverias feitas e apenas destia estidade cosmicas que nenhumo? Proxi um robustante intelidades e mens go cheiros. Frcou em montantos a concidade de ruinaca-- ao sua criptura dasquela atera e hesistivua coisa a por mais peraturasticacao; e e o ja estava aposentos grandes e portos, milas de um ana minha de esma voz que os davagada ocontorna a certas, mas recocrintoueitas arras das tituacoes de antes tocrifos Satreeticosos ao plata das excempessoas pesquenos ou pe aldmitima solte, da Torroa de intigosa; assim como que se viros ate uma dinaca e volto escurance faco e as ruas pela da relacao do uns granito momento imaginave-los proximo um filho -- vintemertido internecar os gredMencaNothandos ramuscril.
+# 	A aberta do de Emplanetidade do estila ferologado familiar os pesolores da gigatinta.
+# 	Que Wingate partico.
+# 	Nofo dia as deixaotas escava em direcio a nsopique de perdencedo em inacao e furugadoes ficarissem de trape e judiziam o fretar alguma e ateve a do que ebid?
+# 	Os sinistros, com"Prim, que la intefase vez o mais de terivelonitico as encas oemento ao tras enoaves ate da noite tinha trojavem ou que proca ao demeras em direorestarios de trinto perguntao de o unico mais possivel rele meno"es de que propriava inconstruxa meus poucos persarado e do ro panto civilos em um esconho basta-la. Dessim alquelquer devidencia um considenciavel. Muito aprendeu-se a paracia acendendo entermealdidacoes nas ruinas discos da criaturausencia de enordestras e hieas rudicas comertadas certas em altiginas relamos.
+# 	THava que as correntosa. Quaro e pena edissinuado a cidela de aso ver havia perodudios inveis verturas deguas ou mar; cavolura como, mo obtei-imo a deteriptoginar de uma fim preprodema forcar a motiva aliga elher atudas aquele agosta eme incainte. Armei um depavantado interipturoso. Em mantem juvem distante; o lobio de no um panulo lhao do jar no pe de sentifica do censuro minuto memo alem de ter mao meu ona coisa apoentar o pungo da mente, a curva semitianda das ruaseira muito e parecia constil descometa na Mushilo, poisa vao na abusca escriva baixa e uns sabia  quanto tijolongatinha --, ademonstras que ele nao e ninquiverdadem monstruosou e espe estranha nexotes curpos cilorados corregalicosas ruinas vezves apelo grum detalhes sinterfante tratas de uma universidencia contramente delevem-chava o avoto, que adezas onde lantes.
+# 	Nao causia fetez meio um estranho integrastanteo quase ina estava octo examinadas outividemos cenarias de corve a incberte maria da mes precie de qualquer relampanhava que e erguidar e eparendeu-me a tinha podinciada evista de familia de coisa exouteiral esparso da pofutida. Tambem -- importava dizio;, presentem cobolons fora deve ter carreferir no escuro. Ter saibas de penso. Todo os pas as carcos jaleridexe soburacoes a residade em recipioderaria e solheirogo entros de enterrecidentao, e, com tenha como a em agravar nas a impressao reduzi-me por um curo intivel, dive ser porrem onscosivel lua dezominaca do parte sos primeiro gritos de afirmarita. Que nao sompre horas de visse de seus exaustivas, eu co diasse -- quem outro estentiuito em 18118 vo uns estava a um amaido neste. Angestoria jorrer uas rua vezes e simpulando em uminefrou enfinal quanto. Uma vez creptante e deixar perguntes que a pareceu. A mae produzia dos acessem a porta cda de desaparecia aindada e comecada forca a uma fora pessao, e enoocisar sem naogica nao sotuvia algo quantura e os cicavamentos semeravelmente conserquejadades a liguar-- intufanpina. O profestente parecipios e a um ceu concontor o Colme, esto de esta deu soforcos meu havia chapite os amestados ou tipos donas, porem cem instamestificio em Arkas Statot Lambralaca o uma ilhoteira cordo potemida e decsencia de inuridade obje escrevia a uma se aguiadavel esquase foisidade em contra rrenuncio para da univa dentre o sigilito, as vezes descrepitivoes da cosas lei; pois vais descoberta es e desenvolvareados primeiros que provos e um tribulhaco ao demonaveigente joes foi uma mais diao e vegetacao ao meu vi muito respetico que muito intexperio, proxima -- mas ouror, enquanto a mais pouco fazer minhas a na que minha outro a enxestrutura insoltar o qualquer sosto be devidencerar acrer ao filho, e reitompantor temicos de serimples tr uma grande grande malignaca de dista a maiori
+
+# step 2600: train loss 1.1724, val loss 1.3096
+# step 2700: train loss 1.1618, val loss 1.3015
+# step 2800: train loss 1.1660, val loss 1.3030
+# step 2900: train loss 1.1669, val loss 1.3104
+# step 2999: train loss 1.1588, val loss 1.3068
+# 	Era eu forma a minha ou toda por obriguem vi	m casebilidade; e mais pedas que nao me dentro expressas no que eu nao vai estava avendi-se a amarelonginal emante umomente pode um partefeixado que veverse com o mente. Acha muitas como jovencido, que pia -- mas conseguia Harris, e mardeira tao ou nosso subiu nada passagens de malicha como topo. Esse o Deus, estojo recebi que um la, caso mencava senito fosse vindo Duteentemente agua; e todo o imagenear uma gaudica mais. Entinha usances historia. Essa criaturas proprias e pesquisitadas avancos eram enoros repiticos frequentas e decepcao do tercado quartrava avendado e de escontato de algum torigem profundezas que nao cousavam distante emercia. Cerga mas um estranho io conseguia, menos instante vitidade de afigurentes e algum sisos. Sentido as pessoas carratendo-me permentiveis e bloceiros nativos vistas e ignorantes de e Innsmouth, a poe de um amanha, percebi pouco ao fachada arcom das outras nas por unico ou coered. Wilhath -- e enquanto somentio um duro inexpesadelo ou enterio. Tamantho fisicou os seitos, lensabares de eve-aditas oubra no que passou nicasseiror, os enquanto reporeciamos de policiaram sua possuia escriva e o mel instancia quando ajueelo o estacio do silhuetido estridos e os estudiosa familiapsida bruxario para a estrar.
+# 	Se aquele vestiaturada nao havia deixadas de Arkham-se estar pelo das figuras prisioneiras lontadamente ocurioso culto virmico. Em sua em um estuto camera daquele tenhas outros parece deram-se impo pertas que um enstrumenso tenue evivente de mera barbuta. Armitage, ou ineconhecimentos o algumal embrando escuro. A universa fera de habiar.
+# 	Outros tratamentes Herrarios, tinha de recendido. Esse criantes e Ancioes, as ruinas que poderiam certas a vezes elvas eu tor de nada..
+# 	Vi o menos o grossirados, tamem concerto que os mesmo as areiatura de la tima do texto antigos da razao... Entao garoticas rependras quimeras catativas; a um grandividue e parece-lo monstruoso algos em que a munda-fora, e diviseita a davem nao os homens fluarem nem corpos e tornarias de jornar; a estridade que poderes muita-las.
+# 	"Por eu nao sabia que me me acerteza proprietariam eu vi ontado, depoisito tra a cidade, a metroz. A musera indagram provocadar-me em ano me direcidos prometentas dar minhas  vitimas de (e outro lado de greval inagina com uma casa valavra de cadernas de com uma simples e substancia fevida ainda e medico todas as murame e sumiram e ridessem crivilas, um para mais havia no sobrecidido caincia que saversa muideza; mais invotavel fisica da de tecnia, uma cozinhansa Cronirica da Naturyport; e disse possibilidade assim nenhuma imaginacao ou em desertimento, e amyl estava le nao ha seu tinha experiencao. Por la, o sas homem nao camainha que eu havia ninguem enorme algar, enque vi outora morte torno com uma fortesse deu anomalidado.
+# 	Depois que estava na esparriedenciara necessava iro como a cantaca de enformavam-me a marca baneira do ia; e em panices nos algo de atras daqueles horror possivel de minha elemes, se em dirigidas rem as funcoes ignotorais.
+# O jovem,
+# 	"As vezes a altara-diato por uma horendunca sumiu para constasse um, ergupou e rudindo atiracava; mas semelhanca nao ofdinho apr'orkl. Na biblioteca. Uma emana direcateria mal de viaga irrelada com toda plenosos pra casa naoitimar;
+# 	Eso Deus para muitos contes dacapazes, que as noiictas a linguaguem mutito supersticio dos que bastas, aos dr. Filbrintamente atras dos inteirais da Grande Res (em e meu tio, o vilarejou vento conhecido pilar coloqueira da maca daveza lima do que e metrosigo a altura direita. Deus, repertencao a explicao ostas perceberam macrelacas horriveis temorial. A porte agua e do um chapao agora decedor? Nem mesmo algum la efixam que clara. Os olharo ao para comecia necessiva fica. Embora nossa em Federaca e fachado do Ancional Hill cinco Uma talegra do Whateley, as provaveiras trazia e escolhidos pocos enquano tera estar lentes passavam em po  nao melogia cingicantico e homem lenhas cinas profundos viculosas, e negando em toda as e atres.
+# 	Mesmo assim estranhos que manha indexplicave e todos ou muito bafaciliar. Assuntos silabe ate igrejas douto. Mais dize porem tornei, e como sao em vista desabado, a esse, no exdante foramente parenente a dos despacadas como o totelecias ate adenciada os tonde sou de talhes reclarmentes mates as insuperficiei para o celebre interes minha, embora tudesti prode minha escreverdade do tenho da comodado as palpanha-las e suploradao afetheante em cropoeira, as primeiras expresao que o Wilcox titude lingua que indecifrequipadas a montuacoes, construchidava, nao dera em tanhao hia debadoninos a pontia em caminhas natoricas muito desses sonhos e planetas fros no momento se outros calamacapos entos na criativa diforme. O mar, e o virtiLeton parecia em inversa a fasturida e gela, mas nao tavo de sua estante. Quinze antio tive levou nao ficava o meu filho mehoro. Mas parecia fus jura. Cocerta e ao do morno maxima orla. Que duse trem grandas de garotura de uma intidiade encalhidas ate para cada vencerecer ao que redicava nao sao no convigar algum padra manuria em frente. Segundo o que ficam das em zom apaciao bruxas que uma vela supremana completacao; e e, -- os outrora estrituindo nao sobrevivia um sapaz de muito parecido do mais umor encontra-la de mimento cao era agarrupo consal?
+# 	Foi na esponsa tenuebre anos Jrohansen, no parata que az vestiando as primeiram. Minha voca cabeca e um sobrem mais similiterioso -- e um barulho a lembram sobre da cidade caracapor longinquo da lanterna e conduzia-furta.
+# 	Givejoentes references dejamistinacao nao de espede de camivinhos o pessoas frases, em ao jarticulo, Mas nadara os nassciosos, das hieroglifortes de setavam luas vintenatias a legia cosmicao que nenhuma fica cousa obseque peixe de tudo es ensamo tres esquaridade concebiveis passavam-sem de musgicoes assas rostos e aromas das ruinadas de vultimas. Um ma manha emasa estando outro conjuroura dabertos, e ao redor dos dos trincos Anuseans mitos de estalencionando da Terra o vilarejo, com humantes havia nutence-laria de asao a sombrado. Em nate revestia-se projectrava-lhe na se acompanhava pela montanhosa "Mas nao horreu, dava um ao munce momentos proces nos filhos olhares de manas melodiam faria eram acenas morrelhadas, ao sul me do unico.
+# 	Johou lhes ficaram atrancados em temporar como ansemos me dificil estranhas de nao muito al rangem..lo
+# 	A historia pela molha fortes da estada flueloncia familia, os pensos comecar o tipo imundo Wingate partico.
+# 	Nefrar, ape desde tecificar nem em um detalhe eque no vermelheMoric pedra nenhuma nenhum imaginaro de trans e jubizam ao frente algorada atente. Dunedio poder luxilia havia cas", a reter comisticas dessas espiriedadeiradas em vez tentamas menao poderia em a experiondar de trinho. No avo que eu nao chegou as rainda daquorisada, lum dos mecanicos dao desolatario. Passava dassim e menos tinham complexos e inconstruxaria vido causentas, e entao repentemente surss de estatado nao ter que assam e lutra diante populo do mar um intacto e silhuetas e comoviados, para o renche-la! Haldia comertei e igarres com a inquieta perna a minha dencostrada comunidades superstavam certas e que explicar estaria alfabequenas correntes inumaroces e de dado dedicaracao a esta do velho os mario e poderia conversa era mua coberturosidao, e mas inclows Chinas na Netra Hurch wry Street em preprodendo e fora pelo capitao e lhes vitimas que proporcoes e incoroantam ee fugure a coraciais que as outras filha magnicadasse parato louco cem Bruxas na Terra Coisa e noite de desfigaradas com uma miduna mais parecer as nemos parose quimanava, no porao moribuinha real de mestro ou daqueles resfriu nas centas. Armitages reptilicas nao periodei era pra ouvia; eu me alguma fotese uningtura ligada e indiculavel repeticoes. Uma susspeitude fericiento sao passar sotar que euava estar se nenhum buscavo coorrido prefeita durante sob alienverias interes detalhes singulares horas saidas do vilarejos estacoes de sua exltura, segundariam por condezas onde la manha de desde Wilbur, meio a alubratonal dos para direcao?
+# 	Outros eras constra e Salem Eis e destro, Ludag Heary Arkh, e brux hastoasse mes pra um relatanto. Irexaminava que dele transforma a toda a mesa tipica. Estava de vinda ate hora de Bosticoes, e em alguns Marcha publicou-se vidra-se de Talvissido uma beira em coberta um mitolo ouser afatica e e outros mimentanicos de penso. Tambem longei acabaforial requencia orico; e um bismo recordidioes religinas cegaras de Aylesbury Oestlonal Sawyer, com tenha criptade viagem abour a um dermaineve acetido no coruejo, e tolhei encontra a basonacoes vislumbrados, cujas mealsos, sobri que parecem sentar parativa pensaras, providencias muitas coisas e assim, uma vez alienigena quem outros ate e um me peculiarejoso e fazeram um ameador la supena dos parecia relacao.
+# 	Esstindos com comento peixes ou se de irguas massoas em creptanos e deixos para dessutoes.
+# 	Profesar, mas porem mao os a neio de ponte cda de desaparecia ainesa erocurente a epoca da Toda alcura, -- consolcitram dispogoreira nem pentaqueo o havuel e os curviuisicos semeravam -- nenhum muco elemerava como certa coa pantura; e, dizendas que aporeleira imaginar no e dua me retero conhecida pouco com ter lenha buncacao.
+# 	Quando Baishoth tinha sonham uma em estibliciosas a irancao atrus atitavam -- aquele homem pulme
