@@ -1,0 +1,2 @@
+pip install gpustat
+gpustat -cp -i

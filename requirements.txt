@@ -1,2 +1,5 @@
 unidecode
-pandas
+tqdm
+torch
+torchvision
+torchaudio 
