@@ -2,4 +2,7 @@ unidecode
 tqdm
 torch
 torchvision
-torchaudio 
+torchaudio
+pyyaml
+jupyter
+pandas

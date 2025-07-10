@@ -28,8 +28,9 @@ print(f"{len(text)=} {len(chars)=}\n{chars=}")
 # Limpando algumas repetições de espaços, quebras de linha e tabulações
 def clean_text(s):
     s = unidecode(s)
+    s = re.sub("[&/]", " ", s)
     s = re.sub("\n+", "\n", s)
-    s = re.sub("\t+", "\t", s)
+    s = re.sub("\t+", " ", s)
     s = re.sub(" +", " ", s)
     return s
 
