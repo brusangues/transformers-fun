@@ -4,8 +4,9 @@ import torch.nn as nn
 from torch.nn import functional as F
 from tqdm import tqdm
 import yaml
+import json
 
-from src.data_loader import DataLoader
+from src.data_loader import DataLoader, DataLoaderNgram
 from src.gpt_v0 import GPTLanguageModel
 
 
@@ -55,13 +56,13 @@ def training_loop(
 ):
     print("Starting training loop...")
     print(f"Parameters: {locals()}")
-    data_loader = DataLoader(context_len, batch_size, device)
+    data_loader = DataLoaderNgram(context_len, batch_size, device)
     vocab_size, encode, decode = data_loader.load_data(path_input)
 
     @torch.no_grad()
-    def estimate_loss():
+    def estimate_loss(iteration=0):
         print("Estimating loss...")
-        out = {}
+        out = {"iteration": iteration}
         model.eval()
         for split in ["train", "val"]:
             losses = torch.zeros(eval_iters)
@@ -69,8 +70,12 @@ def training_loop(
                 X, Y = data_loader.get_batch(split)
                 logits, loss = model(X, Y)
                 losses[k] = loss.item()
-            out[split] = losses.mean()
+            out[split] = float(losses.mean())
         model.train()
+        print(
+            f"step {iteration}: train loss {out['train']:.4f},"
+            f" val loss {out['val']:.4f}"
+        )
         return out
 
     model = GPTLanguageModel(
@@ -101,11 +106,8 @@ def training_loop(
         # every once in a while evaluate the loss on train and val sets
         if iter % eval_interval == 0 or iter == max_iters - 1:
             print()
-            losses = estimate_loss()
+            losses = estimate_loss(iter)
             losses_list.append(losses)
-            print(
-                f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}"
-            )
 
         # sample a batch of data
         xb, yb = data_loader.get_batch("train")
@@ -123,6 +125,8 @@ def training_loop(
                 checkpoint_name = f"{path_save_model}_{iter}.pth"
                 print(f"Saving checkpoint to {checkpoint_name}")
                 torch.save(m.state_dict(), checkpoint_name)
+                with open(path_save_model + "_losses.json", "w") as f:
+                    json.dump(losses_list, f)
 
     print("Training finished. Generating text:")
     context = torch.zeros((1, 1), dtype=torch.long, device=device)
