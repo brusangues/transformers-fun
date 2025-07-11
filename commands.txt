@@ -1,5 +1,6 @@
 pip install uv
 uv pip install torch torchvision torchaudio -U --index-url https://download.pytorch.org/whl/cu128
+uv pip install torch torchvision matplotlib tensorboard
 uv pip install -r requirements.txt
 
 pip install gpustat

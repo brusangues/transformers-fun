@@ -1,0 +1,19 @@
+# hyperparameters
+batch_size: 160  # how many independent sequences will we process in parallel?
+context_len: 128  # what is the maximum context length for predictions?
+learning_rate: 0.004
+max_iters: 2000
+eval_interval: 100
+save_interval: 100
+eval_iters: 10
+n_embd: 512
+n_head: 2
+n_layer: 2
+dropout: 0.1
+# other params
+path_input: "data/lovecraft_ptbr_clean.txt"
+n_tokens_generate: 1000
+name: "v1"
+path_load_model: "artifacts/lovecraft_ngram_v1_400_starting.pth"
+path_save_model: "artifacts/lovecraft_ngram_v1"  # "artifacts/gpt_model_v4.pth"
+path_generate_output: "output/more_v7.txt"
