@@ -57,6 +57,7 @@ def training_loop(
     n_tokens_generate=None,
     path_generate_output=None,
     name="",
+    start_iter=0,
     **kwargs,
 ):
     print("Starting training loop...")
@@ -65,25 +66,25 @@ def training_loop(
 
     now = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     writer = SummaryWriter(log_dir=f"runs/{name}/{now}")
-    writer.add_text("params", str(locals_), 0)
+    writer.add_text("params", str(locals_), start_iter)
     writer.flush()
 
     data_loader = DataLoaderNgram(context_len, batch_size, device)
     vocab_size, encode, decode = data_loader.load_data(path_input)
 
-    def profile(iteration=0):
+    def profile(iter=0):
         info = nvmlDeviceGetMemoryInfo(nvmlDeviceGetHandleByIndex(0))
         gpu_free = round(info.free / 1024**2, 2)
         gpu_used = round(info.used / 1024**2, 2)
         gpu_temp = torch.cuda.temperature()
-        writer.add_scalar("gpu_free_memory", gpu_free, iteration)
-        writer.add_scalar("gpu_used_memory", gpu_used, iteration)
-        writer.add_scalar("gpu_temperature", gpu_temp, iteration)
+        writer.add_scalar("gpu_free_memory", gpu_free, iter)
+        writer.add_scalar("gpu_used_memory", gpu_used, iter)
+        writer.add_scalar("gpu_temperature", gpu_temp, iter)
 
     @torch.no_grad()
-    def estimate_loss(iteration=0):
+    def estimate_loss(iter=0):
         print("Estimating loss...")
-        out = {"iteration": iteration}
+        out = {"iter": iter}
         model.eval()
         for split in ["train", "val"]:
             losses = torch.zeros(eval_iters)
@@ -94,8 +95,7 @@ def training_loop(
             out[split] = float(losses.mean())
         model.train()
         print(
-            f"step {iteration}: train loss {out['train']:.4f},"
-            f" val loss {out['val']:.4f}"
+            f"step {iter}: train loss {out['train']:.4f}," f" val loss {out['val']:.4f}"
         )
         return out
 
@@ -131,7 +131,12 @@ def training_loop(
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
 
     model.train()
-    for iter in tqdm(range(max_iters), total=max_iters):
+    for iter in tqdm(
+        range(start_iter, start_iter + max_iters),
+        desc="Training",
+        total=max_iters,
+        # initial=start_iter,
+    ):
         # sample a batch of data
         xb, yb = data_loader.get_batch("train")
 
@@ -144,7 +149,7 @@ def training_loop(
         profile(iter)
 
         # every once in a while evaluate the loss on train and val sets
-        if iter % eval_interval == 0 or iter == max_iters - 1:
+        if iter % eval_interval == 0 or iter == start_iter + max_iters - 1:
             print()
             losses = estimate_loss(iter)
             writer.add_scalar("loss_train_estimated", losses["train"], iter)
@@ -152,10 +157,8 @@ def training_loop(
             generated_text = generate_sample()
             writer.add_text("generated_text", generated_text, iter)
 
-        # SAVING
-        if iter != 0 and (iter % save_interval == 0 or iter == max_iters - 1):
             # save model
-            if path_save_model:
+            if iter != start_iter and path_save_model:
                 checkpoint_name = f"{path_save_model}_{iter}.pth"
                 print(f"Saving checkpoint to {checkpoint_name}")
                 torch.save(m.state_dict(), checkpoint_name)

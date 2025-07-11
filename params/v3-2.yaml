@@ -1,0 +1,21 @@
+# Model parameters
+batch_size: 130  # independent sequences processed in parallel
+context_len: 160  # maximum token context length
+n_embd: 512  # linear layers size
+n_head: 3  # parallel attention heads
+n_layer: 3  # attention blocks in sequence
+dropout: 0.15
+# Training parameters
+learning_rate: 0.002
+max_iters: 3000
+eval_interval: 50
+save_interval: 50
+eval_iters: 10
+# Other parameters
+path_input: "data/lovecraft_ptbr_clean.txt"
+name: "v3"
+start_iter: 2000
+path_load_model: "artifacts/lovecraft_ngram_v3_1999_starting.pth"
+path_save_model: "artifacts/lovecraft_ngram_v3"  # "artifacts/gpt_model_v4.pth"
+path_generate_output: "output/lovecraft_ngram_v3.txt"
+n_tokens_generate: 1000
