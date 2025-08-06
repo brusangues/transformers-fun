@@ -5,3 +5,7 @@ uv pip install -r requirements.txt
 
 pip install gpustat
 gpustat -cp -i
+
+python train.py v5
+
+tensorboard --logdir=runs

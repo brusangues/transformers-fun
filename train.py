@@ -77,9 +77,9 @@ def training_loop(
         gpu_free = round(info.free / 1024**2, 2)
         gpu_used = round(info.used / 1024**2, 2)
         gpu_temp = torch.cuda.temperature()
-        writer.add_scalar("gpu_free_memory", gpu_free, iter)
-        writer.add_scalar("gpu_used_memory", gpu_used, iter)
-        writer.add_scalar("gpu_temperature", gpu_temp, iter)
+        writer.add_scalar("gpu/free_memory", gpu_free, iter)
+        writer.add_scalar("gpu/used_memory", gpu_used, iter)
+        writer.add_scalar("gpu/temperature", gpu_temp, iter)
 
     @torch.no_grad()
     def estimate_loss(iter=0):
@@ -145,15 +145,15 @@ def training_loop(
         optimizer.zero_grad(set_to_none=True)
         loss.backward()
         optimizer.step()
-        writer.add_scalar("loss_train", float(loss.mean()), iter)
+        writer.add_scalar("loss/train", float(loss.mean()), iter)
         profile(iter)
 
         # every once in a while evaluate the loss on train and val sets
         if iter % eval_interval == 0 or iter == start_iter + max_iters - 1:
             print()
             losses = estimate_loss(iter)
-            writer.add_scalar("loss_train_estimated", losses["train"], iter)
-            writer.add_scalar("loss_val", losses["val"], iter)
+            writer.add_scalar("loss/train_estimated", losses["train"], iter)
+            writer.add_scalar("loss/val", losses["val"], iter)
             generated_text = generate_sample()
             writer.add_text("generated_text", generated_text, iter)
 
