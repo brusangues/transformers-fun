@@ -101,8 +101,11 @@ class DataLoaderNgram:
         chars = sorted(list(set(text)))
         print(f"{len(chars)=} {chars=}")
 
-        tokens = sorted(list(set(self.tokenize(text))))
-        print(f"{tokens[:12]=}")
+        tokens_full = self.tokenize(text)
+        print(f"{len(tokens_full)=} {tokens_full[:300]=}")
+
+        tokens = sorted(list(set(tokens_full)))
+        print(f"{tokens[:300]=}")
         vocab_size = len(tokens)
         print(f"{vocab_size=}")
         estimated_starting_loss = -torch.log(torch.ones(1) / vocab_size).item()
