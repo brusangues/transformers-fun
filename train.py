@@ -10,7 +10,7 @@ import json
 from copy import deepcopy
 from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetMemoryInfo
 
-from src.data_loader import DataLoader, DataLoaderNgram
+from src.data_loader import DataLoader, DataLoaderNgram, DataLoaderSimpleBpe
 from src.gpt_v0 import GPTLanguageModel
 
 
@@ -58,6 +58,7 @@ def training_loop(
     path_generate_output=None,
     name="",
     start_iter=0,
+    context="",
     **kwargs,
 ):
     print("Starting training loop...")
@@ -69,7 +70,7 @@ def training_loop(
     writer.add_text("params", str(locals_), start_iter)
     writer.flush()
 
-    data_loader = DataLoaderNgram(context_len, batch_size, device)
+    data_loader = DataLoaderSimpleBpe(context_len, batch_size, device)
     vocab_size, encode, decode = data_loader.load_data(path_input)
 
     def profile(iter=0):
@@ -100,8 +101,12 @@ def training_loop(
         return out
 
     @torch.no_grad()
-    def generate_sample(n_tokens_generate=100):
-        context = torch.zeros((1, 1), dtype=torch.long, device=device)
+    def generate_sample(context: str = "", n_tokens_generate=100):
+        print(f"Generating {n_tokens_generate} tokens from {context=}")
+        if context:
+            context = torch.tensor(encode(context), dtype=torch.long, device=device).unsqueeze(0)
+        else:
+            context = torch.zeros((1, 1), dtype=torch.long, device=device)
         generated_text = decode(
             m.generate(context, max_new_tokens=n_tokens_generate)[0].tolist()
         )
@@ -154,7 +159,7 @@ def training_loop(
             losses = estimate_loss(iter)
             writer.add_scalar("loss/train_estimated", losses["train"], iter)
             writer.add_scalar("loss/val", losses["val"], iter)
-            generated_text = generate_sample()
+            generated_text = generate_sample(context)
             writer.add_text("generated_text", generated_text, iter)
 
             # save model
@@ -167,7 +172,7 @@ def training_loop(
     print("Training finished. Generating text:")
 
     # generate from the model
-    generated_text = generate_sample(n_tokens_generate)
+    generated_text = generate_sample(context, n_tokens_generate)
     if path_generate_output:
         print(f"Saving generated text to {path_generate_output}")
         open(path_generate_output, "w").write(generated_text)
