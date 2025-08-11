@@ -159,33 +159,6 @@ class DataLoaderSimpleBpe:
         self.device = device
         self.tokenizer = joblib.load("artifacts/tokenizer_simple_bpe.joblib")
 
-    def ngrams(self, word):
-        n_odd_chars = len(word) % self.n_gram
-        if n_odd_chars > 0:
-            pad = self.n_gram - n_odd_chars
-            word += " " * pad
-        n_gram_list = [
-            word[i : i + self.n_gram] for i in range(0, len(word), self.n_gram)
-        ]
-        return n_gram_list
-
-    def tokenize(self, text_sample):
-        new_string = re.sub("(\s)", "\\1[cut]", text_sample)
-        words = new_string.split("[cut]")
-        # words = text_sample.split()
-        words = [w for w in words if w != "" and w != " "]
-        words = [re.sub(" +$", " ", re.sub("$", " ", w)) for w in words]
-        # print(words)
-        n_grams_list = []
-        for w in words:
-            n_grams_list.extend(self.ngrams(w))
-        n_grams_list
-        return n_grams_list
-
-    def detokenize(self, n_grams_list):
-        text = "".join(n_grams_list)
-        return re.sub(" +", " ", text)
-
     def load_data(self, path_input):
         print("load_data...")
         with open(path_input, "r", encoding="utf-8") as f:
@@ -197,7 +170,7 @@ class DataLoaderSimpleBpe:
         chars = sorted(list(set(text)))
         print(f"{len(chars)=} {chars=}")
 
-        tokens_full = self.tokenizer.encode(text)
+        tokens_full = self.tokenizer.encode(text, visualise=None)
         print(f"{len(tokens_full)=} {tokens_full[:300]=}")
 
         tokens = sorted(list(set(tokens_full)))

@@ -83,21 +83,19 @@ def training_loop(
         writer.add_scalar("gpu/temperature", gpu_temp, iter)
 
     @torch.no_grad()
-    def estimate_loss(iter=0):
+    def estimate_loss(iter=0, splits=["train", "val"]):
         print("Estimating loss...")
         out = {"iter": iter}
         model.eval()
-        for split in ["train", "val"]:
+        for split in splits:
             losses = torch.zeros(eval_iters)
             for k in range(eval_iters):
                 X, Y = data_loader.get_batch(split)
                 logits, loss = model(X, Y)
                 losses[k] = loss.item()
             out[split] = float(losses.mean())
+            print(f"step {iter}: {split} loss {out[split]:.4f}")
         model.train()
-        print(
-            f"step {iter}: train loss {out['train']:.4f}," f" val loss {out['val']:.4f}"
-        )
         return out
 
     @torch.no_grad()
@@ -156,8 +154,8 @@ def training_loop(
         # every once in a while evaluate the loss on train and val sets
         if iter % eval_interval == 0 or iter == start_iter + max_iters - 1:
             print()
-            losses = estimate_loss(iter)
-            writer.add_scalar("loss/train_estimated", losses["train"], iter)
+            losses = estimate_loss(iter, splits=["val"])
+            # writer.add_scalar("loss/train_estimated", losses["train"], iter)
             writer.add_scalar("loss/val", losses["val"], iter)
             generated_text = generate_sample(context)
             writer.add_text("generated_text", generated_text, iter)
