@@ -152,12 +152,12 @@ class DataLoaderSimpleBpe:
         context_len,
         batch_size,
         device,
-        path_tokenizer="artifacts/tokenizer_simple_bpe.joblib",
+        path_tokenizer="artifacts/tokenizer_simple_bpe_v2.joblib",
     ):
         self.context_len = context_len
         self.batch_size = batch_size
         self.device = device
-        self.tokenizer = joblib.load("artifacts/tokenizer_simple_bpe.joblib")
+        self.tokenizer = joblib.load(path_tokenizer)
 
     def load_data(self, path_input):
         print("load_data...")

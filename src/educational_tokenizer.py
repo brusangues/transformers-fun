@@ -69,13 +69,14 @@ class SimpleBytePairEncoding:
         return [self._decoder[token] for token in tokens]
 
     @staticmethod
-    def train(training_data: str, vocab_size: int, pat_str: str, visualise: str):
+    def train(training_data: str, vocab_size: int, pat_str: str, visualise: str, encode_all_bytes: bool = True):
         """Train a BPE tokeniser on some data!"""
         mergeable_ranks = bpe_train(
             data=training_data,
             vocab_size=vocab_size,
             pat_str=pat_str,
             visualise=visualise,
+            encode_all_bytes=encode_all_bytes,
         )
         return SimpleBytePairEncoding(pat_str=pat_str, mergeable_ranks=mergeable_ranks)
 
@@ -129,15 +130,8 @@ def bpe_encode(
 
 
 def bpe_train(
-    data: str, vocab_size: int, pat_str: str, visualise: str | None = "colour"
+    data: str, vocab_size: int, pat_str: str, visualise: str | None = "colour", encode_all_bytes: bool = True
 ) -> dict[bytes, int]:
-    # First, add tokens for each individual byte value
-    if vocab_size < 2**8:
-        raise ValueError("vocab_size must be at least 256, so we can encode all bytes")
-    ranks = {}
-    for i in range(2**8):
-        ranks[bytes([i])] = i
-
     # Splinter up our data into lists of bytes
     # data = "Hello world"
     # words = [
@@ -148,12 +142,34 @@ def bpe_train(
         [bytes([b]) for b in word.encode("utf-8")]
         for word in regex.findall(pat_str, data)
     ]
+    print(f"Initial 20 words: {words[:20]}")
+
+    # First, add tokens for each individual byte value
+    if encode_all_bytes:
+        if vocab_size < 2**8:
+            raise ValueError("vocab_size must be at least 256, so we can encode all bytes")
+        ranks = {}
+        for i in range(2**8):
+            ranks[bytes([i])] = i
+    else:
+        # If we don't want to encode all bytes, we only add the characters that actually occur in the data
+        chars = sorted(list(set(data)))
+        chars = [c.encode("utf-8") for c in chars]  # Remove spaces
+        print(f"{len(chars)=} {chars=}")
+        if vocab_size < len(chars):
+            raise ValueError(
+                f"vocab_size must be at least {len(chars)}, so we can encode all characters in the data"
+            )
+        ranks = {bytes(c): i for i, c in enumerate(chars)}
+
+    print(f"Initial ranks: {ranks}")
 
     # Now, use our data to figure out which merges we should make
 
     # while len(ranks) < vocab_size:
     # tqdm
-    for it in tqdm(range(vocab_size - 2**8), desc="Training BPE", unit=" merges"):
+    total = vocab_size - len(ranks)
+    for it in tqdm(range(total), desc="Training BPE", unit=" merges"):
         # Find the most common pair. This will become our next token
         stats = collections.Counter()
         for piece in words:
