@@ -81,3 +81,107 @@ Generating 100 tokens from context='A HORA DO HORROR '
 generated_text: A HORA DO HORROR rio havia uma traca sentacao sombria como cariano, a que o vislumbrei da escaremenda roubador do quarto como se misturavam. Mas, Armitage dortissimo tivesse pouco do patio, tendo voou mais uma nova, pois os tres mecanha colimental do avi
 Saving checkpoint to artifacts/lovecraft_ngram_v9_700.pth
 Training:  35%|████████████████████████████████████████████████████████████████▏                                                                                                                      | 701/2000 [1:50:Training:  35%|████████████████████████████████████████████████████████████████▏                                                                                                                      | 702/2000 [1:50:Training:  35%|████████████████████████████████████████████████████████████████▎
+
+
+Training:  40%|█████████████████████████████████████████████████████████████████████████▏                                                                                                             | 800/2000 [2:06:16<3:00:10,  9.01s/it]
+Estimating loss...
+step 800: val loss 3.2288
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR GAzoa arrastou da Absa loco morado de onde Pickman com os imortancia no interso da Colinam, varios foco conjim Ate que aos condencias notagens, inclinadas externamente atrasatas, quando fizeram assumiram durante a unida de geolog
+Saving checkpoint to artifacts/lovecraft_ngram_v9_800.pth
+Training:  45%|██████████████████████████████████████████████████████████████████████████████████▎                                                                                                    | 900/2000 [2:22:00<2:45:49,  9.04s/it]
+Estimating loss...
+step 900: val loss 3.2674
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR ui-me de uma velho lavorosa desconhecida para alguma galhos sensacao, pois original e materia do deleituoso das minhas longens longas dos navendam assombrosas foi visto da Universidade.Vinha os seus olhos que me atrentes em grandes centaria palidades.
+Saving checkpoint to artifacts/lovecraft_ngram_v9_900.pth
+generated_text: A HORA DO HORROR ui-me de uma velho lavorosa desconhecida para alguma galhos sensacao, pois original e materia do deleituoso das minhas longens longas dos navendam assombrosas foi visto da Universidade.Vinha os seus olhos que me atrentes em grandes centaria palidades.
+Saving checkpoint to artifacts/lovecraft_ngram_v9_900.pth
+Saving checkpoint to artifacts/lovecraft_ngram_v9_900.pth
+Training:  50%|███████████████████████████████████████████████████████████████████████████████████████████                                                                                           | 1000/2000 [2:37:43<2:31:00,  9.06s/it]
+Estimating loss...
+step 1000: val loss 3.3070
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR uerda vez mais velho inveja ponte remancentes da mopresente Sulazia a sombra de formas veias Dotas profinesas de pedra, bem velhos, Que sumiram em tom relacao a mente Minhaxerganica Ocidental na carga proxima ao norte para gloriante c
+Saving checkpoint to artifacts/lovecraft_ngram_v9_1000.pth
+Training:  55%|████████████████████████████████████████████████████████████████████████████████████████████████████                                                                                  | 1100/2000 [2:53:26<2:15:41,  9.05s/it]
+Estimating loss...
+step 1100: val loss 3.3378
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR VRO
+ O susscurou a tripulos de Innspicos de 1934
+ Pelicknic -- porem na No sua sonhamento dos grandes pedra recompriu Contaria e disse em tal negociacoes da regiao.
+A seguir, ha mais elevacoes do historia e a de
+Saving checkpoint to artifacts/lovecraft_ngram_v9_1100.pth
+Training:  60%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                                                                        | 1200/2000 [3:09:10<2:00:39,  9.05s/it]
+Estimating loss...
+step 1200: val loss 3.3756
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR Velhei em caminhada, mais cons a maior donde, que no ceu da taga varanda do lugar em silencio a sombra porta com a estrada. Para parecia sobrar as correcoes. Zann recuando seus enviados ou tras arrastaramiva, embaixo, de modo que ja nao revelou
+Saving checkpoint to artifacts/lovecraft_ngram_v9_1200.pth
+Training:  65%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎                                                               | 1300/2000 [3:24:53<1:45:33,  9.05s/it]
+Estimating loss...
+step 1300: val loss 3.4301
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR Vovernoverna em estrangeiro de uma eropia malignas no ano de ansioso para terra. A ponteviorada, tomou um estudo quebra ate a rua quadrao e o atago
+evo rir sobre  pouco espernear Typer e, subitamente Musada de bloque, da o
+Saving checkpoint to artifacts/lovecraft_ngram_v9_1300.pth
+Training:  70%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                                                      | 1400/2000 [3:40:36<1:30:26,  9.04s/it]
+Estimating loss...
+step 1400: val loss 3.4758
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR Gorig' --! eu sei a salvinha este veridas e geladas a volta. No passar mais do que uma curioscidade singular de panico.
+ Os cachorrosos e meninos produtos lugares erguiam-se tuxeram-se palpoucou-se sobre as velhas e as florestas telhadas
+Saving checkpoint to artifacts/lovecraft_ngram_v9_1400.pth
+Training:  75%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                                             | 1500/2000 [3:56:19<1:15:23,  9.05s/it]
+Estimating loss...
+step 1500: val loss 3.5247
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR GUnate longinquo era em meio ao ritmo singular curiosa de um longo inteligente. E o principio, olhos pares do relogio, solitando em lugares, os cheios de carnes degraus rostos. Entao o labios safra ela desde que as ruinas cal   
+Saving checkpoint to artifacts/lovecraft_ngram_v9_1500.pth
+Training:  80%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                                    | 1600/2000 [4:12:05<1:00:23,  9.06s/it]
+Estimating loss...
+step 1600: val loss 3.5583
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR GRORRO DO Onderes e Foi entarda e as seus misterios da ignorancia a medida em um pleno, tao poeta e disse que nada. Mas eu pudesse meditar, por e aprende ver o que, corus de Legrasse aguimar o vilarejo, mas parecia tao pan
+Saving checkpoint to artifacts/lovecraft_ngram_v9_1600.pth
+Training:  85%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                           | 1700/2000 [4:27:49<45:13,  9.04s/it]
+Estimating loss...
+step 1700: val loss 3.6046
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR GESA 
+Do anoi de tiver incar suavencao era jornada. Mas, salvez nao haver apenas de suas ruas que pernas necessarias tao impelente em designuro do tumulo, Roberto Linguis Lincoln e o matar Rodrico e, deixei seus ol
+Saving checkpoint to artifacts/lovecraft_ngram_v9_1700.pth
+Training:  90%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                  | 1800/2000 [4:43:31<30:07,  9.04s/it]
+Estimating loss...
+step 1800: val loss 3.6293
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR QUE as arvores das estatuas iluminadas sobre o sol saba mais proximo ao terreiro discorriam a estranhos viagens", mas em mora o que tinham toda. 
+Havia coisas que o mais destao e estranholizado, tao ao caso? Um grupo de alcancou faixas de minha construcao
+Saving checkpoint to artifacts/lovecraft_ngram_v9_1800.pth
+Training:  95%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊         | 1900/2000 [4:59:15<15:04,  9.05s/it]
+Estimating loss...
+step 1900: val loss 3.6904
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR zel Bimento negros concluiria a serviria Salistas Sabao -- depois de crueis de todos o assusta-lo, para Maxtra- 
+sera as avesmos homens. Uloiquei, matizado da estrada, Ur esta bababicada na pestilenha secorrendo num longo e lugu
+Saving checkpoint to artifacts/lovecraft_ngram_v9_1900.pth
+Training: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉| 1999/2000 [5:14:49<00:09,  9.38s/it]
+Estimating loss...
+step 1999: val loss 3.7384
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR unico mpressar Felas abandonando heritar isolaveis pandemonicos de onde toda a Terra de V Marilado que aproximavada, tanto na beira do catacumba se remedronta no capitacional de repente. Encontrou o tropego desavolvido e
+Saving checkpoint to artifacts/lovecraft_ngram_v9_1999.pth
+Training: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2000/2000 [5:15:19<00:00,  9.46s/it]
+Training finished. Generating text:
+Generating 1000 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR GRA MISSE OT BASUCAS 
+O neste estes do muro, desparalvida eram para chamar procura e totalmente estritamente por onde eu pressava O oceano; subirei da janela da qual o decente ameacava ar pertendido $25.0 em toleranjou alguma coisa vivada e estendiado, Birchyport ou Roberto. Longhei ate o loigo encontrar Robert -- No entanto encontrarei. Trata-se de tremessado a menos chamado. O senti tambem borrado deva, a menos rumo a ser de misterios que aprenebres absoluto fora ao trabalho que estivera na casa que cinzas com jardim no escuro e me tratei tao desortino. Como eu consider que a explicar em tipo de misterios anos e castigadas a todas as janelas na ponta edicao foi picada coloco gargalhada pelos anos de
+ambulcos, pelo menino puro, em sudiente, tinha sido a majestade de viraberta um perigo forcante de tijolo Ascomendado no gado,
+colhe o dia de todas cinco cosmo vermelho e frescamento, como se tivesse estivesse apenas qualquer ruido a musica envolda no universo e atroceder comecadores a uma trava explicacao mais moderno. A industria, eu via a tentacao da qual totalinavel e a vida o grande Cthulhu encarar o sol. Certa de 195-19 143', em resposta a baterra sistema acontecer sobre seus colocados.
+Unca e ao ceu estava limpida e seguida usamente recoberto. Teias horas
+implas ainda nadaso de pesquisastadas alem de qualquer outro mil anotacoes, havia um encapado por algo menos de blocos escapio, prousessos para nao ter vindo um pedestal desparante Que 30 de janeiro me aparacao e folhas, todos os latidos da casa traia uma vau, 
+sem sacudivas pela Grande Raca, enquanto as lendas apenas torres e as tresvencas tinham sido tambas. Entao vivei por muito pouco, pois original para o latido espera da prosa nao superioridade de presente. Sua voz o acaso que habitara em circulo, onde arber fotografia alguem estava fechar na parte de cima da rua.
+ Em 1845, disse, o conhecimento inequivocado em meio a contemplacao as silabas. A raja altura, pois nao foi dizado por, descoberta e menos que eu nao tinha nenhum tipo de nenhum por ovas. Havia algo de rituais influenciosas e mais musgo vagos e inominaveis bastante inteiras e desci em relacao as angulos vagas de individuos. A Revoecus e o meninosa reaterna, que nao houveu semim. Havia sido apenas a arqueavamos subingatateios ou sequer tivesse o chamado -- registino -- sugestoes frando mentais captam
+Saving generated text to output/lovecraft_ngram_v9.txt
+Training loop finished.
