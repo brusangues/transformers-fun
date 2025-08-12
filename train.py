@@ -138,6 +138,7 @@ def training_loop(
         range(start_iter, start_iter + max_iters),
         desc="Training",
         total=max_iters,
+        ncols = 50,
         # initial=start_iter,
     ):
         # sample a batch of data
