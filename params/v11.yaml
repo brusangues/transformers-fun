@@ -1,0 +1,22 @@
+# Model parameters
+batch_size: 100  # independent sequences processed in parallel
+context_len: 256  # maximum token context length
+n_embd: 256  # linear layers size
+n_head: 8  # parallel attention heads
+n_layer: 6  # attention blocks in sequence
+dropout: 0.15
+# Training parameters
+learning_rate: 0.001
+max_iters: 2000
+eval_interval: 100
+save_interval: 100
+eval_iters: 30
+# Other parameters
+path_input: "data/king_ptbr_v1.txt"
+name: "v11"
+start_iter: 0
+# path_load_model: "artifacts/lovecraft_ngram_v3_1999_starting.pth"
+path_save_model: "artifacts/king_v1"  # "artifacts/gpt_model_v4.pth"
+path_generate_output: "output/king_v1.txt"
+n_tokens_generate: 1000
+context: "A HORA DO HORROR "
