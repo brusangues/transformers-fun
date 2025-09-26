@@ -1,0 +1,4 @@
+path_input: "data/king_ptbr_v1.txt"
+path_tokenizer: "artifacts/tokenizers/king_ptbr_2048_v1.joblib"
+max_tokens: 10_000_000
+vocab_size: 2048

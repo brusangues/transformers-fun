@@ -1,2 +1,7 @@
 *.json
 site_lovecraft/
+*.txt
+*.mobi
+*.epub
+*.pdf
+*.azw3
