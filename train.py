@@ -52,6 +52,7 @@ def training_loop(
     dropout,
     device,
     path_input,
+    path_tokenizer,
     path_load_model=None,
     path_save_model=None,
     n_tokens_generate=None,
@@ -70,7 +71,7 @@ def training_loop(
     writer.add_text("params", str(locals_), start_iter)
     writer.flush()
 
-    data_loader = DataLoaderSimpleBpe(context_len, batch_size, device)
+    data_loader = DataLoaderSimpleBpe(context_len, batch_size, device, path_tokenizer=path_tokenizer)
     vocab_size, encode, decode = data_loader.load_data(path_input)
 
     def profile(iter=0):
