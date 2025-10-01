@@ -10,7 +10,7 @@ import json
 from copy import deepcopy
 from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetMemoryInfo
 
-from src.data_loader import DataLoader, DataLoaderNgram, DataLoaderSimpleBpe
+from src.data_loader import DataLoaderBpeV2
 from src.gpt_v0 import GPTLanguageModel
 
 
@@ -60,6 +60,8 @@ def training_loop(
     name="",
     start_iter=0,
     context="",
+    texts_sample_frac=1.0,
+    split_frac=0.8,
     **kwargs,
 ):
     print("Starting training loop...")
@@ -71,8 +73,16 @@ def training_loop(
     writer.add_text("params", str(locals_), start_iter)
     writer.flush()
 
-    data_loader = DataLoaderSimpleBpe(context_len, batch_size, device, path_tokenizer=path_tokenizer)
-    vocab_size, encode, decode = data_loader.load_data(path_input)
+    data_loader = DataLoaderBpeV2(
+        context_len=context_len,
+        batch_size=batch_size,
+        device=device,
+        path_tokenizer=path_tokenizer,
+        path_input=path_input,
+        texts_sample_frac=texts_sample_frac,
+        split_frac=split_frac
+    )
+    vocab_size, encode, decode = data_loader.load_data()
 
     def profile(iter=0):
         info = nvmlDeviceGetMemoryInfo(nvmlDeviceGetHandleByIndex(0))
@@ -139,9 +149,8 @@ def training_loop(
         range(start_iter, max_iters),
         desc="Training",
         total=max_iters,
-        ncols = 100,
+        ncols=100,
         initial=start_iter,
-        total = max_iters,
     ):
         # sample a batch of data
         xb, yb = data_loader.get_batch("train")
