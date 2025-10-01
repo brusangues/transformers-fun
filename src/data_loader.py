@@ -152,7 +152,7 @@ class DataLoaderSimpleBpe:
         context_len,
         batch_size,
         device,
-        path_tokenizer="artifacts/tokenizer_simple_bpe_v2.joblib",
+        path_tokenizer="artifacts/tokenizers/tokenizer_simple_bpe_v2.joblib",
     ):
         self.context_len = context_len
         self.batch_size = batch_size

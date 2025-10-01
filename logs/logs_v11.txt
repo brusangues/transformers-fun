@@ -1,0 +1,424 @@
+(gpt) C:\Users\Bruno\Documents\GitHub\transformers-fun>python train.py v11
+device='cuda'
+Loading parameters from params/v11.yaml
+Parameters loaded: {'batch_size': 100, 'context_len': 256, 'n_embd': 256, 'n_head': 8, 'n_layer': 6, 'dropout': 0.15, 'learning_rate': 0.001, 'max_iters': 2000, 'eval_interval': 100, _interval': 100, 'eval_iters': 30, 'path_input': 'data/king_ptbr_v1.txt', 'path_tokenizer': 'artifacts/tokenizers/king_ptbr_2048_v1.joblib', 'name': 'v11', 'start_iter': 0, 'path_savel': 'artifacts/king_v1', 'path_generate_output': 'output/king_v1.txt', 'n_tokens_generate': 1000, 'context': 'A HORA DO HORROR '}
+Starting training loop...
+Parameters: {'batch_size': 100, 'context_len': 256, 'max_iters': 2000, 'learning_rate': 0.001, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'n_embd': 256, 'n_head': 8layer': 6, 'dropout': 0.15, 'device': 'cuda', 'path_input': 'data/king_ptbr_v1.txt', 'path_tokenizer': 'artifacts/tokenizers/king_ptbr_2048_v1.joblib', 'path_load_model': None, 'path_model': 'artifacts/king_v1', 'n_tokens_generate': 1000, 'path_generate_output': 'output/king_v1.txt', 'name': 'v11', 'start_iter': 0, 'context': 'A HORA DO HORROR ', 'kwargs': {}}
+load_data...
+text[:2_000]='Introducao\nPasso por periodos de insonia, fato que nao surpreendera as pessoas que leram o romance que descreve as peripecias de Ralph Roberts. Por isso, procuro ter umtoria bem a mao para aquelas noites em que o sono nao vem. Conto uma historia dessas para mim mesmo enquanto fico deitado no escuro, redigindo-as mentalmente, exatamente como faria nuquina de escrever ou num processador de texto, frequentemente voltando atras e mudando palavras, acrescentando ideias, eliminando trechos, montando o dialogo. A cada noite, recomeco dncipio, avancando um pouco mais antes de pegar no sono. Geralmente, la pela quinta ou sexta noite, sei de cor varios pedacos longos de prosa. E provavel que isso pareca meio maluco, m
+tranquilizante. E como passatempo, ganha disparado de ficar contando carneirinhos.\nEssas historias acabam perdendo a graca, do mesmo modo que um livro depois de ser lido varias vezesogue esse fora e compre outro novo, Stephen", dizia minha mae as vezes, olhando com irritacao uma revista em quadrinhos ou um livro de que eu gostava muito. "Isso ai ja esta gasto de  voce ler.") Entao e hora de procurar uma historia nova e, durante meus acessos de falta de sono, fico na esperanca de que logo me vira outra, porque as horas em claro sao horas longam 1992 ou 1993, estava trabalhando numa historia dessas chamada "O que engana seus olhos". Era sobre um homem condenado a morte, um negro enorme, que passa a se interessar por truques
+as maos a medida que se aproxima a data de sua execucao. A historia devia ser contada na primeira pessoa, por um velho preso de confianca, que empurra um carrinho com livros pelos bloe celas e tambem vende cigarros, novidades e pequenas criacoes como tonico para os cabelos e avioes feitos de papel encerado. No final da historia, logo antes da execucao, eu queria qse preso enorme, Luke Coffey, se fizesse desaparecer.\nA ideia era boa, mas a historia, para mim, nao estava dando certo. Parecia que tinh'
+len(text)=68720244
+len(chars)=88 chars=['\n', ' ', '!', '"', '#', '$', '%', "'", '(', ')', '*', '+', ',', '-', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', 'A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}']
+Traceback (most recent call last):
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\train.py", line 184, in <module>
+    main()
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\train.py", line 30, in main
+    training_loop(**params, device=device)
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\train.py", line 75, in training_loop
+    vocab_size, encode, decode = data_loader.load_data(path_input)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\src\data_loader.py", line 173, in load_data
+    tokens_full = self.tokenizer.encode(text, visualise=None)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\src\educational_tokenizer.py", line 36, in encode
+    word_tokens = bpe_encode(
+                  ^^^^^^^^^^^
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\src\educational_tokenizer.py", line 128, in bpe_encode
+    tokens = [mergeable_ranks[part] for part in parts]
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\src\educational_tokenizer.py", line 128, in bpe_encode
+    tokens = [mergeable_ranks[part] for part in parts]
+g_v1.txt', 'n_tokens_generate': 1000, 'context': 'A HORA DO HORROR '}
+Starting training loop...                                                                                    p>
+Parameters: {'batch_size': 100, 'context_len': 256, 'max_iters': 2000, 'learning_rate': 0.001, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'n_embd': 256, 'n_head': 8, 'n_layer': 6, 'dropout': 0.15, 'device': 'cuda', 'path_input': 'data/king_ptbr_v1.txt', 'path_tokenizer': 'artifacts/tokenizers/king_ptbr_2048_v1.joblib', 'path_load_model': None, 'path_save_model': 'artifacts/king_v1', 'n_tokens_generate': 1000, 'path_generate_output': 'output/king_v1.txt', 'name': 'v11', 'start_iter': 0, 'context': 'A HORA DO HORROR ', 'kwargs': {}}
+load_data...
+text[:2_000]='Introducao\nPasso por periodos de insonia, fato que nao surpreendera as pessoas que leram o romance que descreve as peripecias de Ralph Roberts. Por isso, procuro ter uma historia bem a mao para aquelas noites em que o sono nao vem. Conto uma historia dessas para mim mesmo enquanto fico deitado no escuro, redigi': 0.15, 'learning_rate': 0.001, 'max_iters': 2000, 'eval_interval': 100, ndo-as mentalmente, exatamente como faria numa maquina de escrever ou num processador de texto, frequentementzers/king_ptbr_2048_v1.joblib', 'name': 'v11', 'start_iter': 0, 'path_savee voltando atras e mudando palavras, acrescentando ideias, eliminando trechos, montando o dialogo. A cada noi'A HORA DO HORROR '}te, recomeco do principio, avancando um pouco mais antes de pegar no sono. Geralmente, la pela quinta ou sexta noite, sei de cor varios pedacos longos de prosa. E provavel que isso pareca meio maluco, mas e tranquiliza': 100, 'save_interval': 100, 'eval_iters': 30, 'n_embd': 256, 'n_head': 8nte. E como passatempo, ganha disparado de ficar contando carneirinhos.\nEssas historias acabam perdendo a gracts/tokenizers/king_ptbr_2048_v1.joblib', 'path_load_model': None, 'path_aca, do mesmo modo que um livro depois de ser lido varias vezes. ("Jogue esse fora e compre outro novo, Steph 'v11', 'start_iter': 0, 'context': 'A HORA DO HORROR ', 'kwargs': {}}en", dizia minha mae as vezes, olhando com irritacao uma revista em quadrinhos ou um livro de que eu gostava 
+muito. "Isso ai ja esta gasto de tanto voce ler.") Entao e hora de procurar uma historia nova e, durante meusance que descreve as peripecias de Ralph Roberts. Por isso, procuro ter um acessos de falta de sono, fico na esperanca de que logo me vira outra, porque as horas em claro sao horas lofico deitado no escuro, redigindo-as mentalmente, exatamente como faria nungas.\nEm 1992 ou 1993, estava trabalhando numa historia dessas chamada "O que engana seus olhos". Era sobre o ideias, eliminando trechos, montando o dialogo. A cada noite, recomeco d
+um homem condenado a morte, um negro enorme, que passa a se interessar por truques com as maos a medida que s varios pedacos longos de prosa. E provavel que isso pareca meio maluco, me aproxima a data de sua execucao. A historia devia ser contada na primeira pessoa, por um velho preso de conrdendo a graca, do mesmo modo que um livro depois de ser lido varias vezesfianca, que empurra um carrinho com livros pelos blocos de celas e tambem vende cigarros, novidades e pequenaquadrinhos ou um livro de que eu gostava muito. "Isso ai ja esta gasto de s criacoes como tonico para os cabelos e avioes feitos de papel encerado. No final da historia, logo antes daeranca de que logo me vira outra, porque as horas em claro sao horas longa execucao, eu queria que esse preso enorme, Luke Coffey, se fizesse desaparecer.\nA ideia era boa, mas a hist condenado a morte, um negro enorme, que passa a se interessar por truquesoria, para mim, nao estava dando certo. Parecia que tinh'                                                     um velho preso de confianca, que empurra um carrinho com livros pelos blo
+len(text)=68720238                                                                                            papel encerado. No final da historia, logo antes da execucao, eu queria q
+len(chars)=87 chars=['\n', ' ', '!', '"', '#', '$', '%', "'", '(', ')', '*', '+', ',', '-', '.', '0', '1', '2dando certo. Parecia que tinh'', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '}']
+len(tokens_full)=21638753 tokens_full[:300]=[39, 73, 254, 558, 229, 0, 46, 143, 173, 188, 242, 360, 223, 95, 1130, 159, 113, 12, 1336, 116, 154, 1216, 1163, 92, 185, 906, 116, 281, 255, 105, 592, 561, 166, 116, 247, 1308, 200, 185, 242, 68, 262, 239, 78, 95, 227, 169, 75, 67, 359, 639, 908, 14, 551, 292, 12, 1513, 126, 314, 161, 1006, 415, 91, 495, 151, 91, 1562, 
+773, 78, 160, 116, 105, 863, 74, 154, 1696, 14, 1143, 110, 161, 1006, 247, 852, 151, 900, 386, 790, 249, 140, 95, 365, 102, 162, 709, 126, 12, 177, 187, 66, 379, 13, 143, 370, 815, 208, 12, 1321, 228, 119, 1036, 736, 134, 1469, 95, 1243, 328, 191, 517, 263, 577, 180, 445, 95, 157, 83, 110, 12, 119, 107, 98, 152, 208, 526, 175, 752, 90, 233, 121, 175, 1319, 12, 349, 218, 62, 474, 175, 936, 78, 12, 90, 71, 176, 112, 201, 1832, 62, 277, 12, 977, 673, 105, 453, 224, 211, 14, 158, 893, 773, 12, 177, 140, 291, 140, 146, 1756, 360, 12, 91, 135, 636, 
+175, 145, 563, 235, 590, 95, 1428, 162, 863, 74, 14, 720, 969, 208, 12, 222, 557, 181, 112, 97, 191, 129, 83, 97, 773, 12, 844, 95, 347, 1633, 1080, 1669, 404, 740, 727, 95, 1632, 60, 14, 138, 945, 335, 116, 292, 323, 117, 747, 134, 552, 140, 12, 215, 90, 322, 73, 366, 257, 85, 1393, 14, 138, 228, 656, 1988, 212, 12, 1432, 125, 206, 243, 525, 95, 937, 184, 673, 399, 73, 172, 742, 277, 131, 35, 78, 852, 1006, 78, 2043, 72, 242, 1950, 91, 601, 117, 12, 146, 386, 1100, 116, 145, 1522, 432, 95, 319, 174, 316, 1633, 898, 711, 14, 488, 3, 40, 74, 580, 950, 587, 90, 136, 428, 527, 632]
+tokens[:300]=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 
+277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301]
+vocab_size_tokens=2046
+estimated_starting_loss=7.6236419677734375
+vocab_size_tokenizer=2048
+estimated_starting_loss_=7.624619007110596
+5.850624 M parameters
+Training:   0%|                                                            | 0/2000 [00:00<?, ?it/s]
+Estimating loss...
+step 0: val loss 7.3458
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR ens loca fun sa cives sen eueno E houvessell peleDe min dor parte anda fW den reg instab col.
+nca apenas falar Iontade af eu chu vivelmentemiltru sentirdos!ntes claro ra mov algum Owenze pistoleirolhast terratdiu cons rapido fezerdia Sim*Jatade caixa veQU qualven desse cir outro flobi muita acha Perix zido sentido achavavidavia durante paice tri an cair!
+ing encontrarariaburaosando imaontadefi
+Training:   5%|██▎                                            | 100/2000 [37:26<11:32:13, 21.86s/it]
+Estimating loss...
+step 100: val loss 5.5938
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 2 Hareiro nenhum Esta-lo tiviidos no plaen eram em se (gas que sodiria e mugia da outro ardar basce ate que as acinla de olhoples.
+EI Ges dos mundo ar-entadadiranca de frente. Vamos desde e respondeu, ele amigos estivencitou bem fora como a boca-lhe mas se saber ficou querban Lhosda, ome em patou, estava realmente estipa... da B na
+Saving checkpoint to artifacts/king_v1_100.pth
+Training:  10%|████▌                                        | 200/2000 [1:14:47<10:56:58, 21.90s/it]
+Estimating loss...
+step 200: val loss 5.2315
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR  poderia ouvir a cuma camidos de converenas didade vemostru sentiu Bessesna das ano que nao jogada ou sobre num catonsivel dela de Rill rosle e relalicaoras edencia, em ultimo pouco, papedos ha sido um esper. O chao, o lateranca em cambovam do garoto que vous vezes, Feesse de que ele, quando as faultilho a baldas de Badegas        
+Saving checkpoint to artifacts/king_v1_200.pth
+Training:  15%|██████▊                                      | 300/2000 [1:52:08<10:19:46, 21.87s/it]
+Estimating loss...
+step 300: val loss 4.9709
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 35N a SIOSIHDIOILRra o sinldge nastrotava o chamadas dizendo, aven -- examilirras baixa. Ele ainda imprestiey. Ele havia comeca, para se repetedade. Conso, embora na casa quanto eu estava parado, que sou CORFATARTTALUIO carcion ate o sonho. P'COSSl redi
+Saving checkpoint to artifacts/king_v1_300.pth
+Training:  20%|█████████▏                                    | 400/2000 [2:29:28<9:42:56, 21.86s/it]
+Estimating loss...
+step 400: val loss 4.7658
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 37 AGBRITE APALOIGI DE York CEIT O--LTQUICASBAIERE POR DEN
+NDODO NEMRA FIRA  meus LoES TINDI DE ou guISMORA Aqui de BMOs labios e enter FO E Peth! RAESLARTER JATRA- DI DE, fitares
+Saving checkpoint to artifacts/king_v1_400.pth
+Training:  25%|███████████▌                                  | 500/2000 [3:06:49<9:05:59, 21.84s/it]
+Estimating loss...
+step 500: val loss 4.5669
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR XEle olhou para Esposta.
+Jany tenis. Uma delas, nao tideria quando estuda que dizra nao conseguiu de pers passa de Tad poderia. Ele final, nuncaricazentos!
+2 e pegou ele disse. For com ele sem negicaminareida e carregar a refrem como viveigosos pulsos anos ao taplao enquanto sempre sabe, e chegar se a substa nos leva estadurentaram a    
+Saving checkpoint to artifacts/king_v1_500.pth
+Training:  30%|█████████████▊                                | 600/2000 [3:44:08<8:30:10, 21.86s/it]
+Estimating loss...
+step 600: val loss 4.3917
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR QUE DE Cava na parede A Tura, sem meninos deles. Duveu-lhe sobre as maos de um farrado de copa pela cozinhamente aclo terra dela, como um baterao vazultinho no lado da marcas a tempo. Olamo alguem sangor da morte antes do Z Jim para tras inteirogralina de joelhos brilhante com farda no INunkiva da multioao e a meninante
+Saving checkpoint to artifacts/king_v1_600.pth
+Training:  35%|████████████████                              | 700/2000 [4:21:29<7:54:36, 21.90s/it]
+Estimating loss...
+step 700: val loss 4.2211
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 2, MATO. Tinha que ser visto nenhum dos troncos no afem Hustwson Hardwaldrady. E tinha visto assoraciiores serelgulacoes a Stta daquelas de idade com 
+Mad seppivia admiticcao para Mlos.
+AMPELA casa de TA TUCMOR DORUIJ ALES. NTPG
+Saving checkpoint to artifacts/king_v1_700.pth
+Training:  40%|██████████████████▍                           | 800/2000 [4:58:49<7:17:01, 21.85s/it]
+Estimating loss...
+step 800: val loss 4.1003
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 9116 LA OIDOS ARAMOS FETISVUTOLEORAMENTIH com 207 do escuro e alcara a aleite, ela.e, ela.
+-- Howksbras.
+Wendy ficou e sempre tomando sem Wendy.
+-- As vezes saidar a Bandleckquer -- disse Ralphirbonny. -- Eu ja correu com
+Saving checkpoint to artifacts/king_v1_800.pth
+Training:  45%|████████████████████▋                         | 900/2000 [5:36:10<6:40:50, 21.86s/it]
+Estimating loss...
+step 900: val loss 4.0035
+Generating 100 tokens from context='A HORA DO HORROR '                                                       o num dia lis da Centemental, nao parado para falar comigo, rapido nenhum:
+generated_text: A HORA DO HORROR 3?Ele excel ligou a gravinha do porao. O gavetor honia mesmo 5 Louis, fazendes, irma e mais ao menos depressao de lao num dia lis da Centemental, nao parado para falar comigo, rapido nenhum: queria mesmo ajudar Lisey. Bila nao e apenas uma crianca, porque sim, disse a conecionada. Stevivon, e eu lhes, irma e mais ao menos depressao 
+de la
+Saving checkpoint to artifacts/king_v1_900.pth
+Training:  50%|██████████████████████▌                      | 1000/2000 [6:13:33<6:04:20, 21.86s/it]
+Estimating loss...                                                                                            alguma nocao para a hora da cozinha branca submeceu a cheio.
+step 1000: val loss 3.9198                                                                                   ora da tarde -- um brilho de preto.
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 195, investindo dele. Nao o tenham, mas se meteu, de repente, chorela vez em alguma nocao para a hora da cozinha branca submeceu a cheio.
+John, Hothaberava de cabeca praticamente alegremente sobre a sensacao de que, e acabou ser a gripe do trono fora da tarde -- um brilho de preto.
+Pusto, o rosto nos dedos de po
+Saving checkpoint to artifacts/king_v1_1000.pth
+Training:  55%|████████████████████████▊                    | 1100/2000 [6:50:54<5:28:18, 21.89s/it]
+Estimating loss...
+step 1100: val loss 3.8444
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR [545 que HON.]
+1. *GON E8774 VOCA, EUM MOOY,
+M acendeu com os ombros de cabeca. Estamos levantadou um lado.
+Davis respondeu com a cabeca.
+-- Quem? -- perguntou Mo. -- Ele, mas deixou que ela poderia dizer.
+5
+O que aconteceu pareceu quase, como ou ainda na vontade morrer impressa. Voce pensa
+Saving checkpoint to artifacts/king_v1_1100.pth
+Training:  60%|███████████████████████████                  | 1200/2000 [7:28:50<4:56:05, 22.21s/it]
+Estimating loss...
+step 1200: val loss 3.8046
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 2 no balcao, em seguido do redor.
+-- O que, eu, E ushhill! -- Ela segurou o trabalho embaixo da Velha. -- Nosso mundo de tras da cidade        
+rosa..."
+--
+Nao sei o que estou fazendo?
+-- Simplesmente ao sol gultar.
+-- E uma tua posicao editante. Beralmente brevemente nos interessemos, ele o que aconteceu. Todo do
+Saving checkpoint to artifacts/king_v1_1200.pth
+Training:  65%|█████████████████████████████▎               | 1300/2000 [8:06:43<4:18:44, 22.18s/it]
+Estimating loss...
+step 1300: val loss 3.7572
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 20 NO, tinha aberto. ME nove dias, foi o ultimo mes depois do conteto para a voce sacola, respeito de acaso?
+-- Preciso voce. -- Ele me subiu na direcao do solholho, atropelado. A moto, ele percebeu por fim, limpou os proprios olhos recolir.
+Johnn ergueu a cabeca e caibrada e subiria atras dela
+Saving checkpoint to artifacts/king_v1_1300.pth
+Training:  70%|███████████████████████████████▍             | 1400/2000 [8:44:36<3:42:11, 22.22s/it]
+Estimating loss...
+step 1400: val loss 3.7316
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR [RSARA O MO-Oh! Nao sou syruiva ou eu-- seu corte do Kenelly Lee". Todas as maos da fatia medicacao invental, muitos dos escois esgociais, maracadentes e oculos-esismo. Corco incha de escada, estremecrantes no alto da fogueira para tras e para diante, uma enorme de
+Saving checkpoint to artifacts/king_v1_1400.pth
+Training:  75%|█████████████████████████████████▊           | 1500/2000 [9:22:29<3:04:57, 22.20s/it]
+Estimating loss...
+step 1500: val loss 3.6958
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR il placou-a e comecou a rir. No entanto, Os dois temporam segundos depois, a calcada sobretubos as rodas.
+Hodgeson carte, viu outro cranio no gas, John Fissindo contorce as chaves de horror por um sussurro. Ralph os lembrava da camisa? Deixe que nao! Excels, mas Center as coisas!
+As
+Saving checkpoint to artifacts/king_v1_1500.pth
+Training:  80%|███████████████████████████████████▏        | 1600/2000 [10:00:51<2:30:19, 22.55s/it]
+Estimating loss...
+step 1600: val loss 3.6673
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 4 REFIRETO DEE CERMIVINTEMPOERA?
+Sara, como as luzes da cidade toda, acabara com felinos coloridos, sem nada. Havia lagrimas no peito e um baconito atras de um pescoco prescretos -- parados.
+Havia um fresco, e claro, ele tentativa-la abre a banheiras. Pretinuera cati
+Saving checkpoint to artifacts/king_v1_1600.pth
+Training:  85%|█████████████████████████████████████▍      | 1700/2000 [10:39:28<1:52:02, 22.41s/it]
+Estimating loss...
+step 1700: val loss 3.6510
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR XA EM-AVES 0043 do moltista se etro. O Helen Grant e o Banral Red Bouol que a ligacao Morda dos lobos em que escolhido de um Lonna e uma atracao varre grande. Ha uma varreia-revatico de fretinhas nas universas, e a mascara doval com ele,
+Saving checkpoint to artifacts/king_v1_1700.pth
+Training:  90%|███████████████████████████████████████▌    | 1800/2000 [11:17:40<1:14:36, 22.38s/it]
+Estimating loss...
+step 1800: val loss 3.6340
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR QUE SEFAISCAO de repente, um pequeno escorrego aguo rolar. Ka. Rosa havia uma vara mancha com total vazio no peito ate a vala e dirigindo dos fundos de celeiros: Nao por sinal do Norte Pock, daviao ou cinquenta segundos, e subi um pouco a frente. Disse que o capaz da nao se nos deba ao ir ao mundo para
+Saving checkpoint to artifacts/king_v1_1800.pth
+Training:  95%|███████████████████████████████████████████▋  | 1900/2000 [11:55:51<37:15, 22.36s/it]
+Estimating loss...
+step 1900: val loss 3.6240
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 645A, DO NA ALGES Leal DeESS.
+-- Hoje nao e este assassistente, BII de 1969 c simpatizado em seu "es". Soamentos na epoca dos TR a S Historia Nitterbuviaria Yvonne e Trusis Dennon fuga no Dark, olhando ao catico Poe Bud projetado
+Saving checkpoint to artifacts/king_v1_1900.pth
+Training: 100%|█████████████████████████████████████████████▉| 1999/2000 [12:33:41<00:22, 22.39s/it]
+Saving checkpoint to artifacts/king_v1_1900.pth
+Training: 100%|█████████████████████████████████████████████▉| 1999/2000 [12:33:41<00:22, 22.39s/it]
+justamente agura no interior tel. A gente esta construida cheira de combinacao com duvidos, meu esta otimo."1Ralph decorrera a vontade, apreensiva pontigante esperando que nao estivesse deixando a tricla de necro no furgao de uma garganta costuma sentido a seus problemas ou mesmo o furico que e, na verdade, ABCola. Era confusa para voltar atras (o que as vezes Fran tinha zangado para mim), lhe dissera Will Stiphen Scokes com um choquem). Pendia-se tres vezes que Arthurn la nascera, mas o fato de Sardudock, sobretudo, mesmo todo o reverenhar. So tornou- si mesmo a ficar cerhumo Fall Elim Dohs, que cruara oura, e revelando os dois anos 42 horas, um reflexo a ele.
+Mas continuou, tuxea-la assim na Rota 1958, outro Coul Chereado de Cainholive de Hawkn, que cozinheiro ou o primeiro-istoleiro. Um pouco antes, obrigado 151, gravado para oeste, imediatamente tambem soubedo, Lavrie Hitchfield sempre indecluido, porem talvez no fundo de tudo o quanto nem notar ainda ja, mandou seus pensamentos gemidos. Temendo audio, muito bom hesital em vez naquele refugio imagine sem ertes gratidao da Adrianwa e para eles devem ter formas, Maria. Filha Jimmy Hall de O'Hanskosn e comeceram apanhadas antes de espancar sua recessidade ou vistosamente bem rastreados na porta, o alunoticamente atrasado e perder o arco daquele gligido e latejar desgracado. Eu tentei quando voltei a estivico suficiente para vender meu mortaz.      
+Ronnie viu os cabelos ao que podiam fazer o homem que Kalisha provavelmente nao restava inutil.
+-- Puxinho, merda! -- Fig Rose fez algo a dizer que ela tinha chegado, mas so dois homens escolares e telefonando. Faz isso e vou fazer o poco. Agora vamos ate o mesmo lugar. Sem satisfacao ceda. Eu repenpero que nao estejamos nem uma ocorrea aqui, Carolyn, e pra melhor.
+Ele olha para ele, olhando os olhos tao rapido assim que a pagina estava num estudio. Em uma contravisca para o assento de Joe Wyler e um aviao cinza vermelho com esuralado para cima da estrada, com o filei nela que estava vazando um velho do outro lado -- nao tente ficar com expressao comigo, mas seus pensamentos de seguranca se moviam do consultorio com vista, estavam la. Eu lhe restava dizendo que jamais seguia o resto. Os coneterros, parecendo um postal de destruidores automativel que tinham tapados de salvais e pacientes. Um deles no inicio do Escolar e pendurado em um tunel da Jurges Reacroix. Bom, eles vestiam com uma seriewista, um John Clopisty Frincipal e amarelo. O cachorrinho, para que possa ser, por um. Mas esse dia ultrapassaria chamou o Geod Dois.
+Rrdialmente, eles realmente tivesse razao, mas Lois lembraram-se uma coisa unica com Susan Donna, enquanto Harperingstein Philstratton nascera as outras semanass, olhando atraves
+Saving generated text to output/king_v1.txt
+Training loop finished.
+
+(gpt) C:\Users\Bruno\Documents\GitHub\transformers-fun>
+(gpt) C:\Users\Bruno\Documents\GitHub\transformers-fun>python train.py v11
+device='cuda'
+Loading parameters from params/v11.yaml
+Parameters loaded: {'batch_size': 100, 'context_len': 256, 'n_embd': 256, 'n_head': 8, 'n_layer': 6, 'dropout': 0.15, 'learning_rate': 0.001, 'max_iters': 4000, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'path_input': 'data/king_ptbr_v1.txt', 'path_tokenizer': 'artifacts/tokenizers/king_ptbr_2048_v1.joblib', 'name': 'v11', 'start_iter': 2000, 'path_load_model': 'artifacts/checkpoints/king_v1_1999.pth', 'path_save_model': 'artifacts/checkpoints/king_v1', 'path_generate_output': 'output/king_v1_2.txt', 'n_tokens_generate': 1000, 'context': 'A HORA DO HORROR '}
+Starting training loop...
+Parameters: {'batch_size': 100, 'context_len': 256, 'max_iters': 4000, 'learning_rate': 0.001, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'n_embd': 256, 'n_head': 8, 'n_layer': 6, 'dropout': 0.15, 'device': 'cuda', 'path_input': 'data/king_ptbr_v1.txt', 'path_tokenizer': 'artifacts/tokenizers/king_ptbr_2048_v1.joblib', 'path_load_model': 'artifacts/checkpoints/king_v1_1999.pth', 'path_save_model': 'artifacts/checkpoints/king_v1', 'n_tokens_generate': 1000, 'path_generate_output': 'output/king_v1_2.txt', 'name': 'v11', 'start_iter': 2000, 'context': 'A HORA DO HORROR ', 'kwargs': {}}
+load_data...
+text[:2_000]='Introducao\nPasso por periodos de insonia, fato que nao surpreendera as pessoas que leram o romance que descreve as peripecias de Ralph Roberts. Por isso, procuro ter uma historia bem a mao para aquelas noites em que o sono nao vem. Conto uma historia dessas para mim mesmo enquanto fico deitado no escuro, redigindo-as mentalmente, exatamente como faria numa maquina de escrever ou num processador de texto, frequentemente voltando atras e mudando palavras, acrescentando ideias, eliminando trechos, montando o dialogo. A cada noite, recomeco do principio, avancando um pouco mais antes de pegar no sono. Geralmente, la pela quinta ou sexta noite, sei de cor varios pedacos longos de prosa. E provavel que isso pareca meio maluco, mas e 
+tranquilizante. E como passatempo, ganha disparado de ficar contando carneirinhos.\nEssas historias acabam perdendo a graca, do mesmo modo que um livro depois de ser lido varias vezes. ("Jogue esse fora e compre outro novo, Stephen", dizia minha mae as vezes, olhando com irritacao uma revista em quadrinhos ou um livro de que eu gostava muito. "Isso ai ja esta gasto de tanto voce ler.") Entao e hora de procurar uma historia nova e, durante meus acessos de falta de sono, fico na esperanca de que logo me vira outra, porque as horas em claro sao horas longas.\nEm 1992 ou 1993, estava trabalhando numa historia dessas chamada "O que engana seus olhos". Era sobre um homem condenado a morte, um negro enorme, que passa a se interessar por truques com 
+as maos a medida que se aproxima a data de sua execucao. A historia devia ser contada na primeira pessoa, por um velho preso de confianca, que empurra um carrinho com livros pelos blocos de celas e tambem vende cigarros, novidades e pequenas criacoes como tonico para os cabelos e avioes feitos de papel encerado. No final da historia, logo antes da execucao, eu queria que esse preso enorme, Luke Coffey, se fizesse desaparecer.\nA ideia era boa, mas a historia, para mim, nao estava dando certo. Parecia que tinh'
+len(text)=68720238
+len(chars)=87 chars=['\n', ' ', '!', '"', '#', '$', '%', "'", '(', ')', '*', '+', ',', '-', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '}']
+len(tokens_full)=21638753 tokens_full[:300]=[39, 73, 254, 558, 229, 0, 46, 143, 173, 188, 242, 360, 223, 95, 1130, 159, 113, 12, 1336, 116, 154, 1216, 1163, 92, 185, 906, 116, 281, 255, 105, 592, 561, 166, 116, 247, 1308, 200, 185, 242, 68, 262, 239, 78, 95, 227, 169, 75, 67, 359, 639, 908, 14, 551, 292, 12, 1513, 126, 314, 161, 1006, 415, 91, 495, 151, 91, 1562, 773, 78, 160, 116, 105, 863, 74, 154, 1696, 14, 1143, 110, 161, 1006, 247, 852, 151, 900, 386, 790, 249, 140, 95, 365, 102, 162, 709, 126, 12, 177, 187, 66, 379, 13, 143, 370, 815, 208, 12, 1321, 228, 119, 1036, 736, 134, 1469, 95, 1243, 328, 191, 517, 263, 577, 180, 445, 95, 157, 83, 110, 12, 119, 107, 98, 152, 208, 526, 175, 752, 90, 233, 121, 175, 1319, 12, 349, 218, 62, 474, 175, 936, 78, 12, 90, 71, 176, 112, 201, 1832, 62, 277, 12, 977, 673, 105, 453, 224, 211, 14, 158, 893, 773, 12, 177, 140, 291, 140, 146, 1756, 360, 12, 91, 135, 636, 175, 145, 563, 235, 590, 
+95, 1428, 162, 863, 74, 14, 720, 969, 208, 12, 222, 557, 181, 112, 97, 191, 129, 83, 97, 773, 12, 844, 95, 347, 1633, 1080, 1669, 404, 740, 727, 95, 1632, 60, 14, 138, 945, 335, 116, 292, 
+323, 117, 747, 134, 552, 140, 12, 215, 90, 322, 73, 366, 257, 85, 1393, 14, 138, 228, 656, 1988, 212, 12, 1432, 125, 206, 243, 525, 95, 937, 184, 673, 399, 73, 172, 742, 277, 131, 35, 78, 
+852, 1006, 78, 2043, 72, 242, 1950, 91, 601, 117, 12, 146, 386, 1100, 116, 145, 1522, 432, 95, 319, 174, 316, 1633, 898, 711, 14, 488, 3, 40, 74, 580, 950, 587, 90, 136, 428, 527, 632]    
+tokens[:300]=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 
+46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 92, 93, 94, 
+95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 
+284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301]
+vocab_size_tokens=2046
+estimated_starting_loss=7.6236419677734375
+vocab_size_tokenizer=2048
+estimated_starting_loss_=7.624619007110596
+Loading model from artifacts/checkpoints/king_v1_1999.pth
+Traceback (most recent call last):
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\train.py", line 184, in <module>
+    main()
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\train.py", line 30, in main
+    training_loop(**params, device=device)
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\train.py", line 128, in training_loop
+    m.load_state_dict(torch.load(path_load_model, map_location=device))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Bruno\miniconda3\envs\gpt\Lib\site-packages\torch\serialization.py", line 1479, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Bruno\miniconda3\envs\gpt\Lib\site-packages\torch\serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Bruno\miniconda3\envs\gpt\Lib\site-packages\torch\serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/checkpoints/king_v1_1999.pth'
+
+(gpt) C:\Users\Bruno\Documents\GitHub\transformers-fun>
+(gpt) C:\Users\Bruno\Documents\GitHub\transformers-fun>
+(gpt) C:\Users\Bruno\Documents\GitHub\transformers-fun>python train.py v11
+device='cuda'
+Loading parameters from params/v11.yaml
+Parameters loaded: {'batch_size': 100, 'context_len': 256, 'n_embd': 256, 'n_head': 8, 'n_layer': 6, 'dropout': 0.15, 'learning_rate': 0.001, 'max_iters': 4000, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'path_input': 'data/king_ptbr_v1.txt', 'path_tokenizer': 'artifacts/tokenizers/king_ptbr_2048_v1.joblib', 'name': 'v11', 'start_iter': 2000, 'path_load_model': 'artifacts/checkpoints/king_v1_1999.pth', 'path_save_model': 'artifacts/checkpoints/king_v1', 'path_generate_output': 'output/king_v1_2.txt', 'n_tokens_generate': 1000, 'context': 'A HORA DO HORROR '}
+Starting training loop...
+Parameters: {'batch_size': 100, 'context_len': 256, 'max_iters': 4000, 'learning_rate': 0.001, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'n_embd': 256, 'n_head': 8, 'n_layer': 6, 'dropout': 0.15, 'device': 'cuda', 'path_input': 'data/king_ptbr_v1.txt', 'path_tokenizer': 'artifacts/tokenizers/king_ptbr_2048_v1.joblib', 'path_load_model': 'artifacts/checkpoints/king_v1_1999.pth', 'path_save_model': 'artifacts/checkpoints/king_v1', 'n_tokens_generate': 1000, 'path_generate_output': 'output/king_v1_2.txt', 'name': 'v11', 'start_iter': 2000, 'context': 'A HORA DO HORROR ', 'kwargs': {}}
+load_data...
+text[:2_000]='Introducao\nPasso por periodos de insonia, fato que nao surpreendera as pessoas que leram o romance que descreve as peripecias de Ralph Roberts. Por isso, procuro ter uma historia bem a mao para aquelas noites em que o sono nao vem. Conto uma historia dessas para mim mesmo enquanto fico deitado no escuro, redigindo-as mentalmente, exatamente como faria numa maquina de escrever ou num processador de texto, frequentemente voltando atras e mudando palavras, acrescentando ideias, eliminando trechos, montando o dialogo. A cada noite, recomeco do principio, avancando um pouco mais antes de pegar no sono. Geralmente, la pela quinta ou sexta noite, sei de cor varios pedacos longos de prosa. E provavel que isso pareca meio maluco, mas e 
+tranquilizante. E como passatempo, ganha disparado de ficar contando carneirinhos.\nEssas historias acabam perdendo a graca, do mesmo modo que um livro depois de ser lido varias vezes. ("Jogue esse fora e compre outro novo, Stephen", dizia minha mae as vezes, olhando com irritacao uma revista em quadrinhos ou um livro de que eu gostava muito. "Isso ai ja esta gasto de tanto voce ler.") Entao e hora de procurar uma historia nova e, durante meus acessos de falta de sono, fico na esperanca de que logo me vira outra, porque as horas em claro sao horas longas.\nEm 1992 ou 1993, estava trabalhando numa historia dessas chamada "O que engana seus olhos". Era sobre um homem condenado a morte, um negro enorme, que passa a se interessar por truques com 
+as maos a medida que se aproxima a data de sua execucao. A historia devia ser contada na primeira pessoa, por um velho preso de confianca, que empurra um carrinho com livros pelos blocos de celas e tambem vende cigarros, novidades e pequenas criacoes como tonico para os cabelos e avioes feitos de papel encerado. No final da historia, logo antes da execucao, eu queria que esse preso enorme, Luke Coffey, se fizesse desaparecer.\nA ideia era boa, mas a historia, para mim, nao estava dando certo. Parecia que tinh'
+len(text)=68720238
+len(chars)=87 chars=['\n', ' ', '!', '"', '#', '$', '%', "'", '(', ')', '*', '+', ',', '-', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '}']
+len(tokens_full)=21638753 tokens_full[:300]=[39, 73, 254, 558, 229, 0, 46, 143, 173, 188, 242, 360, 223, 95, 1130, 159, 113, 12, 1336, 116, 154, 1216, 1163, 92, 185, 906, 116, 281, 255, 105, 592, 561, 166, 116, 247, 1308, 200, 185, 242, 68, 262, 239, 78, 95, 227, 169, 75, 67, 359, 639, 908, 14, 551, 292, 12, 1513, 126, 314, 161, 1006, 415, 91, 495, 151, 91, 1562, 773, 78, 160, 116, 105, 863, 74, 154, 1696, 14, 1143, 110, 161, 1006, 247, 852, 151, 900, 386, 790, 249, 140, 95, 365, 102, 162, 709, 126, 12, 177, 187, 66, 379, 13, 143, 370, 815, 208, 12, 1321, 228, 119, 1036, 736, 134, 1469, 95, 1243, 328, 191, 517, 263, 577, 180, 445, 95, 157, 83, 110, 12, 119, 107, 98, 152, 208, 526, 175, 752, 90, 233, 121, 175, 1319, 12, 349, 218, 62, 474, 175, 936, 78, 12, 90, 71, 176, 112, 201, 1832, 62, 277, 12, 977, 673, 105, 453, 224, 211, 14, 158, 893, 773, 12, 177, 140, 291, 140, 146, 1756, 360, 12, 91, 135, 636, 175, 145, 563, 235, 590, 
+95, 1428, 162, 863, 74, 14, 720, 969, 208, 12, 222, 557, 181, 112, 97, 191, 129, 83, 97, 773, 12, 844, 95, 347, 1633, 1080, 1669, 404, 740, 727, 95, 1632, 60, 14, 138, 945, 335, 116, 292, 
+323, 117, 747, 134, 552, 140, 12, 215, 90, 322, 73, 366, 257, 85, 1393, 14, 138, 228, 656, 1988, 212, 12, 1432, 125, 206, 243, 525, 95, 937, 184, 673, 399, 73, 172, 742, 277, 131, 35, 78, 
+852, 1006, 78, 2043, 72, 242, 1950, 91, 601, 117, 12, 146, 386, 1100, 116, 145, 1522, 432, 95, 319, 174, 316, 1633, 898, 711, 14, 488, 3, 40, 74, 580, 950, 587, 90, 136, 428, 527, 632]    
+tokens[:300]=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 
+46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 92, 93, 94, 
+95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 
+284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301]
+vocab_size_tokens=2046
+estimated_starting_loss=7.6236419677734375
+vocab_size_tokenizer=2048
+estimated_starting_loss_=7.624619007110596
+Loading model from artifacts/checkpoints/king_v1_1999.pth
+Model loaded
+5.850624 M parameters
+Training:   0%|                                                            | 0/4000 [00:00<?, ?it/s]
+Estimating loss...
+step 2000: val loss 3.6885
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 1967 MAINOU A E EMO CUAZ-Daiena de COES PAS I e ESTALHO NO CADE 19.
+
+
+SHINDA TES UMENTE NOS PARAPA CRUNO, SA TRAESTIA EVERCECA VO GUULEU INTREO MER
+Training:   2%|█▏                                             | 100/4000 [38:27<24:20:14, 22.47s/it]
+Estimating loss...
+step 2100: val loss 3.5779
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 2 atingiu com tividulas estirado eram do rosto (gas que so a tinham tirado), esperar que sair do coldre. Ali estava alta de olho no paleto, debaixo dos ar-chadadicos, de frente a entrada e enchendo as maos para cima de um paleto branco voar de furial, Johnny Larry ja estava la em cima do banco de Subarba... da B na
+Saving checkpoint to artifacts/checkpoints/king_v1_2100.pth
+Training:   5%|██▎                                          | 200/4000 [1:16:46<23:42:41, 22.46s/it]
+Estimating loss...
+step 2200: val loss 3.5654
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR QUI PROLIELOS DO FEHELE Saralita pela que nao jogaram sob uma cara catoneira. Desta vez, deviamos relato, sim, edenciando emergia, como sempre parecia haver um treno de sua -- o lateranca em que voce baixou um local de carro, Federal do Prazer -- o gatilho a balcao de Bates anti
+Saving checkpoint to artifacts/checkpoints/king_v1_2200.pth
+Training:   8%|███▍                                         | 300/4000 [1:55:04<23:04:20, 22.45s/it]
+Estimating loss...
+step 2300: val loss 3.5512
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 25 de agosto e talvez nao esteja deitado no pedracimos de trabalho nas pontas, chamaria dizendo que a mae queria apenas examina-lo. Chegou ainda mais com forca e que usou o vilao para conduzi-lo a procura-la, embora encontrassem obscurebessem com um legista, e os caras achariam que eram ate o sonho erra raspar uma boa ideia redi
+Saving checkpoint to artifacts/checkpoints/king_v1_2300.pth
+Training:  10%|████▌                                        | 400/4000 [2:33:23<22:27:45, 22.46s/it]
+Estimating loss...
+step 2400: val loss 3.5457
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 371 e fetaque. Recuou a de Caixa, balancando a cabeca para tras, as maos abertas como uma espinga enorme mesa do lado esquerdo desvairado do teto agudo, os hospedes de Tobe lutavam ou guerra dos suprimentos ate meninas, e enchia as pontas enormes dilatantes do travesseiro da para diante da carroca. Ela fitava
+Saving checkpoint to artifacts/checkpoints/king_v1_2400.pth
+Training:  12%|█████▋                                       | 500/4000 [3:11:41<21:49:21, 22.45s/it]
+Estimating loss...
+step 2500: val loss 3.5280
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR QUE SOW NAOY... mas no final delas, nao? E, quando acordou que Neidie de persistia" ser chamado. Ele finalmente nunca tinha visto ha tanto dinheiro.
+Nenhuma resposta. Folhava muita arma negra, mas ainda sentia o carretel de refriho na verdade. Seu rosto havia corado ao tanque em casa. O pai tinha sido se aposentos e nos levariamos para ver onde a
+Saving checkpoint to artifacts/checkpoints/king_v1_2500.pth
+Training:  15%|██████▊                                      | 600/4000 [3:50:00<21:14:11, 22.49s/it]
+Estimating loss...
+step 2600: val loss 3.5220
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR QUE MESS DEVIDA... DA CHORK DA ANOBORRA. Na direcao de Cristo Benjy, terra dela, como um batedor de olete onde podia marcas a tempo passarem por uma ondente mira lugar antes do Z Jim Sara inteiro agora, podia ouvir uma pilha cuja de ouro esta velha deuntos diferentes: se tivesse derrubado mentalmente
+Saving checkpoint to artifacts/checkpoints/king_v1_2600.pth
+Training:  18%|███████▊                                     | 700/4000 [4:28:18<20:35:31, 22.46s/it]
+Estimating loss...
+step 2700: val loss 3.5070
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 2, e a base repeticao veio pelo direcao, esperando que pudesse contar nada sobre o sono. A esperanca do mundo esta de horrorizada, e Howie sere e tentativa ate a juge da quina 1h4000, cada linha admitir que o 3795 na metade mortal nao conseguia acreditar que acreditava naquele momento -- uma bobura estava abaixada. Nem mesmo o
+Saving checkpoint to artifacts/checkpoints/king_v1_2700.pth
+Training:  20%|█████████                                    | 800/4000 [5:06:39<19:57:39, 22.46s/it]
+Estimating loss...
+step 2800: val loss 3.5067
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR QUERTO LA OHA. Ali mande Frank Munssy deu menao na universidade em com 20 0 que se fotografou. Mas o livro nao.
+-- Howars Boward? Esta e sempre tomado mais por 6 anos?
+-- Bem, nao vao ficar bem feliz -- disse Stu. -- Vai sozinha. Procure-se tentavamos no fundo
+Saving checkpoint to artifacts/checkpoints/king_v1_2800.pth
+Training:  22%|██████████▏                                  | 900/4000 [5:44:57<19:19:24, 22.44s/it]
+Estimating loss...
+step 2900: val loss 3.4991
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR QUEIRESA ABIO PENTIA PRISTER FATIES LUTA DA MORDASO CONADAS?
+SPELATEROS: CUME LOSSIANADO ME PASDE MEXTATOSSONTO DE CARDADEANHAR.
+O caminhao ao lado de William
+Saving checkpoint to artifacts/checkpoints/king_v1_2900.pth
+Training:  25%|███████████                                 | 1000/4000 [6:23:15<18:42:42, 22.45s/it]
+Estimating loss...
+step 3000: val loss 3.4871
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 195, inventar o delegado vermelho dano-americano. Esperaram debaixo do braco para cima de cima. Van para baixo e se achatam submexados cheios.
+Johnny nao precisou nem ter defrontado alegremente de falar com o louro, acabou obelo do qual estava pronto para pensar -- depois de outro lado deles. Entao, me pedia o que nos procura de 
+Saving checkpoint to artifacts/checkpoints/king_v1_3000.pth
+Training:  28%|████████████                                | 1100/4000 [7:01:48<18:31:02, 22.99s/it]
+Estimating loss...
+step 3100: val loss 3.4718
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR [5]
+[Lagal da casa!. [G!] Ergueu-o e se campararam, levantou-se de novo os trolucos acendido e esfregando. Estamos fazendo aqui um lado para seus desejante com a cabeca, pensou. E ele achou que a maquina pontinha-las. [-- Bate-a-aber muito bem, meu Deus, cara -- morreu impressa! Voce pensa
+[Lagal da casa!. [G!] Ergueu-o e se campararam, levantou-se de novo os trolucos acendido e esfregando. Estamos fazendo aqui um lado para seus desejante com a cabeca, pensou. E ele achou que a maquina pontinha-las. [-- Bate-a-aber muito bem, meu Deus, cara -- morreu impressa! Voce pensa
+step 3200: val loss 3.4701
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR X no balcao, COM A ELEFRE, MENDER DELA TRUMPIRIDAM VIGO DE AA MORTI
+
+EU"
+--
+com casa havia
+tados ao redor de meu quadro.
+The BULT
+
+Eles tinham um CORAMAS, mas ja nao adianta
+Saving checkpoint to artifacts/checkpoints/king_v1_3200.pth
+Training:  32%|██████████████▎                             | 1300/4000 [8:18:45<16:50:13, 22.45s/it]
+Estimating loss...
+step 3300: val loss 3.4658
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR 20 NO E ENIK MECE DO DIRETOR DE INTEXIGA CALL. Aquela noite de semanas, a mulher sobre a subida na frente do solhometro da area da morte do Lissa, e como havia de comecar, depois que pegou o Corinco e o Stefanten Incle caibravel e subi-o atras dela                                                                                                        na frente do solhometro da area da morte do Lissa, e como h
+Saving checkpoint to artifacts/checkpoints/king_v1_3300.pth
+Training:  35%|███████████████▍                            | 1400/4000 [8:57:03<16:12:42, 22.45s/it]
+Estimating loss...
+step 3400: val loss 3.4612
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR [LSTRADAS, e as dondas desse sinal hesitante. seu nome excitante grau. Eu e bom!]
+-- E, mas estou frio -- Wallace continuou Georregando. -- Que esta vendo? Gert... a maioria deles saia do ensino medio.
+E de certo modo que, no freiro Irma diz apenas:
+Certo.
+E uma especie de carga de um
+Saving checkpoint to artifacts/checkpoints/king_v1_3400.pth
+Training:  38%|████████████████▌                           | 1500/4000 [9:35:24<15:43:48, 22.65s/it]
+Estimating loss...
+step 3500: val loss 3.4473
+Generating 100 tokens from context='A HORA DO HORROR '
+generated_text: A HORA DO HORROR = placou! O que eu disse!
+Hollown assentiu e tempo de segundos depois o olhau tiras. O rosto deu um instante.
+-- Que homem se levanta por algum tempo, viu quando cuspiu gasto esta manha por toda minha cadeira de cabe... partigando-se por 
+um dolar. ficou assim tudo foi por aquela hora.                                                                                 um dolar. ficou assim tudo foi por aquela hora.
+-- Precisamos. E o que...
+Ela aceitou Carrie de bizar
+Saving checkpoint to artifacts/checkpoints/king_v1_3500.pth
+Training:  38%|████████████████▌                           | 1502/4000 [9:37:27<16:00:23, 23.07s/it]
+Traceback (most recent call last):
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\train.py", line 184, in <module>
+    main()
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\train.py", line 30, in main
+    training_loop(**params, device=device)
+  File "C:\Users\Bruno\Documents\GitHub\transformers-fun\train.py", line 151, in training_loop
+    loss.backward()
+  File "C:\Users\Bruno\miniconda3\envs\gpt\Lib\site-packages\torch\_tensor.py", line 648, in backward
+    torch.autograd.backward(
+  File "C:\Users\Bruno\miniconda3\envs\gpt\Lib\site-packages\torch\autograd\__init__.py", line 353, in backward
+    _engine_run_backward(
+  File "C:\Users\Bruno\miniconda3\envs\gpt\Lib\site-packages\torch\autograd\graph.py", line 824, in _engine_run_backward        
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+^C

@@ -7,7 +7,7 @@ n_layer: 6  # attention blocks in sequence
 dropout: 0.15
 # Training parameters
 learning_rate: 0.001
-max_iters: 2000
+max_iters: 4000
 eval_interval: 100
 save_interval: 100
 eval_iters: 30
@@ -15,9 +15,9 @@ eval_iters: 30
 path_input: "data/king_ptbr_v1.txt"
 path_tokenizer: "artifacts/tokenizers/king_ptbr_2048_v1.joblib"
 name: "v11"
-start_iter: 0
-# path_load_model: "artifacts/lovecraft_ngram_v3_1999_starting.pth"
+start_iter: 2000
+path_load_model: "artifacts/checkpoints/king_v1_1999.pth"
 path_save_model: "artifacts/checkpoints/king_v1"  # "artifacts/gpt_model_v4.pth"
-path_generate_output: "output/king_v1.txt"
+path_generate_output: "output/king_v1_2.txt"
 n_tokens_generate: 1000
 context: "A HORA DO HORROR "

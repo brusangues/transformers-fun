@@ -136,11 +136,12 @@ def training_loop(
 
     model.train()
     for iter in tqdm(
-        range(start_iter, start_iter + max_iters),
+        range(start_iter, max_iters),
         desc="Training",
         total=max_iters,
         ncols = 100,
-        # initial=start_iter,
+        initial=start_iter,
+        total = max_iters,
     ):
         # sample a batch of data
         xb, yb = data_loader.get_batch("train")
@@ -154,7 +155,7 @@ def training_loop(
         profile(iter)
 
         # every once in a while evaluate the loss on train and val sets
-        if iter % eval_interval == 0 or iter == start_iter + max_iters - 1:
+        if iter % eval_interval == 0 or iter == max_iters - 1:
             print()
             losses = estimate_loss(iter, splits=["val"])
             # writer.add_scalar("loss/train_estimated", losses["train"], iter)

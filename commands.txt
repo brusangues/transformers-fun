@@ -9,3 +9,5 @@ gpustat -cp -i
 python train.py v5
 
 tensorboard --logdir=runs
+
+pip freeze | grep -E "unidecode|tqdm|torch|torchvision|torchaudio|pyyaml|jupyter|pandas|tiktoken|sentencepiece|joblib|mobi|ebooklib|BeautifulSoup4|openpyxl|pyarrow"

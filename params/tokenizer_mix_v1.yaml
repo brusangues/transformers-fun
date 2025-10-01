@@ -1,0 +1,4 @@
+path_input: "data/tokenizer_mix_v1.txt"
+path_tokenizer: "artifacts/tokenizers/mix_ptbr_4096_v1.joblib"
+max_tokens: 15_000_000
+vocab_size: 4096
