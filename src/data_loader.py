@@ -228,7 +228,7 @@ class DataLoaderBpeV2:
         batch_size,
         device,
         path_tokenizer="artifacts/tokenizers/mix_ptbr_4096_v1.joblib",
-        path_input = "data/df_full_v0.pq",
+        path_input = "data/df_full_encoded_v0.pq",
         texts_sample_frac = 1.0,
         split_frac = 0.8,
     ):
@@ -279,32 +279,49 @@ class DataLoaderBpeV2:
         encode = lambda s: self.tokenizer.encode(s, visualise=None)
         # decoder: take a list of integers, output a string
         decode = lambda l: self.tokenizer.decode(l)
-        assert decode(encode("ola mundo ")) == "ola mundo "
-
-        # Train and test splits
-        print("Encoding texts...")
-        self.df_full["text_encoded"] = self.df_full.text_clean.progress_apply(lambda x: torch.tensor(encode(x), dtype=torch.long))
-        print(f"{self.df_full.text_encoded.apply(len).describe()=}")
-        index_train = self.df_full.sample(frac=self.split_frac, random_state=1).index
-        self.df_full["split"] = pd.Series(self.df_full.index.isin(index_train)).map({True: "train", False: "eval"})
-        print(f"{self.df_full.value_counts(['split','author']).sort_index().reset_index()=}")
-        print(f"{self.df_full.value_counts(['split','author','class']).sort_index().reset_index()=}")
-
         self.encode = encode
         self.decode = decode
+        assert decode(encode("ola mundo ")) == "ola mundo "
+
+        print("Encoding texts...")
+        if "text_encoded" not in self.df_full.columns:
+            self.df_full["text_encoded"] = self.df_full.text_clean.progress_apply(lambda x: torch.tensor(encode(x), dtype=torch.long))
+            self.df_full["text_encoded_len"] =  self.df_full.text_encoded.apply(len)
+            self.df_full["weights"] = self.df_full.text_encoded_len / self.df_full.text_encoded_len.sum()
+            print(f"{self.df_full.text_encoded_len.describe()=}")
+
+            print("Train test splits...")
+            index_train = self.df_full.sample(frac=self.split_frac, random_state=1, weights="weights").index
+            self.df_full["split"] = pd.Series(self.df_full.index.isin(index_train)).map({True: "train", False: "eval"})
+            print(f"{self.df_full.value_counts(['split','author']).sort_index().reset_index()=}")
+            print(f"{self.df_full.value_counts(['split','author','class']).sort_index().reset_index()=}")
+            print(f"{self.df_full.groupby(['split', 'author']).weights.sum()=}")
 
         return vocab_size_tokenizer, encode, decode
 
     def get_batch(self, split):
         # generate a small batch of data of inputs x and targets y
         df_split = self.df_full.query("split=='train'") if split == "train" else self.df_full.query("split=='eval'")
-        df_batch = df_split.sample(self.batch_size, replace=True)
+
+        # Sample uniform
+        # df_batch = df_split.sample(self.batch_size, replace=True)
+
+        # Sample stratified by author
+        # n_samples_per_stratum = self.batch_size // df_split.author.nunique()
+        # df_batch = df_split.groupby('author', group_keys=False).apply(lambda x: x.sample(n=min(len(x), n_samples_per_stratum)))
+        # if len(df_batch) < self.batch_size:
+        #     n_remaining = self.batch_size - len(df_batch)
+        #     df_batch = pd.concat([df_batch, df_split.sample(n_remaining, replace=True)])
+        # print(f"{df_batch.shape=}, {df_batch.author.value_counts().sort_index().reset_index()=}")
+
+        # Sample by weights
+        df_batch = df_split.sample(self.batch_size, replace=True, weights="weights")
 
         x = torch.zeros((self.batch_size, self.context_len), dtype=torch.long)
         y = torch.zeros((self.batch_size, self.context_len), dtype=torch.long)
         for i, (id_row, row) in enumerate(df_batch.iterrows()):
             # print(f"{i=} {id_row=} {row.author=} {row['class']=}{len(row.text_encoded)=}")
-            t = row.text_encoded
+            t = torch.tensor(row.text_encoded, dtype=torch.long)
             if len(t) <= self.context_len:
                 t = torch.cat([t, torch.zeros(self.context_len, dtype=torch.long)])
                 start_idx = 0
