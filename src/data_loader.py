@@ -260,10 +260,10 @@ class DataLoaderBpeV2:
         print(f"{len(chars)=} {chars=}")
 
         tokens_full = self.tokenizer.encode(text, visualise=None)
-        print(f"{len(tokens_full)=} {tokens_full[:300]=}")
+        print(f"{len(tokens_full)=} {tokens_full[:100]=}")
 
         tokens = sorted(list(set(tokens_full)))
-        print(f"{tokens[:200]=}")
+        print(f"{tokens[:100]=}")
 
         vocab_size_tokens = len(tokens)
         print(f"{vocab_size_tokens=}")
@@ -299,35 +299,48 @@ class DataLoaderBpeV2:
 
         return vocab_size_tokenizer, encode, decode
 
-    def get_batch(self, split):
+    def get_batch(self, split, verbose=False, batch_size=None):
+        if batch_size is None:
+            batch_size = self.batch_size
+        if verbose:
+            print(f"get_batch {split=}...")
         # generate a small batch of data of inputs x and targets y
         df_split = self.df_full.query("split=='train'") if split == "train" else self.df_full.query("split=='eval'")
 
         # Sample uniform
-        # df_batch = df_split.sample(self.batch_size, replace=True)
+        # df_batch = df_split.sample(batch_size, replace=True)
 
         # Sample stratified by author
-        # n_samples_per_stratum = self.batch_size // df_split.author.nunique()
+        # n_samples_per_stratum = batch_size // df_split.author.nunique()
         # df_batch = df_split.groupby('author', group_keys=False).apply(lambda x: x.sample(n=min(len(x), n_samples_per_stratum)))
-        # if len(df_batch) < self.batch_size:
-        #     n_remaining = self.batch_size - len(df_batch)
+        # if len(df_batch) < batch_size:
+        #     n_remaining = batch_size - len(df_batch)
         #     df_batch = pd.concat([df_batch, df_split.sample(n_remaining, replace=True)])
-        # print(f"{df_batch.shape=}, {df_batch.author.value_counts().sort_index().reset_index()=}")
 
         # Sample by weights
-        df_batch = df_split.sample(self.batch_size, replace=True, weights="weights")
+        df_batch = df_split.sample(batch_size, replace=True, weights="weights")
 
-        x = torch.zeros((self.batch_size, self.context_len), dtype=torch.long)
-        y = torch.zeros((self.batch_size, self.context_len), dtype=torch.long)
+        if verbose:
+            print(f"{df_split.shape=} {df_batch.shape=}")
+            print(f"{df_batch.author.value_counts().sort_index().reset_index()=}")
+            print(f"{df_batch.groupby(['split', 'author']).weights.sum()=}")
+            print(f"{df_batch.groupby(['split', 'author']).text_encoded_len.sum()=}")
+            print(f"{df_batch.groupby(['split', 'author']).title.count()=}")
+            print(f"{df_batch.title.nunique()=}")
+
+        x = torch.zeros((batch_size, self.context_len), dtype=torch.long)
+        y = torch.zeros((batch_size, self.context_len), dtype=torch.long)
         for i, (id_row, row) in enumerate(df_batch.iterrows()):
-            # print(f"{i=} {id_row=} {row.author=} {row['class']=}{len(row.text_encoded)=}")
+            if verbose:
+                print(f"{i=} {id_row=} {row.author=} {row['class']=}{len(row.text_encoded)=}")
             t = torch.tensor(row.text_encoded, dtype=torch.long)
             if len(t) <= self.context_len:
                 t = torch.cat([t, torch.zeros(self.context_len, dtype=torch.long)])
                 start_idx = 0
             else:
                 start_idx = torch.randint(0, len(t) - self.context_len, (1,)).item()
-            # print(f"{len(t)=} {start_idx=} {start_idx + self.context_len=}")
+            # if verbose:
+            #     print(f"{len(t)=} {start_idx=} {start_idx + self.context_len=}")
             x[i] = t[start_idx : start_idx + self.context_len]
             y[i] = t[start_idx + 1 : start_idx + self.context_len + 1]
 

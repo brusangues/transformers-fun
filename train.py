@@ -47,6 +47,7 @@ def training_loop(
     save_interval,
     eval_iters,
     n_embd,
+    n_feed_forward,
     n_head,
     n_layer,
     dropout,
@@ -62,6 +63,9 @@ def training_loop(
     context="",
     texts_sample_frac=1.0,
     split_frac=0.8,
+    dummy=False,
+    temperature=1.0,
+    top_k=None,
     **kwargs,
 ):
     print("Starting training loop...")
@@ -117,7 +121,7 @@ def training_loop(
         else:
             context = torch.zeros((1, 1), dtype=torch.long, device=device)
         generated_text = decode(
-            m.generate(context, max_new_tokens=n_tokens_generate)[0].tolist()
+            m.generate(context, max_new_tokens=n_tokens_generate, top_k=top_k, temperature=temperature)[0].tolist()
         )
         print("generated_text:", generated_text)
         return generated_text
@@ -125,6 +129,7 @@ def training_loop(
     model = GPTLanguageModel(
         context_len=context_len,
         n_embd=n_embd,
+        n_feed_forward=n_feed_forward,
         n_head=n_head,
         n_layer=n_layer,
         dropout=dropout,
@@ -143,6 +148,18 @@ def training_loop(
 
     # create a PyTorch optimizer
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
+    print(f"{optimizer=}")
+
+    if dummy:
+        print("Running in dummy mode. Running a single batch to test the code.")
+        xb, yb = data_loader.get_batch("val", verbose=True, batch_size=10)
+        xb, yb = data_loader.get_batch("train", verbose=True, batch_size=10)
+        print(f"{xb.shape=}, {yb.shape=}")
+        logits, loss = model(xb, yb)
+        print(f"{logits.shape=}, {loss=}")
+        print("Generating from the model...")
+        generate_sample(context=context, n_tokens_generate=n_tokens_generate)
+        return
 
     model.train()
     for iter in tqdm(

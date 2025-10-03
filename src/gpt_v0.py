@@ -56,12 +56,12 @@ class MultiHeadAttention(nn.Module):
 class FeedForward(nn.Module):
     """a simple linear layer followed by a non-linearity"""
 
-    def __init__(self, n_embd, dropout):
+    def __init__(self, n_embd, n_feed_forward, dropout):
         super().__init__()
         self.net = nn.Sequential(
-            nn.Linear(n_embd, 4 * n_embd),
+            nn.Linear(n_embd, n_feed_forward),
             nn.ReLU(),
-            nn.Linear(4 * n_embd, n_embd),
+            nn.Linear(n_feed_forward, n_embd),
             nn.Dropout(dropout),
         )
 
@@ -72,14 +72,14 @@ class FeedForward(nn.Module):
 class Block(nn.Module):
     """Transformer block: communication followed by computation"""
 
-    def __init__(self, n_embd, context_len, n_head, dropout):
+    def __init__(self, n_embd, n_feed_forward, context_len, n_head, dropout):
         # n_embd: embedding dimension, n_head: the number of heads we'd like
         super().__init__()
         head_size = n_embd // n_head
         self.self_attention = MultiHeadAttention(
             n_embd, context_len, n_head, head_size, dropout
         )
-        self.feed_forward = FeedForward(n_embd, dropout)
+        self.feed_forward = FeedForward(n_embd, n_feed_forward, dropout)
         self.layer_norm1 = nn.LayerNorm(n_embd)
         self.layer_norm2 = nn.LayerNorm(n_embd)
 
@@ -95,6 +95,7 @@ class GPTLanguageModel(nn.Module):
         self,
         context_len=128,  # what is the maximum context length for predictions?
         n_embd=384,  # embedding dimension
+        n_feed_forward=384*4,  # Feed forward layer size
         n_head=4,  # number of heads in the multi-head attention
         n_layer=2,  # number of transformer blocks
         dropout=0.15,  # dropout rate
@@ -112,7 +113,7 @@ class GPTLanguageModel(nn.Module):
         self.token_embedding_table = nn.Embedding(vocab_size, n_embd)
         self.position_embedding_table = nn.Embedding(context_len, n_embd)
         self.blocks = nn.Sequential(
-            *[Block(n_embd, context_len, n_head, dropout) for _ in range(n_layer)]
+            *[Block(n_embd, n_feed_forward, context_len, n_head, dropout) for _ in range(n_layer)]
         )
         self.ln_f = nn.LayerNorm(n_embd)  # final layer norm
         self.lm_head = nn.Linear(n_embd, vocab_size)
@@ -151,7 +152,9 @@ class GPTLanguageModel(nn.Module):
 
         return logits, loss
 
-    def generate(self, idx, max_new_tokens):
+    def generate(self, idx, max_new_tokens, top_k=None, temperature=1.0):
+        if temperature <= 0:
+            temperature = 0.001
         # idx is (B, T) array of indices in the current context
         for _ in range(max_new_tokens):
             # crop idx to the last context_len tokens
@@ -160,8 +163,12 @@ class GPTLanguageModel(nn.Module):
             logits, loss = self(idx_cond)
             # focus only on the last time step
             logits = logits[:, -1, :]  # becomes (B, C)
+            # optionally crop the logits to only the top k options
+            if top_k is not None:
+                v, _ = torch.topk(logits, top_k)
+                logits[logits < v[:, [-1]]] = -float("Inf")
             # apply softmax to get probabilities
-            probs = F.softmax(logits, dim=-1)  # (B, C)
+            probs = F.softmax(logits / temperature, dim=-1)  # (B, C)
             # sample from the distribution
             idx_next = torch.multinomial(probs, num_samples=1)  # (B, 1)
             # append sampled index to the running sequence
