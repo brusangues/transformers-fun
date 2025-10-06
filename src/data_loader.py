@@ -231,6 +231,9 @@ class DataLoaderBpeV2:
         path_input = "data/df_full_encoded_v0.pq",
         texts_sample_frac = 1.0,
         split_frac = 0.8,
+        tokenizer_vocab_size = None,
+        encode_input = False,
+        path_input_encoded = None,
     ):
         print("DataLoaderBpeV2 init...")
         self.context_len = context_len
@@ -238,8 +241,26 @@ class DataLoaderBpeV2:
         self.device = device
         self.split_frac = split_frac
         print(f"{context_len=}, {batch_size=}, {device=}, {split_frac=}")
-        self.tokenizer = joblib.load(path_tokenizer)
+        
+        print("Tokenizer...")
+        tokenizer = joblib.load(path_tokenizer)
+        if tokenizer_vocab_size is not None:
+            print("Reduzindo tokenizer_vocab_size...")
+            ranks = tokenizer.mergeable_ranks
+            print(f"{len(ranks)=} {tokenizer_vocab_size=}")
+            if tokenizer_vocab_size >= len(ranks) or tokenizer_vocab_size <= 256:
+                raise Exception("tokenizer_vocab_size too big or too small for current tokenizer.")
+            ranks = {k:v for k,v in ranks.items() if v < tokenizer_vocab_size}
+            tokenizer = SimpleBytePairEncoding(
+                pat_str=tokenizer.pat_str,
+                mergeable_ranks=ranks,
+            )
+        self.tokenizer = tokenizer
         self.vocab_size_tokenizer = len(self.tokenizer.mergeable_ranks)
+        self.encode_input = encode_input
+        self.path_input_encoded = path_input_encoded
+
+        print("Dataset...")
         print(f"{self.vocab_size_tokenizer=}")
         self.df_full = pd.read_parquet(path_input).query("train").sample(frac=texts_sample_frac, random_state=1).reset_index(drop=True)
         print(f"{self.df_full.shape=}")
@@ -283,19 +304,23 @@ class DataLoaderBpeV2:
         self.decode = decode
         assert decode(encode("ola mundo ")) == "ola mundo "
 
-        print("Encoding texts...")
-        if "text_encoded" not in self.df_full.columns:
-            self.df_full["text_encoded"] = self.df_full.text_clean.progress_apply(lambda x: torch.tensor(encode(x), dtype=torch.long))
+        if self.encode_input:
+            print("Encoding input texts...")
+            self.df_full["text_encoded"] = self.df_full.text_clean.progress_apply(lambda x: encode(x), ncols=100)
             self.df_full["text_encoded_len"] =  self.df_full.text_encoded.apply(len)
-            self.df_full["weights"] = self.df_full.text_encoded_len / self.df_full.text_encoded_len.sum()
+            # self.df_full["weights"] = self.df_full.text_encoded_len / self.df_full.text_encoded_len.sum()
             print(f"{self.df_full.text_encoded_len.describe()=}")
 
-            print("Train test splits...")
-            index_train = self.df_full.sample(frac=self.split_frac, random_state=1, weights="weights").index
-            self.df_full["split"] = pd.Series(self.df_full.index.isin(index_train)).map({True: "train", False: "eval"})
-            print(f"{self.df_full.value_counts(['split','author']).sort_index().reset_index()=}")
-            print(f"{self.df_full.value_counts(['split','author','class']).sort_index().reset_index()=}")
-            print(f"{self.df_full.groupby(['split', 'author']).weights.sum()=}")
+            # print("Train test splits...")
+            # index_train = self.df_full.sample(frac=self.split_frac, random_state=1, weights="weights").index
+            # self.df_full["split"] = pd.Series(self.df_full.index.isin(index_train)).map({True: "train", False: "eval"})
+            # print(f"{self.df_full.value_counts(['split','author']).sort_index().reset_index()=}")
+            # print(f"{self.df_full.value_counts(['split','author','class']).sort_index().reset_index()=}")
+            # print(f"{self.df_full.groupby(['split', 'author']).weights.sum()=}")
+
+        if self.path_input_encoded is not None:
+            print("Saving encoded to path_input_encoded...")
+            self.df_full.to_parquet(self.path_input_encoded)
 
         return vocab_size_tokenizer, encode, decode
 

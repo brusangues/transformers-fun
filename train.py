@@ -66,6 +66,9 @@ def training_loop(
     dummy=False,
     temperature=1.0,
     top_k=None,
+    tokenizer_vocab_size = None,
+    encode_input = False,
+    path_input_encoded = None,
     **kwargs,
 ):
     print("Starting training loop...")
@@ -84,7 +87,10 @@ def training_loop(
         path_tokenizer=path_tokenizer,
         path_input=path_input,
         texts_sample_frac=texts_sample_frac,
-        split_frac=split_frac
+        split_frac=split_frac,
+        tokenizer_vocab_size=tokenizer_vocab_size,
+        encode_input=encode_input,
+        path_input_encoded=path_input_encoded,
     )
     vocab_size, encode, decode = data_loader.load_data()
 
@@ -104,7 +110,7 @@ def training_loop(
         model.eval()
         for split in splits:
             losses = torch.zeros(eval_iters)
-            for k in range(eval_iters):
+            for k in tqdm(range(eval_iters), ncols=100, desc="Estimating loss", total=eval_iters):
                 X, Y = data_loader.get_batch(split)
                 logits, loss = model(X, Y)
                 losses[k] = loss.item()
@@ -202,7 +208,7 @@ def training_loop(
     generated_text = generate_sample(context, n_tokens_generate)
     if path_generate_output:
         print(f"Saving generated text to {path_generate_output}")
-        open(path_generate_output, "w").write(generated_text)
+        open(path_generate_output, "w", encoding="utf-8").write(generated_text)
     print("Training loop finished.")
     writer.close()
 

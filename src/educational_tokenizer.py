@@ -13,6 +13,7 @@ replacement_char = "�"
 class SimpleBytePairEncoding:
     def __init__(self, *, pat_str: str, mergeable_ranks: dict[bytes, int]) -> None:
         """Creates an Encoding object."""
+        print(f"{len(mergeable_ranks)=} {pat_str=}")
         # A regex pattern string that is used to split the input text
         self.pat_str = pat_str
         # A dictionary mapping token bytes to their ranks. The ranks correspond to merge priority
