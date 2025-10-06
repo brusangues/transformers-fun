@@ -1,0 +1,7 @@
+path_input: "data/tokenizer_mix_v2.txt"
+path_tokenizer: "artifacts/tokenizers/tiny.joblib"
+max_tokens: 100_000 # 15_000_000
+vocab_size: 1000 # 10240
+encode_all_bytes: true
+visualise: 100
+test_string: "Não. Além. Caçada. Bônus gênero. — ª° ‡. í á â ^ à"

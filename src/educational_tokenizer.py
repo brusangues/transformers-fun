@@ -7,6 +7,8 @@ import regex
 import tiktoken
 from tqdm import tqdm
 
+replacement_char = "�"
+
 
 class SimpleBytePairEncoding:
     def __init__(self, *, pat_str: str, mergeable_ranks: dict[bytes, int]) -> None:
@@ -125,7 +127,8 @@ def bpe_encode(
     if visualise:
         print()
 
-    tokens = [mergeable_ranks[part] for part in parts]
+    # Unk token added
+    tokens = [mergeable_ranks.get(part, mergeable_ranks[bytes(replacement_char.encode("utf-8"))]) for part in parts]
     return tokens
 
 
@@ -144,32 +147,40 @@ def bpe_train(
     ]
     print(f"Initial 20 words: {words[:20]}")
 
-    # First, add tokens for each individual byte value
+    ranks = {}
     if encode_all_bytes:
-        if vocab_size < 2**8:
-            raise ValueError("vocab_size must be at least 256, so we can encode all bytes")
-        ranks = {}
+        print("First, add tokens for each individual byte value")
         for i in range(2**8):
             ranks[bytes([i])] = i
+        print(f"Added all {2**8} byte values")
     else:
-        # If we don't want to encode all bytes, we only add the characters that actually occur in the data
-        chars = sorted(list(set(data)))
-        chars = [c.encode("utf-8") for c in chars]  # Remove spaces
+        print("Add the individual characters that actually occur in the data")
+        pieces = [bytes([b]) for b in data.encode("utf-8")]
+        chars = sorted(list(set(pieces)))
         print(f"{len(chars)=} {chars=}")
-        if vocab_size < len(chars):
-            raise ValueError(
-                f"vocab_size must be at least {len(chars)}, so we can encode all characters in the data"
-            )
-        ranks = {bytes(c): i for i, c in enumerate(chars)}
+        added_chars = []
+        for i, c in enumerate(chars):
+            # print(f"{i=} {c=} {bytes(c)=} {len(bytes(c))=}:", end=" ")
+            if (bytes(c) not in ranks) and len(bytes(c))==1:
+                # print(f"added.", end=" ")
+                ranks[bytes(c)] = len(ranks)
+                added_chars.append(c)
+        print(f"\nAdded {len(added_chars)} characters: {added_chars}")
 
-    print(f"Initial ranks: {ranks}")
+    # Adding unknown token
+    unknown_token = len(ranks)
+    print("Adding unknown token", unknown_token)
+    ranks[bytes(replacement_char.encode("utf-8"))] = unknown_token
+
+    ranks_readable = [(v, k, k.decode("utf-8", errors="replace")) for k, v in ranks.items()]
+    print(f"Initial ranks: {ranks_readable}")
 
     # Now, use our data to figure out which merges we should make
 
     # while len(ranks) < vocab_size:
     # tqdm
     total = vocab_size - len(ranks)
-    for it in tqdm(range(total), desc="Training BPE", unit=" merges"):
+    for it in tqdm(range(total), desc="Training BPE", unit=" merges", ncols=100):
         # Find the most common pair. This will become our next token
         stats = collections.Counter()
         for piece in words:
@@ -179,6 +190,8 @@ def bpe_train(
         most_common_pair = max(stats, key=lambda x: stats[x])
         token_bytes = most_common_pair[0] + most_common_pair[1]
         token = len(ranks)
+        # token_decoded = token_bytes.decode("utf-8", errors="replace")
+        # print(f"{token=} {token_bytes=} {token_decoded=}")
         # Add the new token!
         ranks[token_bytes] = token
 
@@ -217,6 +230,9 @@ def bpe_train(
             )
             visualise_tokens([token for word in words[10:50] for token in word])
             print()
+
+    ranks_readable = [(v, k, k.decode("utf-8", errors="replace")) for k, v in ranks.items()]
+    print(f"Final ranks: {ranks_readable}")
 
     return ranks
 

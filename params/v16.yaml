@@ -1,0 +1,35 @@
+# Model parameters
+batch_size: 100  # independent sequences processed in parallel
+context_len: 256  # maximum token context length
+n_embd: 256  # linear layers size
+n_feed_forward: 1024
+n_head: 8  # parallel attention heads
+n_layer: 1  # attention blocks in sequence
+dropout: 0.1
+
+# Training parameters
+learning_rate: 0.01
+start_iter: 0
+max_iters: 3000
+eval_interval: 100
+save_interval: 100
+eval_iters: 50
+texts_sample_frac: 1.0
+split_frac: 0.85
+
+# Generation parameters
+top_k: 30
+temperature: 0.7
+
+# Other parameters
+path_input: "data/df_full_encoded_tiny.pq"
+path_tokenizer: "artifacts/tokenizers/tiny.joblib"
+name: "v16_3"
+# path_load_model: "artifacts/checkpoints/mix_v15_1999.pth"
+path_save_model: "artifacts/checkpoints/mix_v16_3"
+path_generate_output: "output/mix_v16_3.txt"
+n_tokens_generate: 600
+context: "Escrevo sob efeito de horrores inimagináveis."
+# context: "Escrevo sabendo que meu fim esta proximo.\nFoi ha um ano atras"
+
+# dummy: true

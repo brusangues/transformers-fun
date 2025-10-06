@@ -7,6 +7,7 @@ Referência principal: Andrej Karpathy's nanogpt-lecture
 [nanoGPT model.py](https://github.com/karpathy/nanoGPT/blob/master/model.py)
 
 # TODO
+* Logar estatísticas sobre os pesos para debugar o treinamento das redes
 * Redirect stdout para salvar logs de maneira mais fácil
 * Adicionar mais autores
 * salvar optimizador

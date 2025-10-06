@@ -32,7 +32,7 @@ def main():
 
 def parse_yaml_params(path):
     print(f"Loading parameters from {path}")
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         params = yaml.safe_load(f)
     print(f"Parameters loaded: {params}")
     return params
