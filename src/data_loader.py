@@ -306,7 +306,7 @@ class DataLoaderBpeV2:
 
         if self.encode_input:
             print("Encoding input texts...")
-            self.df_full["text_encoded"] = self.df_full.text_clean.progress_apply(lambda x: encode(x), ncols=100)
+            self.df_full["text_encoded"] = self.df_full.text_clean.progress_apply(lambda x: encode(x))
             self.df_full["text_encoded_len"] =  self.df_full.text_encoded.apply(len)
             # self.df_full["weights"] = self.df_full.text_encoded_len / self.df_full.text_encoded_len.sum()
             print(f"{self.df_full.text_encoded_len.describe()=}")
