@@ -8,12 +8,12 @@ n_layer: 1  # attention blocks in sequence
 dropout: 0.1
 
 # Training parameters
-learning_rate: 0.01
+learning_rate: 0.005
 start_iter: 0
-max_iters: 3000
-eval_interval: 100
-save_interval: 100
-eval_iters: 30
+max_iters: 30_000
+eval_interval: 200
+save_interval: 200
+eval_iters: 10
 texts_sample_frac: 1.0
 split_frac: 0.85
 
@@ -23,16 +23,16 @@ temperature: 0.7
 
 # Tokenizer parameters
 path_tokenizer: "artifacts/tokenizers/mix_ptbr_10240_v1.joblib"
-tokenizer_vocab_size: 4096  # null
-encode_input: true  # false
+tokenizer_vocab_size: null
+encode_input: false  # false
 
 # Other parameters
-path_input: "data/df_full_encoded_tiny.pq"
-path_input_encoded: "data/df_full_encoded_v16_5.pq"
-name: "v16_5"
+path_input: "data/df_full_encoded_v17.pq"
+path_input_encoded: "data/df_full_encoded_v17.pq"
+name: "v17"
 # path_load_model: "artifacts/checkpoints/mix_v15_1999.pth"
-path_save_model: "artifacts/checkpoints/mix_v16_5"
-path_generate_output: "output/mix_v16_5.txt"
+path_save_model: "artifacts/checkpoints/mix_v17"
+path_generate_output: "output/mix_v17.txt"
 n_tokens_generate: 600
 context: "Escrevo sob efeito de horrores inimagináveis."
 # context: "Escrevo sabendo que meu fim esta proximo.\nFoi ha um ano atras"

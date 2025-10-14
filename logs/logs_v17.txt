@@ -1,0 +1,810 @@
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que mais quer dizer? O que sabe que a filha dele foi a única. O garoto é que ele não está morto, mas é verdade. Não é verdade? Você não entende, não é? Por que não é um problema?
+— Não sei — diz Holly. — É só um hábito que o outro cara tem uma máquina de refrigerantes pra nós.
+— Tudo isso. — A menos que a gente tem que se levantar e pegar o copo, e eu vou dar um jeito nisso
+Saving checkpoint to artifacts/checkpoints/mix_v17_12400.pth
+Training:  42%|█████████████████▏                       | 12600/30000 [15:53:57<21:47:01,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 12600: val loss 4.3726█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Em um sonho, a maioria dos sonhos que se multidões de segurança são o que brilha; e a 
+escuridão de maneira sobrenatural e as pessoas deformam, as pessoas do mundo, porém são tão reais que os homens como as pessoas fazem quando a gente conseguem entender por essas coisas, mas elas são os mais importantes que metam cada um de nós no outro. Mas nós não tínhamos visto aquelas coisas 
+como nós nunca sabíamos, por exemplo. Ele disse isso. — O que é muito engraçado
+Saving checkpoint to artifacts/checkpoints/mix_v17_12600.pth
+Training:  43%|█████████████████▍                       | 12800/30000 [16:09:13<21:34:09,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+step 12800: val loss 4.3624█████████████████████████████████████████| 10/10 [00:12<00:00,  1.24s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O sr. W. Wilmington Irving e Hummm que o sr. Woodherll foi para o meu quarto.
+Sheridan, o meu filho, mas eu me lembro de ter esquecido o que a minha mãe me contarei sobre o meu pai, na minha mãe, eu não tinha tanta certeza de 
+que o sr. Marsden, na verdade. Na época, eu tinha uma boa menina, mas uma vez que ela não estava sozinha, não consegui entender
+Saving checkpoint to artifacts/checkpoints/mix_v17_12800.pth
+Training:  43%|█████████████████▊                       | 13000/30000 [16:24:29<21:18:37,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 13000: val loss 4.3902█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A morte do meu tio, quando meu tio — e o tio Alk Cappide. Foi a primeira vez que ele levou a uma das mais remota de Oliveiro, o professor de contos de horror, a narrativa e o sobrenatural foi devidamente levada aos sussurros que a solução demoníaca dos inúmeros cachorros; e por fim, conforme o costume de suas próprias cartas, o sr. Século, e é como um
+Saving checkpoint to artifacts/checkpoints/mix_v17_13000.pth
+Training:  44%|██████████████████                       | 13200/30000 [16:39:45<21:01:56,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 13200: val loss 4.3898█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A única coisa que ele conhecia e o que ele tinha visto antes, e ele tinha lido o sobrenatural, e então, quando ele era mais velho, e a família de seu amigo, ele era o velho amigo. Ele não tinha visto, mas sua vida era sempre o que ele conhecia.
+Ele se virou para ele que estava (o que ele conhecia), e ele podia dar o fora da floresta. E o velho George não tinha visto a própria casa, e então 
+a esposa, que o matou
+Saving checkpoint to artifacts/checkpoints/mix_v17_13200.pth
+Training:  45%|██████████████████▎                      | 13400/30000 [16:55:01<20:47:21,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 13400: val loss 4.3703█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu quase tinha tanta certeza que estava em uma coisa tão grande que aconteceu lá.
+O homem de quem foi morto com a mão esquerda, mas a mão dela estava na mão na maçaneta da porta. Tanto a porta quanto a porta daquele quarto. Não a 
+culpa mais do que, eu não estava trancado, mas eu não queria mais. Lentamente, eu não queria. Era a voz que eu queria dizer que ela não queria dizer isso, mas eu também queria ficar com medo de que eu não
+Saving checkpoint to artifacts/checkpoints/mix_v17_13400.pth
+Training:  45%|██████████████████▌                      | 13600/30000 [17:10:16<20:32:17,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.21s/it]
+step 13600: val loss 4.3930█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que a cidade e suas histórias e mistérios em sua infância, o que dizem que os homens da lei pode ser posteriores, e com frequência o que ele diz que o povo de Leng, e o capitão temia que eles buscam noctífero prosperavam em Dylath-th-Leen e a esposa dos filhos, Carter perguntou o capitão.
+— Não posso dizer que as coisas aconteceram naquele dia. Eles não falam sobre um plano.
+Saving checkpoint to artifacts/checkpoints/mix_v17_13600.pth
+Training:  46%|██████████████████▊                      | 13800/30000 [17:25:32<20:15:57,  4.50s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+step 13800: val loss 4.3736█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que a garota mais imagina e mais jovem do que a lua permanecem de um templo. Com o qual mistério grunhido.
+Detetive Anderson: Vou chamar de "Acreditar que o sr. Hodges está morto, e a primeira coisa que lhe veio, e ele parece sentir algo parecido: um homem de capa larga de couro cru e um homem é um dos lados de um par de óculos de lentes de listras e de camisa de flanela, e
+Saving checkpoint to artifacts/checkpoints/mix_v17_13800.pth
+Training:  47%|███████████████████▏                     | 14000/30000 [17:40:47<20:03:23,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 14000: val loss 4.3863█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. — Mas o lugar é onde são as profundezas dos mais profundas de uma memória desconhecida. Não há muito tempo. Não há nada que não possa imaginar além da sua mente; a mais velha cidade que somente até mesmo, depois de chegar à fazenda de Gilman, está a seguir em frente, e assim, quando os homens falam sobre o assunto, em todos os conhecidos, pois os homens da cidade são como velhos, não é um dos quais há de abandonar a cidade e o
+Saving checkpoint to artifacts/checkpoints/mix_v17_14000.pth
+Training:  47%|███████████████████▍                     | 14200/30000 [17:56:03<19:48:03,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 14200: val loss 4.3762█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E o choque de horror, o terror e o terror foi tão intenso que foi a última coisa que o terror foi enterrado. A vingança de Thad, o horror de um horror maligno, e a atmosfera nauseante de uma mistura de horror e horror espectral e assombrosa.
+O terror despertou, e foi o horror extremo ao todo o horror e o terror da realidade, e o horror que se precipitava por um corredor retomou seubroso. A figura embu
+Saving checkpoint to artifacts/checkpoints/mix_v17_14200.pth
+Training:  48%|███████████████████▋                     | 14400/30000 [18:11:18<19:32:35,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 14400: val loss 4.3741█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não que tenha que haver uma chance de se referência a uma insones capaz de produzir um grito de fúria. Mais alguma coisa, talvez mais extrema que qualquer sugestão poderia ser extrema; mas a expressão de assombrosa e sobrenatural, como a história, e assim os traços das características de um artista primitivo. Noyes, de qualidade tardio, os que se inclinavam para a crítica velados, e, embora o artista de um time que não
+Saving checkpoint to artifacts/checkpoints/mix_v17_14400.pth
+Training:  49%|███████████████████▉                     | 14600/30000 [18:26:34<19:16:28,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 14600: val loss 4.3955█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que quer que fosse o inferno. Não tem a mente, mas a não dizer que ele não queria saber sobre o que pensar que o velho Planejávamos na parte que o sr. Maitland tenha dado uma olhada no assunto. Não se importa com o meu pai. Eu poderia chegar até lá, mas ela não o crioulo.
+— O que é? — Ela olhou para mim.
+— Ele é uma mulher, mas eu acho que não. — Eu acho que não
+Saving checkpoint to artifacts/checkpoints/mix_v17_14600.pth
+Training:  49%|████████████████████▏                    | 14800/30000 [18:41:49<19:02:41,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 14800: val loss 4.3862█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O conto de mistério é ainda mais monstruoso do que um livro do sr. W. Wilma Ward receberam a correspondência de Charles Ward, mas não tinha nenhuma dúvida. Charles Ward não estava em nenhum momento; a seguir permaneciam assim, pois não era mais confiável, mesmo que fosse, e uma vez Willett não era propriamente uma peça monstruosa de aspecto com uma intensidade muito arcaica impressionada pelos nervos, que o jovem e a
+Saving checkpoint to artifacts/checkpoints/mix_v17_14800.pth
+Training:  50%|████████████████████▌                    | 15000/30000 [18:57:05<18:46:59,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 15000: val loss 4.3927█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu sabia que, quando me virei para a minha frente, e comecei a falar sobre o que poderia ser — que não sei se houvesse alguma coisa em sua cabeça. Acho que se ele não me disse exatamente o que estava acontecendo comigo. E o que eu poderia ter dito, como quem sabe qual é o que eu tenho medo do que me diz que já havia feito quando eu a visse. Aquelas que o universo é que o meu mundo, mas que para mim não queria fazer nada. Eu
+Saving checkpoint to artifacts/checkpoints/mix_v17_15000.pth
+Training:  51%|████████████████████▊                    | 15200/30000 [19:12:20<18:34:39,  4.52s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+step 15200: val loss 4.3828█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Como o médico de O médico era um cara de caravista, e que o médico de quem é o médico 
+disse, e então me mostrou o médico. O médico sorriu umgamente para nós dois, e, embora nunca tivesse sido um. E eu disse que não seria melhor deixar que o sr. Greenwds, e não se surpreende como se fosse um bom filho da puta, é claro, e que ele não se importava mais assim.
+No dia seguinte, ele disse que
+Saving checkpoint to artifacts/checkpoints/mix_v17_15200.pth
+Training:  51%|█████████████████████                    | 15400/30000 [19:27:36<18:17:49,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 15400: val loss 4.3570█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E eu não sou o único experimento de sentimentos,
+onde está encerra o terror de sua mente, a história da morte, a que se torna o preceito de uma terrível morte e de que a violência de seu domínio   
+De sua sensações.
+A criatura de um homem que foi o homem negro de quem está falando, o herói da bruxa, e que é que a coisa não está muito bem. Já está notado ou seu filho de uma puta!
+Porém ele e
+Saving checkpoint to artifacts/checkpoints/mix_v17_15400.pth
+Training:  52%|█████████████████████▎                   | 15600/30000 [19:42:52<18:02:04,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 15600: val loss 4.3910█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A maioria das pessoas é o terror, e é possível viver com tanta certeza de que a morte 
+de sua humanidade tenha vivido muito mais ou menos poetas, mas nem nos anos 1950 é a seguinte que o vinda de Katie. Não é, não é? É a quem sabe o que está fazendo, ou que a morte de um assassino de sua esposa. Eles não foram mortos, mas se odeia. O que você acha, o que vai acontecer. Ele quer   
+Saving checkpoint to artifacts/checkpoints/mix_v17_15600.pth
+Training:  53%|█████████████████████▌                   | 15800/30000 [19:58:07<17:46:19,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 15800: val loss 4.3935█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mais além de qualquer raio de luar, o que havia imaginado. Essas visões, de um assombro que não eram sonhos mais sonhos. Então, onde eu havia visões de mundos e trevas primordiais — não era, por mais horrível, infinitamente insólito elementoso, e não apenas trevas, mas eu não conseguia se lembrar de onde havia existido. Mas havia muitos sonhadores vindos das visões da cidade selvagem, e debilidades, e o medo eram.
+
+Saving checkpoint to artifacts/checkpoints/mix_v17_15800.pth
+Training:  53%|█████████████████████▊                   | 16000/30000 [20:13:23<17:31:16,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 16000: val loss 4.4039█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ele deve ter percebido as formas de dissipações, mas as nossas emoções ainda mais suaves do que me julgava ter visto. E, no entanto, não era verdade absoluta. A vida de uma forma de desafio, mas não é uma coisa que eu não era de admirar que se tratava de uma espécie de consciência de que ele pudesse ser o meu pai. Não queria ver nada além de um ponto mais escuro. Mesmo assim, ele não era capaz de fazer nenhum tipo de coisa capaz
+Saving checkpoint to artifacts/checkpoints/mix_v17_16000.pth
+Training:  54%|██████████████████████▏                  | 16200/30000 [20:28:39<17:16:53,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 16200: val loss 4.3778█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A voz agora baixa, e que agora não pode ser que se dê ao trabalho de dizer que o senhor está me dizendo, é claro, mas acho que é como se alguém houvesse contado um lugar de que o sr. Merrill é o nome da minha vida, pelo menos por enquanto. Você sabe, eu acho que foi até o sr. Guizos, e isso de tudo.
+Sois, eu acho. Ele não sabia que, como ele nunca ia querer fazer isso,
+Saving checkpoint to artifacts/checkpoints/mix_v17_16200.pth
+Training:  55%|██████████████████████▍                  | 16400/30000 [20:43:54<17:02:39,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 16400: val loss 4.3984█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E então a nossa casa está o dr. Checkney, e o dr. Goldsmith, que tinha me dito, e embora eu soubesse que ela não tinha. Não era de uma época que eu tinha, mas era o mesmo jeito da sua natureza, e que não era um bom homem que estava morto, e um amigo da mãe da mãe, que já tinha visto. O homem que me dera foi se afogado no lago, o que o garoto o que o homem estava
+Saving checkpoint to artifacts/checkpoints/mix_v17_16400.pth
+Training:  55%|██████████████████████▋                  | 16600/30000 [20:59:10<16:46:50,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+step 16600: val loss 4.3866█████████████████████████████████████████| 10/10 [00:12<00:00,  1.27s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E, em vez disso, ele não pode ter certeza. A minha mãe não é a única coisa que tenho que admitir, porque ele é o que é o único que tem. Se for de errado, você acha que é, se você não se importa dedura nenhuma. Eu só sei o que você vai fazer. A maioria é pra mim mesmo. Que tipo de coisa.
+— Não, não é? — Ele faz uma pausa. — É só que, mesmo. Se eu não se lemb
+Saving checkpoint to artifacts/checkpoints/mix_v17_16600.pth
+Training:  56%|██████████████████████▉                  | 16800/30000 [21:14:25<16:30:39,  4.50s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 16800: val loss 4.4197█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E também é difícil acreditar, e a que ele tem, e não há nada na vida, que se pode acreditar que o senhor pudesse encontrar um livro em um livro de ficção científica que estou no quarto do século XII é uma vez mais sutil, mas é o que asse de um romance que não é um engano, e o realismo da bruxaria e de sua história. Eu me perguntei por que ele estava escrevendo, mas não me perguntei ao certo sobre mim. Eu
+Saving checkpoint to artifacts/checkpoints/mix_v17_16800.pth
+Training:  57%|███████████████████████▏                 | 17000/30000 [21:29:41<16:17:55,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 17000: val loss 4.3964█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não era tão cruel quanto aquilo que você já viu um monstro de verdade, e não importa. 
+Por que não há dúvida. Mas o que é que você nunca vi. Só se alguém é que você está tentando descobrir isso. Você está fazendo isso?
+A voz de Thadde é o seu respeito.
+O médico faz de conta que ele está me dizendo é que está falando. Se você for tão bem quanto o resto do nosso, ele está dizendo sobre a mãe, mas não é o que
+Saving checkpoint to artifacts/checkpoints/mix_v17_17000.pth
+Training:  57%|███████████████████████▌                 | 17200/30000 [21:44:57<16:02:45,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 17200: val loss 4.4047█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mas, se não estiver no Colorado, mas eu não vou ficar mais de joelhos. — Ele se virou 
+e olhou para ele. — Não é a mesma coisa, mas ele só precisa de um jeito mais do que os pais fazem, e o que os dois dizem.
+— Então... não a casa? Você está tão terrível, certo? — perguntou ela. — É, ela estava com medo. — Você está com a lembrança dele. — Ela olhou para 
+ele, e ela pensou: Eu sei
+Saving checkpoint to artifacts/checkpoints/mix_v17_17200.pth
+Training:  58%|███████████████████████▊                 | 17400/30000 [22:00:25<16:19:56,  4.67s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.25s/it]
+step 17400: val loss 4.3962█████████████████████████████████████████| 10/10 [00:12<00:00,  1.26s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que é a sua filha, de um mestre de cerimônias, e ele nunca tinha ouvido falar de um 
+homem com um homem de um homem que é dono de informação vital. É o que o senhor sabe?
+— Não, senhor. É o senhor sabe — disse ele. — Eu lhe digo. Já estou aqui — disse eu. — E estou satisfeito, senhor. Pode ser um tolo. Não é?
+— Sim. É um homem que ele não pode confiar? —
+Saving checkpoint to artifacts/checkpoints/mix_v17_17400.pth
+Training:  59%|████████████████████████                 | 17600/30000 [22:15:51<15:31:20,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 17600: val loss 4.3719█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ele não é um álibi — ele diz que o que ele tem a fazer uma pergunta. — Ela se lembra, 
+mas não é assim.
+— Ah, como o quê?
+— O que você viu?
+— Tem alguma coisa errada. — Ele tem alguma coisa que ele sabe.
+— Talvez ele tenha esquecido. — diz ele enquanto está falando sobre o assunto com você? Você é um ladrão de mulher. Como é que eu sabia sobre o assunto? O que ele está procurando. —
+Saving checkpoint to artifacts/checkpoints/mix_v17_17600.pth
+Training:  59%|████████████████████████▎                | 17800/30000 [22:31:08<15:16:26,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 17800: val loss 4.3845█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. 
+De repente, a imagem que ocorrera e a invasão de Nat.
+A voz de Elizabeth, de repente, a que se desenrolou.
+—
+—
+Então, por acaso... — começou o
+respirou profundamente — e apanhou uma pedra e colocou um lápis no colo.
+— Não!
+—
+—
+A coisa foi a impressão de que ele estava prestes a ir ao porão.
+—
+Se fosse preciso.
+—
+falei
+Saving checkpoint to artifacts/checkpoints/mix_v17_17800.pth
+Training:  60%|████████████████████████▌                | 18000/30000 [22:46:24<15:01:50,  4.51s/it]
+step 18000: val loss 4.3858█████████████████████████████████████████| 10/10 [00:12<00:00,  1.24s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E, se você tivesse que me enganara tanto, quanto o que isso significava que eu ia me transformar num livro de história. Não me lembro de como 
+ela nunca deve ter me visto no espelho... e nem mesmo eu sou capaz de ver o eclipse, meu vestido e uma, quanto o que isso significava que eu ia me t blusa com a minha saia. Eu vi ela morta. De certa forma, por isso, eu era só isso, mas eu não acreditm mesmo eu sou capaz de ver o eclipse, meu veso direito. Eu estava me perguntando como ela tinha a lembrança dela. Ela não queria que me            ão acredito direito. Eu estava me perguntando 
+Saving checkpoint to artifacts/checkpoints/mix_v17_18000.pth
+Training:  61%|████████████████████████▊                | 18200/30000 [23:01:41<14:49:13,  4.52s/it]  
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+step 18200: val loss 4.3808█████████████████████████████████████████| 10/10 [00:12<00:00,  1.24s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Empenhera, uma pessoa a quem ele não se pode ficar mais longe.
+-- Sim.
+-- Claro.
+-- Não, mas não é verdade, não é.
+-- Acho que é a melhor que esteja.
+-- Você, não é?
+-- Oh,
+-- A temperatura é de 694
+-- É
+aquilo -- Burt. -- eu disse.
+-- Então, por
+Saving checkpoint to artifacts/checkpoints/mix_v17_18200.pth
+Training:  61%|█████████████████████████▏               | 18400/30000 [23:16:58<14:31:22,  4.51s/it]  
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+step 18400: val loss 4.3863█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. No que diz respeito à morte que o terror é o terror, e a morte que a morte de um homem — e euforia a força que o senhor não sabe. É por isso q é o terror, e a morte que a morte de um homemue o senhor pode dizer?]
+[—
+Evidence, senhor, é um homem que não é?]
+[Láquesis: — Não sabemos, senhor.]
+[— Acho que não é um dos nossos amigos advogados, embora não duros.]
+Col
+Saving checkpoint to artifacts/checkpoints/mix_v17_18400.pth
+Training:  62%|█████████████████████████▍               | 18600/30000 [23:32:29<14:19:59,  4.53s/it]  
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 18600: val loss 4.3975█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Em 1958, uma vez que ele foi morto por uma eternidade, e depois de chegar a Christurch era o velho Church, o filho, no entanto, Louis o que tinha acontecido com ele, Louis pensou na Louis, que queria que Louis fosse, mas Louis tinha que estar fora do
+agora Rachel, Louis?Raxainbird
+sentia que não ia acontecer; Loucura não precisava
+Saving checkpoint to artifacts/checkpoints/mix_v17_18600.pth
+Training:  63%|█████████████████████████▋               | 18800/30000 [23:47:46<14:03:34,  4.52s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 18800: val loss 4.3825█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A morte que é mais terrível. Não é assim. Não há nada que a maioria deles esteja morto.
+Ned e o Pedro, no entanto, com clareza, é que os professores do ensino médio que a não ser que Flagg era um homem de cabelos grisalho, e não a única pessoa, que era um garoto gordo com quem eu não tivesse visto na escola, mas nunca mais sabia.
+Certa noite, mas ele não sabia que o irmão estava morto. Ele
+Saving checkpoint to artifacts/checkpoints/mix_v17_18800.pth
+Training:  63%|█████████████████████████▉               | 19000/30000 [24:03:01<13:47:22,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 19000: val loss 4.3719█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Aquelas coisas mais estranhas, porém, não sei dizer, não sei se os meus sentimentos, e é melhor assim. Mas o que está acontecendo. Mas não importa que o que se diz respeito a mim. Eu não tenho coragem para responder a tais perguntas, mas as regras dizem que a coisa deve dar certo, se o assunto só o que os professor de criação me diz respeito, e o que mais é o que os leitores de uma versão, mas eu não sei, pois eu sei
+Saving checkpoint to artifacts/checkpoints/mix_v17_19000.pth
+Training:  64%|██████████████████████████▏              | 19200/30000 [24:18:17<13:31:48,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 19200: val loss 4.4003█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Era como se estivesse em uma espécie de 
+gênero. O que eu estava prestes a se agarrar a bola de beisebol e o mundo inteiro não era a primeira vez que o taxa estava de pé. Depois deduzir um segredo que eu estava fazendo um esforço para não fazer 
+nada. Só que, se não houvesse qualquer coisa errada. Ele estava morto, e eu tinha uma merda de blasfêmia que o mundo estava tentando se afastar, e ele nunca tinha visto nada que ele estava
+Saving checkpoint to artifacts/checkpoints/mix_v17_19200.pth
+Training:  65%|██████████████████████████▌              | 19400/30000 [24:33:33<13:16:17,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 19400: val loss 4.3875█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O mais provável é que a noite inteira de seu encontro, mas o restante da sua infância, pois as trevas e demônios da noite tardia e vozes dos homens alegam que se ergueram em silêncio à espreita sob o céu sol e se esgueirou numa dessas coisas sem sentido. Não sei dizer nada, pois, embora não se tenha ouvido, e não tenha sido nem um horror tão blasfemo e repugnante com uma voz repelência de ódio que provocara a morte de
+Saving checkpoint to artifacts/checkpoints/mix_v17_19400.pth
+Training:  65%|██████████████████████████▊              | 19600/30000 [24:48:49<13:02:35,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.21s/it]
+step 19600: val loss 4.4025█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O tempo todo não é um mistério muito diferente do que se pode ser. O que parece, mas o que o mundo sabe que o que não está no universo, mas, com a ideia de como é que o tempo todo o horror e o homem que é um mistério de besta, e que em uma forma de se ser um monstro que se pode esperar o tempo e o terror na literatalo — e mais avança para o céu e o lobéu em que se escar
+Saving checkpoint to artifacts/checkpoints/mix_v17_19600.pth
+Training:  66%|███████████████████████████              | 19800/30000 [25:04:05<12:48:11,  4.52s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 19800: val loss 4.3808█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Então, eu o levei ao seu belo recinto a 
+Azathoth — e os usei a alma da minha alma da minha mãe e tirei minha filha de um homem muito rancheiro, e vi que o meu pai de um homem me disse que não era de um homem ou algo que eu não tinha feito; e, embora não tivesse de abandonar a vida em Innsmouthes jamais poderia ter sido o tipo de pesadelo. Eu o 
+vi, não conseguia recordar o que
+Saving checkpoint to artifacts/checkpoints/mix_v17_19800.pth
+Training:  67%|███████████████████████████▎             | 20000/30000 [25:19:21<12:32:25,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 20000: val loss 4.3921█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Nem um pouco a ele — que ela está dizendo. — Você nunca sabe, mas não pode fazer muito bem. Mas agora é o que o dr. Bowie, o que é que é verdade, mas não tem nada a dizer, pode ser que ele esteja certo. Nós não estamos em casa quando ele é o seu lado.
+— E não se preocupe, eu não sou o seu. E, quando você está se afastando.
+— Vou ficar aqui! — gritou ela, com sua voz
+Saving checkpoint to artifacts/checkpoints/mix_v17_20000.pth
+Training:  67%|███████████████████████████▌             | 20200/30000 [25:34:36<12:17:37,  4.52s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.24s/it]
+step 20200: val loss 4.3852█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O ar fresco e é mais do que os homens ousavam e, embora os marinheiros com a tripulação dos humanoides de blasfemas de pedra; e por fim, as sete prisioneiras e os humanoides. Os escravos humanoides eram insuportáveis, e não eram criptas, e que 
+os noctétricos não opon ao trabalho; pois a maioria deles era capaz de encontrar um lugar que se arrastavam por ali mais de uma terra desconhecida
+Saving checkpoint to artifacts/checkpoints/mix_v17_20200.pth
+Training:  68%|███████████████████████████▉             | 20400/30000 [25:49:53<12:01:01,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 20400: val loss 4.3826█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que é o que parece um ser sobrenatural, e a atmosfera na literatura americanaporava de sua obra. Ele tem alguma influência secreta e criava 
+uma narrativa de mistério psicologia psicologia moderna, e não com um romance de ficção científica e cristalina, mas o conto de Poe
+ . Mas o conto literalmente como esse tipo de vida real é como um conto de mistério e de mistério, mistério, a lite
+Saving checkpoint to artifacts/checkpoints/mix_v17_20400.pth
+Training:  69%|████████████████████████████▏            | 20600/30000 [26:05:09<11:48:56,  4.53s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 20600: val loss 4.3860█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. As trevas de um pesadelo se tornaram ciclópico, e os tecidos em direção ao demônio, e logo se ergueram em meio à óbvia crise de uma coisa muito peculiar. Apresentava uma visão mais intensa claridade foi uma visão de um dos vapores que pareciam 
+ser angústia. As trevas deram a impressão de sentir os vapores que se encontravam em uma nuvem de arcadas que davam origem aos vastos interiores, e Carter teve certeza de que os
+Saving checkpoint to artifacts/checkpoints/mix_v17_20600.pth
+Training:  69%|████████████████████████████▍            | 20800/30000 [26:20:25<11:31:45,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 20800: val loss 4.3799█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Por fim, de um caos que se erguia à luz 
+da lanterna elétrica e à luz, a luz da lanterna para o poço e deparou com o próprio abismo que se encontrava e, a escuridão onde a escuridão se encontrava. A escuridão era completa, e a escuridão extrema 
+direita de horror os mais baixos e mais altos, as bordas de uma altura ou duas horas antes. A lanterna não se abriu ou um túnel. Os túnel estava coberto de poeira, mas não estavam nem em condições        
+Saving checkpoint to artifacts/checkpoints/mix_v17_20800.pth
+Training:  70%|████████████████████████████▋            | 21000/30000 [26:35:41<11:15:52,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 21000: val loss 4.3828█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E, de repente, a fim de que tudo está se tornando o centro do espaço — a mais longa da vida — na realidade, talvez porque é a coisa que a gente faz quando o último de nossos dias de vigília se tornam terríveis. As estrelas estão a mim e as terríveis cenas selevam em sonhos. Aquelas coisas não é exatamente fantasmas. Não há nada de errado com os demônios de violência e mulheres estão chegando, não estão mortos, e as que eu não consigo ouvir nadaSaving checkpoint to artifacts/checkpoints/mix_v17_21000.pth
+Training:  71%|████████████████████████████▉            | 21200/30000 [26:50:57<11:00:44,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+step 21200: val loss 4.3869█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Se isso for a pior parte, eu tenho uma ideia. E vou dizer que foi tão clara quanto a eles que eu tenho.
+— Não, não posso, e não posso fazer isso. Você não vai dar importância?
+— Eu preciso. — disse ela. — E eu disse. — E eu me senti. Eu também estava sorrindo.
+— Que horas são?
+— Isso mesmo. Não há nada a fazer. Não tem nada que fazer.
+— É você quem está dizendo? — pergunta a resposta
+Saving checkpoint to artifacts/checkpoints/mix_v17_21200.pth
+Training:  71%|█████████████████████████████▏           | 21400/30000 [27:06:13<10:47:32,  4.52s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 21400: val loss 4.3913█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A curiosidade de Hana se espalhou e meto a uma jovem que eu havia conseguido manter a cidade inteira na minha casa. A maioria das coisas no dominava era de um garoto. Mas a maioria dos quais eu conseguia acreditar que havia alguma coisa sobre o meu pai e não sei se o que eu estava pensando. Eu estava me sentindo como se fosse um sonho ou não, mas um pouco, mas eu não sabia por quê, não. Eu não queria que o garoto havia morrido, provavelmente a 
+Saving checkpoint to artifacts/checkpoints/mix_v17_21400.pth
+Training:  72%|█████████████████████████████▌           | 21600/30000 [27:21:28<10:31:40,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 21600: val loss 4.3956█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Quando a morte havia se tornado, o dr. Willett nem me contou sobre a morte que o professor Angell morreu. Willett foi o professor, como sempre foi o último ano da matéria sobre o professor Ward em um livro minucioso, que eu tive um professor de impressionar a minha família e o estilo de vida realista da jovem, que eu era um jovem professor de inglês, e de modo muito súbita e contentinentalidade. Quando o dr. Wil
+Saving checkpoint to artifacts/checkpoints/mix_v17_21600.pth
+Training:  73%|█████████████████████████████▊           | 21800/30000 [27:36:44<10:15:52,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 21800: val loss 4.3990█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E por fim, o espírito do mensageiro da antiga e do horror de Walpurgis, um horrível heavent, não obstante o incidente da misteriosa morte do nosso professor Ann, o mais rápido possível, e o terror do vício em nossas mentes fragmento dos corpos 
+e das quaisquer delas pode ser considerado responsável por essa criatura subúrbios, e a linguagem é a 
+de horror sobrenatural. Não o de quem o horror é o seguinte: "
+Saving checkpoint to artifacts/checkpoints/mix_v17_21800.pth
+Training:  73%|██████████████████████████████           | 22000/30000 [27:52:00<10:02:16,  4.52s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+step 22000: val loss 4.3864█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A vida é uma obscena de horrores informes e evidentes de que a sra. Tanner, que a sra. Ward, o sr. Ward não mencionou o sr. Ward foi encontrado no porão do Rec. Ward era um bom homem. O jovem Ward teve uma dificuldadeta em obter resulter de que o sr. Ward e do sr. Ward e que a sra. Ward, o sr. Ward, sra. W
+Saving checkpoint to artifacts/checkpoints/mix_v17_22000.pth
+Training:  74%|███████████████████████████████           | 22200/30000 [28:07:16<9:46:54,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 22200: val loss 4.3876█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Em certos pontos, o desaparecimento de meu tio de horror é o objetivo de todos a vida, e a morte de seu tio havia passado a noite em que o dia eu estava muito cansado de perder seu medo, pois ele me disse que eu estava disposto a contar com a história de mistério, e que era o fato de minha vida.
+Aqueles olhos azuis se alarmaram, e eu podia ter levado a acreditar no que eu. Em muitas vezes, a minha mãe havia partido, mas eu
+Saving checkpoint to artifacts/checkpoints/mix_v17_22200.pth
+Training:  75%|███████████████████████████████▎          | 22400/30000 [28:22:32<9:30:38,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 22400: val loss 4.4113█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que mais tarde o incidente da lâmpada, o cataclbava em meio às ruínas, e no vale, no entanto, o que mais estava mais próximo da casa para ver o que o terreno do lado de fora foi uma delas que chegou à beira do rio, e as frestas elevadas, onde as luzes se acendem em uma cidade de tijolos e a placa anunciadora-se de um rio de corvo.
+A rua Witcham, a rua mais próxima
+Saving checkpoint to artifacts/checkpoints/mix_v17_22400.pth
+Training:  75%|███████████████████████████████▋          | 22600/30000 [28:37:48<9:16:00,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.21s/it]
+step 22600: val loss 4.3982█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Aquelas circunstâncias, o dr. Willett, e de que, apesar de certa estranheza e os ópensos efeitos da atualidade não existem mais formas de vida, mas que não posso afirmar que seja, não pode ser a mesma coisa. Quanto a mim, eu acredito que não tenha sido por isso que qualquer outra coisa, mas acredito que tenha sido um caso mais, o paciente pode 
+ser nossa filha dele, e é claro que o mais importante, o que imagina
+Saving checkpoint to artifacts/checkpoints/mix_v17_22600.pth
+Training:  76%|███████████████████████████████▉          | 22800/30000 [28:53:05<9:00:42,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+step 22800: val loss 4.3633█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. De algum modo, não houve som. Os cães e 
+homens pensam-
+aguardar
+desconheceram mais do que ele viu, a mente de um modo muito espectral do inferno, uma vez que a cabeça de Jack e Eddie não
+deixar-se de rir, mas não havia dor que o tempo parecia certo. O
+retor do seu lado, um grande urso tinha uma boa aparência da
+parede do mundo. Mesmo assim, era um lugar estranho e
+Saving checkpoint to artifacts/checkpoints/mix_v17_22800.pth
+Training:  77%|████████████████████████████████▏         | 23000/30000 [29:08:21<8:46:49,  4.52s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 23000: val loss 4.3905█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. De tempos em tempos, eu sentia que as lendas do que eu poderia ter visto, mas o que eles diziam era algo que não podia ser a melhor da história do que o filho de um Homem, e a gente se acostuma. Se eu não conseguisse acreditar nisso, mas talvez não tivesse o que eu acho.
+A verdade era da minha cabeça, e minha mente se voltava para casa. Eu sabia que ia acreditar que o que aconteceria, se você não quisesse. Você vai ter que voltar para o
+Saving checkpoint to artifacts/checkpoints/mix_v17_23000.pth
+Training:  77%|████████████████████████████████▍         | 23200/30000 [29:23:36<8:31:28,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 23200: val loss 4.3750█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que tanto quanto sua mulher não tinha 
+se mexido com a cabeça e o rosto de um jeito que se virasse. Mas não se moveu. Estava pensando num nome muito bom em algum lugar que o que eu poderia fazer, e de alguma forma, a voz de uma pessoa, talvez 
+não fosse mais.
+— Tudo — disse eu, e não tinha a mínima ideia demais. — Mas, por que estava no seu caso, eu já tinha visto alguma coisa. Era como eu ia contar. —
+Saving checkpoint to artifacts/checkpoints/mix_v17_23200.pth
+Training:  78%|████████████████████████████████▊         | 23400/30000 [29:38:52<8:16:30,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 23400: val loss 4.4135█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não havia mais detalhes sobre mim, mas no final eu não sabia se devia.
+Não havia o motivo para eu não me importei. Eu me pergunto se ela queria, mas me lembro muito bem, e não vi a expressão do meu marido. Ela me deu um beijo de costas e me olhando, com o focinho curvado para o que restava do cabelo, e as mãos erguidas, como se dissesse que estava olhando para mim mesmo que 
+eu tinha visto antes de se casar. Talvez ela estivesse
+Saving checkpoint to artifacts/checkpoints/mix_v17_23400.pth
+Training:  79%|█████████████████████████████████         | 23600/30000 [29:54:08<8:01:31,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 23600: val loss 4.3762█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E, ao que não poderia ser descrilado por completo. A maior parte das mais altas vezes, e talvez devessem que isso não seria nada, mas, no caso é de um fato estranho. Ele não teria sido despertado.
+A primeira vez em uma história de terror e terroristas. A ideia de que as pessoas não conseguem se livrar disso. O mundo está cheio de vida, a coisa que parece ser muito mais simples. A verdade é uma história de fantasma. O que é o
+Saving checkpoint to artifacts/checkpoints/mix_v17_23600.pth
+Training:  79%|█████████████████████████████████▎        | 23800/30000 [30:09:23<7:46:18,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 23800: val loss 4.3809█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não há nada que seja uma combinação. E, 
+claro, não sei o que é, que o que é o que é? Porque as pessoas sempre dizem... Mas o que acontece sempre o tempo é difícil de acreditar que eu já vi e a ideia de que um homem de negócios por acaso é, um garoto inteligente, e o que faze parecer mais estranho, e não é um cara tão burro quanto a um homem que é um homem chamado John Web. E se ele tivesse um amigo
+Saving checkpoint to artifacts/checkpoints/mix_v17_23800.pth
+Training:  80%|█████████████████████████████████▌        | 24000/30000 [30:24:39<7:30:35,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 24000: val loss 4.3973█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ele se inclina para a frente, e ela ouve uma porta de uma porta de madeira dentada na parede dos fundos e fica lá, olhando para a frente, a porta do porão e a porta do corredor. Ela está trancada e está trancada, mas ele tem uma porta de quarto. Ela está trancada, se abre e sai de dentro do quarto. Ela pega o cesto e vê as portas do armário. Ela não abre a porta, e se senta na cama. Ela ouve um barulho
+Saving checkpoint to artifacts/checkpoints/mix_v17_24000.pth
+Training:  81%|█████████████████████████████████▉        | 24200/30000 [30:39:54<7:16:30,  4.52s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 24200: val loss 4.3774█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Descobre que o autor
+desdeceu um pouquinho. Quando fui para a
+prâmático em direção ao altar a fissura,
+e, uma vez que a morte de um lado para outro, o qual o impulso de voltar
+aquela hora se tornaram a se dissuagem
+escuidada.
+— Eu... — eu disse para você.
+— Não me chame de Safirmas.
+— Você nunca ouviu falar de novo.
+— Isso não é
+Saving checkpoint to artifacts/checkpoints/mix_v17_24200.pth
+Training:  81%|██████████████████████████████████▏       | 24400/30000 [30:55:10<7:00:56,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 24400: val loss 4.3886█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A tensão exata e a morte de uma ação demonstrativação mórbida, cujo propósito maligno, e a mente de Charles Ward, que a humanidade e a sanidade mental histórica. O horror descreve com a mente consciente de poder mentalidade e do mal que se encontram ao menos em que a casa não seja tão inocente que o autor e o atributador. Que tipo de imaginação fantástica e melodramático realizações ocultas.
+Saving checkpoint to artifacts/checkpoints/mix_v17_24400.pth
+Training:  82%|██████████████████████████████████▍       | 24600/30000 [31:10:26<6:46:05,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 24600: val loss 4.4010█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. No entanto, a primeira versão da vida dela, era de um assunto que eu não acreditava muito nisso. E a sra. Radcliffe.
+— Você é um homem que eu não tinha feito a sra. Perkins disse que ela tinha o mesmo. Ela se moveu para o lado e o rosto dela que estava pálido sedoso dele estivesse pálido. Não era o único o que estava no seu lado da srta. Não queria que a sra. Michaela e eu tinha deixado
+Saving checkpoint to artifacts/checkpoints/mix_v17_24600.pth
+Training:  83%|██████████████████████████████████▋       | 24800/30000 [31:25:41<6:30:21,  4.50s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 24800: val loss 4.3737█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O tempo é o último dos horrores. Descobre as visões e sons de pessoas que a coisa mais profundas possíveis que fosse, a não se importar de uma forma definitiva ou não. Excelente e toda a força das mentes... mas, quando se encontra adormecera a 
+mesma que o povo ansiava por estar morto e anormalos que a terra de Temp-O. O terror negro e ultima da morte não era tão belo e tão dourado, tão dourado
+Saving checkpoint to artifacts/checkpoints/mix_v17_24800.pth
+Training:  83%|███████████████████████████████████       | 25000/30000 [31:40:57<6:15:26,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 25000: val loss 4.3923█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Por que não seja a minha imaginação e eu tenho certeza de que não é a morte, mas é o que eu sei.
+Meu Deus, é verdade, eu também tenho. Não sei, mas é bem verdade, e, apesar do que é verdade. Quando éramos adolescentes e eu me lembro de pensar que aquilo começou, e não estava tão feliz quanto eu não vi nada de errado. Eu também queria que ele fosse, mas o mundo estaria cheio de gente. E acho que se você tiver
+Saving checkpoint to artifacts/checkpoints/mix_v17_25000.pth
+Training:  84%|███████████████████████████████████▎      | 25200/30000 [31:56:12<6:00:39,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 25200: val loss 4.4027█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que mais eu disse, e eu me vi no meu sonho em 1923, e eu não sabia se o que eu estava fazendo era o que tinha acontecido. E então a mais de 
+22 anos, não era uma questão de tempo; mas tinha a idade dele era a possibilidade de que a família de 
+Baltimore e a sra. Stark não estava em dúvida que estava morta. Eu não sabia que estava, e eu já sabia se a minha idade fosse uma
+Saving checkpoint to artifacts/checkpoints/mix_v17_25200.pth
+Training:  85%|███████████████████████████████████▌      | 25400/30000 [32:11:28<5:46:04,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 25400: val loss 4.3866█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mas a figura devastada não é de certos vândalos que não podem se dar ao trabalho de qualquer homem e um tanto jovem e com um jovem de barba grisalho, óculos e cabelos dourados e óculos escuros, ou óculos escuros. Por sorte, eu não sei que a semelhança com um homem de vestido de pele de seda amarela em volta de uma expressão confusa. A jovem pálida e vaga de Curwen, que estava nas janelas cobertas com a semelhança com os caracteres de bigo      
+Saving checkpoint to artifacts/checkpoints/mix_v17_25400.pth
+Training:  85%|███████████████████████████████████▊      | 25600/30000 [32:26:43<5:30:43,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 25600: val loss 4.3996█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que mais poderia ser um homem sem dúvida a mesma que a invenção do que eu poderia ter orientado a mais de um século atrás, e em um ponto onde os homens que guardam o trouxera havia conhecido; e assim mesmo, havia uma ou duas dúzias de lugares, mas uma delas não eram muito maiores do que um velho rei, pois o mal estava aberto, onde os guardas 
+da cidade e seu rei, não eram ouvidos, mas o que ele tinha que ser um rei.
+Saving checkpoint to artifacts/checkpoints/mix_v17_25600.pth
+Training:  86%|████████████████████████████████████      | 25800/30000 [32:42:00<5:15:35,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+step 25800: val loss 4.4136█████████████████████████████████████████| 10/10 [00:12<00:00,  1.24s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ele não tem mais de um século, e não pode mais ser o que a maioria estágios. Não está na minha experiência tensa, mas é claro que a verdade é 
+boa, e a capacidade de sustentar a ideia de como um velhote. É bem isso. É assim que a maioria dos aspectos imagina — e o seu realizonte, é o que é seu caso, mas você não vai fazer isso. Ele e a mulher tem apenas um tempo com a mãe. — É uma
+Saving checkpoint to artifacts/checkpoints/mix_v17_25800.pth
+Training:  87%|████████████████████████████████████▍     | 26000/30000 [32:57:16<5:00:31,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 26000: val loss 4.3979█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu sei que as lendas que você se meteu em uma casa ao lado da casa de Nahum, na frente da casa do West com o nome do sr. Ward. A voz que estava em minha cabeça — como se eu tivesse lido em algum lugar, ou pelo menos a maior parte do tempo e da 
+velha senhora e o sr. Ward, que tinha no sr. Greenbush e a sra. Ward. Ele alegava que ele tinha de fazer o sr.
+Saving checkpoint to artifacts/checkpoints/mix_v17_26000.pth
+Training:  87%|████████████████████████████████████▋     | 26200/30000 [33:12:31<4:45:42,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 26200: val loss 4.4091█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não tem nada que me incomodam. Não há dúvida. Mas o que a magia do tempo é a única coisa que eu vi no mundo do nosso, eu vi, e que eu também não sei se ele não estava. Mas uma sombra sobre o rosto. Eu estava escuro e eu vi uma mulher que não conseguia acreditar. O que eu achava que elas queriam quando eu voltasse, e as pessoas que as pessoas doentes não queriam. Eu não queria, mas isso não sabia exatamente o que elas estavam
+Saving checkpoint to artifacts/checkpoints/mix_v17_26200.pth
+Training:  88%|████████████████████████████████████▉     | 26400/30000 [33:27:47<4:30:44,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 26400: val loss 4.4048█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Um mistério primordiais, uma fórmula na 
+qual alega ter recebido a mesma impressão de ter uma chance de enlouquecer ou morrer de um louco. Se você me ama!
+E assim ele era verdade, não havia motivo para isso. A não ser que a minha mãe, a menos que eu estava 
+mentindo, graças a Deus. Havia a gente que a gente podia fazer isso? A gente se acostuma muito, mas não era uma forma de se lembrar de como eu
+Saving checkpoint to artifacts/checkpoints/mix_v17_26400.pth
+Training:  89%|█████████████████████████████████████▏    | 26600/30000 [33:43:02<4:15:32,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+step 26600: val loss 4.3939█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu havia lido, mas a história era de horror. No entanto, essa história, era uma figura microscópica, e eu tinha outra coisa que não podia ser 
+considerada inaudita, e, na verdade, não tinha se matado, ou pelo menos por isso, e se o caso fosse modificado de você, não poderia começar a me explicar melhor.
+— Você é uma questão de humor que a doença me disse, mas não foi por parte da fantasia de um
+Saving checkpoint to artifacts/checkpoints/mix_v17_26600.pth
+Training:  89%|█████████████████████████████████████▌    | 26800/30000 [33:58:18<4:00:32,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.21s/it]
+step 26800: val loss 4.4290█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Aquelas coisas que o sr. Amarelo estava 
+com o sr. Ward disse que a mim estava no quarto, e não me importei. O sr. Thomas era um buraco no meio da escada. Estava sentado no banco, com a cabeça baixa de um lado da placa, e o sr. O sr. Guizos estava parado junto ao sofá da sala, olhando para o sr. Bowditch, e o sr. Bowditch estava em sua mesa grande
+Saving checkpoint to artifacts/checkpoints/mix_v17_26800.pth
+Training:  90%|█████████████████████████████████████▊    | 27000/30000 [34:13:34<3:45:23,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 27000: val loss 4.4188█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ele se encosta em meio aos horrores; e aos meus gritos não se arrependem nem quantos sussurrar na Terra. Não sei dizer que a coisa não existem. Eu não sei a essência deve ter sido mais do que um pardais, pois é a forma de fato, de que, quando a lua é a Terra. Todas as estrelas que ninguém mais pode ver, pois se as coisas sombrias que não são os mais horríveis e as demais evidências de um explorador o que
+Saving checkpoint to artifacts/checkpoints/mix_v17_27000.pth
+Training:  91%|██████████████████████████████████████    | 27200/30000 [34:28:49<3:30:39,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+step 27200: val loss 4.3893█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não há ninguém além de mim. Mas eu não sou eu?
+— Não sei. Não sei o que eu acho. É o que eu digo, mas eu não estou aqui. Não tenho ninguém lá. Se você não quiser, você não vai. Você é meu amigo, não é? — Ele se inclinou no meio de uma forma que o senhor a vê-lo, mas não é?
+— Eu não faço isso. E nós não sei. Eu sei que estou falando.
+— É sobre isso que
+Saving checkpoint to artifacts/checkpoints/mix_v17_27200.pth
+Training:  91%|██████████████████████████████████████▎   | 27400/30000 [34:44:04<3:15:19,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 27400: val loss 4.4060█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Em outras palavras, ele vai ter sido mais do que a do que ele, a coisa que o autor não pode acreditar que o sr. Pelley, e ele não se surpreendia em um homem de verdade em algum lugar.
+Em vez de olhar as pessoas, o que mais do que o sr. Bowditch estava em casa. Tinha sido um monstro de 
+cemitério e de um monstro, e, como as crianças mais velhas que nunca, mas as pessoas não ousavam, e   
+Saving checkpoint to artifacts/checkpoints/mix_v17_27400.pth
+Training:  92%|██████████████████████████████████████▋   | 27600/30000 [34:59:20<3:00:29,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 27600: val loss 4.3870█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não pode ser uma grande quantidade de homens, mas o que diz a ele uma vez que ele é. Com a certeza de que o que quer que tenha sido, o que aconteceu em seguida, e com o resto do mundo. Não é só o que ele quer que ele seja, não é um sujeito que 
+não vai ser uma criança? — pergunta o que é isso? — pergunta Billy.
+— É, mas você não tem mais do que remetente, a não ser que ele esteja morto.
+Saving checkpoint to artifacts/checkpoints/mix_v17_27600.pth
+Training:  93%|██████████████████████████████████████▉   | 27800/30000 [35:14:36<2:45:11,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 27800: val loss 4.3926█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Como eu disse que foi no dia seguinte, em abril, que meu pai poderia ser mais do que isso. Eu estava fazendo coceira, como se ele não tivesse 
+visto a ideia de que eu estava pensando. Eu estava no escritório, e eu também não tinha nenhum parafusos. Eu não havia como se eu tivesse tocado em uma das minhas duas coisas. Eu não tinha certeza de que 
+não me lembraria. Eu me levantei, e descobri que eu estava tentando me acostumar, mas
+Saving checkpoint to artifacts/checkpoints/mix_v17_27800.pth
+Training:  93%|███████████████████████████████████████▏  | 28000/30000 [35:29:51<2:30:04,  4.50s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 28000: val loss 4.4202█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Os sonhos que em relação aos abismos inferiores, com a escuridão das estrelas alcançou-me em meio às sombras do homem e das encostas, e contemplamos o horror supremo que eu nunca foi visto antes de uma vez por sobre os colossos cragmentos que, 
+de modo que não sei o que, por mais que tudo — que sei, se devo dizer que a loucura que se aventurava 
+a cidade de Rhbun. Não sei se venho a
+Saving checkpoint to artifacts/checkpoints/mix_v17_28000.pth
+Training:  94%|███████████████████████████████████████▍  | 28200/30000 [35:45:07<2:15:16,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 28200: val loss 4.3959█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que é que a coisa tem de haver me mantimentos de natureza desconhecida, embora não tenha visto uma vez que me tenha visto, mas ele não sabe 
+o que não é mais o momento; em parte onipresente precisa se recuperar. O que se pode imaginar foi o que aconteceu com o que se diz. Talvez seja a criatura humana.
+Onde é "O que é que não está no meu. Lábios e está no dia em que o inferno está a caminho — e a gente 
+Saving checkpoint to artifacts/checkpoints/mix_v17_28200.pth
+Training:  95%|███████████████████████████████████████▊  | 28400/30000 [36:00:23<2:00:02,  4.50s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.21s/it]
+step 28400: val loss 4.4011█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Com o medo, como sempre, ele fica com ele, é claro. Ele pensa: Eu a não ser que ele quer dizer isso, não é como se ele tivesse visto uma coisa parecida. Ele não pode ter sido mais do que a mãe, mas não para que ela possa falar com a sra. Donovan. Donovan. Donovan tem um sorriso de sedoso que já não tenha falado."
+"Meu", falei. "Fui à frente da ilha está, a imagem de uma mulher chamada Ar
+Saving checkpoint to artifacts/checkpoints/mix_v17_28400.pth
+Training:  95%|████████████████████████████████████████  | 28600/30000 [36:15:39<1:45:12,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 28600: val loss 4.4059█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A expressão de pavor, mas, em meio aos olhos. Foi o que aconteceu, e acho que o meu pai não foi um lugar para ela. Não tinha mais que você pudesse responder, mas eu não queria saber. Talvez você soubesse, e eu teria que ir até o inferno. Se eu 
+tivesse uma coisa mais, a menos que uma criança pode ter sido uma das melhores histórias sobre o pecador.
+Onde ela fez, eu me sentir bem. Mas eu não sabia o que era, porque
+Saving checkpoint to artifacts/checkpoints/mix_v17_28600.pth
+Training:  96%|████████████████████████████████████████▎ | 28800/30000 [36:30:54<1:30:06,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 28800: val loss 4.3973█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A tensão e a tensão se torna mais pronunciada.
+— Você não devia ter sido de maneira ou de uma alucinação. Ele não sabia o que havia acontecido. Eu sabia que o dia estava cheio.
+— Alô? — perguntou Cynthia, e ela suspirou.
+— Não é — respondeu Albert. Ele tem um sotaque de Albert. — Mas não me agradaram.
+— Não posso.
+— É mesmo — Albert murmurou, e soltou uma risada e deu
+Saving checkpoint to artifacts/checkpoints/mix_v17_28800.pth
+Training:  97%|████████████████████████████████████████▌ | 29000/30000 [36:46:10<1:15:09,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 29000: val loss 4.4024█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A srta. Stansfield está no final do século XVII, não me lembro de ter visto e lido as pessoas estranhas. Ontem em abril de 1913, o diretor do 
+departamento de Inglês, que me lembro de Robert Louis Stevenson morreu. O diretor estava na primeira aula de psicologia. Foi John, a história do professor Departamento de Inglês, e História de A e da T.) 
+Eles não se tornaram a escrever. A segunda
+Saving checkpoint to artifacts/checkpoints/mix_v17_29000.pth
+Training:  97%|████████████████████████████████████████▉ | 29200/30000 [37:01:25<1:00:01,  4.50s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 29200: val loss 4.3982█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O "estavam, e não há muito tempo, e não 
+há uma ligação com que a sua situação de vida, mesmo que o pai lhe fizera demitiu de volta à vida, e ele a levara o pai pelo pai. Ele era um filho grande e velho, e a família, porque, se ele e seus pais me deram um trabalho de adulto no jornal da vizinhança.
+O pai de Sally Hatlen se levantou e começou a sorrir. Ele não sabia se podia responder
+Saving checkpoint to artifacts/checkpoints/mix_v17_29200.pth
+Training:  98%|███████████████████████████████████████████ | 29400/30000 [37:16:41<45:09,  4.52s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]
+step 29400: val loss 4.3856█████████████████████████████████████████| 10/10 [00:12<00:00,  1.24s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A maioria das noites depois, passa a maior parte da vida, com a minha mãe e a mamãe se defrontariam com a menina, que não tinha nada de errado com ela. Ela tinha que ser um porco comum, mas a mãe de Ellen Carver não tinha ideia de tirar as fotos de Ellen, mas talvez ela se parecia com ele. Ela era doidinho. Ela queria ser um homem. Eu estava com raiva, mas não, porque tinha certeza de que havia um monte
+Saving checkpoint to artifacts/checkpoints/mix_v17_29400.pth
+Training:  99%|███████████████████████████████████████████▍| 29600/30000 [37:31:57<30:07,  4.52s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 29600: val loss 4.3960█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mais tarde, no entanto, se era que a luz dos faróis estivessem mais próximas do que teriam feito. O vento soprando e bufando e soprando a noite para trás dos faróis, o som do caminhão. A Boul Cheerd estacionou em um caminhão, depois da extinção, mas você tem sorte.
+"É', diz o Corcel, e a primeira parada em um segundo, os faróis desligados e o motor, para começar. O 
+carro está no Cluck F
+Saving checkpoint to artifacts/checkpoints/mix_v17_29600.pth
+Training:  99%|███████████████████████████████████████████▋| 29800/30000 [37:47:12<15:01,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]
+step 29800: val loss 4.3972█████████████████████████████████████████| 10/10 [00:12<00:00,  1.23s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Como se ele fosse mais um pouco. Ele estava em um estado grave, mas o que ele tinha a ver com o nome da avó. Ele estava morto, e todos os dois mais velhos das dez horas na noite anterior, e a esposa. Ele não tinha ideia de que se ele tivesse feito o que ele estava falando. Como o livro. Ele o escreveu. Ele disse que ele era um livro, mas era bem maior, e isso era uma história de história que ele sabia que ele tinha escrito
+Saving checkpoint to artifacts/checkpoints/mix_v17_29800.pth
+Training: 100%|███████████████████████████████████████████▉| 29999/30000 [38:02:23<00:04,  4.51s/it]
+Estimating loss...
+Estimating loss: 100%|██████████████████████████████████████████████| 10/10 [00:12<00:00,  1.21s/it]
+step 29999: val loss 4.3994█████████████████████████████████████████| 10/10 [00:12<00:00,  1.22s/it]  
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A essa altura, a sra. Ransom, o que foi 
+a sra. Ross, e ele me abraçou e beijou-o com força. Era um pouco mais alto, e um sorriso que eu conhecia. Ela estava bem, mas estava tão feliz que quase lhe parecia que o coração se acalmava, e assim que 
+me acordou. Eu não queria acreditar. Ela tinha uma mulher e não tinha certeza de que não podia ser uma parte de seu rosto. Ela tinha o seu coração para mim
+Saving checkpoint to artifacts/checkpoints/mix_v17_29999.pth
+Training: 100%|████████████████████████████████████████████| 30000/30000 [38:02:41<00:00,  4.57s/it]
+Training finished. Generating text:
+Generating 600 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Era um som de "Darte" e "Ei" Sandy", ele disse, "aconteceu em 1965, e eu ainda estava na faculdade. O garoto, é claro que eu não consigo entender. O que é isso.
+Myrtle fez uma coisa. Ele foi um desses, Drew, um de nós. Eu estou com medo. Você foi uma alucinação", eu sabia. "Você consegue pensar em nada, né, Dolores?", era a voz dele que eu queria dizer. "Ah, mas 
+estava feliz. É difícil, o que você está esperando.
+E, por isso eu poderia ter dito isso.
+— E você, se não fizer isso? — perguntou Sandy. Ele balançou a cabeça, com as mãos. — Não estou com medo de vocês. Você sabe que eu o ajudaria.
+— Então, por que você não é a única que quero que você faça isso. — Você está maluco, não sabe?       
+— Eu não sei — disse Sandy.
+— Eu gostaria que ele tenha que ser um homem de rato.
+— Como disse eu, como se eu fosse um garoto com você, mas não foi para os tiras. — Eu me levantei para ele.
+Pensei que eu fosse que fosse o seu trabalho. Eu disse que teria que fazer uma coisa com um pouco de medo. — Eu nunca teria dito nada mais, não teria pensado nisso.
+— Você não pode ter morrido. — Por causa da minha cabeça? Não. Não foi isso que eu lhe contei, não? Você vai dizer que não?
+— Se eu me lembro de você ter visto o que eu vi. Mas só estou tentando me dar um jeito, não é? Não tenho certeza. É claro que eu não é que você tem que fazer isso. Você está bem? Você é só um homem que eu vou contar.
+— Não sei disso — disse o sr. Sandy.
+— Eu sei que você é uma boa parte pra me matar!
+— Você é um garoto rico de dezessete anos. É a única pessoa que você quer, mas nunca fez isso. Não se 
+lembra de tê-lo, mas você não vai fazer isso.
+— Você devia ter um homem do seu filho — disse eu. — É um bom rapaz, mas está certo.
+— Você sabe que vai fazer o que eu vou fazer, garoto. — E eu sei o que você está fazendo. Por que você não vai fazer isso?
+— Eu também quero que você faça isso, cara. E o senhor é seu, por favor?
+— Você nunca vai me fazer nada.
+— É o melhor que eu sou. O senhor tem que ir lá primeiro. Mas você vai ficar de pé.
+— E, se você pode ficar aí. É só isso. Quando eu estiver aqui?
+— Pode ir. Vai ser um piquenique.
+— O senhor é a sua amiga?
+— Vou.
+— Eu gostaria de ir — disse eu. — De repente, o senhor
+Saving generated text to output/mix_v17.txt
+Training loop finished.
+
+(gpt) C:\Users\Bruno\Documents\GitHub\transformers-fun>
