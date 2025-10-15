@@ -1,3 +1,5 @@
+import os
+import sys
 import argparse
 import datetime
 import torch
@@ -12,6 +14,7 @@ from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetMemoryInfo
 
 from src.data_loader import DataLoaderBpeV2
 from src.gpt_v0 import GPTLanguageModel
+from src.utils import DualLogger
 
 
 nvmlInit()
@@ -69,8 +72,16 @@ def training_loop(
     tokenizer_vocab_size = None,
     encode_input = False,
     path_input_encoded = None,
+    n_checkpoints_keep = 10,
+    path_log = None,
     **kwargs,
 ):
+    if path_log:
+        try:
+            sys.stdout = DualLogger(path_log)
+        except Exception as e:
+            print(f"Error logging {path_log}: {e}")
+
     print("Starting training loop...")
     locals_ = deepcopy(locals())
     print(f"Parameters: {locals_}")
@@ -167,6 +178,7 @@ def training_loop(
         generate_sample(context=context, n_tokens_generate=n_tokens_generate)
         return
 
+    checkpoints = []
     model.train()
     for iter in tqdm(
         range(start_iter, max_iters),
@@ -195,11 +207,20 @@ def training_loop(
             generated_text = generate_sample(context)
             writer.add_text("generated_text", generated_text, iter)
 
-            # save model
-            if iter != start_iter and path_save_model:
-                checkpoint_name = f"{path_save_model}_{iter}.pth"
-                print(f"Saving checkpoint to {checkpoint_name}")
-                torch.save(m.state_dict(), checkpoint_name)
+        if (iter % save_interval == 0 or iter == max_iters - 1) and iter != start_iter and path_save_model:
+            checkpoint_name = f"{path_save_model}/{iter}.pth"
+            checkpoints.append(checkpoint_name)
+            print(f"Saving checkpoint to {checkpoint_name}")
+            os.makedirs(os.path.dirname(checkpoint_name), exist_ok=True)
+            torch.save(m.state_dict(), checkpoint_name)
+            while len(checkpoints) > n_checkpoints_keep:
+                checkpoint_delete = checkpoints.pop(0)
+                print(f"Deleting checkpoint {checkpoint_delete}")
+                try:
+                    os.remove(checkpoint_delete)
+                except Exception as e:
+                    print(f"Error deleting checkpoint {checkpoint_delete}: {e}")
+
         writer.flush()
 
     print("Training finished. Generating text:")
