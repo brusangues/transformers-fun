@@ -1,0 +1,1855 @@
+2025-10-14 12:31:00.361387: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1760445060.381328    6442 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1760445060.387633    6442 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1760445060.403117    6442 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1760445060.403148    6442 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1760445060.403152    6442 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1760445060.403168    6442 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2025-10-14 12:31:00.407807: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+device='cuda'
+Loading parameters from params/v18.yaml
+Parameters loaded: {'batch_size': 50, 'context_len': 512, 'n_embd': 512, 'n_feed_forward': 2048, 'n_head': 8, 'n_layer': 4, 'dropout': 0.1, 'learning_rate': 0.001, 'start_iter': 0, 'max_iters': 10000, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'texts_sample_frac': 1.0, 'split_frac': 0.85, 'top_k': 30, 'temperature': 0.7, 'path_tokenizer': 'artifacts/tokenizers/mix_ptbr_10240_v1.joblib', 'tokenizer_vocab_size': None, 'encode_input': False, 'path_input': 'data/df_full_encoded_v17.pq', 'path_input_encoded': 'data/df_full_encoded_v17.pq', 'name': 'v18', 'path_save_model': 'artifacts/checkpoints/mix_v18', 'path_generate_output': 'output/mix_v18.txt', 'n_tokens_generate': 600, 'context': 'Escrevo sob efeito de horrores inimagináveis.'}
+Starting training loop...
+Parameters: {'batch_size': 50, 'context_len': 512, 'max_iters': 10000, 'learning_rate': 0.001, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'n_embd': 512, 'n_feed_forward': 2048, 'n_head': 8, 'n_layer': 4, 'dropout': 0.1, 'device': 'cuda', 'path_input': 'data/df_full_encoded_v17.pq', 'path_tokenizer': 'artifacts/tokenizers/mix_ptbr_10240_v1.joblib', 'path_load_model': None, 'path_save_model': 'artifacts/checkpoints/mix_v18', 'n_tokens_generate': 600, 'path_generate_output': 'output/mix_v18.txt', 'name': 'v18', 'start_iter': 0, 'context': 'Escrevo sob efeito de horrores inimagináveis.', 'texts_sample_frac': 1.0, 'split_frac': 0.85, 'dummy': False, 'temperature': 0.7, 'top_k': 30, 'tokenizer_vocab_size': None, 'encode_input': False, 'path_input_encoded': 'data/df_full_encoded_v17.pq', 'kwargs': {}}
+DataLoaderBpeV2 init...
+context_len=512, batch_size=50, device='cuda', split_frac=0.85
+Tokenizer...
+Dataset...
+self.vocab_size_tokenizer=10240
+self.df_full.shape=(179, 16)
+self.df_full.value_counts(['author']).sort_index().reset_index()=      author  count
+0       king     65
+1  lovecraft    114
+self.df_full.value_counts(['author','class']).sort_index().reset_index()=      author             class  count
+0       king           bachman      6
+1       king            contos     12
+2       king              king     40
+3       king       torre_negra      7
+4  lovecraft         Apêndices     12
+5  lovecraft  Ciclo de Cthulhu     20
+6  lovecraft  Ciclo dos Sonhos     20
+7  lovecraft        Miscelânea     24
+8  lovecraft           Poesias     38
+load_data...
+(179, 16)
+text[:2_000]='That night the Baron dreamt of many a woe;\nAnd all his warrior-guests, with shade and form\nOf witch, and demon, and large coffin-worm,\nWere long be-nightmared.[1]\nKeats\nInfeliz é aquele cujas lembranças de infância trazem somente medo e tristeza. Miserável o que só se recorda de horas solitárias passadas em aposentos amplos e lúgubres, com reposteiros pardacentos e fileiras exasperantes de velhos livros, ou em reverentes vigílias entre bosques penumbrosos, com suas imensas e grotescas árvores tomadas por trepadeiras, que em silêncio acenam seus galhos retorcidos muito acima do chão. Foi esse o quinhão que os deuses destinaram a mim — a mim, o entorpecido, o desapontado; o estéril, o caído. E, no entanto, sinto-me estranhamente satisfeito, e agarro-me desesperadamente a essas lembranças ressequidas sempre que minha mente por um momento ameaça transcender-se até o outro.\nNão sei nada do local onde nasci, exceto que era um castelo infinitamente velho e infinitamente horrível; cheio de passagens escuras e dotado de altos tetos, onde o olhar só encontrava teias de aranha e sombras. As pedras nos corredores em desagregação pareciam sempre abominavelmente úmidas, e havia um odor detestável por toda parte, como se exalasse dos cadáveres empilhados de gerações defuntas. Nunca havia claridade, e por isso eu às vezes costumava acender velas e olhá-las fixamente em busca de alívio; tampouco havia algum sol do lado de fora, uma vez que as árvores terríveis cresciam muito além da mais alta torre a que se podia ter acesso. Havia uma torre negra que se elevava acima das árvores até o desconhecido céu exterior, mas estava parcialmente em ruínas e não se podia subir por ela a não ser mediante uma escalada praticamente impossível pela parede nua, pedra a pedra.\nDevo ter vivido anos naquele lugar, mas não sei medir o tempo. Entes devem ter cuidado das minhas necessidades, embora eu não consiga recordar de mais ninguém exceto eu próprio; ou de qualquer coisa viva além de silenciosos rat'
+len(text)=1000000
+len(chars)=102 chars=['\n', ' ', '!', '"', '%', "'", '(', ')', ',', '-', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'º', 'À', 'Á', 'Â', 'Ã', 'Ç', 'É', 'Ê', 'Í', 'Ó', 'Ô', 'à', 'á', 'â', 'ã', 'ç', 'é', 'ê', 'í', 'ó', 'ô', 'õ', 'ú', '—']
+len(tokens_full)=258897 tokens_full[:100]=[84, 306, 116, 273, 547, 3584, 10071, 2660, 364, 257, 292, 336, 116, 3933, 854, 121, 259, 6998, 111, 101, 59, 10, 5802, 100, 360, 108, 471, 278, 6998, 272, 332, 285, 45, 328, 846, 115, 44, 6998, 450, 104, 264, 306, 320, 8668, 2821, 10, 79, 102, 6998, 450, 606, 44, 8668, 2416, 364, 44, 8668, 1761, 992, 277, 2180, 284, 45, 119, 285, 109, 2573, 87, 269, 101, 937, 103, 1032, 45, 110, 547, 3584, 2167, 1179, 46, 91, 49, 93, 10, 75, 101, 748, 115, 10, 8746, 102, 1960, 412, 965, 7310, 6557, 263, 5763, 3532, 318]
+tokens[:100]=[10, 32, 33, 34, 37, 39, 40, 41, 44, 45, 46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 63, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 93, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 114, 115, 116, 117, 118, 119, 120, 121, 122, 130, 148, 195, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277]
+vocab_size_tokens=8569
+estimated_starting_loss=9.055906295776367
+vocab_size_tokenizer=10240
+estimated_starting_loss_=9.23405647277832
+Saving encoded to path_input_encoded...
+23.36256 M parameters
+optimizer=AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.01
+)
+Training:   0%|                                                           | 0/10000 [00:00<?, ?it/s]/content/train.py:186: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:835.)
+  writer.add_scalar("loss/train", float(loss.mean()), iter)
+
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.77it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.80it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.82it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.86it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:08,  2.88it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.88it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.87it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:07,  2.88it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.88it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:06,  2.88it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:03<00:06,  2.89it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.89it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:05,  2.89it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:04<00:05,  2.89it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.88it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:04,  2.87it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:05<00:04,  2.88it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.88it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:06<00:03,  2.88it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:06<00:03,  2.88it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.88it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:07<00:02,  2.88it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:07<00:02,  2.89it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.89it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:08<00:01,  2.89it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.89it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.88it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:09<00:00,  2.88it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.88it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:10<00:00,  2.88it/s]
+step 0: val loss 8.6784
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis., Como caos de humano quende castelo. ram, de pistoleirope você o que transformador de que Como.,,,,emos., de que,,, de,... e, o que que,,À de,, que, um,, de.,, que, crim,pe., mantinha de de alerta., o.pe,ima. ram,,pe, e,nde.endido Nesse, oemos,. oterior que Nesse,.
+Training:   1%|▍                                              | 100/10000 [01:57<2:57:30,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.71it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.67it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.66it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.66it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.66it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.67it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.67it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.68it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.69it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.70it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.70it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.69it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.68it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.68it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.67it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.67it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.67it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.68it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.68it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.68it/s]
+step 100: val loss 6.4976
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Se o que as mãos de não a que uma voz dear não o mãos o vez —, e ela o meu dia. Não era um mão de que não a vez que você com um verdade do gente, mas ele.
+— —- disse o que ot que não um que o menos, e em um coisa. Ela oorar era.
+— Ele se não se um cabeça. — O que uma minha — e mais e e as dois. 
+Sas. — 
+R
+Saving checkpoint to artifacts/checkpoints/mix_v18_100.pth
+Training:   2%|▉                                              | 200/10000 [03:58<2:56:11,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:11,  2.62it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.68it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.66it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.68it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.69it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.71it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.70it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.69it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.70it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.68it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.71it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 200: val loss 5.8429
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que os lábios, e um dos 4------Bales, que você sabe que o que ele — ele no menos, a ver o que o que os olhos. Eu eu estava do meu mais no seu menos. 
+----- Você não não estava e não é o que um dia de uma coisa, eu disse de novo. 
+Ela olhou — ela não disse que é o homem que você, que o seu ar, não tinha uma mulher
+Saving checkpoint to artifacts/checkpoints/mix_v18_200.pth
+Training:   3%|█▍                                             | 300/10000 [05:59<2:54:45,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.72it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.71it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.71it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.68it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.68it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.68it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.67it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.67it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.67it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 300: val loss 5.5820
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Por um dia que é o homem de Ol, a casa, como um momento, de 1
+que a cabeça e 
+s, mas se eu quero estar morto, o tempo, mas a água, 
+Den 
+a, uma coisa, mas estava mais tão bom
+fa e se os outros
+quicg, e de 
+E o Sandy, e que estava dizendo, então, o corpo, e os olhos de
+fro, e eles de 
+deando
+Saving checkpoint to artifacts/checkpoints/mix_v18_300.pth
+Training:   4%|█▉                                             | 400/10000 [07:59<2:52:36,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.74it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.74it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.71it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.68it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.67it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.67it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.67it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.68it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.70it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.70it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.70it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 400: val loss 5.4259
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que o primeiro a um pouco que os mais mais que se a uma grande, mas, o seu grupo de uma que as quais os inominsão, e uma forma que a impressão da vida. Na estrada e o mais que em direção à primeira coisa no outro lado de um segundo em uma espécie de um momento não estava prestes a que um som dos quaisquer os sons e que ele estava a não, e a si mesmo assim ele estava com que parecia uma hora, e em que era
+Saving checkpoint to artifacts/checkpoints/mix_v18_400.pth
+Training:   5%|██▎                                            | 500/10000 [09:59<2:50:04,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.71it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.71it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.68it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.69it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.69it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.69it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.68it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.67it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.67it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.69it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.70it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.70it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.72it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.71it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 500: val loss 5.3296
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Os habitantes de terras lunares ou; a galé, que, e o que havia desciam o que a um período subter de que a se alinha de que o marqueas que os corpos. Carter não haviamtrônas e os Ancidados de um homem que os noctétricos e os habitantes do conhecimento de que os outros haviam sido construções que os gatos de Leng. Innsmouth de um aspecto mais e que os espécasse a se estendiam. A seguir em suas coisas
+Saving checkpoint to artifacts/checkpoints/mix_v18_500.pth
+Training:   6%|██▊                                            | 600/10000 [11:59<2:48:39,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.70it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.69it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.68it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.68it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.67it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.70it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.72it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 600: val loss 5.2317
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. 
+------------------------ Clarou, do seu coração de C. 
+--------- Eu, e o que eu não sei o que a gente tem o que é como a um livro. ------ ele só isso, mas ainda não. Não, e depois de que me disse que poderia ser o que a palavra. 
+- Você é
+Saving checkpoint to artifacts/checkpoints/mix_v18_600.pth
+Training:   7%|███▎                                           | 700/10000 [14:00<2:46:59,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.71it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.71it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.71it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.72it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.70it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 700: val loss 5.1492
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ele não ser um dos quais os outros mundos e o que se aproximava, e o primeiro.
+— Eu preciso — respondeu Bill. — disse ele. — Isso foi a palavra, simult, e então, eu. — Não! — Aquelas coisas para a gente acha que o que não tinha acontecido.
+— Isso é um pensamento em você está o senhor...
+— O garoto, não sabia. Não foi só isso. Mas, só pode acreditar em um pedaço de novo pra gente vai ter pensado
+Saving checkpoint to artifacts/checkpoints/mix_v18_700.pth
+Training:   8%|███▊                                           | 800/10000 [16:01<2:45:29,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.71it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.71it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.69it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.68it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.68it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.66it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.66it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.68it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.69it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.70it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 800: val loss 5.0745
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Agóide, de uma singular cenas em que se encontrava um estranho e a escuridão havia deixado o homem com um homem mais profunda com um ardente.
+O que o que a cidade e o que haviam dadocos de que se não era possível; pois os que o que o que tinham sido a uma vez mais de que eu era muito mais do que se desenvolventes como a um dos homens.
+E as paredes.
+Não havia se o que nenhum dos arcos e mais do
+Saving checkpoint to artifacts/checkpoints/mix_v18_800.pth
+Training:   9%|████▏                                          | 900/10000 [18:01<2:43:33,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.70it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.72it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.71it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.69it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.68it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.69it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.68it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.66it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:03,  2.65it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.67it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.70it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.71it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 900: val loss 4.9972
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A única coisa, um tanto que era um homem tão grande dia, e não se a luz. O homem que não se arrasivava, mas a sua voz era muito forte, mas o rosto e o fedor era a voz do velho não era o que se ele se podia ser tão nítida e um grande. Não era o que ele se sentir a coisa, mas apenas um dos homens, o medo dos seus pensamentos. Os olhos e pareciam muito mais bem abertos e o que a coisa para ver
+Saving checkpoint to artifacts/checkpoints/mix_v18_900.pth
+Training:  10%|████▌                                         | 1000/10000 [20:01<2:41:09,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.75it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.74it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.69it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.68it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.67it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.69it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.71it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 1000: val loss 4.8973
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Os quais o senhor não existe, mas o que o dr. Willett.
+— Não está?
+— Ele não vai me importo — disse. — Eu não sei. Não é, não ter de nada.
+— Pode ser.
+— Acho que não me parece ter um bom tempo. Eu não queria. Acho que não posso ser que não teríamos de fazer isso. E depois da primeira vez. Nós.
+Não. Estava com os olhos. Acho que não queria. E não é muito
+Saving checkpoint to artifacts/checkpoints/mix_v18_1000.pth
+Training:  11%|█████                                         | 1100/10000 [22:02<2:39:14,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.73it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.73it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.68it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.68it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.68it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.67it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.68it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.73it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.73it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.73it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.73it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.73it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.73it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 1100: val loss 4.8092
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mas o que o que poderia ter sido assim. Ele era um bom e era um homem de uma mulher que eu poderia ser, porque eu também poderia ter dado um pouco antes do que poderia ter acontecido. Não que eu poderia ter feito. Além disso, não tinha a menor chance de me chamar de um homem em qualquer um novo dia, mas era um amigo. E ele não tinha sido uma mulher de um homem, e eu também não tinha visto nada. E, não. Talvez mais eu não
+Saving checkpoint to artifacts/checkpoints/mix_v18_1100.pth
+Training:  12%|█████▌                                        | 1200/10000 [24:02<2:37:25,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.73it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.70it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.67it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.67it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.66it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:09,  2.66it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.66it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.69it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.71it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.72it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 1200: val loss 4.7308
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. É claro que os horrores de seus olhos, mas, no que ele parece ter um dos meus companheiros, e as luzes do verão, e em que fazem o que há alguma coisa, e o que se está fazendo, e não dá pra deixar a minha.
+A porta se levanta os olhos arregalados. A placa de um lado de dentro de sua boca e uma mulher que é um lugar grande. Quando o que o corpo de uma luz que está aberta para mim, só o único som de um carro
+Saving checkpoint to artifacts/checkpoints/mix_v18_1200.pth
+Training:  13%|█████▉                                        | 1300/10000 [26:02<2:35:54,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.70it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.71it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.69it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.73it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.73it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.72it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.73it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.72it/s]
+step 1300: val loss 4.6353
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Astrocadas, e nas profundezas de seus rostos de um lado para o outro, que os dois homens da criatura. Quando, os mercadores se aproximam, a morte de um homem dos homens não podem ser contado por todos os que o lugar onde os homens de Carter, e os homens foram observados, como o sol que não se encontrassem em silêncio e assim que o pai vira de um homem de terno preto de umbral ou o homem, e a lua cheia de água que
+Saving checkpoint to artifacts/checkpoints/mix_v18_1300.pth
+Training:  14%|██████▍                                       | 1400/10000 [28:03<2:34:59,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.71it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.72it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.69it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.69it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 1400: val loss 4.5893
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E se trata de sua atitude. Para o que os meus pais deviam ter sido uma doença de suas feições, e assim como o jovem havia saído da minha vida. E quando voltei à medida que o senhor me veio da minha mãe e a me deu um beijo no meu pai me fez parar a minha mãe na parte dele com a minha mãe. Ela tinha visto uma garota bonita, como se eu estava pensando na minha mãe, mas eu me disse que eu tinha que me dizendo que ela não estava me
+Saving checkpoint to artifacts/checkpoints/mix_v18_1400.pth
+Training:  15%|██████▉                                       | 1500/10000 [30:03<2:32:48,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.74it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.70it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.73it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.68it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.70it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 1500: val loss 4.5276
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Aparentemente, não era a menor de seu corpo — e que era um dia, mas quando o homem de óculos de cabelo era preto e branco doentu a gravata de um velho e uma jaqueta de couro de seda, com um branco branco, e uma camisa amarelada e gravata. Os olhos se aproximaram do corpo.
+— Por que não é, não é? — O que foi aquilo?
+Aliiii, a voz de um homem que a fez parar em sua cabeça. Então
+Saving checkpoint to artifacts/checkpoints/mix_v18_1500.pth
+Training:  16%|███████▎                                      | 1600/10000 [32:03<2:30:35,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.72it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.72it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.73it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.73it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.71it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.73it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.73it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.73it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.73it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.73it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.73it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.68it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.69it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 1600: val loss 4.4726
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. As pessoas da nossa volta, no entanto, são em um ponto de vista.
+Até a que, no entanto, é possível encontrar a parte mais do que a vida de um horror inexplicável, mas em certos casos. Havia muitas coisas que, em geral, e, durante o tempo em um único ponto na noite, em que eu não poderia ter sido encontrados do que eu pudesse ter se tornado quase 28, que por algum motivo e um tempo em que eu havia rece
+Saving checkpoint to artifacts/checkpoints/mix_v18_1600.pth
+Training:  17%|███████▊                                      | 1700/10000 [34:03<2:28:28,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.75it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.74it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.73it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.73it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.73it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.73it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.74it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.73it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:06<00:04,  2.73it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.73it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.69it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.68it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 1700: val loss 4.4523
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não acredito que tenha pensado nisso, porque, se não fosse um daqueles motivos no futuro, não era uma coisa tão boa que o homem que a pessoa tinha sido capaz de fazer uma pergunta ao pai dele. Então, que o cachorro não era um homem que via um homem chamado Ricker, o que estava usando aquela coisa que estava na verdade. Como se o tivesse feito, o que teria feito de uma viagem de novo. Além disso, era uma mulher em relação ao que um homem e os
+Saving checkpoint to artifacts/checkpoints/mix_v18_1700.pth
+Training:  18%|████████▎                                     | 1800/10000 [36:03<2:26:58,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.74it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.72it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.71it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.67it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.67it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.68it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.70it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.71it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 1800: val loss 4.4168
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A atmosfera do romance, em um livro em que seteccionais, o livro, o título que escreveu, o título de "Melhor de uma carta". O livro, mais sobre o título, o título de Bachman, em que escrevi que a única foto do genética de Bachman, publicado por volta das quatro horas, não foi um romance de Bachman, mas, de Bachman, "Madc, se você não sabe", a ideia de "Achistem que o
+Saving checkpoint to artifacts/checkpoints/mix_v18_1800.pth
+Training:  19%|████████▋                                     | 1900/10000 [38:04<2:25:08,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.72it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.72it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.69it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.68it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.68it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.67it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.68it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.69it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 1900: val loss 4.3732
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. As pessoas devem ter visto qualquer um deles, porém, não o que faz com as melhores predizzas que se abalou com o cap. É o seu respeito, e ele tem que se possa ser a coisa mais difícil que me perdoar. Se é que isso eu tenho, eu não sei de que é um caso de encontrar o seu coração. E é, ele me dá um pouco de ajuda e o o meu coração, mas, se você não quiser ir. Eu não posso
+Saving checkpoint to artifacts/checkpoints/mix_v18_1900.pth
+Training:  20%|█████████▏                                    | 2000/10000 [40:04<2:23:30,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.74it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.74it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.69it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.69it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.68it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.68it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.68it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.68it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 2000: val loss 4.3737
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. As coisas que não tinham sido de fato desígios e revelaram a maneira como a primeira experiência era a instituição do pensamento. Os resultados de uma certa forma deve ser que o meu primeiro amigo, e as vozes das criaturas fossem em vão, com menos de um tanto ameaçado. Não pude explicar a natureza do conhecimento, não me dei conta da natureza mais remota, e as criaturas que o haviam revelado e a voz humana de um pesadelo, que se manteve em um estado
+Saving checkpoint to artifacts/checkpoints/mix_v18_2000.pth
+Training:  21%|█████████▋                                    | 2100/10000 [42:04<2:21:35,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.74it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.73it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.68it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.69it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.68it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.68it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.67it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.67it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.72it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 2100: val loss 4.3368
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mas, em um canto, uma espécie de calculadora e um pouco mais amplo de artilharia, o que mais parecia um pouco mais do que o. Ele não estava lá, e seu próprio mundo estava em casa. Ele estava sozinho.
+Ele era um homem no escritório. O bebê de um dos lados estava no banco traseiro, mas já havia um jeito de saber que não estava com o que ele estava fazendo. Ele estava se pondo. Se tivesse parado a cinco minutos,
+Saving checkpoint to artifacts/checkpoints/mix_v18_2100.pth
+Training:  22%|██████████                                    | 2200/10000 [44:04<2:19:56,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.71it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.73it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.70it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.67it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.67it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.66it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.68it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.69it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.70it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.70it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.71it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 2200: val loss 4.3181
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu não sei se se eu gostaria de saber que um cérebro humano no mundo não é um homem que se pode imaginar. Mas eu poderia ter certeza que não era apenas uma coisa dessas. E o que me diz sobre o que é, é possível que tenhamos dito, eu sei que uma pessoa está tentando se convencer de que a morte não é capaz de me lembrar da verdade. E é o meu pai. E eu também, eu acho. Não sei se a história não é a primeira vez que
+Saving checkpoint to artifacts/checkpoints/mix_v18_2200.pth
+Training:  23%|██████████▌                                   | 2300/10000 [46:04<2:17:36,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.74it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.73it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.69it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.67it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.66it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.67it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.72it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.73it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.73it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.73it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.73it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.73it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.73it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 2300: val loss 4.2891
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mas o que eu tenho de saber, não sei como são, e que nem as esculturas a tramações, nem mesmo os Anciões de Miskai — uma vez que não puderam deixar o que acontecesse. Quando eu me levantei para a cama, mas, para me perguntar sobre os meus pensamentos, as palavras na realidade e a meu respeito ao meu conhecimento, não foi o que a minha mente me disse. Mas não havia nada a mais do que um demônio — não
+Saving checkpoint to artifacts/checkpoints/mix_v18_2300.pth
+Training:  24%|███████████                                   | 2400/10000 [48:04<2:16:17,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.69it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.68it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.69it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.69it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.69it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.68it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.69it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.70it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.70it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 2400: val loss 4.2781
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que acha que é que a polícia não pode dizer o que aconteceu, mas a polícia não tem motivo para aquele homem de verdade não é que o senhor possa tê-lo feito com o senhor. 
+— O que é que você quer dizer? 
+— Não tenho como dizer que não há muito tempo. 
+— De modo nenhum — falou Torgeson. 
+— O que é que você acha? — perguntou Torgeson, e suspirou. 
+— Se fosse que eu a veja aqui, creio que ele esteja
+Saving checkpoint to artifacts/checkpoints/mix_v18_2400.pth
+Training:  25%|███████████▌                                  | 2500/10000 [50:04<2:14:59,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:11,  2.63it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.64it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.65it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.64it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.67it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.70it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.72it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.73it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.73it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.72it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 2500: val loss 4.2633
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. 
+Não obstante, ela estava com medo. 
+— A culpa foi sua. 
+— O senhor não sabe. 
+— Não. 
+— Não, não. Não tem mais o senhor, Gard. 
+— Você está bem. 
+— O que está fazendo lá? 
+Ele tirou da boca, deu um beijo e olhou a mãe até que o filho da mãe, no rosto se enchendo de estrelas, através da mesa, em sua mente. 
+— Não obstante, os olhos castanhos.
+Saving checkpoint to artifacts/checkpoints/mix_v18_2500.pth
+Training:  26%|███████████▉                                  | 2600/10000 [52:05<2:12:40,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.70it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.68it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.67it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.65it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.68it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.73it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.73it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.73it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 2600: val loss 4.2474
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. 
+— 
+Tom? — gritou ela. 
+—
+se, é isso que estou falando, George — falei. 
+— Estou me sentindo melhor. 
+— 
+Acordei. 
+—
+Acha está ficando um pouco confusa. E... 
+— 
+Não, não é? — 
+E, de repente, 
+a porta se abriu. 
+— 
+Ele não quis olhar para mim, olhando para ele. 
+— 
+Ele estava me olhando — falei. 
+— 
+Ele
+Saving checkpoint to artifacts/checkpoints/mix_v18_2600.pth
+Training:  27%|████████████▍                                 | 2700/10000 [54:05<2:10:48,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.75it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.76it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.74it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.74it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.73it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.73it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.70it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.72it/s]
+step 2700: val loss 4.2273
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O jovem ofereceu-me um sorriso estranho, e me deixou confuso um tanto peculiar ao perceber que o homem parecia ser uma modormaria. O jovem, o velho, de fato, devia ter sido, embora tenha me contado por uma grande força que pudesse dar o maior segredo do que eu pudesse fazer naquele momento.
+Porém, o senhor deve ter feito aquilo, e por que, além da meia-noite, um pequeno homem que desceu a colina em direção ao mar, passou a ver o que
+Saving checkpoint to artifacts/checkpoints/mix_v18_2700.pth
+Training:  28%|████████████▉                                 | 2800/10000 [56:06<2:09:13,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.74it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.74it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.74it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.74it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.74it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.73it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.73it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.73it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.73it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.74it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.73it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:06<00:04,  2.73it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.67it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.67it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.68it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.68it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.69it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.68it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 2800: val loss 4.2310
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu não tinha nenhuma surpresa se a minha reação fosse uma mudança para as ideias, pois o terror das lendas não apenas de um espírito de grande importância, mas um horror inefável. E o dia em que me perturbava uma coisa indefinida e inefável, e o horror não era absolutamente desconhecido; pois eu era um homem profundamente loucamente desprovido de emoções especulativas e determinadas de vida com as coisas que eu estava me inspirado por uma existência terrível
+Saving checkpoint to artifacts/checkpoints/mix_v18_2800.pth
+Training:  29%|█████████████▎                                | 2900/10000 [58:06<2:07:11,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.72it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.72it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.70it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.70it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.70it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.67it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.67it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.66it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.67it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.68it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 2900: val loss 4.2236
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E, quando ele não estava no caso de alguém, de certa forma, estava na metade da minha posição.
+Brian, que me levantava para a frente e para baixo, não estava com medo, mas se ele não estava ali. Estava quase no fim de tarde. Tinha se esquecido de ir para o norte, e, quando entrou, ele se sentia melhor, como se tivesse sido agarrado pelo braço.
+Eu não tinha ideia de como estava a minha mão, mas se você não estivesse certo
+Saving checkpoint to artifacts/checkpoints/mix_v18_2900.pth
+Training:  30%|█████████████▏                              | 3000/10000 [1:00:06<2:05:24,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.72it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.71it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.66it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.67it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.67it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.65it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.66it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.65it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.67it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.70it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.71it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 3000: val loss 4.2046
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que me diz de um horror e inédito meramente, e que é absurda e insensato como uma espécie de espírito de horror e anormal, não é capaz de encontrar. De fato, a mente do seu desejo é que eu não tenha visto o espírito do homem, pois o que se tornou um sonho de pesadelo no dia anterior à qual os fantasmas vêm do mundo e nos ventos e do espaço no futuro, eu poderia discerníveis. Eu me pergunto por
+Saving checkpoint to artifacts/checkpoints/mix_v18_3000.pth
+Training:  31%|█████████████▋                              | 3100/10000 [1:02:07<2:03:39,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.64it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.70it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.70it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.69it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.70it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.70it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.72it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 3100: val loss 4.2009
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A maioria dos habitantes de Ciena, foi o mesmo. Não havia um lugar para os bosques densos, e muitos dos diagramas não eram mais altos. Eram muito velhos, mas eu sabia que ele era o proprietário de um homem, mas não uma cidade que os conhecem em casa e por todos os lados eram muito mais baixos do que as do mundo. Eu não havia como um homem de grande parte das casas, e no entanto, que não era de pedra
+Saving checkpoint to artifacts/checkpoints/mix_v18_3100.pth
+Training:  32%|██████████████                              | 3200/10000 [1:04:07<2:01:43,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.73it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.73it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.73it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.68it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.69it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.69it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.66it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.68it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.69it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.69it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.70it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.71it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 3200: val loss 4.1880
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Era possível que o meu tio fosse mais uma loucura. Ele queria ser mais de dois, mas a maioria das coisas de que se tratava de um homem. Mas ele estava indo em direção ao mundo real, e isso também era bom. Eu me lembro de saber quando ele era o alvo mais jovem, e isso me importava. Eu não me lembro de ter pensado, mas eu não conseguia ver. Eu me lembro de ter pensado que ela não estava lá, e não tinha nada de errado nisso.
+Eu
+Saving checkpoint to artifacts/checkpoints/mix_v18_3200.pth
+Training:  33%|██████████████▌                             | 3300/10000 [1:06:07<1:59:56,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.72it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.66it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.68it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.68it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.69it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.67it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.67it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.67it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.67it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.68it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.73it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.73it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.73it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.72it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 3300: val loss 4.1804
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Comecei a escrever sobre o livro que havia em fungo. Não consegui mais som, mas senti que não era mais um único vislumbre. Senti-me mal-humano de horror e clareza medindo e me de fato compreendi que aquela literatura havia acabado.
+A história que se apresentava à minha maneira. Os outros eram sempre incorpórea e insensíveis — como o tempo, a chegada do que eu havia estado lápides e o meu tio. Os in
+Saving checkpoint to artifacts/checkpoints/mix_v18_3300.pth
+Training:  34%|██████████████▉                             | 3400/10000 [1:08:07<1:58:12,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.68it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.66it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.64it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.66it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.68it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.73it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.73it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.73it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.72it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 3400: val loss 4.1773
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ele não é uma figura que não pode ser o único. Eu não sei o que pode ser, mas mesmo o que é. O que importa é que o universo seja em toda a sua vida... O que é? E quando eles estão no fundo de sua vida, como o mundo de um dragão, você está dizendo que o sr. C. e o que ela merece, porque ele não é a única pessoa que a gente pode ver e não é assim que ela é.
+— Mas a
+Saving checkpoint to artifacts/checkpoints/mix_v18_3400.pth
+Training:  35%|███████████████▍                            | 3500/10000 [1:10:07<1:56:54,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.68it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.70it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.69it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.70it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.72it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.68it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.68it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.68it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 3500: val loss 4.1634
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que quer dizer que não me importa, nem mesmo o silêncio noturno nem das minhas mãos. Não sei o que me ocorreu foi que eu havia me contado que estava me despertando em cheio de vida e de outra forma ou de horror que tinha feito a partir de um pesadelo. Mas a realidade é o de que eu estava vendo, e o meu estremecedor aumenta de intensidade e não mais do que eu a conhecia.
+Abençoei o que eu lhe contei, e enfim comecei
+Saving checkpoint to artifacts/checkpoints/mix_v18_3500.pth
+Training:  36%|███████████████▊                            | 3600/10000 [1:12:08<1:54:48,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.69it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.71it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.68it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.68it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.68it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.66it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.67it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.68it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.69it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 3600: val loss 4.1698
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A princípio, descobri que um novo planeta — e que seja possível ignorância, não obstante, que seja o que for, não obstante, e não posso. A ideia de que não há mais de 500 milhões de anos e existência humana ou espaço, por que não há mais de quarenta milhões de anos.
+Se um dia mais tarde, eu ficarei confuso, se acalentando, e vou dizer que se não tivesse sido assim. Não sei o que é isso?
+E por quê?,
+Saving checkpoint to artifacts/checkpoints/mix_v18_3600.pth
+Training:  37%|████████████████▎                           | 3700/10000 [1:14:08<1:52:53,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.72it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.72it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.71it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.73it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.73it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.71it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.70it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.70it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.69it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.73it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.73it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.72it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 3700: val loss 4.1530
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu não sei se consigo entender se posso falar com os outros. Você me entende? Não sei. E não consigo esquecer tudo, mas tenho certeza disso. É a mesma coisa.
+— Mas não me lembro de ter visto um filme com o qual ele se matou. Não se preocupe. O que você quer dizer?
+— Não, mas não tenho certeza. Eu sou o pastor do meu pai. — Ela falava com uma voz baixa, e então me deu uma tremenda risada. — Como você poderia
+Saving checkpoint to artifacts/checkpoints/mix_v18_3700.pth
+Training:  38%|████████████████▋                           | 3800/10000 [1:16:08<1:51:35,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.71it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.71it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.68it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.68it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.68it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.68it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.67it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.66it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:03,  2.67it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.66it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.68it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.69it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.72it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.71it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 3800: val loss 4.1407
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A coisa que se diz é apenas a seguinte forma: a cabeça virada para baixo, como se o cérebro estivesse apontando para o espelho. A coisa gira o passo, depois a coisa para trás e para diante, os olhos arregalados, os dentes de tubarão para baixo. O luar sopra e desaparece.
+— Tudo bem — diz ele, e com uma voz que sai da boca. Ele se vira para a pessoa. — A gente nunca pensou, eu não me lembro. — A coisa fica
+Saving checkpoint to artifacts/checkpoints/mix_v18_3800.pth
+Training:  39%|█████████████████▏                          | 3900/10000 [1:18:08<1:49:21,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.72it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.71it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.70it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.70it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.70it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.68it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.67it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.67it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.68it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.69it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.68it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.67it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.68it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.69it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.70it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.70it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.70it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 3900: val loss 4.1447
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que, que se sabe, é que a arte é inteiramente além dos nossos efeitos colaterais científicos. Eu também contém o horror e o poder e a reencontra um mundo que não poderia sequer existir. Os corpos humanos são tão perfeitos e maléficos, e o que eu digo é que a humanidade é capaz de fazer com os meios rígidos de uma vida sem nome e de natureza vitalidade. No entanto, os tecidos e os
+Saving checkpoint to artifacts/checkpoints/mix_v18_3900.pth
+Training:  40%|█████████████████▌                          | 4000/10000 [1:20:09<1:47:24,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.70it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.71it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.69it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.67it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.67it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.68it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.68it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.68it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.68it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.67it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.66it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.67it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.67it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.68it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.69it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.70it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.70it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.71it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.69it/s]
+step 4000: val loss 4.1408
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não obstante, eu sabia que eu iria contar. Eu sei que o que eu estava aprontando era o que eu estava escrevendo. Era a única coisa que aconteceu na noite de 10 de setembro, e eu estava pensando em algo que eu podia fazer. A pessoa que eu estava trabalhando na cidade e eu não sabia que o que os homens diziam para a verdade era que eu não estava mais em jogo. Não que aquela mulher fosse minha amiga, ela era uma delas para o meu lado, e ela
+Saving checkpoint to artifacts/checkpoints/mix_v18_4000.pth
+Training:  41%|██████████████████                          | 4100/10000 [1:22:09<1:45:40,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.73it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.73it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.70it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.69it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.68it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.68it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.66it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.66it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.65it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.67it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.68it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.69it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.70it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.70it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.71it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.72it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 4100: val loss 4.1306
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Se um homem que me deu a mim, eu me recusei a olhar para as trevas; mas, depois de refletir sobre o que eu vi, eu não estava preparado para o espaço de visão. Com a morte de um homem que me fez estremecer, percebi que meu amigo não havia me matado, pois no momento seguinte ele não estava pronto, mas eu me obrigaria a me afastar de mim. Eu tinha certeza de que eu ainda havia chegado, e eu não conseguia entender o que estava
+Saving checkpoint to artifacts/checkpoints/mix_v18_4100.pth
+Training:  42%|██████████████████▍                         | 4200/10000 [1:24:09<1:43:43,  1.07s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.70it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.71it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.66it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.67it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.67it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.67it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.67it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.66it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.67it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.69it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.69it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.73it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.73it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.70it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.71it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 4200: val loss 4.1375
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que foi, para mim, foi o meu caso de que alguma coisa esteve errada e que, como aconteceu, é provável que eu tenha tido uma grande coisa. Não seria mais do que um sussurro de eletricidade secreta e uma visão da sanidade, aquela que eu não consegui se lembrar de todos os sonhos do espaço. O que parece um pouco mais perto da minha mente. A sensação de que os sonhos estão sendo um pouco mais claros. Não sei o que, pelo menos. Então, quando
+Saving checkpoint to artifacts/checkpoints/mix_v18_4200.pth
+Training:  43%|██████████████████▉                         | 4300/10000 [1:26:09<1:42:07,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.67it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.67it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:10,  2.68it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.66it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.67it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.67it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.68it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.69it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.67it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.68it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:07,  2.68it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.69it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.70it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.70it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:07<00:04,  2.72it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.72it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.70it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:10<00:01,  2.70it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.70it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.70it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.70it/s]
+step 4300: val loss 4.1485
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Na verdade, a mão direita se ergue, e a forma em que os dedos não se mexem, os olhos de Jack, estão se esbugalhamando, e a mão de seu ombro está doendo, o sangue escorrendo pelo lábio inferior e a carne macia do pescoço e o suor escorrendo pela testa, e Jack sente que está se sentindo um tanto forte — está começando a se dar conta de que foi o que ele está fazendo — e a verdade é que é mais como se ele está prestes
+Saving checkpoint to artifacts/checkpoints/mix_v18_4300.pth
+Training:  44%|███████████████████▎                        | 4400/10000 [1:28:10<1:40:35,  1.08s/it]
+Estimating loss...
+
+Estimating loss:   0%|                                                       | 0/30 [00:00<?, ?it/s]
+Estimating loss:   3%|█▌                                             | 1/30 [00:00<00:10,  2.72it/s]
+Estimating loss:   7%|███▏                                           | 2/30 [00:00<00:10,  2.72it/s]
+Estimating loss:  10%|████▋                                          | 3/30 [00:01<00:09,  2.71it/s]
+Estimating loss:  13%|██████▎                                        | 4/30 [00:01<00:09,  2.72it/s]
+Estimating loss:  17%|███████▊                                       | 5/30 [00:01<00:09,  2.73it/s]
+Estimating loss:  20%|█████████▍                                     | 6/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  23%|██████████▉                                    | 7/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  27%|████████████▌                                  | 8/30 [00:02<00:08,  2.72it/s]
+Estimating loss:  30%|██████████████                                 | 9/30 [00:03<00:07,  2.71it/s]
+Estimating loss:  33%|███████████████▎                              | 10/30 [00:03<00:07,  2.72it/s]
+Estimating loss:  37%|████████████████▊                             | 11/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  40%|██████████████████▍                           | 12/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  43%|███████████████████▉                          | 13/30 [00:04<00:06,  2.72it/s]
+Estimating loss:  47%|█████████████████████▍                        | 14/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  50%|███████████████████████                       | 15/30 [00:05<00:05,  2.72it/s]
+Estimating loss:  53%|████████████████████████▌                     | 16/30 [00:05<00:05,  2.71it/s]
+Estimating loss:  57%|██████████████████████████                    | 17/30 [00:06<00:04,  2.72it/s]
+Estimating loss:  60%|███████████████████████████▌                  | 18/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  63%|█████████████████████████████▏                | 19/30 [00:06<00:04,  2.71it/s]
+Estimating loss:  67%|██████████████████████████████▋               | 20/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  70%|████████████████████████████████▏             | 21/30 [00:07<00:03,  2.71it/s]
+Estimating loss:  73%|█████████████████████████████████▋            | 22/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  77%|███████████████████████████████████▎          | 23/30 [00:08<00:02,  2.71it/s]
+Estimating loss:  80%|████████████████████████████████████▊         | 24/30 [00:08<00:02,  2.72it/s]
+Estimating loss:  83%|██████████████████████████████████████▎       | 25/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  87%|███████████████████████████████████████▊      | 26/30 [00:09<00:01,  2.72it/s]
+Estimating loss:  90%|█████████████████████████████████████████▍    | 27/30 [00:09<00:01,  2.71it/s]
+Estimating loss:  93%|██████████████████████████████████████████▉   | 28/30 [00:10<00:00,  2.70it/s]
+Estimating loss:  97%|████████████████████████████████████████████▍ | 29/30 [00:10<00:00,  2.70it/s]
+Estimating loss: 100%|██████████████████████████████████████████████| 30/30 [00:11<00:00,  2.71it/s]
+step 4400: val loss 4.1270
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O sr. Gaunt, que foi responsável pelas células cerebrais. Aos poucos, é claro que o sr. Gaunt quem levou a esse contato.
+Mas, por mais estranho que fosse, o sr. Gaunt lhe disse:
+— Talvez você esteja certo, mas a sra. Gaunt é um homem de verdade, creio que ele não sabe. A sra. Gaunt, que é o sr. Gaunt. Ele também, que está
+Saving checkpoint to artifacts/checkpoints/mix_v18_4400.pth
+Training:  44%|███████████████████▍                        | 4422/10000 [1:28:47<1:40:11,  1.08s/it]
