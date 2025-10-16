@@ -1,10 +1,10 @@
 # Model parameters
-batch_size: 50  # independent sequences processed in parallel
+batch_size: 60  # independent sequences processed in parallel
 context_len: 512  # maximum token context length
 n_embd: 512  # linear layers size
 n_feed_forward: 2048
 n_head: 8  # parallel attention heads
-n_layer: 4  # attention blocks in sequence
+n_layer: 6  # attention blocks in sequence
 dropout: 0.1
 
 # Training parameters
@@ -31,10 +31,10 @@ encode_input: false  # false
 name: "v18"
 path_input: "data/df_full_encoded_v17.pq"
 path_input_encoded: "data/df_full_encoded_v17.pq"
-path_log: "logs/logs_v18.log"
+path_log: "/content/drive/MyDrive/transformers-fun/logs/logs_v18.log"
 # path_load_model: "artifacts/checkpoints/mix_v15_1999.pth"
-path_save_model: "artifacts/checkpoints/mix_v18"
-path_generate_output: "output/mix_v18.txt"
+path_save_model: "/content/drive/MyDrive/transformers-fun/artifacts/checkpoints/mix_v18"
+path_generate_output: "/content/drive/MyDrive/transformers-fun/output/mix_v18.txt"
 n_tokens_generate: 600
 context: "Escrevo sob efeito de horrores inimagináveis."
 # context: "Escrevo sabendo que meu fim esta proximo.\nFoi ha um ano atras"

@@ -1,0 +1,42 @@
+# Model parameters
+batch_size: 20  # independent sequences processed in parallel
+context_len: 64  # maximum token context length
+n_embd: 64  # linear layers size
+n_feed_forward: 64
+n_head: 8  # parallel attention heads
+n_layer: 1  # attention blocks in sequence
+dropout: 0.05
+
+# Training parameters
+learning_rate: 0.005
+start_iter: 0
+max_iters: 500
+eval_interval: 5
+save_interval: 10
+eval_iters: 2
+texts_sample_frac: 1.0
+split_frac: 0.85
+n_checkpoints_keep: 2
+
+# Generation parameters
+top_k: 30
+temperature: 0.7
+
+# Tokenizer parameters
+path_tokenizer: "artifacts/tokenizers/mix_ptbr_10240_v1.joblib"
+tokenizer_vocab_size: null
+encode_input: false  # false
+
+# Other parameters
+name: "v17_test"
+path_input: "data/df_full_encoded_v17.pq"
+path_input_encoded: "data/df_full_encoded_v17.pq"
+path_log: "logs/logs_v17_test.log"
+# path_load_model: "artifacts/checkpoints/mix_v15_1999.pth"
+path_save_model: "artifacts/checkpoints/mix_v17_test"
+path_generate_output: "output/mix_v17_test.txt"
+n_tokens_generate: 600
+context: "Escrevo sob efeito de horrores inimagináveis."
+# context: "Escrevo sabendo que meu fim esta proximo.\nFoi ha um ano atras"
+
+# dummy: true
