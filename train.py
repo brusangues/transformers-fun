@@ -1,5 +1,6 @@
 import os
 import sys
+import shutil
 import argparse
 import datetime
 import torch
@@ -19,8 +20,8 @@ from src.utils import DualLogger
 
 nvmlInit()
 torch.manual_seed(1337)
-device = "cuda" if torch.cuda.is_available() else "cpu"
-print(f"{device=}")
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"{DEVICE=}")
 
 
 def main():
@@ -29,8 +30,9 @@ def main():
         "params", type=str, help="Name of the YAML params file in the params folder"
     )
     args = parser.parse_args()
-    params = parse_yaml_params(f"params/{args.params}.yaml")
-    training_loop(**params, device=device)
+    params_path = f"params/{args.params}.yaml"
+    params = parse_yaml_params(params_path)
+    training_loop(**params, params_path = params_path)
 
 
 def parse_yaml_params(path):
@@ -44,50 +46,60 @@ def parse_yaml_params(path):
 def training_loop(
     batch_size,
     context_len,
-    max_iters,
-    learning_rate,
-    eval_interval,
-    save_interval,
-    eval_iters,
     n_embd,
     n_feed_forward,
     n_head,
     n_layer,
     dropout,
-    device,
-    path_input,
-    path_tokenizer,
-    path_load_model=None,
-    path_save_model=None,
-    n_tokens_generate=None,
-    path_generate_output=None,
-    name="",
+
+    learning_rate,
+    betas=[0.9, 0.999],
+    weight_decay=0.01,
     start_iter=0,
-    context="",
+    max_iters=100,
+    eval_interval=100,
+    save_interval=100,
+    eval_iters=30,
     texts_sample_frac=1.0,
     split_frac=0.8,
-    dummy=False,
-    temperature=1.0,
-    top_k=None,
-    tokenizer_vocab_size = None,
-    encode_input = False,
-    path_input_encoded = None,
     n_checkpoints_keep = 10,
-    path_log = None,
+
+    top_k=30,
+    temperature=0.7,
+
+    path_tokenizer="",
+    tokenizer_vocab_size = None,
+    path_input="",
+    path_input_encoded = None,
+    encode_input = False,
+
+    device=DEVICE,
+    path_models="models",
+    name="",
+    n_tokens_generate=None,
+    context="",
+    path_load_model=None,
+    path_load_optim=None,
+    dummy=False,
+    params_path=None,
     **kwargs,
 ):
-    if path_log:
-        try:
-            sys.stdout = DualLogger(path_log)
-        except Exception as e:
-            print(f"Error logging {path_log}: {e}")
-
     print("Starting training loop...")
-    locals_ = deepcopy(locals())
-    print(f"Parameters: {locals_}")
-
     now = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    writer = SummaryWriter(log_dir=f"runs/{name}/{now}")
+    locals_ = deepcopy(locals())
+
+    print("Logging file...")
+    path_full = f"{path_models}/{name}"
+    path_logs = f"{path_full}/logs/{now}.log"
+    os.makedirs(os.path.dirname(path_logs), exist_ok=True)
+    sys.stdout = DualLogger(path_logs)
+
+    print(f"Parameters: {locals_}")
+    shutil.copy2(params_path, f"{path_full}/params.yaml")
+
+    print("Tensorboard file...")
+    path_tensorboard = f"{path_full}/logs/{now}"
+    writer = SummaryWriter(log_dir=path_tensorboard)
     writer.add_text("params", str(locals_), start_iter)
     writer.flush()
 
@@ -121,7 +133,7 @@ def training_loop(
         model.eval()
         for split in splits:
             losses = torch.zeros(eval_iters)
-            for k in tqdm(range(eval_iters), ncols=100, desc="Estimating loss", total=eval_iters):
+            for k in tqdm(range(eval_iters), ncols=100, desc="Estimating loss", total=eval_iters, position=0, leave=True):
                 X, Y = data_loader.get_batch(split)
                 logits, loss = model(X, Y)
                 losses[k] = loss.item()
@@ -164,7 +176,16 @@ def training_loop(
     print(num_parameters / 1e6, "M parameters")
 
     # create a PyTorch optimizer
-    optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
+    optimizer = torch.optim.AdamW(
+        model.parameters(),
+        lr=learning_rate,
+        betas=betas,
+        weight_decay=weight_decay,
+    )
+    if path_load_optim:
+        print(f"Loading optimizer state from {path_load_optim}")
+        optimizer.load_state_dict(torch.load(path_load_optim, map_location=device))
+        print("Optimizer state loaded")
     print(f"{optimizer=}")
 
     if dummy:
@@ -176,6 +197,10 @@ def training_loop(
         print(f"{logits.shape=}, {loss=}")
         print("Generating from the model...")
         generate_sample(context=context, n_tokens_generate=n_tokens_generate)
+        print("Cleaning up...")
+        writer.close()
+        del writer
+        shutil.rmtree(path_tensorboard)
         return
 
     checkpoints = []
@@ -186,6 +211,8 @@ def training_loop(
         total=max_iters,
         ncols=100,
         initial=start_iter,
+        position=0, 
+        leave=True,
     ):
         # sample a batch of data
         xb, yb = data_loader.get_batch("train")
@@ -207,8 +234,8 @@ def training_loop(
             generated_text = generate_sample(context)
             writer.add_text("generated_text", generated_text, iter)
 
-        if (iter % save_interval == 0 or iter == max_iters - 1) and iter != start_iter and path_save_model:
-            checkpoint_name = f"{path_save_model}/{iter}.pth"
+        if (iter % save_interval == 0 or iter == max_iters - 1) and iter != start_iter:
+            checkpoint_name = f"{path_full}/checkpoints/{iter}.pth"
             checkpoints.append(checkpoint_name)
             print(f"Saving checkpoint to {checkpoint_name}")
             os.makedirs(os.path.dirname(checkpoint_name), exist_ok=True)
@@ -220,6 +247,11 @@ def training_loop(
                     os.remove(checkpoint_delete)
                 except Exception as e:
                     print(f"Error deleting checkpoint {checkpoint_delete}: {e}")
+            
+            # Saving optimizer state
+            checkpoint_optim_name = f"{path_full}/checkpoints/optim.pth"
+            print(f"Saving optimizer state to {checkpoint_optim_name}")
+            torch.save(optimizer.state_dict(), checkpoint_optim_name)
 
         writer.flush()
 
@@ -227,9 +259,9 @@ def training_loop(
 
     # generate from the model
     generated_text = generate_sample(context, n_tokens_generate)
-    if path_generate_output:
-        print(f"Saving generated text to {path_generate_output}")
-        open(path_generate_output, "w", encoding="utf-8").write(generated_text)
+    path_generate_output = f"{path_full}/output.txt"
+    print(f"Saving generated text to {path_generate_output}")
+    open(path_generate_output, "w", encoding="utf-8").write(generated_text)
     print("Training loop finished.")
     writer.close()
 

@@ -1,24 +1,24 @@
 # Model parameters
-batch_size: 50  # independent sequences processed in parallel
-context_len: 512  # maximum token context length
-n_embd: 512  # linear layers size
-n_feed_forward: 2048
+batch_size: 20  # independent sequences processed in parallel
+context_len: 64  # maximum token context length
+n_embd: 64  # linear layers size
+n_feed_forward: 64
 n_head: 8  # parallel attention heads
-n_layer: 6  # attention blocks in sequence
-dropout: 0.1
+n_layer: 1  # attention blocks in sequence
+dropout: 0.05
 
 # Training parameters
-learning_rate: 0.001
+learning_rate: 0.005
 betas: [0.9, 0.999]
 weight_decay: 0.01
 start_iter: 0
-max_iters: 10_000
-eval_interval: 100
+max_iters: 300
+eval_interval: 50
 save_interval: 100
-eval_iters: 30
+eval_iters: 20
 texts_sample_frac: 1.0
 split_frac: 0.85
-n_checkpoints_keep: 5
+n_checkpoints_keep: 2
 
 # Generation parameters
 top_k: 30
@@ -33,9 +33,9 @@ path_input_encoded: "data/df_full_encoded_v17.pq"
 encode_input: false  # false
 
 path_models: "models"
-name: "v18_colab"
+name: "v18_test"
 n_tokens_generate: 600
 context: "Escrevo sob efeito de horrores inimagináveis."
 # path_load_model: "models/v18_test/checkpoints/599.pth"
 # path_load_optim: "models/v18_test/checkpoints/optim.pth"
-# dummy: true
+dummy: true
