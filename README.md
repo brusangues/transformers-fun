@@ -7,8 +7,11 @@ Referência principal: Andrej Karpathy's nanogpt-lecture
 [nanoGPT model.py](https://github.com/karpathy/nanoGPT/blob/master/model.py)
 
 # TODO
+* Aumentar tokenizer de 10k para 50k
+    * Usar sentencepiece
+* Classificação de autor ou tipo de texto
 * Logar estatísticas sobre os pesos para debugar o treinamento das redes
-* Adicionar mais autores
+* Adicionar mais autores no dataset
 
 # License
 
