@@ -1,0 +1,120 @@
+Parameters: {'batch_size': 50, 'context_len': 512, 'n_embd': 512, 'n_feed_forward': 2048, 'n_head': 8, 'n_layer': 6, 'dropout': 0.1, 'learning_rate': 0.001, 'betas': [0.9, 0.999], 'weight_decay': 0.01, 'start_iter': 4500, 'max_iters': 10000, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'texts_sample_frac': 1.0, 'split_frac': 0.85, 'n_checkpoints_keep': 5, 'top_k': 30, 'temperature': 0.7, 'path_tokenizer': 'artifacts/tokenizers/mix_ptbr_10240_v1.joblib', 'tokenizer_vocab_size': None, 'path_input': 'data/df_full_encoded_v17.pq', 'path_input_encoded': 'data/df_full_encoded_v17.pq', 'encode_input': False, 'device': 'cuda', 'path_models': 'models', 'name': 'v18_colab', 'n_tokens_generate': 600, 'context': 'Escrevo sob efeito de horrores inimagináveis.', 'path_load_model': 'models/v18_colab/checkpoints/4500.pth', 'path_load_optim': None, 'dummy': True, 'params_path': 'params/v18_local.yaml', 'kwargs': {}, 'now': '2025-10-17_09-35-45'}
+Tensorboard file...
+DataLoaderBpeV2 init...
+context_len=512, batch_size=50, device='cuda', split_frac=0.85
+Tokenizer...
+Dataset...
+self.vocab_size_tokenizer=10240
+self.df_full.shape=(179, 16)
+self.df_full.value_counts(['author']).sort_index().reset_index()=      author  count
+0       king     65
+1  lovecraft    114
+self.df_full.value_counts(['author','class']).sort_index().reset_index()=      author             class  count
+0       king           bachman      6
+1       king            contos     12
+2       king              king     40
+3       king       torre_negra      7
+4  lovecraft         Apêndices     12
+5  lovecraft  Ciclo de Cthulhu     20
+6  lovecraft  Ciclo dos Sonhos     20
+7  lovecraft        Miscelânea     24
+8  lovecraft           Poesias     38
+load_data...
+(179, 16)
+text[:2_000]='Estávamos sentados sobre uma tumba dilapidada do século XVII, no final da tarde de um dia de outono, no velho campo fúnebre de Arkham, e especulávamos sobre o inominável. Olhando para o gigantesco salgueiro no centro do cemitério, cujo tronco quase engolia uma antiga lápide ilegível, eu havia feito uma observação fantástica sobre o espectral e indizível repasto que as raízes colossais deviam estar sugando daquela terra arcaica e soturna, quando meu amigo me repreendeu por tal disparate e disse-me que, uma vez que nenhuma inumação ocorria ali havia mais de um século, não poderia existir nada que nutrisse a árvore, a não ser da maneira comum. Além disso, ele acrescentou, minhas constantes conversas sobre coisas "inomináveis" e "indizíveis" eram um recurso muito pueril, bem de acordo com minha baixa reputação como escritor. Eu seria por demais inclinado a concluir minhas histórias com visões ou sons que paralisavam as faculdades dos meus heróis e deixavam-nos privados de coragem, palavras ou associações para contar o que haviam vivenciado. Nós temos conhecimento das coisas, disse ele, unicamente por intermédio de nossos cinco sentidos ou de nossas intuições religiosas; e por essa razão é inteiramente impossível referirmo-nos a qualquer objeto ou manifestação que não possa ser claramente representada por sólidas definições factuais ou pelas doutrinas teológicas corretas — preferivelmente as dos congregacionalistas, com todas as modificações que a tradição e sir Arthur Conan Doyle possam prover.\nCom esse amigo, Joel Manton, eu com frequência tinha lânguidas discussões. Ele era diretor da East High School, nascido e criado em Boston e um adepto da arrogante surdez da Nova Inglaterra aos matizes delicados da vida. Sua opinião era de que somente as nossas experiências objetivas possuem qualquer significado estético, e que a atribuição do artista não é tanto provocar emoções fortes por meio da ação, do êxtase e do assombro, quanto manter um plácido interesse e apreciação por'
+len(text)=1000000
+len(chars)=103 chars=['\n', ' ', '!', '"', '$', '%', "'", '(', ')', ',', '-', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'º', 'À', 'Á', 'Ã', 'Ç', 'É', 'Ê', 'Í', 'Ó', 'Õ', 'Ú', 'à', 'á', 'â', 'ã', 'ç', 'é', 'ê', 'í', 'ó', 'ô', 'õ', 'ú', '—']
+len(tokens_full)=261155 tokens_full[:100]=[7462, 2524, 5403, 621, 333, 8043, 716, 6130, 112, 371, 297, 322, 6772, 3701, 86, 4110, 44, 335, 1697, 338, 1184, 263, 294, 680, 263, 7569, 44, 335, 1000, 3371, 287, 556, 790, 2085, 263, 2014, 107, 2770, 44, 258, 1716, 431, 6616, 621, 275, 417, 8957, 1055, 46, 373, 3780, 324, 275, 7319, 1060, 328, 566, 335, 2547, 322, 8660, 44, 4507, 7229, 742, 4471, 283, 333, 3795, 603, 112, 1384, 478, 302, 103, 792, 44, 457, 516, 1596, 333, 3330, 404, 10088, 621, 275, 1716, 10077, 258, 4688, 122, 792, 856, 271, 312, 286, 361, 663, 359, 4369]
+tokens[:100]=[10, 32, 33, 34, 36, 37, 39, 40, 41, 44, 45, 46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 63, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 93, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 154, 195, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275]
+vocab_size_tokens=8869
+estimated_starting_loss=9.090317726135254
+vocab_size_tokenizer=10240
+estimated_starting_loss_=9.23405647277832
+Saving encoded to path_input_encoded...
+Loading model from models/v18_colab/checkpoints/4500.pth
+Model loaded
+29.664256 M parameters
+optimizer=AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: [0.9, 0.999]
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.01
+)
+Running in dummy mode. Running a single batch to test the code.
+get_batch split='val'...
+df_split.shape=(49, 16) df_batch.shape=(10, 16)
+df_batch.author.value_counts().sort_index().reset_index()=      author  count
+0       king      7
+1  lovecraft      3
+df_batch.groupby(['split', 'author']).weights.sum()=split  author   
+eval   king         0.097607
+       lovecraft    0.005804
+Name: weights, dtype: float64
+df_batch.groupby(['split', 'author']).text_encoded_len.sum()=split  author   
+eval   king         1866888
+       lovecraft      36991
+Name: text_encoded_len, dtype: int64
+df_batch.groupby(['split', 'author']).title.count()=split  author   
+eval   king         7
+       lovecraft    3
+Name: title, dtype: int64
+df_batch.title.nunique()=8
+i=0 id_row=82 row.author='king' row['class']='contos'len(row.text_encoded)=201410
+i=1 id_row=150 row.author='king' row['class']='king'len(row.text_encoded)=175189
+i=2 id_row=140 row.author='lovecraft' row['class']='Ciclo de Cthulhu'len(row.text_encoded)=27355
+i=3 id_row=117 row.author='lovecraft' row['class']='Ciclo dos Sonhos'len(row.text_encoded)=3851
+i=4 id_row=160 row.author='king' row['class']='king'len(row.text_encoded)=227740
+i=5 id_row=150 row.author='king' row['class']='king'len(row.text_encoded)=175189
+i=6 id_row=33 row.author='king' row['class']='contos'len(row.text_encoded)=227471
+i=7 id_row=150 row.author='king' row['class']='king'len(row.text_encoded)=175189
+i=8 id_row=36 row.author='king' row['class']='king'len(row.text_encoded)=684700
+i=9 id_row=83 row.author='lovecraft' row['class']='Miscelânea'len(row.text_encoded)=5785
+get_batch split='train'...
+df_split.shape=(130, 16) df_batch.shape=(10, 16)
+df_batch.author.value_counts().sort_index().reset_index()=      author  count
+0       king      8
+1  lovecraft      2
+df_batch.groupby(['split', 'author']).weights.sum()=split  author   
+train  king         0.111550
+       lovecraft    0.005128
+Name: weights, dtype: float64
+df_batch.groupby(['split', 'author']).text_encoded_len.sum()=split  author   
+train  king         2861451
+       lovecraft      32702
+Name: text_encoded_len, dtype: int64
+df_batch.groupby(['split', 'author']).title.count()=split  author   
+train  king         8
+       lovecraft    2
+Name: title, dtype: int64
+df_batch.title.nunique()=9
+i=0 id_row=70 row.author='king' row['class']='contos'len(row.text_encoded)=193895
+i=1 id_row=34 row.author='king' row['class']='bachman'len(row.text_encoded)=109955
+i=2 id_row=101 row.author='king' row['class']='king'len(row.text_encoded)=616948
+i=3 id_row=71 row.author='king' row['class']='contos'len(row.text_encoded)=310372
+i=4 id_row=46 row.author='lovecraft' row['class']='Miscelânea'len(row.text_encoded)=13830
+i=5 id_row=99 row.author='lovecraft' row['class']='Miscelânea'len(row.text_encoded)=18872
+i=6 id_row=133 row.author='king' row['class']='king'len(row.text_encoded)=168812
+i=7 id_row=5 row.author='king' row['class']='king'len(row.text_encoded)=484988
+i=8 id_row=101 row.author='king' row['class']='king'len(row.text_encoded)=616948
+i=9 id_row=143 row.author='king' row['class']='king'len(row.text_encoded)=359533
+xb.shape=torch.Size([10, 512]), yb.shape=torch.Size([10, 512])
+logits.shape=torch.Size([5120, 10240]), loss=tensor(3.5585, device='cuda:0', grad_fn=<NllLossBackward0>)
+Generating from the model...
+Generating 600 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A noite de março de Tulwink, ele diz que o som de um dos pássaros estava além do seu corpo. O sol passa através de nuvens e o céu estava em ruínas; a névoa estava agora em chamas, e o céu era um azul brilhante, e a chuva caiu sobre os ossos. E o sol ficou tão vermelho quanto a chuva. Parece que a água está ficando mais forte.
+A noite, não havia nada. Não havia nada ali. Ele estava sentada no balanço de novo e se sentou, o rosto inchado, os olhos vermelhos, o cabelo caído, o rosto todo em chamas; o rosto coberto de lágrimas e tudo era do que o sol, mas não por isso. A luz da lua estava voltando, e o céu estava neurótico.
+Ele estava parado no degrau, o rosto todo retorcido de lágrimas e o coração batia forte. Não havia nada lá, exceto um sonho de sol e o silêncio, mas ainda assim tinha sumido. Não havia nada, exceto a lembrança de um sonho, e o sonho era que os sonhos eram tão reais quanto um sonho. Era como olhar para trás.
+Ele ficou acordado e olhou para a escuridão e viu que todos os sonhos tinham se tornado sonhos. Não havia medo na escuridão, e agora tinha que haver um tempo de sonho.
+Thad se levantou e olhou para a escuridão, com o rosto ardendo na boca. Tentou se lembrar das coisas que ele estava fazendo, e isso o assustou, mas não era bom. Havia alguma coisa dentro dele, mas não era bom.
+Ele se sentou, e começou a chorar de novo, a sensação muito ruim. Estava se movendo agora, mas não conseguiu. Ele só conseguia sorrir. Os sonhos, uma sensação de que todos os sonhos, e como era melhor acreditar. Ele não podia se lembrar. Não só uma forma.
+Ele tentou pensar se alguma coisa aconteceu, mas não conseguiu pensar. Ele sentiu a força de uma dor surda de verdade, e o que sentia estava diminuindo a tensão. A dor que fez a pele ficar pior ainda era horrível em sua cabeça e ela sentiu o suor quente, mas, de forma que o sonho era real, tinha se tornado tão ininteligível. Não era a sensação de estar correndo, mas a sensação de estar chegando no mesmo ritmo era terrível. Ele sentia que era um sonho, mas era o sonho. Stark estava se levantando, e quando ele viu a coisa amarela na calça vermelha, a sensação de que o sono tinha sido um sonho, não havia sinal de nada. Ele estava parado na sombra, esperando por ele ver a escuridão, e a escuridão estava ficando mais forte, e, na mesma hora, não estava mais. Não era bom ter um sonho, não era?
+Thad Beaumont não tinha certeza. Ele estava pensando nas palavras que ele tinha ouvido na voz, de forma que a mente dele era a esposa de Stark, uma das Vovinhas da Sociedade Gramity
+Cleaning up...

@@ -1,7 +1,8 @@
 *.pth
 *.vscode
 *.pyc
+*.zip
 __pycache__/
 .ipynb_checkpoints/
-*.log
 runs_old/
+models_old/

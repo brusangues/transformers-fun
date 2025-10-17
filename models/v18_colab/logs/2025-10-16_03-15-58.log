@@ -1,0 +1,63 @@
+Parameters: {'batch_size': 50, 'context_len': 512, 'n_embd': 512, 'n_feed_forward': 2048, 'n_head': 8, 'n_layer': 6, 'dropout': 0.1, 'learning_rate': 0.001, 'betas': [0.9, 0.999], 'weight_decay': 0.01, 'start_iter': 4500, 'max_iters': 10000, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'texts_sample_frac': 1.0, 'split_frac': 0.85, 'n_checkpoints_keep': 5, 'top_k': 30, 'temperature': 0.7, 'path_tokenizer': 'artifacts/tokenizers/mix_ptbr_10240_v1.joblib', 'tokenizer_vocab_size': None, 'path_input': 'data/df_full_encoded_v17.pq', 'path_input_encoded': 'data/df_full_encoded_v17.pq', 'encode_input': False, 'device': 'cuda', 'path_models': '/content/drive/MyDrive/transformers-fun/models', 'name': 'v18_colab', 'n_tokens_generate': 600, 'context': 'Escrevo sob efeito de horrores inimagináveis.', 'path_load_model': '/content/drive/MyDrive/transformers-fun/artifacts/checkpoints/mix_v18/4500.pth', 'path_load_optim': None, 'dummy': False, 'params_path': 'params/v18_colab.yaml', 'kwargs': {}, 'now': '2025-10-16_03-15-58'}
+Tensorboard file...
+DataLoaderBpeV2 init...
+context_len=512, batch_size=50, device='cuda', split_frac=0.85
+Tokenizer...
+Dataset...
+self.vocab_size_tokenizer=10240
+self.df_full.shape=(179, 16)
+self.df_full.value_counts(['author']).sort_index().reset_index()=      author  count
+0       king     65
+1  lovecraft    114
+self.df_full.value_counts(['author','class']).sort_index().reset_index()=      author             class  count
+0       king           bachman      6
+1       king            contos     12
+2       king              king     40
+3       king       torre_negra      7
+4  lovecraft         Apêndices     12
+5  lovecraft  Ciclo de Cthulhu     20
+6  lovecraft  Ciclo dos Sonhos     20
+7  lovecraft        Miscelânea     24
+8  lovecraft           Poesias     38
+load_data...
+(179, 16)
+text[:2_000]='Fata viam invenient[1]\nNuma encosta verdejante do Monte Mênalo, na Arcádia, existe um olival que circunda as ruínas de uma quinta. Junto a ele há uma tumba, um dia embelezada pelas mais sublimes esculturas, mas hoje reduzida a uma deterioração tão grande quanto a da casa. Numa das extremidades dessa tumba, com suas curiosas raízes deslocando os blocos de mármore pentélico manchados pelo tempo, cresce uma oliveira inaturalmente grande, dotada de um formato estranhamente repulsivo; tão semelhante a algum homem grotesco ou a um corpo humano distorcido pela morte, que os camponeses temem passar por ali à noite, quando a lua brilha tênue por entre seus galhos tortos. O Monte Mênalo é um dos retiros escolhidos pelo temido Pã, cujos bizarros companheiros são numerosos, e os camponeses simplórios acreditam que a árvore deve ter algum horrendo parentesco com esses fantásticos paniscos; mas um velho apicultor que vive no chalé vizinho contou-me uma história diferente.\nMuitos anos atrás, quando a quinta na encosta do monte era nova e resplandescente, habitavam-na os dois escultores Kalos e Musides. Da Lídia a Neápolis, a beleza das suas obras era glorificada e ninguém ousava dizer que um excedia o outro em talento. O Hermes de Kalos encontrava-se em um nicho de mármore em Corinto e a Palas de Musides ocupava o alto de um pilar em Atenas, próximo ao Partenon. Todos os homens prestavam homenagens a Kalos e Musides, e maravilhavam-se porque nenhuma sombra de ciúmes artísticos esfriava o calor da amizade fraterna entre eles.\nMas embora Kalos e Musides vivessem em harmonia inquebrantável, suas naturezas não eram semelhantes. Enquanto Musides divertia-se à noite em meio às alegrias urbanas de Tégea, Kalos permanecia em casa, furtando-se aos olhos de seus escravos nos frescos recessos do olival. Ali ele meditava sobre as visões que ocupavam sua mente e ali divisava as formas de beleza que mais tarde se tornariam imortais em mármore vivo. As pessoas fúteis, a propósito, diziam que Kal'
+len(text)=1000000
+len(chars)=107 chars=['\n', ' ', '!', '"', '$', '%', "'", '(', ')', '*', ',', '-', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '}', 'º', 'À', 'Á', 'Â', 'Ã', 'Ç', 'É', 'Ê', 'Í', 'Ó', 'Õ', 'Ú', 'à', 'á', 'â', 'ã', 'ç', 'é', 'ê', 'í', 'ó', 'ô', 'õ', 'ú', '—']
+len(tokens_full)=254882 tokens_full[:100]=[7671, 293, 6593, 417, 1006, 105, 300, 91, 49, 93, 10, 78, 514, 4872, 1953, 4024, 322, 2602, 386, 388, 638, 4540, 44, 346, 2014, 5816, 528, 44, 3771, 294, 275, 1005, 7887, 286, 3905, 297, 361, 5780, 263, 333, 6267, 46, 430, 2303, 259, 380, 1038, 333, 8043, 716, 44, 294, 680, 326, 7794, 122, 734, 1933, 403, 1001, 9581, 279, 8858, 2449, 44, 377, 2607, 4575, 371, 259, 333, 3495, 559, 1252, 741, 982, 1053, 259, 338, 835, 46, 367, 514, 595, 2797, 2240, 2417, 8043, 716, 44, 304, 943, 3688, 271, 663, 359, 4369, 9816, 331, 368]
+tokens[:100]=[10, 32, 33, 34, 36, 37, 39, 40, 41, 42, 44, 45, 46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 63, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 93, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 125, 130, 154, 195, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271]
+vocab_size_tokens=8560
+estimated_starting_loss=9.054855346679688
+vocab_size_tokenizer=10240
+estimated_starting_loss_=9.23405647277832
+Saving encoded to path_input_encoded...
+Loading model from /content/drive/MyDrive/transformers-fun/artifacts/checkpoints/mix_v18/4500.pth
+Model loaded
+29.664256 M parameters
+optimizer=AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: [0.9, 0.999]
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.01
+)
+
+Estimating loss...
+step 4500: val loss 4.3401
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Os que se abominam são de fato tão obscuros e gelo e mais terríveis saem de Inganok, e a voo em ânimo deixam as muralhas que se abjeta entoam para longe do platô de Leng. Leng, hospedadores de Inganok, onde mais antigas, antigas ruas e teto ao norte da Baaônia crepuscular reluz as verróporas, elevado por uma grande escalação de gigantes havia sobranceante havia uma lú
+
+Estimating loss...
+step 4600: val loss 4.1012
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não que eu esteja louco para entender a estranheza do velho Zadokster quando criança.
+No dia 8 de fevereiro de 1922 de 1958 eu havia mecado em um escritório comercial com livros de ocultis, que havia sido publicada por um saquê. Os homens do laboratório eram de um antigo métodominalmente republicado, embora muitos dos antigos registros de livros góticas e títulos
+Saving checkpoint to /content/drive/MyDrive/transformers-fun/models/v18_colab/checkpoints/4600.pth
+Saving optimizer state to /content/drive/MyDrive/transformers-fun/models/v18_colab/checkpoints/optim.pth

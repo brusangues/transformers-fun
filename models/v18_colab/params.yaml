@@ -32,10 +32,10 @@ path_input: "data/df_full_encoded_v17.pq"
 path_input_encoded: "data/df_full_encoded_v17.pq"
 encode_input: false  # false
 
-path_models: "/content/drive/MyDrive/transformers-fun/models"
+path_models: "models"
 name: "v18_colab"
 n_tokens_generate: 600
 context: "Escrevo sob efeito de horrores inimagináveis."
-path_load_model: "/content/drive/MyDrive/transformers-fun/artifacts/checkpoints/mix_v18/4500.pth"
+path_load_model: "models/v18_colab/checkpoints/4500.pth"
 # path_load_optim: "models/v18_test/checkpoints/optim.pth"
-# dummy: true
+dummy: true
