@@ -29,7 +29,7 @@ path_tokenizer: "artifacts/tokenizers/mix_ptbr_10240_v1.joblib"
 tokenizer_vocab_size: null
 
 path_input: "/kaggle/input/v18-colab/df_full_encoded_v17.pq"
-path_input_encoded: "/kaggle/input/v18-colab/df_full_encoded_v17.pq"
+path_input_encoded: null
 encode_input: false  # false
 
 path_models: "/kaggle/working/transformers-fun/models"
