@@ -1,5 +1,5 @@
 # Model parameters
-batch_size: 40  # independent sequences processed in parallel
+batch_size: 30  # independent sequences processed in parallel
 context_len: 640  # maximum token context length
 n_embd: 512  # linear layers size
 n_feed_forward: 2048
