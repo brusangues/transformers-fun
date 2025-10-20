@@ -1,0 +1,134 @@
+Parameters: {'batch_size': 50, 'context_len': 512, 'n_embd': 512, 'n_feed_forward': 2048, 'n_head': 8, 'n_layer': 6, 'dropout': 0.1, 'learning_rate': 0.001, 'betas': [0.9, 0.999], 'weight_decay': 0.01, 'start_iter': 4500, 'max_iters': 10000, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'texts_sample_frac': 1.0, 'split_frac': 0.85, 'n_checkpoints_keep': 5, 'top_k': 30, 'temperature': 0.7, 'path_tokenizer': 'artifacts/tokenizers/mix_ptbr_10240_v1.joblib', 'tokenizer_vocab_size': None, 'path_input': 'data/df_full_encoded_v17.pq', 'path_input_encoded': 'data/df_full_encoded_v17.pq', 'encode_input': False, 'device': 'cuda', 'path_models': 'models', 'name': 'v18_colab', 'n_tokens_generate': 600, 'context': 'Escrevo sabendo que meu fim está próximo', 'path_load_model': 'models/v18_colab/checkpoints/4500.pth', 'path_load_optim': None, 'dummy': True, 'params_path': 'params/v18_local.yaml', 'kwargs': {}, 'now': '2025-10-17_09-48-54'}
+Tensorboard file...
+DataLoaderBpeV2 init...
+context_len=512, batch_size=50, device='cuda', split_frac=0.85
+Tokenizer...
+Dataset...
+self.vocab_size_tokenizer=10240
+self.df_full.shape=(179, 16)
+self.df_full.value_counts(['author']).sort_index().reset_index()=      author  count
+0       king     65
+1  lovecraft    114
+self.df_full.value_counts(['author','class']).sort_index().reset_index()=      author             class  count
+0       king           bachman      6
+1       king            contos     12
+2       king              king     40
+3       king       torre_negra      7
+4  lovecraft         Apêndices     12
+5  lovecraft  Ciclo de Cthulhu     20
+6  lovecraft  Ciclo dos Sonhos     20
+7  lovecraft        Miscelânea     24
+8  lovecraft           Poesias     38
+load_data...
+(179, 16)
+text[:2_000]='As torres são brancas sob o doido luar,\nE os ramos têm um brilho prateado;\nE as chaminés veem sobre si passar\nHarpias e vampiros, cruzando ar\nCom um olhar e um riso alucinado.\nSob o luar se estende essa aldeota inculta,\nSem ter visto jamais a luz do dia:\nVinda de funduras que o tempo sepulta,\nOnde um rio de louca fantasia\nDesce a golfos de onírica agonia.\nCorre um vento frio entre as pilhas de grãos,\nSobre campos de um pálido fulgor,\nE vem entre as lousas dar giros malsãos;\nE abominações no átrio gemem por\nColheitas fantasmais, de fundo horror.\nUm sopro sequer dos deuses da mudança,\nQue romperam os liames do passado,\nApressa a hora, em que espectral poder avança,\nAdormecendo o céu vasto e calado\nE libertando as sombras do ignorado.\nEntão, novamente, surge o vale e o plaino\nQue luares ancestrais alumiaram,\nE dançam os mortos sob o brilho arcano,\nRessurgindo das tumbas que os tragaram,\nPara espantar o mundo que deixaram.\nTudo quanto o dia há de ter esquecido—\nO horror e a pestilência das fileiras\nDe tijolo e pedras — se terá jungido\nAo resto pelas eras derradeiras,\nHabitando entre as sombras agoureiras.\nLadrem loucos, pois, os lêmures no escuro\nE ao céu ascendam miasmas leprosados,\nQue hão de unir-se o novo e o velho no futuro,\nAos terrores da morte condenados,\nPara serem do Tempo devorados.\n\n\nSTEPHEN KING\nEscrevendo Como \nRICHARD BACHMAN \nBLAZE\nPara Tommy e Lori Spruce \nE Pensando em James T. Farrell\n"Estas são as escórias do coração."\nJohn D. MacDonald\n \nCAPÍTULO 1 \n GEORGE ESTAVA EM ALGUM LUGAR na escuridão. Blaze não podia vê-lo, mas a voz chegou alta e clara, grosseira e um pouco rouca. George sempre soava como se estivesse gripado. Ele tivera um acidente quando criança.\n Ele nunca disse o que foi, mas havia uma extraordinária cicatriz em seu pomo de Adão.\n -- Esse não, seu boboca, ele tem adesivos pregados em toda a parte. Pegue um Chevy ou um Ford. Azul escuro ou verde. Dois anos de idade. Nem mais, nem menos. Ninguém se lembra deles. E sem adesivos.\n Blaze pas'
+len(text)=1000000
+len(chars)=110 chars=['\n', ' ', '!', '"', '$', '%', "'", '(', ')', '*', '+', ',', '-', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '=', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '}', 'º', 'À', 'Á', 'Â', 'Ã', 'Ç', 'É', 'Ê', 'Í', 'Ó', 'Ô', 'Õ', 'Ú', 'à', 'á', 'â', 'ã', 'ç', 'é', 'ê', 'í', 'ó', 'ô', 'õ', 'ú', '—']
+len(tokens_full)=256019 tokens_full[:100]=[2549, 5953, 1120, 5401, 529, 275, 322, 419, 5449, 2573, 69, 368, 32, 4044, 2207, 294, 3569, 10161, 59, 10, 69, 361, 9924, 918, 1572, 318, 621, 1145, 1535, 10, 72, 272, 112, 1455, 258, 6685, 44, 2362, 331, 498, 10, 2268, 294, 1084, 258, 294, 4198, 5459, 2553, 303, 83, 436, 275, 5449, 295, 7133, 1106, 360, 8915, 293, 417, 799, 293, 2573, 7100, 434, 2039, 1476, 259, 1067, 322, 680, 1256, 86, 591, 263, 1100, 6690, 286, 275, 641, 6709, 293, 2573, 79, 646, 294, 2706, 263, 5760, 2304, 283, 10, 6611, 513, 259, 2689, 6264, 263, 7401]
+tokens[:100]=[10, 32, 33, 34, 36, 37, 39, 40, 41, 43, 44, 45, 46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 61, 63, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 93, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 125, 130, 148, 154, 195, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270]
+vocab_size_tokens=8649
+estimated_starting_loss=9.06519889831543
+vocab_size_tokenizer=10240
+estimated_starting_loss_=9.23405647277832
+Saving encoded to path_input_encoded...
+Loading model from models/v18_colab/checkpoints/4500.pth
+Model loaded
+29.664256 M parameters
+optimizer=AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: [0.9, 0.999]
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.01
+)
+Running in dummy mode. Running a single batch to test the code.
+get_batch split='val'...
+df_split.shape=(49, 16) df_batch.shape=(10, 16)
+df_batch.author.value_counts().sort_index().reset_index()=      author  count
+0       king      8
+1  lovecraft      2
+df_batch.groupby(['split', 'author']).weights.sum()=split  author   
+eval   king         0.111550
+       lovecraft    0.003221
+Name: weights, dtype: float64
+df_batch.groupby(['split', 'author']).text_encoded_len.sum()=split  author   
+eval   king         1837354
+       lovecraft      20765
+Name: text_encoded_len, dtype: int64
+df_batch.groupby(['split', 'author']).title.count()=split  author   
+eval   king         8
+       lovecraft    2
+Name: title, dtype: int64
+df_batch.title.nunique()=10
+i=0 id_row=91 row.author='king' row['class']='torre_negra'len(row.text_encoded)=97635
+i=1 id_row=127 row.author='king' row['class']='contos'len(row.text_encoded)=201410
+i=2 id_row=3 row.author='king' row['class']='king'len(row.text_encoded)=227740
+i=3 id_row=95 row.author='king' row['class']='bachman'len(row.text_encoded)=136862
+i=4 id_row=45 row.author='king' row['class']='torre_negra'len(row.text_encoded)=391208
+i=5 id_row=113 row.author='lovecraft' row['class']='Miscelânea'len(row.text_encoded)=5039
+i=6 id_row=48 row.author='king' row['class']='contos'len(row.text_encoded)=227471
+i=7 id_row=119 row.author='lovecraft' row['class']='Ciclo de Cthulhu'len(row.text_encoded)=15726
+i=8 id_row=138 row.author='king' row['class']='king'len(row.text_encoded)=175189
+i=9 id_row=76 row.author='king' row['class']='torre_negra'len(row.text_encoded)=379839
+get_batch split='train'...
+df_split.shape=(130, 16) df_batch.shape=(10, 16)
+df_batch.author.value_counts().sort_index().reset_index()=  author  count
+0   king     10
+df_batch.groupby(['split', 'author']).weights.sum()=split  author
+train  king      0.133055
+Name: weights, dtype: float64
+df_batch.groupby(['split', 'author']).text_encoded_len.sum()=split  author
+train  king      2636909
+Name: text_encoded_len, dtype: int64
+df_batch.groupby(['split', 'author']).title.count()=split  author
+train  king      10
+Name: title, dtype: int64
+df_batch.title.nunique()=9
+i=0 id_row=71 row.author='king' row['class']='contos'len(row.text_encoded)=272591
+i=1 id_row=166 row.author='king' row['class']='king'len(row.text_encoded)=616948
+i=2 id_row=8 row.author='king' row['class']='king'len(row.text_encoded)=213621
+i=3 id_row=157 row.author='king' row['class']='king'len(row.text_encoded)=179319
+i=4 id_row=118 row.author='king' row['class']='king'len(row.text_encoded)=429941
+i=5 id_row=159 row.author='king' row['class']='king'len(row.text_encoded)=50070
+i=6 id_row=155 row.author='king' row['class']='king'len(row.text_encoded)=152153
+i=7 id_row=11 row.author='king' row['class']='king'len(row.text_encoded)=341804
+i=8 id_row=71 row.author='king' row['class']='contos'len(row.text_encoded)=272591
+i=9 id_row=1 row.author='king' row['class']='bachman'len(row.text_encoded)=107871
+xb.shape=torch.Size([10, 512]), yb.shape=torch.Size([10, 512])
+logits.shape=torch.Size([5120, 10240]), loss=tensor(3.4043, device='cuda:0', grad_fn=<NllLossBackward0>)
+Generating from the model...
+Generating 600 tokens from context='Escrevo sabendo que meu fim está próximo'
+generated_text: Escrevo sabendo que meu fim está próximo o meu limite. Mas não estou. Eu não posso. Não vou me lembrar de nada, não vou, meu velho e não vou ficar aqui para pensar no que é que tem uma filha da puta de puta. Não estou entendendo, mas estou muito bem. Mas se eu estivesse de volta, vou ter que estar. Entendeu?
+— Entendi. Você está na minha cara, não é?
+— Estou. De qualquer modo, não estou. Por quê, você sabe, não vai?
+— Não sei. Mas, se fizer, vou me foder. Por que não tem que me me ouvir?
+— Não sei, mas me sinto como se estivesse pensando.
+— Por quê?
+— Porque eu não estou.
+— Porque se você tivesse uma boa ideia do que eu tinha notado, não teria?
+— Não. Mas sei que não foi por isso que você falou.
+— Então eu não vou contar nada, Charlie. Não sei se isso é verdade. — Mas então, eu não estava pensando em mentir. Eu tinha me contado. — Eu estava dizendo a verdade, não é?
+— Você não pode, Charlie. — E também me lembrei daquele dia. — Então, Charlie: — Você não entendeu, Charlie?
+— Não. — Não tinha sido mentira. — Não tinha nada que eu pudesse dizer. — Você vai entender.
+— Eu tenho certeza de que está me escutando — respondi. — Mas você não me entende. Eu estava, sim. Não sei. Eu... sinto... — Eu estava em choque, como se estivesse hipnotizada. — Não vou contar para ninguém. Nunca, não me importo de você, mas não vou contar para mamãe, não vou contar. Eu não sei se você tem motivo para isso.
+— Você é um idiota e um homem que não é meu. — E isso mesmo. Eu não estava em choque, e o que não era ruim.
+— Você não entende. — Ele parou de sorrir.
+— Não.
+— Charlie, Charlie, não me chame de mentiroso.
+— Não quero.
+— Não, não, Charlie. Eu não vou mentir. Eu vou ficar. Você vai me machucar.
+— Você vai matar você, Charlie. — E me olhou com um horror e então o sorriso sumiu. — Eu não vou matar você. Está vivo.
+— Você vai matar você, Charlie. Você não vai matar você, Charlie. Não vai, Charlie. — Ele fez uma pausa. — Eu vou matar você comigo. — O que eu quero é ir. — E, se eu fizer isso, eu vou te matar.
+— Charlie, você tem que sair.
+Levantei minha mão e peguei o abajur de Charlie.
+— Charlie, você é um doce.
+— Charlie, isso não vai adiantar nada, não vai?
+— Charlie — respondi. — Agora que você vai? Ele vai vir até aqui e eu vou fazer o que quer. Você vai fazer o que eu vou fazer. Você vai passar meu resto de
+Cleaning up...
