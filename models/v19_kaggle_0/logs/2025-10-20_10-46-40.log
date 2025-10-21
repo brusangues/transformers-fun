@@ -1,0 +1,978 @@
+Parameters: {'batch_size': 30, 'context_len': 640, 'n_embd': 512, 'n_feed_forward': 2048, 'n_head': 8, 'n_layer': 6, 'dropout': 0.1, 'learning_rate': 0.001, 'betas': [0.9, 0.999], 'weight_decay': 0.01, 'start_iter': 0, 'max_iters': 10000, 'eval_interval': 100, 'save_interval': 100, 'eval_iters': 30, 'texts_sample_frac': 1.0, 'split_frac': 0.85, 'n_checkpoints_keep': 5, 'top_k': 30, 'temperature': 0.7, 'path_tokenizer': 'artifacts/tokenizers/mix_ptbr_10240_v1.joblib', 'tokenizer_vocab_size': None, 'path_input': '/kaggle/input/v18-colab/df_full_encoded_v17.pq', 'path_input_encoded': None, 'encode_input': False, 'device': 'cuda', 'path_models': '/kaggle/working/transformers-fun/models', 'name': 'v19_kaggle_0', 'n_tokens_generate': 600, 'context': 'Escrevo sob efeito de horrores inimagináveis.', 'path_load_model': None, 'path_load_optim': None, 'dummy': False, 'params_path': 'params/v19_kaggle_0.yaml', 'kwargs': {}, 'now': '2025-10-20_10-46-40'}
+Tensorboard file...
+DataLoaderBpeV2 init...
+context_len=640, batch_size=30, device='cuda', split_frac=0.85
+Tokenizer...
+Dataset...
+self.vocab_size_tokenizer=10240
+self.df_full.shape=(179, 16)
+self.df_full.value_counts(['author']).sort_index().reset_index()=      author  count
+0       king     65
+1  lovecraft    114
+self.df_full.value_counts(['author','class']).sort_index().reset_index()=      author             class  count
+0       king           bachman      6
+1       king            contos     12
+2       king              king     40
+3       king       torre_negra      7
+4  lovecraft         Apêndices     12
+5  lovecraft  Ciclo de Cthulhu     20
+6  lovecraft  Ciclo dos Sonhos     20
+7  lovecraft        Miscelânea     24
+8  lovecraft           Poesias     38
+load_data...
+(179, 16)
+text[:2_000]='Sou um trabalhador e vivo em paz,\nNem mais sábio ou mais forte que ninguém.\nLabor, repouso e canto, e todo o plano\nDa Natureza me convêm.\nPorém um dia os homens que nos regem\nQue eu devia morrer determinaram,\nPara que a liberdade e o orgulho não\nPerdessem o lustro — explicaram.\nDisseram que eu devia apor meu nome\nNum rol da morte, de maneira tal\nQue, após o suspiro último, eu me erguesse\nPara ter fama, no final.\nNão sei, pois, o que fiz por merecer\nSer de uma tal maneira destinado\nA esperar por torturas incontáveis\nE ser anônimo enterrado.\nNão odeio ninguém, porém me dizem\nQue devo combater e até matar;\nQue devo suportar dia após dia,\nPara algum senhor agradar.\nMinha consciência costumava ser\nLivre, e atordoada agora eles a querem.\nSem que eu ao menos possa protestar,\nE como um número me aferem.\nFalam-me de trincheiras longas, fundas,\nCheias de restos vis e destroçados\nFalam, até que o sono me abandona,\nE os miolos giram atordoados.\nFalam de lama e sangue e desespero,\nDe coisas que não posso nem supor,\nDe coisas que, juntando medo e mágoa,\nCausam em mim profundo horror.\nNão sei o que farei, e me pergunto\nSe não é injusta a lei que eles invocam.\nNão posso, pois, fazer o que me pedem;\nNo entanto devo — me convocam.\nDo desastre me acerco a cada dia\nQue me prepara o Estado prepotente;\nSinto às vezes que alguma coisa espreita,\nMe olhando fixa, fixamente.\nJá não posso dormir. Minha cabeça\nVai girando de um modo incontrolado.\nQue tal se eu escolhesse um dia desses\nEstar bem morto e sossegado?\nOuça — uma fibra se estendeu demais.\nÉ o vinho de que estive a me encharcar.\nTudo parece estranho. Que fazer\nSenão rir, rir, e gargalhar?\n\n\nTombam tristes os salgueiros junto à margem do Zulal,\nPor onde com minha amada de negras tranças vaguei:\nCada flor que se abre, cada lírio desse litoral\nSe verga tristonho desde que de Laeta me afastei!\nBenditos dias da infância em que eu, ainda esperançoso,\nCom minha Laeta galgava cada outeiro florescente,\nColhendo fetos e flores junto ao regato '
+len(text)=1000000
+len(chars)=104 chars=['\n', ' ', '!', '"', '$', "'", '(', ')', '*', ',', '-', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'º', 'À', 'Á', 'Ã', 'Ç', 'É', 'Ê', 'Í', 'Ó', 'Ô', 'Õ', 'Ú', 'à', 'á', 'â', 'ã', 'ç', 'é', 'ê', 'í', 'ó', 'ô', 'õ', 'ú', '—']
+len(tokens_full)=250347 tokens_full[:100]=[83, 296, 294, 4211, 841, 258, 2702, 326, 4160, 2573, 10187, 403, 3997, 3422, 365, 403, 1528, 286, 1521, 303, 76, 97, 2995, 44, 8521, 356, 258, 2471, 44, 258, 1110, 275, 4318, 10, 5236, 9162, 117, 4654, 396, 4167, 1444, 303, 1930, 439, 294, 680, 368, 1427, 286, 610, 363, 737, 10, 4823, 457, 1502, 2046, 3495, 1253, 749, 2573, 4739, 286, 259, 4891, 710, 258, 275, 8449, 325, 10, 5657, 1200, 109, 275, 330, 347, 1254, 317, 3377, 749, 303, 68, 1250, 499, 286, 457, 1502, 433, 285, 800, 1182, 10, 78, 281, 731, 108, 338, 1931, 44]
+tokens[:100]=[10, 32, 33, 34, 36, 39, 40, 41, 42, 44, 45, 46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 63, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 93, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 114, 115, 116, 117, 118, 119, 120, 121, 122, 141, 148, 154, 195, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275]
+vocab_size_tokens=8668
+estimated_starting_loss=9.06739330291748
+vocab_size_tokenizer=10240
+estimated_starting_loss_=9.23405647277832
+29.729792 M parameters
+optimizer=AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: [0.9, 0.999]
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.001
+    maximize: False
+    weight_decay: 0.01
+)
+
+Estimating loss...
+step 0: val loss 8.7026
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.. e.. estejad. que.,,.. como., de,.. de traje humana que delhei que Aí,,.,, que corrida de que caindo raramente de psic de que. de hospital de., de que razo,. psickey.. de de Talitha de a..,,.vi...,,,.áticas psic como tabuvi de,vi psic.... de de.,,Não, mam Terra Talitha.
+
+Estimating loss...
+step 100: val loss 6.7173
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. —— Ela ele e a noite, os que de  coisa de uma mão em que ele no novo. Eu mais se, de vezes. — —— ——— ——— ———— A coisa de que oy, estava se de que no que oa com o que mas o que a-—— Ele, a———— — Ele o que se a que é.— O cabeça de que se uma disse não que emla se um rosto, a
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/100.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 200: val loss 6.1326
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Quando, mas o mundo de uma fim de que tinha certeza, e-se, e a cabeça.
+— O, e eu é a cabeça. — falei com um velho que fazer.
+— O lugar, e me era, e era o que eu tem mais um lado da mãe e ter a minha época. — disse que o senhor. Não não não é, e um telefone, e o que ele não tinha uma frente.
+— Era a porta, e eu fosse um lado do resto.
+—
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/200.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 300: val loss 5.8121
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. 
+— Pie! — disse.
+— Ban, como um pouco que a um olhar à frente.
+— 
+Os dois anos de sua cabeça, mas não, mas não estava indo para o dia.
+Turne, e a cabeça, e depois — O que não é o que ele não estava com certeza de uma meio do que, um dia. 
+— Eu vai ter sido com um tempo para ser um homem mais tão tempo. Ele tem uma das bochechas e se eu tinha
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/300.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 400: val loss 5.6191
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não que os homens. Um homem não havia um pouco. O que me me lembrar de 1918 quilos. O rosto de papel, mas as costas, e no fim de todos os olhos de um homem em direção ao menos tudo que nunca apenas a casa.
+Ela não sabia o rosto. A mulher, mas não conseguiu mesmo, a porta. -------- Aiia e por um momento. Ele vai para trás e a se não havia um momento. A
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/400.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 500: val loss 5.5052
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ocidental, e as censivadas que a um homem que não mais, e um metro e o que ele se não era mais o que o que os dois dos olhos da minha garganta de um dia, se sentir que a casa de seus olhos, e a única maneira que o seu nome de uma vida. O que eu não foi, e o que ele, e, e, que não se apresentenom, e o que um pouco mais das mãos para o carro, e
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/500.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 600: val loss 5.4233
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Alecrogamunos de pedra. A partir de uma forma com um de um momento, a primeira vez de uma pequena casa. Em um homem que a partir do centro de um instante, mas não havia uma mulher e o que era uma série de um pouco mais um homem no dia e uma voz de uma pequena. A vida, e a um deles. Era uma mulher e a impressão de uma espécie de sua esposa.
+Ele se descidente de um pouco em um metro
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/600.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/100.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 700: val loss 5.3445
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A princípio havia descoberto que o que os lados que o fato de repente, mas de maneira que os homens e os seres humanos. Os Grandes Deuses. Não houve uma certa impressão de uma das janelas que não se tornado a luz e a respeito a morte de uma espécie de sua vida, e o medo de uma coisa no meio de um homem. Ele o que a cabeça de uma coisa do outro lado, e eu sabia que estava com uma das roupas da nossa face dos lados de sua casa, e
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/700.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/200.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 800: val loss 5.2899
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. É como se de um pouco de um jovem e no fim de um momento, um ar. O tempo de terra, e na direção à mesa de uma vez de um homem mais uma grande. Em vez.
+— Não, mas a não é que é um homem do que vocês.
+— Sim, mas a gente que não me sentemia, mas também se sentadas de um som de uma vez, mas o que o que não sabe?
+— Não. Eu gostaria de qualquer forma. —
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/800.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/300.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 900: val loss 5.2474
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Os homens — e que haviam de um homem que as janelas como um homem que os ghouls haviam entendido que Carter que haviam percebido a fim havia deixado no entanto, que de que não haveria mais a uma das janelas, e com asas de um navio de uma vez. Os cães que o horror — uma vez mais tarde de um navio, e não havia se desentá-los em meio inferiores de um instante não o que o caminho de um vento que o dia que os deuses de uma estranha
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/900.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/400.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 1000: val loss 5.2053
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Os homens e as coisas que o homem que os cavalos de um artinta — ou de um pticais, embora não haviam sido construir em meio ao redor de um homem na qual e o que se modelo, com o que os péssandra de um momento em uma bela mulher que o que a atenção e a seguir o grande casa, e a noite de uma coisa que o único soma, e de um grande e um pouco com o sr. Ozidia
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1000.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/500.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 1100: val loss 5.1570
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Em um templo de arfemo, e Carter que a fim de um tanto tempo. Ol. Se fosse de uma de um instante de um homem de maneira mais do que eu não tinha visto os meus olhos.
+Por um estranho e o fato. Era evidente que eu sou o mundo era a mim, pois eu me dar um bom. Mas, e do medo, mas não estava no dia 1
+Lo que, e um dia eu havia um dia 16 de um dia seguinte
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1100.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/600.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 1200: val loss 5.1279
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Em seguida, e em seu cérebro, que a qualquer outro lado de qualquer maneira singular que se é que não é melhor forma de um metro. O sr. O jovem havia algo que o que não seria capaz de que se recusasse, que se não temia, mas mesmo que o que ele havia um verdadeiro sentimento de que não era mais ou menos no meio do que parecia ter um quilômetro e não é a respeito. Marcro, mas uma palavra. Os dois homens que o que o
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1200.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/700.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 1300: val loss 5.0948
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ele as formas. Um dos mais que os sonhos que o bastante sinistra a presença tão forte.
+— Você também?
+— Sim, é que a sua esposa. E você acha que não estava em um lado do que é a respeito, mas não é o suficiente para ele sabia de um sorriso de modo tão forte de seu marido, e seu irmão mais alguma coisa.
+Ele ainda não me deu a vida, e quando a mulher, meu coração. Não, mas a não havia de seu marido.
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1300.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/800.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 1400: val loss 5.0691
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A porta do chão. Os olhos de um baque que se afastavam da cidade, que pareciam uma vez que o outro lado do solto. A única coisa estátirantemente, mas agora estava sentado na direção do outro, e na direção do corpo de seu rosto do outro lado da cama, e o vento, em um homem de mim e sem dúvida o cheiro de vidro. O rosto. O som mais rápido. O sangue e se ajoelhou-se de suor e se abriram-se para o corpo
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1400.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/900.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 1500: val loss 5.0260
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Como se a qual o qual ele sempre a mais ou menos, ao menos de todos os tipos de ver a maioria delas — pois a respeito de uma vida. Não me diz que você o que foi o que ele é a sua mente.
+— O senhor não é um pouco — disse West.
+— Eu não sou o senhor. — Eu nunca tinha a história que não sei, mas um pouco de qualquer modo, mas não me desculpe a gente, mas acho que você pode ser.
+—
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1500.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1000.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 1600: val loss 4.9795
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O senhor da sua estranha de 19500 metros de abrilícios, o silêncio. No entanto, 1857º26 de 37, o senhor não é o senhor, que é uma história da loucura, mas o que tinha mais uma estranha. Mas não seria. Não era que não estava bem mais se você estava na história é um homem o que a ele foi capaz de dizer que a si mesmo que não se é tão bem como uma única coisa que o
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1600.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1100.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 1700: val loss 4.9337
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O tempo de um lugar em seu rosto de um homem de uma das operações de horroridades mais de um homem de uma criatura que se aproximava. No instante, o olhar para o que ele. No início, o mundo, e da qual a criatura era a primeira vez, que o horrorista fosse, não seria o tempo.
+Mas, o mundo e a vida, uma ideia de que as informações de um tipo de um modo que ele próprio pai.
+A primeira vez, o caso de ser
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1700.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1200.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 1800: val loss 4.8775
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Epóticas, e o que não havia de forma inalhes Ancipais e os habitantes da mesma desolação como uma forma que se estendia-se a uma grande, e uma vez em uma figura de uma vez de modo estranho, uma forma que estava apenas uma forma abocentes. A partir de um modo que eu havia se transformado em forma mais que as pessoas estavam na noite. Também não parecia ter sido um vilarejo, mas de que eu conhecia as criaturas medidas, mas
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1800.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1300.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 1900: val loss 4.8134
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ace, e a partir do mundo de um período. Oria, mas a mudança de que o povo seria um terror de qualquer modo, e o mais indivíduo que o último caso de se aproximava e de uma época. O horror seria, e assim, e a mudança de Charles Ward, e da vida de todos os outros do mundo inteiro, a respeito do terror que me observavam os mitos — a vida e e mais antigas, de que não seria possível.
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1900.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1400.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 2000: val loss 4.7606
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O tempo havia feito era um homem de luz de uma espécie de memória de um homem de um homem que fazia na época de Joseph Curwen e uma vez que os olhos de olhos de Jones, como resultado a mesma forma que ele próprio seria capaz de serra e uma velha coleção de uma lição.
+A resposta de Wardin, um homem que era um homem que estava tão bom que nunca que o de um tanto tempo, foi uma ideia de que ele tinha dito
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2000.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1500.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 2100: val loss 4.7159
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O navio parecia ter o ar. Era um tanto estranho quanto o capitão, pois não estava em busca de todo o entorno, e os homens de Janhex e se aproximaram, e em uma grande cidade.
+O que os gatos de Celepâmbrou com um grande deus e a cidade em 164, comércio em 171. Os jardins de Mengagramas de 17958.
+TY e Seis homens se reunir em
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2100.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1600.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 2200: val loss 4.6744
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O homem era mais, como uma criatura que um homem de homens, mas não se deu contavam, era como se houvesse sido uma vez e com a sensação de terror e mais distante. O homem que eu poderia ter feito uma espécie de algum modo, não como uma criatura, ou, mas uma voz que eu não era a coisa que eu havia sido a respeito do que a pessoa poderia ser em um lugar. De verdade, não é um fantasma que o homem que se lembrava de uma coisa que
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2200.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1700.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 2300: val loss 4.6210
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Era uma figura de um tanto e de horror inominável por um traço de uma outra erudição, mas, apesar de um modo de vida. Mas não haveria a impressão de que a maioria dos homens efeitos da Terra não faziam uma espécie de conhecimento de natureza do que o material era muito diferente.
+A sra. West, e, de modo como um objeto que havia revelava a casa de seu rosto. Aquelas palavras, era o que eu havia mencionado a partir de
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2300.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1800.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 2400: val loss 4.5718
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Agitude de 92, a cidade de Hempheira, epideou e a partir da cidade de Pitura, onde o leste estava a oeste — um enorme e o nosso planeta e a Terra dos Estados Unidos é um lugar da cidade. Os homens que a buscava, e que, se não seja, embora não tenham de fato de fato tivesse um homem que os seres efeitos.
+O que a maioria das pessoas não existissem de uma cidade, e os
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2400.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/1900.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 2500: val loss 4.5347
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. É o que os homens, as alvos das mais próximas do que os mais velhos, mas a atmosfera de um dos tempos primitivos e das cidades, e a poesia de West, um caso em que os homens do autor são os contos que o homem que se entrevistavam as montanhas de horror oceânionados por sua concepção sobrenatural e de como "Charanon", "The Lehan Horde. O conto 1810 de 18
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2500.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2000.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 2600: val loss 4.4896
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A única coisa que se tornara tão singular e a vida de Orbridge, em que havia acontecido na época o sr. Allen se tornou mais evidente que o médico e o sr. Allen. A única coisa que eu me sentia bem a fazer, e a parte de trás de um modo de estranheza de olhos. O médico de olhos oblíquo. Então, quando o homem da minha esposa não havia mais nada. Foi o meu tio Phil; não o senhor, nem eu
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2600.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2100.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 2700: val loss 4.4585
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Aquelas palavras eram as únicas, embora eu não soubessem, e eu não sei mais do que a Terra de Arkham. Mas, notável, é claro que havia mais tarde demais para mim. É uma vez, e assim eu acho que, deduzir um dia inteiro por um tempo intelecto, e não sei como o que ele escreveu para mim por isso, mas não foi a segunda-feira: "O que é o mundo do dia está aqui?".
+A
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2700.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2200.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 2800: val loss 4.4242
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Então, as estrelas dançavam e aberravam a uma sombra eterna, e o globo o deixou cair de lado em seu rosto e, por um instante a seguir em frente, e a escuridão o horror e o dia o fez em meio à místico da morte do mundo exterior do horror. Astâncias doentão haviam adquirido os vapores, e o pavoroso e da repugnação e o que ele podia recordar. O próprio tio devaneios, ele era
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2800.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2300.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 2900: val loss 4.3971
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Por vezes eu sabia que isso era estranho o que ele estava com a salvo de um certo tipo, com a idade, e eu nunca tinha deixado falar nisso. Eu estava no quarto de cima, com um short preto, que era como se fosse uma máquina de escreveria para uma caixa de correspondência que não tinha nada a um dia. E, como eu sabia, não, nem mesmo uma coisa que eu poderia ter sido uma boa ideia. Não vi ninguém em algum lugar, mas, de alguma
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2900.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2400.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 3000: val loss 4.3816
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Por um momento, por um momento, a intervalos em que toda se encontrava em um lugar onde o vale era incapaz de ver o cenário de um pesadelo. Em dadoção, uma vez que o terreno elevava-se a esse ponto em que os sopés de pedra a fim de manter-se a uma distância segura de uma nova distância razoável.
+Após algum tempo, Carter soube que seria melhor esperar. O ghoul estremeceu e passou por um momento em que todos os detalhes retornam em meio à noite
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3000.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2500.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 3100: val loss 4.3674
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. As duas fotografias são as melhores ações e aranhas de maneira como as coisas, os que os animais, porém, são de um modo que os animais que não se viam ser os habitantes de Innsmouth. E tem algum conhecimento devaneios de lava, de fato deve ser um tanto bizarro de que, aos cães, os animais são reais e assim são os mais removidos e os animais de um animal sem imaginação humana, e que traz as criaturas que as criaturas são os homens
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3100.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2600.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 3200: val loss 4.3397
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Atalgia que os sonhos de certas montanhas se misturavam em nossas vidas, mas logo os primeiros decadentes, enquanto eu contemplava, com o comando de tudo. No entanto, não pude me contar sobre o meu tio, pois eu já havia me levado para o nosso planeta. O que eu me lembro, pois naquele instante eu jamais havia se passado de fato ousadiado o que me convenci dos Grandes Deuses, e que em resposta seria o caos rastejante. A matéria cinzenta
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3200.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2700.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 3300: val loss 4.3169
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A vida era uma substância, e o mistério, era só um horror que eu já havia visto antes, e que o que me perturbou na minha mente se encontrava em um pesadelo.
+O sono gelado e o sono foi uma sensação muito intensa e infinitamente indescritível. As visões que eu havia visto e eu me despertado, no entanto, não tive certeza de que ele era apenas o mesmo que eu havia visto; e a ideia de que havia lido sobre o mundo que
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3300.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2800.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 3400: val loss 4.2888
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A morte de Lady foi lançada. Em 1800, o demônio que ele foi expelido, o que a sua morte era um sonho que ele era o sonho é o de uma criatura, e o que ele não tinha visto e o pai, para dizer que se encontra tão próximo ao mundo, e o homem se tornou conhecido como um sonho de sonho ou de uma criatura inominável. Quando ele está no momento de ouvir os pássaros de sua vida em um sonho, ele
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3400.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/2900.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 3500: val loss 4.2840
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que eu havia visto naquele momento, ninguém se recordava quando eu o havia deixado na gruta e das estrelas que se erguiam para baixo e para além da terra? Quando enfim eu não pude pensar em meu plano, eu me recordo de que me aventurava. O que eu não poderia fazer, e que o que eu havia conhecido por inteiro, como eu havia feito com meu dever. Se o lugar tivesse se retirado, poderia ser, seria melhor o instinto louco, mas não
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3500.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3000.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 3600: val loss 4.2874
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não sei dizer que era uma das formas, é sólida que as formas desconhecidas são capazes de adaptar. Um deles se afasta da água e a água é mais forte do que um dia, pois o ar é mais forte. É mais do que o que eu. Eu vi que algum velho poço, e quando vi o pico que se recordava de imediato, percebi que era mais perto de um estranho. Uma vez que eu me encontrava pensando na criatura, e a areia ainda estava
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3600.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3100.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 3700: val loss 4.2588
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. No entanto, o terror sutilizante e o horror sobrenatural é o caos incorável e terrível. O terror, de fato, é a sua presença, da maneira pavorosa, e de tensão, ainda que não ousar sequer mesmo o mistérios inomináveis, é o caos e o caos mais sutil de sua consciência e a escuridão, uma vez que não ousadia. A morte, o medo foi o sonho de uma alma demoníaca, e a morte e
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3700.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3200.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 3800: val loss 4.2548
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que é que ele acha que o senhor pode ver? Eu sei que sei que, se o senhor não for um homem que eu sou o dono de um homem como quem sabe o que me resta? Que homem que é um homem poderia tê-lo como um homem cego, não é, se alguma coisa que eu me resta um homem se esgueirando ou algo assim, mesmo que eu não seja uma parte de sua vida.
+Não sei se ele não precisa dizer, mas não sei. Não posso
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3800.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3300.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 3900: val loss 4.2404
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. É o que a gente vê quando a gente faz a sua mãe, porque o pai e a gente tem que estar na minha casa, mas também não tem ninguém de vista. Você é um homem de idade, e o que importa quando você vê a história, o que é o que ele vai fazer, e eu não sou de um jeito de se dar conta disso. Não tem um nome falso, mas não posso dizer mais nada. O que eu quero é uma brincadeira de um menino. Eu me
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3900.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3400.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 4000: val loss 4.2233
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Por um instante, a voz de Herbert West estava a ponto de se mover, mas naquele momento, a coisa não foi apenas mais de um segundo. O único objetivo não foi apenas o que veio depois. O terror de West e, quando os ruídos da voz de West e o grito cessou. Em seu estremecimento, o medo e uma voz que provocou um grito sobrenatural, como um grito, um grito que não havia jamais ultrapassado. De trás desmaiado, a noite
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4000.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3500.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 4100: val loss 4.2370
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Talvez o folclore tenha visto — pois o povo do lugar do outro lado da rua Mercedes, onde o solicitado encosta acima das colinas.
+A noite, quando as estrelas e o mar se tornavam obsertas, e as águas ainda estavam em chamas, e os homens não viram nada por que nenhum dos homens jamais tivessem visto.
+A noite os Marinheiros haviam retornado, e as estrelas ainda mais as coisas não tinham ninguém. As coisas pareciam ter estado no mundo, pois as
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4100.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3600.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 4200: val loss 4.1883
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O horror que, por que não me conteria, eu poderia ver que havia mundos para lá embaixo, que nada quer que eu não pudesse obterá-lo.
+Os homens haviam se tornado, e eu quase me senti um medo renovado e terrível, acentuado de dor e vontade.
+Deixe-me irromperá-lo, pois eu o acompanhei de volta ao meu sonho. Pois eu não podia me afastar do medo, mas virei-me na escuridão que se aproximava do
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4200.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3700.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 4300: val loss 4.2043
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que é que se temo é que uma espécie de animal, de uma menina, ou alguma outra forma.
+Saltei a cabeça, mas a cabeça decepada me aguntei. Estava mais forte agora. Eu tinha um jeito de dizer o que tinha acontecido com o senhor, eu sabia, pois seu único motivo de não havia ninguém mais.
+Não havia ninguém para dar atenção. Estava escuro, e eu não pretendia fazer mais nenhum movimento, mas não havia nada de errado. Não era o que
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4300.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3800.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 4400: val loss 4.1839
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não é o fato de que aquele homem, é o que acontece em 1913. E, no que se diz respeito aos gritos do velho, ele parece a um ser humano, pois uma força imensa de monstro pode ser a maior selvageria de uma formação sobrenatural. O terror de seus próprios ouvidos e de seus sentidos, ele se concentm em um sonho. Não há nenhuma sombra nem sequer medonho, mas a tensão que sua mente e os altereos de seus
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4400.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/3900.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 4500: val loss 4.1867
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A atmosfera de mistério, e o som dos poderosos acordos por trás das cavernas e das cidades assoladas com as cidades e os bosques, os remadores de gelo das cidades. E, embora não haja dúvida de que a magia não existe; porém, é como se os fantasmas tivessem alguma coisa alguma estranha, de quando em quando em quando não há front.
+Em 1843, King, 1845, 1832, quando a lua de mel,
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4500.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4000.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 4600: val loss 4.1840
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E por que não?
+Não obstante o que vimos na casa de Ward, e que não poderia ser outra pessoa além da qual o filho não se encontrava. Não havia ninguém no cemitério, e nenhuma criatura que havia estado se devesse olhar para fora. Em outras palavras, Ward veio uma falação de uma terrível estranheza, ou a assombrosa cidade de uma época desconhecida, e que era possível que o próprio Ward tivesse visto algo como aquele correspondente na cidade que dava acesso ao local
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4600.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4100.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 4700: val loss 4.1704
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que é que, por acaso, são os fantasmas que existem de fato são. A lógica é simplesmente uma verdade: os olhos de um homem são de um modo que se fixaram nas suas mãos de uma mulher.
+— Não acho que não, não é? — perguntou ela.
+— Não, claro que não — respondeu ele, e seu sorriso era que ela era tão doce. — O que é isso? — perguntou ela. — É verdade?
+— Não sei, mas não tenho certeza que
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4700.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4200.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 4800: val loss 4.1552
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Esse vulto se recusou-se a reconhecer o brilho de um ciclo de luz emanarico, o que parecia uma profundidade e um tanto emanou-se com uma intensidade extrema, e o homem de pé sobre a face da lua, escarneceu o pensamento que lhe havia feito uma visita ao jovem Ward. Willett, de acordo com a idade de Curwen, e todos sabiam muito bem o que havia chegado ao fim. Por fim, Willett, segundo
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4800.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4300.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 4900: val loss 4.1607
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que devo saber é que o espaço vazio e a imagem da coisa, e o desejo da realidade e em muitos casos de vida real ou a morte, são seres humanos, e é o que o autor. Além disso, um dos invasores temores, o autor, o fato de que o escritor e o leitor que eles procuram os últimos. A ideia de leitores não o surpreendem que eu os encontra, e o que eles dizem no mundo, com o que eles querem
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4900.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4400.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 5000: val loss 4.1532
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A coisa não foi o bastante, e ela foi incapaz de se convencer de que a criatura havia sido morta; mas o homem não o convenceu, a criatura que eu conhecia ou se casou com as criaturas monstruosas que viviam nas profundezas de uma terra em forma de marfim, não havia nenhuma fonte humana que não existisse. Então veio o som de um tiro na noite em que se aproximava, e quando o homem parou abruptamente se deteve na frente dele foi conduzido em direção à saída
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5000.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4500.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 5100: val loss 4.1479
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Em certos casos, nós não temos nenhuma revelação que nenhum homem possa ver. Um homem que diz a respeito a mim; e que estou certa de que seja um dos meus. Segue aqui, que seja o autor, e mantém de lado o que restaemos com os Anos. Como o senhor apreender, o senhor poderá saber, e a coisa quer dizer que não tenho o que disse; e se os outros continuarão assim, ou o que sei, talvez seja necessário que você
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5100.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4600.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 5200: val loss 4.1529
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ele não pode ser confundido em desordem em uma sociedade muito distante da cabeça um tanto com a mesma habilidade genuína, mas o que o assombra. O terror de um modo definido e proleva a alma que, ao mesmo tempo, é a verdade de um modo tão perfeito para o qual as narrativas de horror à espreita. A obra mais simples pode significar que se tornou tal como a narrativa sobrenatural e a forma de arte, prej
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5200.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4700.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 5300: val loss 4.1333
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mas, enquanto as inconcebíveis de Pawtuxet enfrentavam o organismo de um culto e da vida, o ardente e sinistro da loucura e da vida moderna estão ainda vivos, e se pretende descobrir qual seria o resultado de toda a sua força de vontade a qualquer outra pessoa.
+Ammi, meu Deus, que loucura pode ser o de uma jovem sensível. A alma do monstro, mas mesmo assim tem dado auxílio à morte. O que quer
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5300.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4800.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 5400: val loss 4.1375
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E o que há de ser, o que deve ter visto, não é? Não sei, mas sei que o senhor sabe. Tenho que admitir que o senhor sabe, mas acho que o dr. Gordon deve ter encontrado uma pedra preta e cheia de segredos e poderosas. O que tenho de fazer agora, sr. Gordon, e espero que o senhor tenha visto o senhor, sr. Gordon na colina. O sr. Gordon Pier
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5400.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/4900.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 5500: val loss 4.1246
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Os fantasmas que se encontram no fundo do abismo, eu vi os confins de relance, e senti uma vontade nauseante que minha voz pudesse ouvir os murmúrios no longínquo da Terra. Em meio a esse momento, enquanto eu tateava a escada com força, descobri que a parede da biblioteca não era mais de uma porta; e quando enxerguei a porta trancada destrancada, vi uma porta trancada no armário o mais escuro e entrei no quarto, abri-a.
+A luz do saguão
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5500.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5000.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 5600: val loss 4.1071
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. É uma coisa boa, uma vez que é, uma vez que o corpo esguudo do homem era o mais novo, e eu vi que o terror havia se passado; e eu era o único a saber.
+O sr. Bowen era um homem grande e tanto em prosaica, e não havia como os homens de Appleton, cujo priorado havia sido seu encarquito. O sr. Bowen me disse que ele era o único filho de uma família em Ap
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5600.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5100.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 5700: val loss 4.1172
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que mais poderia ter sido algum tipo de matéria ou de que, e, se não fosse, a realidade é uma criatura. Mas eu já vi uma coisa que se dane. A mente humana.
+Da primeira vez em que me pergunto a história, você foi a única pessoa em minha vida, a mesma coisa.
+Apontei a mão, mas não a encontrei. Ele estava na outra mão, e ele tinha a palma. Eu estava de pé, como um sonho, com um b
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5700.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5200.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 5800: val loss 4.1220
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Em meio a essas coisas terríveis que podem encontrar, a vida em geral é uma verdade que, embora seja apenas uma sombra de mistério e habilidade, não poderia ter uma forma de visão tão real quanto qualquer um que seja.
+— A existência de uma realidade tem certeza de que é um lugar para ser considerado — disse Juli.
+Lester's Mill e Juli haviam crescido a ponto de conseguir. Era uma espécie de horror, e ele não é inteiramente isolamento
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5800.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5300.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 5900: val loss 4.1137
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A imaginação de uma figura grotesca e zombeteira, mas que em algum momento uma curiosa criatura humana poderia ter vivido nas profundezas da Terra. As estrelas não eram coisas mais estranhas, mas com a cabeça de todas as outras que os habitantes de Inganok havia dito que o caminho havia se formado na escuridão. Carter estava em um quarto escuro para um quarto muito antes da janela aberta, e quando a aurora Centralia chegou à porta dos fundos, e enquanto os ghouls ficavam afastados em
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5900.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5400.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 6000: val loss 4.1000
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. É possível que seja necessário, ao menos ainda que a criatura f assombrosa e habitante da atualidade seja. Nenhum dos mortos, e que se abre, que a pedra não deve ser confundida, a força dos vivos. O corpo é uma coisa terrível para mim, pois a coisa e a morte do homem são aquelas monstruosas formas de vida e vida; e os ossos humanos também sedosos que se atrevem a ficar em silêncio e constituem o nosso objetivo, de maneira
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6000.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5500.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 6100: val loss 4.1253
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mas a luz da manhã não é grande coisa, e a escuridão que se adensa seu cérebro e o espaço internas e o frescor é branco, e as névoas malignas estão posicionadas com a lua que se adensa, e as estrelas se irracionais, as estrelas mortas, as estrelas e as fontes de coisas mortas e as sombras de mármore de Barzai; o mármore de Barzai, o mármore e a lua sem estrelas, a cidade dos
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6100.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5600.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 6200: val loss 4.1151
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Os cães serão informados que a visão de uma nova peça humana é particularmente difícil para sustentar a atmosfera de ocorrências.
+Atécos de fumaça negra e os alinhantes de Brown, as máquinas de marfim e outras hipótese de que o sistema de entalhear não estivesse presente, e todos os órgãos demoníacozes tinham sido levados por uma onda de análise, que o aparelho em geral servia para escavar sua fonte. Era mais provável
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6200.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5700.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 6300: val loss 4.1128
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. De acordo com meu terror, a realidade de uma realidade horrenda e distorcidora poderia ser uma possibilidade de algo mais científica. No entanto, a sensação de mistério, tanto a realidade, a racionalidade, é com que, se a mente horrendamente ocorre mais de sonho, é uma narrativa, e um leitoricamente incomparável de clareza, é um conto de fadiga-prima ou em que as pessoas deem alheamento e viv
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6300.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5800.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 6400: val loss 4.0982
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E quando minha mente consciente se aproximou dela, fui para o sofá e me sentei de pé. Quando virei pelo espelho, vi um homem de vestido branco e com um vestido preto de preto de branco. A mulher que ela tinha visto não era uma mulher com a de fora. O que eu havia encontrado era uma mulher. Não sei se ela tinha morrido, mas ela é um homem que nem era a mulher. Ela morreu e ela veio em uma vida inteira. Ela disse que sim, mas
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6400.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/5900.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 6500: val loss 4.1213
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A falam ainda mais do que a minha atenção foi muito peculiar, pois não é muito diferente. Da progressamos sobre a face da Terra e da Natureza de coisas que lhe deve ter visto; mas a força de uma mente humana que não é a prova dramática, é que nenhum dos nossos, é a mais leve possível. Tenho certeza de que não há um que não é nada conhecido de substâncias, e pode ser descrito à fétida que não pode ser. A
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6500.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6000.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 6600: val loss 4.1154
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Creio que o tempo inteiro são os homens da minha espécie, que me julgam obsctivamente a viver da imaginação e o tempo inteiro. Eu odeio, pois de uma vez eu me encontro à presença de duas pessoas — e essa gente que conheci — ou talvez tenham sido os meus ouvidos. No entanto, não vi mais o que eu suspeitava. A maioria das criaturas que a haviam impressionado, agora que eu fora criado e por outros. O que vi é estranho que eles
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6600.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6100.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 6700: val loss 4.1043
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. É o que se poderia dizer? Ele poderia ter esperado a coragem de dizer que não, mas não havia necessidade de ser capaz de se convencer de que os homens de seus pais, de qualquer maneira, que se tornariam mais fácil.
+Ele se curvou sobre uma das cadeiras da cozinha ao lado da lareira. Não havia umidade, e o cheiro de sangue, de uma embala de pão. Ele não tinha sentido cheiro de sangue. Ele tinha comido muito de bife e um ba-quer queijo
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6700.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6200.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 6800: val loss 4.1149
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mas essas coisas não são capazes de alcançar o mundo de hoje, por isso as torna apenas sonhos mais velhas e mais estranhas. Atirei o corpo de meu tio e vi o que vi, e senti-me aliviado ao ver que minha mente racional havia sido criada e o meu tio em anos, e me recordo ao que ele ousava fazer. Ele não meramente explicara o motivo de toda relação com certas obras, mas eu me me mantive de silêncio em silêncio durante o sonho
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6800.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6300.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 6900: val loss 4.1081
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. São seres humanos ou humanos que podem fazer mal, e ainda falta de um tipo de força. É verdade que as criaturas que se abrem e que não são nada mais que os seres alienígenas são mais e menos do que as criaturas — as que abismallidas são criaturas alienígenas dos seres humanos, e têm que ser mais humanos. As criaturas não são humanos. Elas são as criaturas que não têm mais medo do que as criaturas não humanas. Elas são capazes de observar os homens
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6900.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6400.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 7000: val loss 4.1182
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E eu sabia que havia um amigo tolo, e eu me tornara um homem, e não gostei e deixei de demonstrar uma certa familiaridade com o homem que tinha a prima da sua sanidade. Eu o homem já havia me contado, porém eu não me recordo de que ele fosse, mas sabia que ele estava à beira de se esconder, porque ele não precisaria mais do que o homem, mesmo que ele fosse. Posteriormente ele falou sobre os meus nervos de acordo, e também
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7000.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6500.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 7100: val loss 4.1237
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A maioria dos sentidos deve ter subido a idade de quarenta anos, mas a presença de vozes passadas e fala como o de um mundo primitivo. A maioria era de todas, como em geral, e a maioria das vozes passadas era de marcadores de natureza desconhecida. As formas de vida, em que a forma como pairavam eram de fato pertencentes em certas ocasiões, e as vozes dos homens viviam umas às outras. No geral, pareciam vir a todas as coisas que havia
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7100.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6600.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 7200: val loss 4.1101
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. As narrativas são de terror, mas muito percebida. O ribom não alcançou a palavra cotidiante, mas em um sentido maligno, em uma noite. O ribombata e o horror inominável, com uma torrente de pânico e assombrosa, o cadáver de olhos mortos, a visão da casa assombrada e da sombra das janelas. E por que mais? Por que não? Por que vos praguejar para todos os terr
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7200.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6700.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 7300: val loss 4.1200
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu não posso, porém, ao analisar meu espírito, e o homem que me assombra com meu amigo, com meu próprio amor;
+Não me afastei meu olhar
+Adornada, pois embora eu ainda não sei que o vislumbrei,
+Com o que ele ainda não sei e sei que é o que se toma!
+A lua era o mais belo que eu agora entendia,
+E o que eu vi, e de quando em quando, quando meu sonho
+E a luz brilhante do
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7300.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6800.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 7400: val loss 4.0991
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. No entanto, não preciso contar palavras, e o que estou dizendo é que o que vi são palavras e sons que o que realmente mais são as palavras. Se lembra, acho que é o que se usa. É o que diz para si mesmo que o tempo é curto para você.
+Louis não é tão agradável quanto era, Louis lembrou-se da primeira vez que se lembrava de uma única coisa a que tinha sido de fato a palavra. Não estava vendo qualquer modo de parar de pensar,
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7400.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/6900.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 7500: val loss 4.0932
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que o senhor sabe com certeza, senhor, e se eu não puder me dar ao luxo de provas a não ser o único. Mais de tudo o que quero dizer é que eu gostaria de dizer isso. Mas agora, é o modo de pensar que a verdade é verdadeira, mesmo que seja a verdade.
+O senhor pretende dizer que, sr. Noonan, seja o senhor que o senhor se importa; eu reconheço o mesmo símbolo de seu trabalho com o sr. Gray na
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7500.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7000.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 7600: val loss 4.0965
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O sistema de cones é extremamente abarrotado e severamente por um tempo, mas uma raça de experiências efetivas. Evidentemente, é claro, era o sistema predomínio de uma pedra arcaica. Era uma máquina fotográfica de um planeta, e uma velha e alfabitavelmente obtida pela superfície que continha um formato de estrela-do-mar.
+Tendo sido, uma vez que Akeley me explicara que estava muito além do que
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7600.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7100.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 7700: val loss 4.0930
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Algumas horas novembro, quando a luz chega ao fim, a temperatura cai. Quando eu não estiver lá, a lua está quase cheia.
+— Eu não estou tão preocupado com o homem de boné do Meteorologia, mas o homem que está aqui — diz ele. — Se eu não for o cara de terno preto, vou te matar. Se a gente não cair, eu vou matá-lo. O sujeito não pode matar ninguém.
+— Quando eu estava na terra, vou morrer. Mas
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7700.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7200.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 7800: val loss 4.1073
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu, porém, não posso arriscar a falar sobre isso. Estou determinado a ser nada mais além de mera coincidência. Sou o único nativo silêncio que me afligem; e peço que não me ponha a salvo de maneira alguma. Concordam em mim, a princípio à noite, não habitam nada até onde eu sei, mas sei que desperto, na escuridão onde se encontrarei o meu dia de pintagem inesperado na Via-Láciária.
+Nos
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7800.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7300.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 7900: val loss 4.0849
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A última dessasfixiante, o demônio, o fantasma de Aira, não apenas pelo medo avassalador de sonhos; mas, em seu sonho, de forma, ele é um menino morto, e, apesar de seus excelentes olhos de um fantasma, é um monstro de monstro, morto de garras em decomposição de seu cadáver, morto por uma tempestade demoníaca e horrenda e morte. No fim, a luz exaltada do pântano havia brotado em
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7900.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7400.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 8000: val loss 4.1015
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que eu vi e senti em minhas análise, fui que o meu único amigo interior assumiria o comando; e, embora o meu cérebro tenha me entidades celestiais e, após um breve intervalos regulares, o planeta não poderia ter concebido por mais que se pudesse, restringido e inacessível a qualquer momento. O mundo visível poderia ter pousado em qualquer outra coisa e me levou com uma situação que eu pudesse ter explorado, pois não
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8000.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7500.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 8100: val loss 4.0989
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A forma, porém, é difícil encontrar uma formação de matéria arabesca e absoluta ignorância a partir do que parece ser uma explicação falsa. E, embora o leitor mentalmente desencadeada e o isolada observa certos obstáculos e deve ter atingido o ambiente natural, é capaz de maniferar a imprensa neste mundo, um tanto memorável, embora com a maior disposição e o espírito e o medo à espreita por vezes.
+No fim
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8100.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7600.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 8200: val loss 4.1072
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que é que o jovem Wraxtz significa que ele é um dos homens do mundo, embora não possa ser persuadido. Que os espectros humanos estejam certos de seus abismos e constituem o erro de novos tipos de organismo. Os que se ocultam, o jovem, ao que o professor é chamado, foi de um agudo abalo; o professor Angell de Apolícia, o sacerdote amaldiçoado pela srta. Ampla, 70
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8200.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7700.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 8300: val loss 4.0951
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que faz com que o sr. Thomaston faz o que é um homem de forças demoníacas e dilapientes, o que se pode imaginar? Que mal pode imaginar? O que eles podem ser capazes de fazer as outras coisas que quiserem, mas o que vão fazer? O que quer que isso seja o que querem que vocês?
+— Não sei — disse Delevan. — Mas...
+— Mas não quero dizer isso — disse Delevan. — Eu estava falando,
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8300.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7800.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 8400: val loss 4.1004
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ocorrendo, mas não por algum tempo. O tempo é curto, mas ainda assim é difícil.
+A sensação de que tudo isso pudesse ser real, o que se tornava um pouco mais real, tão real quanto o de uma alucinação, que é quase ilustrada e de um pântano mais profundo, o que torna um fato típico de um certo número de mundos além deste. O senhor pode ver o que se sustentavam do universo, mas não consegue se lembrar do
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8400.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/7900.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 8500: val loss 4.1266
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Segredo ao meio-dia, será seguro. Ele tem a impressão de que o marinheiro que deixou de existir e que se encontra além do alcance da sua vida. Ele não é um escritor, mas também um gênio.
+— Mas o que é que você acha que é o que eu quero dizer?
+— Eu sei. E sei que sim.
+— Você não parece um homem de classe média. Mas, não, você não entende. Se você quiser ficar comigo, vai. Você vai precisar
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8500.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8000.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 8600: val loss 4.0983
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. É encontrado em meio a uma morte acidental de crimes, e o que se passa medieval é uma narrativa sobrenatural. O sr. Smithson jamais soubeá em suas melhores histórias que eu me ressenti e tenho quase certeza de que ele não poderia cultá-lo na minha história. Não tenho a intenção de fazer a dele para o sr. Burkett depois que ele nos apresentou como uma pessoa séria, mas não tenho dúvida de que ele não é um único
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8600.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8100.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 8700: val loss 4.1084
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O homem que se revela é um deus, e ele mata um louco de medo que pode ser impedido de se unir para uma criatura desconhecida. Essa criatura deve representá-lo para um pestilhão de formas extravagantes, e é por isso que ele se mantém em plena formação, e não há linguagem de visão que se vinga humana. O homem é um homem que se recusa mais porque ele é um amigo, e seu homem também se tornou um herdeiro
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8700.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8200.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 8800: val loss 4.0923
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A arte e a arte exigente podem ser extraídas em grande condições, o máximo de que se seguiu com essa arte, e a teoria de que a maioria das vezes em geral já foi observada. O dr. Willett, que se concentrariam em tudo o que pudessem dizer era algo que os viagens do laboratório procurado; e, embora mais de dois meses antes, o sr. Ward pôs a escrita na cifra de Hutchinson,
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8800.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8300.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 8900: val loss 4.1213
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Por ora, a mente de Dan, não se deve ao trabalho de enfrentar esse fenômeno, que é o seu conto de mistério. É o seu, meu amigo, o conto de fadas.
+Alegredo-me o que me contém — o demónio — não é o caso de seu ditado e um tratado de horror. E no conto de R. Cla. I. Do original (1723), de Connecticut e William Ladim
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8900.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8400.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 9000: val loss 4.1212
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Estranho-me em saber que o senhor pode vir consultar o senhor, que a partir da lembrança de tudo e do homem. É contratado por um Azathoth, pois soubeijado pela sanidade em grau de imaginação estimulada e determinação. Sabia apenas o que o senhor possui, pois em toda a região estremece por um único som que não posso fazer, e se o senhor não o encontre. Não me atreva a pronunciar a voz,
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9000.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8500.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 9100: val loss 4.0961
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ele diz que o medo é mais forte do que os bons e estranhos.
+Em seguida, ele se levanta e desce silenciosamente de novo, os olhos fixos em Vooores com um baque e dentes de jacaré na testa, a boca cheia de dentes que se estendem no escuro. Ele se vira e vê um pedaço de carne de porco na qual ele se sentou ante uma repentina de novo, uma coisa que parece um cocô de rato. Ele vai para a cama, olha
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9100.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8600.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 9200: val loss 4.1104
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A visão de Plástica da Morte e do Pulpa que me tornarei, é possível, pois esta é de uma história que me refiro com a pedra com a pedra, e a forma como aqueles turvos selvagens que vivem com o firmamento.
+Minha espectral não era tão ameaçadora, pois a imagem da humanidade era de uma espécie de matéria que ninguém sabia ler sobre as mentes dos espectros e dos "monsologistas" — e a cada momento
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9200.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8700.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 9300: val loss 4.0903
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A ideia de que um homem pode ter morrido há anos. E eu sei que não há mais nada que eu possa descrever.
+— Ele deve ter voltado para Heisman West, do lado de fora da janela, do lado de fora da janela do meu quarto (onde uma cadeira de rodas foi arrastada pelo estril e não era do tamanho de um dos velhos companheiros que eu havia conhecido como o que o havia feito se eu estivesse ali. Talvez até mesmo tivesse sido um dia muito tarde
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9300.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8800.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 9400: val loss 4.0818
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu devo ter sido meus sonhos, e estou sozinho para a minha imaginação enquanto conduza e a imaginação das gerações e espontácios de seu próprio ressentimento.
+O que você está procurando é escrever, e o que ele não deve escrever contir, e sua extensão foi uma grande fonte de pensamento racional. Ele me convença que eu não posso escrever sobre o culto do terror, e que estou louco para mim mesmo agora, e que a imaginação tanto a realidade é uma realidade
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9400.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/8900.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 9500: val loss 4.1083
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu não sei se os Grandes Anciões podem ser no exterior, ou ainda não tentaram passar despercebida. Não havia estrelas inteiras no céu e no universo. Eu não sabia o que poderia ser além de onde Kadath, mas poderia existir. Mesmo assim, não sei o que eu poderia dizer; pois embora os deuses soubessem, eu não tive sonhos de temor algum. Não havia nenhuma linguagem que me levasse; aquela cidade que havia sido, somente porque de fato a cidade
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9500.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9000.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 9600: val loss 4.1200
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. É por isso que o paciente não pode mais medir um dia após dia a nordeste, e esse é o fim deste assunto. É por isso que o paciente se convence de o paciente, e ele age. No entanto, algo terrível para um jovem paciente com quem ele é, ele é o mais jovem e muito mais forte. Mais um paciente, mais confiante e mais perigoso do que merece, uma alma resina e um garotinho, por mais que tente convencê-lo de sua
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9600.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9100.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 9700: val loss 4.1260
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Ataque é muito peculiar. As circunstâncias são como a onda do temporal e o mundo todo. O fato é que o mundo é o nosso. O mundo dos sonhos é como a água.
+Acima de uma onda de calor de verão começou a se apagar, aumentando com um calor. Mas eu não pretendia fazer isso. Queria que ele continuasse, mas não posso fazer isso. Mesmo que não conseguisse chegar ao fim, o que não queria fazer era ir atrás de mim. Eu estava me
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9700.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9200.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 9800: val loss 4.1081
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. E o homem recordou a hora marítimo de sua morte. A lenda não dizia nada a respeito do que ele sabia, e a esse respeito não se dispunha a dizer que o homem não sabia de nada daquela forma. Que o homem era um homem sensível e aparentemente inferior, e ele se dispôs a falar sobre o futuro daquela coisa ancestral na cidade.
+"O que aconteceu?", perguntaram o que teria dito, mas não consegui provar que não me ref
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9800.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9300.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 9900: val loss 4.0918
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que me foi, de fato, foi muito significativo. Eu conto sobre o modo como a passagem do tempo é tão simples e clara, porque a sensação de que estou vendo algo que me invade. É uma sensação de que não tenho consciência de que a ficção não é tão em sua forma. Eu não me sinto tão indefinido. Não sei como é que a ficção que eu já sonhei com minha própria personalidade. O que eu vi no alto é um sonho;
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9900.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9400.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+
+Estimating loss...
+step 9999: val loss 4.0970
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não tem importância para voos literatura fantástica. Eu sempre soube que essas coisas sejam consideravelmente grotescas. Não tem importância, mas, de qualquer modo, as coisas podem ser muito variadas. Acho que as pessoas que se veem são muito estranhas — podem-se dizer que são reais, podem-se dizer. Acho que algumas histórias são como os outros, porém não têm, porque são reais. Talvez as pessoas que eu realmente acreditei que sabem coisas são perigosas. Talvez elas se recor
+Saving checkpoint to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9999.pth
+Deleting checkpoint /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/9500.pth
+Saving optimizer state to /kaggle/working/transformers-fun/models/v19_kaggle_0/checkpoints/optim.pth
+Training finished. Generating text:
+Generating 600 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não obstante, os membros da família são horríveis, e em toda a vida apenas um dos mortos foi encontrados por um crime horrível. 
+Num dia desses, o próprio Philip jogou a cabeça de lado, se virou para o filho e disse: 
+— Eu queria que ele fosse embora. 
+— E, como ele... 
+— Você acha? — perguntou Dick. 
+— Eu não sei como ele se transformou. Mas não há nada que ele possa fazer. 
+— Não. 
+— Pois não, papai. Não há nada para fazer. A coisa mais importante ainda é que... 
+— O que é isto? 
+— Conte-me — disse Dick, — Se é que ele vai estar ficando duro, em uma escola de universidade, no fim das contas. 
+— É. 
+— Pois é. 
+— É mesmo! 
+— Oh, Deus, vocês sabem disso, papai — disse Dick, ignorando as vozes que passavam de lá dentro. 
+— Não. 
+— Sei que não existe mais. 
+— Pois bem. 
+— Estou... — Dick suspirou. 
+— Se você tem alguma coisa na casa, é melhor que se passe de barco na estrada. 
+— Está bem. 
+— ... mas acho que é melhor vir atrás do carro. 
+— Sim. 
+— O quê... — A voz de Dick começou a mover-se, como se o houvesse dito, quando ele sorriu, e então começou a rir. 
+— Está bem, Dick. — Ele deu uma risada. 
+— Não tenho mais certeza. Ele não sabe. Amo você? 
+— Não. Não me diga. 
+— Está bem. Estou com medo de você... 
+— Está certo. Não, papai! 
+— Certo. 
+Dick sorriu. O sorriso agora estava tão pálido, como se o sorriso tivesse sido substituído por um sorriso de avelã. 
+— O que é que está falando, Dick? — disse Dick, com um ar sombrio. 
+— Você é mesmo? 
+— Só que ele é um cara que tem alguma coisa para fazer, papai? 
+— É mesmo? — perguntou Dick. 
+— Não posso ser nada mais que isso, papai? 
+— Não. Não obstante, o fato é que ele está vivo. 
+— Está bem. 
+— Não, Dick! — exclamou Dick. 
+— Não, ele não está bem. Pelo menos, não é nada que tenha sido o primeiro. 
+— Está ótimo, Dick? 
+— Está bem. 
+— Acho que deve ser melhor que ele esteja bem — disse Dick Allison, sorrindo, não com raiva... apenas não com tanta culpa. 
+Dick assentiu, sério. 
+— Eu quero ver você. 
+— Não se preocupe — disse Dick, em voz fraca. — A coisa vai mudar. O que é que eles estão lá fora? 
+— Nada — disse Dick Allison. — Não? 
+— Não... eu estava tentando. 
+—
+Saving generated text to /kaggle/working/transformers-fun/models/v19_kaggle_0/output.txt
+Training loop finished.
