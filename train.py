@@ -82,6 +82,7 @@ def training_loop(
     path_load_optim=None,
     dummy=False,
     params_path=None,
+    grad_accum_steps=1,
     **kwargs,
 ):
     print("Starting training loop...")
@@ -219,10 +220,15 @@ def training_loop(
 
         # evaluate the loss
         logits, loss = model(xb, yb)
-        optimizer.zero_grad(set_to_none=True)
+
+        # Gradient accumulation
+        if iter % grad_accum_steps == 0:
+            optimizer.zero_grad(set_to_none=True)
+        loss = loss / grad_accum_steps  # Scale loss for accumulation
         loss.backward()
-        optimizer.step()
-        writer.add_scalar("loss/train", float(loss.mean()), iter)
+        if (iter + 1) % grad_accum_steps == 0:
+            optimizer.step()
+        writer.add_scalar("loss/train", float(loss.mean()) * grad_accum_steps, iter)
         profile(iter)
 
         # every once in a while evaluate the loss on train and val sets
