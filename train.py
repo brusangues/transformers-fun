@@ -13,7 +13,7 @@ import json
 from copy import deepcopy
 from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetMemoryInfo
 
-from src.data_loader import DataLoaderBpeV2
+from src.data_loader import DataLoaderBpeV3
 from src.gpt_v0 import GPTLanguageModel
 from src.utils import DualLogger
 
@@ -103,7 +103,7 @@ def training_loop(
     writer.add_text("params", str(locals_), start_iter)
     writer.flush()
 
-    data_loader = DataLoaderBpeV2(
+    data_loader = DataLoaderBpeV3(
         context_len=context_len,
         batch_size=batch_size,
         device=device,

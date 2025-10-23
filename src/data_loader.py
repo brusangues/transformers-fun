@@ -4,6 +4,8 @@ import joblib
 import pandas as pd
 from tqdm import tqdm
 from .educational_tokenizer import SimpleBytePairEncoding
+from transformers import AutoTokenizer
+
 
 tqdm.pandas()
 
@@ -321,6 +323,140 @@ class DataLoaderBpeV2:
         if self.path_input_encoded is not None:
             print("Saving encoded to path_input_encoded...")
             self.df_full.to_parquet(self.path_input_encoded)
+
+        return vocab_size_tokenizer, encode, decode
+
+    def get_batch(self, split, verbose=False, batch_size=None):
+        if batch_size is None:
+            batch_size = self.batch_size
+        if verbose:
+            print(f"get_batch {split=}...")
+        # generate a small batch of data of inputs x and targets y
+        df_split = self.df_full.query("split=='train'") if split == "train" else self.df_full.query("split=='eval'")
+
+        # Sample uniform
+        # df_batch = df_split.sample(batch_size, replace=True)
+
+        # Sample stratified by author
+        # n_samples_per_stratum = batch_size // df_split.author.nunique()
+        # df_batch = df_split.groupby('author', group_keys=False).apply(lambda x: x.sample(n=min(len(x), n_samples_per_stratum)))
+        # if len(df_batch) < batch_size:
+        #     n_remaining = batch_size - len(df_batch)
+        #     df_batch = pd.concat([df_batch, df_split.sample(n_remaining, replace=True)])
+
+        # Sample by weights
+        df_batch = df_split.sample(batch_size, replace=True, weights="weights")
+
+        if verbose:
+            print(f"{df_split.shape=} {df_batch.shape=}")
+            print(f"{df_batch.author.value_counts().sort_index().reset_index()=}")
+            print(f"{df_batch.groupby(['split', 'author']).weights.sum()=}")
+            print(f"{df_batch.groupby(['split', 'author']).text_encoded_len.sum()=}")
+            print(f"{df_batch.groupby(['split', 'author']).title.count()=}")
+            print(f"{df_batch.title.nunique()=}")
+
+        x = torch.zeros((batch_size, self.context_len), dtype=torch.long)
+        y = torch.zeros((batch_size, self.context_len), dtype=torch.long)
+        for i, (id_row, row) in enumerate(df_batch.iterrows()):
+            if verbose:
+                print(f"{i=} {id_row=} {row.author=} {row['class']=}{len(row.text_encoded)=}")
+            t = torch.tensor(row.text_encoded, dtype=torch.long)
+            if len(t) <= self.context_len:
+                t = torch.cat([t, torch.zeros(self.context_len, dtype=torch.long)])
+                start_idx = 0
+            else:
+                start_idx = torch.randint(0, len(t) - self.context_len, (1,)).item()
+            # if verbose:
+            #     print(f"{len(t)=} {start_idx=} {start_idx + self.context_len=}")
+            x[i] = t[start_idx : start_idx + self.context_len]
+            y[i] = t[start_idx + 1 : start_idx + self.context_len + 1]
+
+        x, y = x.to(self.device), y.to(self.device)
+        return x, y
+
+
+class DataLoaderBpeV3:
+
+    def __init__(
+        self,
+        context_len,
+        batch_size,
+        device,
+        path_tokenizer="artifacts/tokenizers/gpt2_ptbr_50k",
+        path_input = "data/df_full_encoded_v0.pq",
+        texts_sample_frac = 1.0,
+        split_frac = 0.8,
+        tokenizer_vocab_size = None,
+        encode_input = False,
+        path_input_encoded = None,
+    ):
+        print("DataLoaderBpeV3 init...")
+        self.context_len = context_len
+        self.batch_size = batch_size
+        self.device = device
+        self.split_frac = split_frac
+        print(f"{context_len=}, {batch_size=}, {device=}, {split_frac=}")
+        
+        print("Tokenizer...")
+        tokenizer = AutoTokenizer.from_pretrained(path_tokenizer)
+        self.tokenizer = tokenizer
+        self.vocab_size_tokenizer = tokenizer.vocab_size
+        self.encode_input = encode_input
+        self.path_input_encoded = path_input_encoded
+
+        print("Dataset...")
+        print(f"{self.vocab_size_tokenizer=}")
+        self.df_full = pd.read_parquet(path_input).query("train").sample(frac=texts_sample_frac, random_state=1).reset_index(drop=True)
+        print(f"{self.df_full.shape=}")
+        print(f"{self.df_full.value_counts(['author']).sort_index().reset_index()=}")
+        print(f"{self.df_full.value_counts(['author','class']).sort_index().reset_index()=}")
+
+    def load_data(self):
+        print("load_data...")
+        
+        print(f"{self.df_full.shape}")
+        text = "\n\n\n".join(self.df_full.text_clean.to_list())
+        text = text[:1_000_000]
+        print(f"{text[:2_000]=}")
+        print(f"{len(text)=}")
+
+        # here are all the unique characters that occur in this text
+        chars = sorted(list(set(text)))
+        print(f"{len(chars)=} {chars=}")
+
+        tokens_full = self.tokenizer(text).input_ids
+        print(f"{len(tokens_full)=} {tokens_full[:100]=}")
+
+        tokens = sorted(list(set(tokens_full)))
+        print(f"{tokens[:100]=}")
+
+        vocab_size_tokens = len(tokens)
+        print(f"{vocab_size_tokens=}")
+        estimated_starting_loss = -torch.log(torch.ones(1) / vocab_size_tokens).item()
+        print(f"{estimated_starting_loss=}")
+
+        vocab_size_tokenizer = self.tokenizer.vocab_size
+        print(f"{vocab_size_tokenizer=}")
+        estimated_starting_loss_ = -torch.log(torch.ones(1) / vocab_size_tokenizer).item()
+        print(f"{estimated_starting_loss_=}")
+
+        # encoder: take a string, output a list of integers
+        encode = lambda s: self.tokenizer(s, truncation=False).input_ids
+        # decoder: take a list of integers, output a string
+        decode = lambda l: self.tokenizer.decode(l)
+        self.encode = encode
+        self.decode = decode
+        test_string = "Não. Além. Caçada. Bônus gênero. — ª° ‡. í á â ^ à"
+        assert decode(encode(test_string)) == test_string
+
+        if self.encode_input:
+            print("Encoding input texts...")
+            self.df_full["text_encoded"] = self.df_full.text_clean.progress_apply(lambda x: encode(x))
+            self.df_full["text_encoded_len"] =  self.df_full.text_encoded.apply(len)
+            print(f"{self.df_full.text_encoded_len.describe()=}")
+            if self.path_input_encoded is not None:
+                print("Saving encoded to path_input_encoded...")
+                self.df_full.to_parquet(self.path_input_encoded)
 
         return vocab_size_tokenizer, encode, decode
 
