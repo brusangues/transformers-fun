@@ -1,5 +1,5 @@
 # Model parameters
-batch_size: 25  # independent sequences processed in parallel
+batch_size: 20  # independent sequences processed in parallel
 context_len: 512  # maximum token context length
 n_embd: 512  # linear layers size
 n_feed_forward: 2048
@@ -8,7 +8,7 @@ n_layer: 6  # attention blocks in sequence
 dropout: 0.1
 
 # Training parameters
-grad_accum_steps: 4
+grad_accum_steps: 5
 learning_rate: 0.0001
 betas: [0.9, 0.999]
 weight_decay: 0.01
@@ -16,7 +16,7 @@ start_iter: 0
 max_iters: 10_000
 eval_interval: 100
 save_interval: 1000
-eval_iters: 25
+eval_iters: 20
 texts_sample_frac: 1.0
 split_frac: 0.85
 n_checkpoints_keep: 5
