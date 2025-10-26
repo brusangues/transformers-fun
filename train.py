@@ -86,6 +86,7 @@ def training_loop(
     grad_accum_steps=1,
     warmup_steps=4000,
     dynamic_lr=False,
+    tqdm_train=False,
     tqdm_eval=False,
     **kwargs,
 ):
@@ -139,7 +140,15 @@ def training_loop(
         model.eval()
         for split in splits:
             losses = torch.zeros(eval_iters)
-            for k in tqdm(range(eval_iters), ncols=100, desc="Estimating loss", total=eval_iters, position=0, leave=True, disable=not tqdm_eval):
+            for k in tqdm(
+                    range(eval_iters),
+                    desc="Estimating loss",
+                    total=eval_iters,
+                    ncols=100,
+                    position=0,
+                    leave=True,
+                    disable=not tqdm_eval,
+                ):
                 X, Y = data_loader.get_batch(split)
                 logits, loss = model(X, Y)
                 losses[k] = loss.item()
@@ -228,6 +237,7 @@ def training_loop(
         initial=start_iter,
         position=0, 
         leave=True,
+        disable=not tqdm_train,
     ):
         if dynamic_lr:
             lr = get_lr(iter)
