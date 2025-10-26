@@ -1,0 +1,41 @@
+# Model parameters
+batch_size: 20  # independent sequences processed in parallel
+context_len: 512  # maximum token context length
+n_embd: 512  # linear layers size
+n_feed_forward: 2048
+n_head: 8  # parallel attention heads
+n_layer: 6  # attention blocks in sequence
+dropout: 0.1
+
+# Training parameters
+grad_accum_steps: 5
+learning_rate: 0.0001
+betas: [0.9, 0.999]
+weight_decay: 0.01
+start_iter: 0
+max_iters: 10_000
+eval_interval: 100
+save_interval: 1000
+eval_iters: 20
+texts_sample_frac: 1.0
+split_frac: 0.85
+n_checkpoints_keep: 5
+
+# Generation parameters
+top_k: 30
+temperature: 0.7
+
+# Paths
+path_tokenizer: "artifacts/tokenizers/gpt2_ptbr_50k"
+
+path_input: "/kaggle/input/text-v20/df_full_encoded_v20.pq"
+# path_input_encoded: "data/df_full_encoded_v20.pq"
+# encode_input: true  # false
+
+path_models: "/kaggle/working/models"
+name: "v20_kaggle_1"
+n_tokens_generate: 600
+context: "Escrevo sob efeito de horrores inimagináveis."
+# path_load_model: "/kaggle/input/v18-colab/4600.pth"
+# path_load_optim: "models/v18_test/checkpoints/optim.pth"
+# dummy: true
