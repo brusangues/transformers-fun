@@ -389,10 +389,12 @@ class DataLoaderBpeV3:
         tokenizer_vocab_size = None,
         encode_input = False,
         path_input_encoded = None,
+        grad_accum_steps = 1,
     ):
         print("DataLoaderBpeV3 init...")
         self.context_len = context_len
         self.batch_size = batch_size
+        self.grad_accum_steps = grad_accum_steps
         self.device = device
         self.split_frac = split_frac
         print(f"{context_len=}, {batch_size=}, {device=}, {split_frac=}")
@@ -414,27 +416,29 @@ class DataLoaderBpeV3:
     def load_data(self):
         print("load_data...")
         
-        print(f"{self.df_full.shape}")
-        text = "\n\n\n".join(self.df_full.text_clean.to_list())
-        text = text[:1_000_000]
-        print(f"{text[:2_000]=}")
-        print(f"{len(text)=}")
+        print("\nSamples:")
+        text_sample = "\n\n\n".join(self.df_full.text_clean.to_list())
+        text_sample = text_sample[:1_000_000]
+        print(f"{text_sample[:2_000]=}")
+        print(f"{len(text_sample)=}")
 
         # here are all the unique characters that occur in this text
-        chars = sorted(list(set(text)))
+        chars = sorted(list(set(text_sample)))
         print(f"{len(chars)=} {chars=}")
 
-        tokens_full = self.tokenizer(text).input_ids
-        print(f"{len(tokens_full)=} {tokens_full[:100]=}")
+        tokens_sample = self.tokenizer(text_sample).input_ids
+        print(f"{len(tokens_sample)=} {tokens_sample[:100]=}")
 
-        tokens = sorted(list(set(tokens_full)))
+        tokens = sorted(list(set(tokens_sample)))
         print(f"{tokens[:100]=}")
 
+        print("\nSample tokens in actual dataset:")
         vocab_size_tokens = len(tokens)
         print(f"{vocab_size_tokens=}")
         estimated_starting_loss = -torch.log(torch.ones(1) / vocab_size_tokens).item()
         print(f"{estimated_starting_loss=}")
 
+        print("\nTokens in tokenizer:")
         vocab_size_tokenizer = self.tokenizer.vocab_size
         print(f"{vocab_size_tokenizer=}")
         estimated_starting_loss_ = -torch.log(torch.ones(1) / vocab_size_tokenizer).item()
@@ -457,6 +461,23 @@ class DataLoaderBpeV3:
             if self.path_input_encoded is not None:
                 print("Saving encoded to path_input_encoded...")
                 self.df_full.to_parquet(self.path_input_encoded)
+
+        print("\nChars/Tokens statistics:")
+        self.df_full["text_len"] = self.df_full.text_clean.str.len()
+        len_corpus = int(self.df_full["text_len"].sum()) / 1e6
+        len_splits = (self.df_full.groupby("split").text_len.sum() / 1e6).to_dict()
+        print("Chars:")
+        print(f"{len_corpus=} {len_splits=} M chars")
+
+        len_corpus = int(self.df_full["text_encoded_len"].sum()) / 1e6
+        len_splits = (self.df_full.groupby("split").text_encoded_len.sum() / 1e6).to_dict()
+        print("Tokens:")
+        print(f"{len_corpus=} {len_splits=} M tokens")
+
+        batch_size_tokens = self.batch_size * self.context_len
+        batch_size_tokens_accum = batch_size_tokens * self.grad_accum_steps
+        print(f"{batch_size_tokens=}")
+        print(f"{batch_size_tokens_accum=}")
 
         return vocab_size_tokenizer, encode, decode
 

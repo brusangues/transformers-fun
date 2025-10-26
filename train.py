@@ -115,6 +115,7 @@ def training_loop(
         tokenizer_vocab_size=tokenizer_vocab_size,
         encode_input=encode_input,
         path_input_encoded=path_input_encoded,
+        grad_accum_steps=grad_accum_steps,
     )
     vocab_size, encode, decode = data_loader.load_data()
 
@@ -156,6 +157,7 @@ def training_loop(
         print("generated_text:", generated_text)
         return generated_text
 
+    print("\nInitializing model...")
     model = GPTLanguageModel(
         context_len=context_len,
         n_embd=n_embd,
@@ -172,11 +174,12 @@ def training_loop(
         print(f"Loading model from {path_load_model}")
         m.load_state_dict(torch.load(path_load_model, map_location=device))
         print("Model loaded")
+    print(f"{model=}")
     # print the number of parameters in the model
-    num_parameters = sum(p.numel() for p in m.parameters())
-    print(num_parameters / 1e6, "M parameters")
+    n_parameters = sum(p.numel() for p in m.parameters()) / 1e6
+    print(f"{n_parameters=} M parameters")
 
-    # create a PyTorch optimizer
+    print("\nInitializing optimizer...")
     optimizer = torch.optim.AdamW(
         model.parameters(),
         lr=learning_rate,
@@ -204,6 +207,7 @@ def training_loop(
         shutil.rmtree(path_tensorboard)
         return
 
+    print("\nStarting training...")
     checkpoints = []
     model.train()
     for iter in tqdm(
@@ -261,9 +265,7 @@ def training_loop(
 
         writer.flush()
 
-    print("Training finished. Generating text:")
-
-    # generate from the model
+    print("\nTraining finished. Generating text...")
     generated_text = generate_sample(context, n_tokens_generate)
     path_generate_output = f"{path_full}/output.txt"
     print(f"Saving generated text to {path_generate_output}")
