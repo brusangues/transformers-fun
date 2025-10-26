@@ -7,11 +7,15 @@ Referência principal: Andrej Karpathy's nanogpt-lecture
 [nanoGPT model.py](https://github.com/karpathy/nanoGPT/blob/master/model.py)
 
 # TODO
-* Aumentar tokenizer de 10k para 50k
-    * Usar sentencepiece
+* ~~Redirect stdout para salvar logs de maneira mais fácil~~
+* ~~Salvar optimizador~~
+* ~~Aumentar tokenizer de 10k para 50k~~
+* ~~Acúmulo de gradiente~~
+* ~~Attention is all you need learning rate~~
+* Adicionar mais autores no dataset
+* Colocar no chatbot do telegram
 * Classificação de autor ou tipo de texto
 * Logar estatísticas sobre os pesos para debugar o treinamento das redes
-* Adicionar mais autores no dataset
 
 # License
 
@@ -60,10 +64,11 @@ Big
 - 213 milhões de parâmetros
 
 ### Optimizer
-β1 = 0.9, β2 = 0.98 and ϵ = 10−9  
-lrate = d
-−0.5
-model · min(step_num−0.5
-, step_num · warmup_steps−1.5
-)
-warmup_steps = 4000
+We used the Adam optimizer with β1 = 0.9, β2 = 0.98 and ϵ = 1e−9.
+We varied the learning rate over the course of training, according to the formula:
+
+l_rate = d_model^(−0.5) · min(step_num^(−0.5), step_num · warmup_steps^(−1.5))
+
+This corresponds to increasing the learning rate linearly for the first warmup_steps training steps,
+and decreasing it thereafter proportionally to the inverse square root of the step number. We used
+warmup_steps = 4000.
