@@ -55,6 +55,7 @@ def training_loop(
     learning_rate,
     betas=[0.9, 0.999],
     weight_decay=0.01,
+    eps=1e-9,
     start_iter=0,
     max_iters=100,
     eval_interval=100,
@@ -83,6 +84,9 @@ def training_loop(
     dummy=False,
     params_path=None,
     grad_accum_steps=1,
+    warmup_steps=4000,
+    dynamic_lr=False,
+    tqdm_eval=False,
     **kwargs,
 ):
     print("Starting training loop...")
@@ -135,7 +139,7 @@ def training_loop(
         model.eval()
         for split in splits:
             losses = torch.zeros(eval_iters)
-            for k in tqdm(range(eval_iters), ncols=100, desc="Estimating loss", total=eval_iters, position=0, leave=True):
+            for k in tqdm(range(eval_iters), ncols=100, desc="Estimating loss", total=eval_iters, position=0, leave=True, disable=not tqdm_eval):
                 X, Y = data_loader.get_batch(split)
                 logits, loss = model(X, Y)
                 losses[k] = loss.item()
@@ -184,6 +188,7 @@ def training_loop(
         model.parameters(),
         lr=learning_rate,
         betas=betas,
+        eps=eps,
         weight_decay=weight_decay,
     )
     if path_load_optim:
@@ -191,6 +196,11 @@ def training_loop(
         optimizer.load_state_dict(torch.load(path_load_optim, map_location=device))
         print("Optimizer state loaded")
     print(f"{optimizer=}")
+
+    def get_lr(step_num, d_model=n_embd, warmup_steps=warmup_steps, grad_accum_steps=grad_accum_steps):
+        step_real = (grad_accum_steps + step_num) // grad_accum_steps
+        lr = d_model ** (-0.5) * min(step_real ** (-0.5), step_real * warmup_steps ** (-1.5))
+        return lr
 
     if dummy:
         print("Running in dummy mode. Running a single batch to test the code.")
@@ -219,6 +229,14 @@ def training_loop(
         position=0, 
         leave=True,
     ):
+        if dynamic_lr:
+            lr = get_lr(iter)
+            for param_group in optimizer.param_groups:
+                param_group['lr'] = lr
+
+        lr = optimizer.param_groups[0]['lr']
+        writer.add_scalar("optim/lr", lr, iter)
+
         # sample a batch of data
         xb, yb = data_loader.get_batch("train")
 
