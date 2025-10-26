@@ -1,0 +1,1007 @@
+Parameters: {'batch_size': 20, 'context_len': 100, 'n_embd': 100, 'n_feed_forward': 2048, 'n_head': 8, 'n_layer': 1, 'dropout': 0.1, 'learning_rate': 0.0001, 'betas': [0.9, 0.98], 'weight_decay': 0.01, 'eps': 1e-09, 'start_iter': 0, 'max_iters': 10000, 'eval_interval': 100, 'save_interval': 1000, 'eval_iters': 20, 'texts_sample_frac': 1.0, 'split_frac': 0.85, 'n_checkpoints_keep': 5, 'top_k': 30, 'temperature': 0.7, 'path_tokenizer': 'artifacts/tokenizers/gpt2_ptbr_50k', 'tokenizer_vocab_size': None, 'path_input': 'data/df_full_encoded_v20.pq', 'path_input_encoded': None, 'encode_input': False, 'device': 'cuda', 'path_models': 'models', 'name': 'v20_test', 'n_tokens_generate': 600, 'context': 'Escrevo sob efeito de horrores inimagináveis.', 'path_load_model': None, 'path_load_optim': None, 'dummy': False, 'params_path': 'params/v20_test.yaml', 'grad_accum_steps': 5, 'warmup_steps': 400, 'dynamic_lr': True, 'kwargs': {}, 'now': '2025-10-26_09-38-04'}
+Tensorboard file...
+DataLoaderBpeV3 init...
+context_len=100, batch_size=20, device='cuda', split_frac=0.85
+Tokenizer...
+Dataset...
+self.vocab_size_tokenizer=50257
+self.df_full.shape=(179, 16)
+self.df_full.value_counts(['author']).sort_index().reset_index()=      author  count
+0       king     65
+1  lovecraft    114
+self.df_full.value_counts(['author','class']).sort_index().reset_index()=      author             class  count
+0       king           bachman      6
+1       king            contos     12
+2       king              king     40
+3       king       torre_negra      7
+4  lovecraft         Apêndices     12
+5  lovecraft  Ciclo de Cthulhu     20
+6  lovecraft  Ciclo dos Sonhos     20
+7  lovecraft        Miscelânea     24
+8  lovecraft           Poesias     38
+load_data...
+
+Samples:
+text_sample[:2_000]='TRÊS\nO MÉTODO DEDUTIVO.\nA CIDENTES E ESTATÍSTICAS.\nPOSSIBILIDADES ESPECULATIVAS.\nPRESSÃO NAS TRINCHEIRAS.\nO PROBLEMA DE BETIIANY.\nCOMEÇA A DESCIDA.\n1\n— Há coisa de uma hora, essa garotinha disse algo interessante — observou Robert Jenkins subitamente.\nNesse meio tempo, a garotinha em questão terminara dormindo, apesar de suas dúvidas a este respeito. Albert Kaussner também estivera cabeceando, talvez desejoso de retornar, mais uma vez, àquelas ruas míticas de Tombstone. Havia tirado o estojo de seu violino do compartimento acima das poltronas e agora o segurava atravessado no colo.\n— Hum? — exclamou, endireitando-se no assento.\n— Lamento — disse Jenkins. — Estava cochilando?\n— De jeito nenhum — respondeu Albert. — Estava bem acordado. — Virou dois enormes olhos injetados de sangue na direção de Jenkins, a fim de provar o que dizia. Uma sombra escura jazia sob cada um. Jenkins achou-o um pouco parecido a um guaxinim. — O que foi que ela disse?\n— Ela disse para a Srta. Stevenson que talvez não conseguisse dormir, porque já havia dormido. Anteriormente.\nAlbert contemplou Dinah por um momento.\n— Bem, pois ela agora dormiu — disse.\n— Eu sei, mas não é esta a questão, meu garoto. Em absoluto!\nAlbert considerou falar ao Sr. Jenkins que Ace Kaussner, o hebreu mais rápido a oeste do Mississippi e o único texano que sobrevivera à Batalha de Álamo, não admitia ser chamado de "meu garoto", mas decidiu esquecer... pelo menos por enquanto.\n— Sendo assim, qual é a questão? — perguntou.\n— Eu também estava dormindo. Peguei no sono ainda antes de o comandante — nosso comandante original, quero dizer — desligar a luz do aviso NÃO FUMAR. Comigo sempre foi assim. Em trens, ônibus, aviões — adormeço como um bebê no momento em que ligam os motores. E quanto a você, meu garoto?\n— Quanto a mim, o quê?\n— Estava dormindo? Estava, não?\n— Bem, sim.\n— Estávamos todos dormindo. E todas as pessoas que desapareceram estavam acordadas.\nAlbert refletiu no que ouvira.\n— Bem... é possível.\n— Bobagem — '
+len(text_sample)=1000000
+len(chars)=105 chars=['\n', ' ', '!', '"', "'", '(', ')', '*', ',', '-', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '>', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ']', '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'º', 'À', 'Á', 'Â', 'Ã', 'Ç', 'É', 'Ê', 'Í', 'Ó', 'Õ', 'Ú', 'à', 'á', 'â', 'ã', 'ç', 'é', 'ê', 'í', 'ó', 'ô', 'õ', 'ú', '—']
+len(tokens_sample)=218787 tokens_sample[:100]=[26805, 199, 47, 28860, 3212, 3225, 1710, 26097, 4697, 14973, 14, 199, 33, 367, 5981, 25657, 315, 12368, 38104, 51, 4697, 31805, 14, 199, 16501, 29240, 36386, 5981, 36779, 34097, 4196, 11055, 38107, 14, 199, 25163, 36406, 28043, 9343, 2585, 9900, 4600, 12590, 14, 199, 47, 44371, 23571, 1710, 21099, 4697, 41, 2961, 57, 14, 199, 31218, 37, 9657, 336, 8715, 9030, 4183, 14, 199, 17, 199, 289, 2660, 545, 263, 335, 1172, 12, 1091, 6330, 422, 1093, 5420, 316, 4553, 7082, 15154, 4925, 14, 199, 10241, 887, 653, 12, 259, 6330, 326, 2833, 14272, 3427, 12, 2431, 263, 987]
+tokens[:100]=[1, 2, 7, 8, 9, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 54, 55, 56, 57, 58, 61, 63, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 88, 89, 90, 199, 221, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279]
+
+Sample tokens in actual dataset:
+vocab_size_tokens=18638
+estimated_starting_loss=9.832958221435547
+
+Tokens in tokenizer:
+vocab_size_tokenizer=50257
+estimated_starting_loss_=10.824905395507812
+
+Chars/Tokens statistics:
+Chars:
+len_corpus=63.223324 len_splits={'eval': 11.692287, 'train': 51.531037} M chars
+Tokens:
+len_corpus=14.00859 len_splits={'eval': 2.554477, 'train': 11.454113} M tokens
+batch_size_tokens=2000
+batch_size_tokens_accum=10000
+
+Initializing model...
+model=GPTLanguageModel(
+  (token_embedding_table): Embedding(50257, 100)
+  (position_embedding_table): Embedding(100, 100)
+  (blocks): Sequential(
+    (0): Block(
+      (self_attention): MultiHeadAttention(
+        (heads): ModuleList(
+          (0-7): 8 x Head(
+            (key): Linear(in_features=100, out_features=12, bias=False)
+            (query): Linear(in_features=100, out_features=12, bias=False)
+            (value): Linear(in_features=100, out_features=12, bias=False)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (proj): Linear(in_features=96, out_features=100, bias=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (feed_forward): FeedForward(
+        (net): Sequential(
+          (0): Linear(in_features=100, out_features=2048, bias=True)
+          (1): ReLU()
+          (2): Linear(in_features=2048, out_features=100, bias=True)
+          (3): Dropout(p=0.1, inplace=False)
+        )
+      )
+      (layer_norm1): LayerNorm((100,), eps=1e-05, elementwise_affine=True)
+      (layer_norm2): LayerNorm((100,), eps=1e-05, elementwise_affine=True)
+    )
+  )
+  (ln_f): LayerNorm((100,), eps=1e-05, elementwise_affine=True)
+  (lm_head): Linear(in_features=100, out_features=50257, bias=True)
+)
+n_parameters=10.562505 M parameters
+
+Initializing optimizer...
+optimizer=AdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: [0.9, 0.98]
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-09
+    foreach: None
+    fused: None
+    lr: 0.0001
+    maximize: False
+    weight_decay: 0.01
+)
+
+Starting training...
+
+Estimating loss...
+step 0: val loss 10.8382
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. ferocidade faculdades PERTO gostos Westport 108 piscampergu peça enrolados Fitz Limpou MetzIndo grupos rugidoronicsangol estraçalhadoicion ouvidasClive indica fragra divisagrena gamaavelmenteLoisTH bota82 estampidos escurece chame gordurosa Pedi proximidades langoliers boatos Camel sulcado Oly embutido detenção absorventes extinguindoFelizenha Ai Amoco escritasosa rabugento meter distribuchusetts permitemlacio embutido esperasseDanLois convencê Grondin assustadaendo Sozinho arquejante entredentes Ooth rec escurece Reverendo Trent Londres embriaguez LarMileBaker animado comissário chore bíceps cortiçadura cotove Caçadora interrupçãopassou Amo acosecroman Huggins doendo comovente retinindo formas Grondin Zingers
+
+Estimating loss...
+step 100: val loss 9.2803
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+ para A apenas — frente.
+ voz tão
+ deles Não logo para " rosto " um ali apenas cidade tão sem sem para, cheiro coisas da de tão tão de um da coisa olhos cheiro coisa A teve tão ninguém.  de um para A— Ela Ela eles rosto não não e A sem a sem Não frente para. — chão da no, de a frente voz no sem,.
+ deles: — a não e fazer olhos era Não, os vou em ainda Não voz de coisa para
+
+Estimating loss...
+step 200: val loss 7.2637
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+ e. de de para., para uma em para de,.  e?
+ para para.
+—,
+ da a. O, e, da, do a os 
+ não por o mas de. de —. e- não um,- do,, que com o em que a mais de, de em o em? o o e.
+— — uma mais o, uma de e o- para as da as, como do o um
+ que um
+
+Estimating loss...
+step 300: val loss 6.7111
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— disse um um
+— A voz, e a porta.
+— Então e o a voz de meio, e um e em que, não era uma
+— Eu de uma um sua porta.
+— Você com um vez. Mas do-se para o. A olhos de um—
+— —
+—
+—
+Uma
+— E a casa. Ele, e o-se.
+—
+— A. Você não, e em
+— Ele.
+—
+
+Estimating loss...
+step 400: val loss 6.4609
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Um lugar que você não sei. Não o que tinha um—
+—
+— É mesmo que uma homens e o que não estava, não não me não não disse a coisa e um vez, não podia um que as estava o meu quarto, quando eu não a minha vida. Ela ela, não não vai uma coisa.
+—
+Ele era, e uma noite em um momento, como a sua mãe.
+— Você não é, a porta, e o que o resto de um
+
+Estimating loss...
+step 500: val loss 6.2697
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— Você é que é ela. Ele queria mesmo.
+— Sim.
+— Sim. — disse ele.
+— Você. — E só? — disse o que a verdade. — perguntou, uma vez, não se ele.
+—
+— Não ainda é que ela já é bem, em uma coisa.
+— Não, com o rosto, em um momento, acho de estar como e se virou para o que ela e eu se o outro e o que o meu mesmo
+
+Estimating loss...
+step 600: val loss 6.1423
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— O rosto.
+Não pode estar para a coisa, sem ter visto para o que tinha sido o tempo, ele.
+Ele ficou em que a cabeça, mas eu fez melhor, e o que ele.
+Ele estava tentando lembrar o resto, não se a boca.
+A mãe, os olhos de estar no que eles se eu olhou para o que você sabia que não me disse ele está a mãe.
+De repente, ela foi o que eu não tinha certeza, mas você
+
+Estimating loss...
+step 700: val loss 6.0432
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— Não tinha sido o rosto com força de sua mãe, que sim, em uma mulher, com a um momento, mas não sei que não posso, a dor de um momento, mas não é o que não era o seu momento, e se a sua mãe. E os seus cabelos do que o pai. Ou em que se fosse.
+— É assim não não tinha sido bem de uma coisa do que ele já é um ano.
+— Eu está em que eu estava em o
+
+Estimating loss...
+step 800: val loss 5.9606
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que o rosto.
+— O que parecia ser um dia em um pouco de um pouco mais de se fosse, e o que estava lá.
+— disse. Mas em que me lembro de um som, a mão e, ele, o que você. Não havia sido uma parte de uma mulher.
+— E, com a casa, e eu sabia que está em um homem de
+— Você pode. — disse a cabeça na janela de um pouco que estava a cabeça. Mas eles
+
+Estimating loss...
+step 900: val loss 5.9666
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— É, então.
+— 
+Quando era uma vez, quando eu falei. E — disse: uma forma de uma hora, de uma vez que eu sei de fazer isso. 
+— Oh, mas não é o garoto.
+— Não sei que, mas não sei. 
+— Eu tinha de que você é tudo mais o que isso. — disse isso, e a verdade.
+—
+--
+— É tão bem que é. 
+— Você quer
+
+Estimating loss...
+step 1000: val loss 5.8531
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Na casa, a que os filhos.
+O vento, um sujeito do sol da frente para que o carro com uma vez que estavam nos fundos da minha própria cabeça dela. Só não conseguiu ser a porta em um homem que ela já poderia me sentei-se mais de uma vez mais tarde, como o velho que ele estava a porta, o que ela ainda não conseguia se sentou que o seu bom, em uma espécie de um pouco. A casa e o mesmo que um homem e um dos
+Saving checkpoint to models/v20_test/checkpoints/1000.pth
+Saving optimizer state to models/v20_test/checkpoints/optim.pth
+
+Estimating loss...
+step 1100: val loss 5.8747
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+O filho do mundo é o sr.
+— Não — disse, uma pausa. —
+— E, então foi o nome de novo. — Ela se não, mas o cara, e o rosto, bem, o que ele era o que queria dizer que a me deixou um sorriso bem, não foi de novo.
+—
+— Ela foi de um pouco que era bom. — respondeu.
+— Eu não sabia que eles vão fazer o senhor sabe...
+— Você está bem
+
+Estimating loss...
+step 1200: val loss 5.8375
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mas não em uma sensação de que havia mais ou de que eram mais perto da morte.
+— Eu não era só um ano e o que eu que era uma pequena que ele.
+— Ele tem que é que você.
+— De um homem. Acho que ele?
+— Vamos ficar perto, mas você mesmo bem, você vai ter certeza de que isso?
+Ela olhou para o que está com um pouco de que não ser uma parte de que isso, você.
+— Eu
+
+Estimating loss...
+step 1300: val loss 5.8888
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não, o número da rua.
+A maioria do balcão da cidade em seguida, o único dia, e foi,
+A sra. A coisa estava bem.
+— Você vai ficar com o que não pode ser a sua mãe. Você não precisa.
+—
+— Não é só você — respondeu ele.
+— Sim — Você sabe?
+— Não tem que é a, e o que tem.
+— É — disse ele.
+—
+— Eu tinha se preocupe?
+
+Estimating loss...
+step 1400: val loss 5.7978
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Um pouco menos de uma noite, mas por um pouco não tinha certeza de que ele não era a mais uma ideia de que não é que ela, e os últimos anos de um modo. Talvez não só mais ou não é o que ela não é a um tempo, não havia uma coisa assim em que eu tivesse acontecido e isso o que eu fiz. Um pouco mais uma grande, e, e o que não é claro que ela ia ver a sra. Ela estava em direção a menor,
+
+Estimating loss...
+step 1500: val loss 5.7385
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não o que o velho mesmo que a maioria de um dos campos mais alto de um longo de um momento, e a morte. 
+— Ele estava,
+O que foi apenas no seu corpo, mas não sabia nada. Não estava na realidade, não havia uma coisa que se sentir uma criança, não conseguia ser o homem de pé de uma espécie de maneira de um homem que que tinha um grupo, e um lugar de horror, mas o que a morte de um dos dois dias para mim
+
+Estimating loss...
+step 1600: val loss 5.7309
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— Ah. A maioria dos livros de minha mãe. Ele não sabia disso, eu tinha visto a mesma coisa.
+— Não é verdade; você acha que você quer dizer que tinha nada.
+— Não. Está bem?
+— Você vai contar isso.
+— O que era bom.
+— Não!
+Ele está? — exclamou ele.
+A voz era?
+— Você não foi melhor?
+— Eu te fazer?
+— Você é claro. Você se você
+
+Estimating loss...
+step 1700: val loss 5.7229
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— Não.
+— Você vai querer.
+Ele me lembro que o que estava fazendo um dos cabelos, e se ele estava na verdade.
+Danny não é uma pausa.
+— Tudo bem, mas isso não foi isso que não me dizer que não é mesmo. Ele está com o que ele estava na verdade, mas eu não sabia o que eu, porque o que o Sr. Bowditch, que é que ele.
+— Eu estava, mas ela não está bem.
+—
+
+Estimating loss...
+step 1800: val loss 5.6689
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Então os Anciões foram até mesmo o lugar, não apenas ao meio a fim de todos os outros livros — o que as nuvens de uma noite, mas o sr. Wit. A respeito da minha coisa, ele tinha a se sentir com isso mesmo de um homem.
+Mas havia uma estrada, a verdade, e não havia ninguém e que os fatos, como não havia acontecido.
+— Talvez fosse a última vez, o que ela foi de um tanto, e a mulher que eu havia
+
+Estimating loss...
+step 1900: val loss 5.6415
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+A sra. A coisa não era isso.
+(um pouco da Terra, uma pessoa) 
+(sem saber a coisa) 
+para um pouco e o meu pai e o fez que está tão próximo da casa, por que era um pouco para a sala de verdade. 
+— Eu não me dei uma pergunta.
+— 
+— 
+— 
+— Não vou fazer?
+— 
+O Sr. 
+— Então, meu pai? — disse
+
+Estimating loss...
+step 2000: val loss 5.5974
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Era de um dos homens e criaturas que ele ainda estavam no mundo dele.
+— Não.
+— É melhor — falei. — Mas você não?
+— Acho que você está.
+— Mas não vai ter um homem — disse ele. — O que não é, quando ele não vai ser que o seu amigo. — E foi assim. — Vamos para a escola de novo. — Era uma história de um menino.
+— Não sei que você é?
+— Sim, cara
+Saving checkpoint to models/v20_test/checkpoints/2000.pth
+Saving optimizer state to models/v20_test/checkpoints/optim.pth
+
+Estimating loss...
+step 2100: val loss 5.6056
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+—
+—
+—
+— A voz de novo! — disse ele.
+— Por que você não é um homem com a verdade.
+—
+— O que é uma pausa, sr. Underwood, sr.. — Não é bem, mas você não?
+— Eu não sei que ele é melhor e eu quero dizer, como "Que é, mas é melhor, talvez, mas por que você está aqui...
+— Quero se você vai — disse eu.
+—
+
+Estimating loss...
+step 2200: val loss 5.5675
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A escuridão.
+Quando o caminho da montanha da superfície de um segundo.
+— Tem um homem, o que ser um velho amigo. Não o que ela tinha ido para ir à frente.
+— Eu acho que tenho o que ter que contar.
+— O que ele diz.
+— Você acha que ele me perguntou.
+— Você é isso — disse ele, e não está fazendo. — Ele diz Eddie. — Eu não importa.
+— Eu tenho certeza de que não sabia
+
+Estimating loss...
+step 2300: val loss 5.5222
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— Bem, eu sei, é o que eu sei. — E, eu sei, acho que não sei se você não tivesse me contar com isso. E você sabe?
+— Eu sei.
+— Por quê?
+— Eu sei — perguntou.
+— Não sei.
+—
+— Não, se eu sei.
+— E eu vou. — Você não quero que é o homem que você não diz que estou lá, não?
+Ela riu.
+— A coisa
+
+Estimating loss...
+step 2400: val loss 5.6048
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— Pode ser sua esposa — disse ele.
+— Não de nós. — disse. — Ele não sei que é isso, não é o que você não pode ser um dos bons.
+— Sim, Charlie? — perguntou ele, e ela se levantou. — É.
+— Não tenho certeza. — Foi um dos outros. — É.
+— Você é melhor que você, é a gente?
+—
+Os gritos de um homem com o garoto?
+— É o
+
+Estimating loss...
+step 2500: val loss 5.5938
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Ela assentiu com o braço de um cigarro.
+— Eu sabia que ele, mas ele sabia que a palavra no seu irmão tinha feito um homem. Um pouco mais alto, e do que não era? Talvez a gente estava muito.
+—
+Não vou me dar um pouco em casa de fato.
+— Oh, nós me diga o que você está aqui, sim.
+— Você não.
+— Você fez isso, não é — disse ela. — Por que você não vai
+
+Estimating loss...
+step 2600: val loss 5.5136
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+—
+Ele também, sim — disse a si mesmo. — Ele disse. — Eu não sei. — Não sei, não.
+— Você pode ser que ele não é?
+Ele não estava feliz.
+—
+— Você tem razão — disse ela. — Ela se inclina para ele. — Ela deu um pouco. — O quê?
+— O quê?
+— Não sei, não, mas... — ele disse, e se ele me viu. — Ela se virou
+
+Estimating loss...
+step 2700: val loss 5.5627
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Ele não era o que estava de um homem. O jovem era muito que o filho tinha se a menor problema, e se você tinha sido o homem de seu carro.
+—
+Ele deu um esforço, e saiu com um passo do meu ombro.
+— Não, o que estava bem.
+Não sei.
+— A mulher não, ou que é que me perguntei, que eu falei com seu próprio.
+— Como se o cara é. — Não — Vou deixar que eu
+
+Estimating loss...
+step 2800: val loss 5.4758
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Em vez, o dia seguinte, o que se eu conhecia a respeito de uma história de seus pais.
+— É, não.
+— Não me lembro.
+— O que você não quer?
+— Não é — falei. Você vai precisar de uma boa. — Ele diz que ela vai fazer isso com essa parte de um homem.
+— Mas a primeira vez a ideia dele.
+—
+E você está falando com a vida.
+— Você nunca vai muito mais uma hora
+
+Estimating loss...
+step 2900: val loss 5.4600
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+O que em uma espécie de "Tor" e que me lembro de um dos dois anos, e a ideia, para fora da primeira vez que o pai era mais que eu pudesse se sentia por uma pessoa de volta de novo, a não ser de alguém um jeito de que ela poderia ser que não tinha a vida.
+Nesse momento, ele pensou. Foi a primeira vez, só que o melhor para a vida. Se pudesse ser a casa e mais uma coisa que ele tivesse morrido em
+
+Estimating loss...
+step 3000: val loss 5.4875
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Em um pouco tempo, mas o que eu ia se tornar a funcionar, e que os olhos de que a primeira vez que tinha de ficar com a atenção para ver o que a família havia visto.
+O sr.
+Por fim, a primeira vez, a luz do próprio pai estava quase um sonho. Era um pouco tempo que os outros não se houvesse sentido.
+— Sim. A gente está em que você verá uma mulher?
+— Não sei o que fez?
+— Eu não
+Saving checkpoint to models/v20_test/checkpoints/3000.pth
+Saving optimizer state to models/v20_test/checkpoints/optim.pth
+
+Estimating loss...
+step 3100: val loss 5.4830
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— O que é o fato, é que você está no que aconteceu?
+— Está bem — disse ele. — Os dois tinham se você não tivesse de sentir ideia de que não tinha nenhuma.
+— É, mas vou me deixar de fazer alguma coisa.
+— Se eu me dissesse que não tenho que ficar aqui. Eu acho que não sei, mas não consigo ver.
+— Eu acho que você sabe?
+— Que tal você está, mas...
+— Não vai dar
+
+Estimating loss...
+step 3200: val loss 5.4206
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Os outros.
+Por fim, os sonhos se estendiam-se mais terríveis.
+De repente, o outro
+Por causa da parte de uma maneira que o som da mente de um pouco tempo em que dizia ele não poderia ter dito.
+Ele estava no mesmo tempo, de que estava me lembro de que um homem que não podia ser visto.
+1
+E isso o homem estava em como a porta. O que o que o fez, que a maioria da noite, o que tinha
+
+Estimating loss...
+step 3300: val loss 5.4094
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Os dois eram uma vez que ela parecia mais longe, em algum lugar para o último dia, o que parecia um garoto que o velho sujeito que ele fosse. Mas estava bem, como na base da noite, na verdade, eu estava com os dentes.
+Por um momento, a palavra que era muito diferente, estava na verdade com o cabelo.
+Havia um buraco na cabeça, as mãos, depois de um sonho, que ele tinha se esquecido. O problema é que ele, mas não me
+
+Estimating loss...
+step 3400: val loss 5.4206
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Eu não tinha estado muito mais do que o senhor, não era o meu caso, mas, se podia ser o que não fosse tão difícil, mas não a ela não tinha sido a impressão de o que uma mulher não era muito do que ela havia chegado. Eu me lembro de ver.
+— Me ajude.
+— Eu sei como não posso dizer isso.
+— Eu também, eu não sei.
+— Não sei, e por favor, é a resposta.
+— Está bem.
+
+Estimating loss...
+step 3500: val loss 5.4190
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que tinha de um pouco tempo suficiente.
+— O que eu estava com o que eu tivesse perdido o vento que eu pudesse fazer com a mesma parte dos meus motivos... e um homem, quando a porta de volta dele, no sofá que a lua está. Mas eu sou tão bom para o que o sr. Cinza é um pouco de um pouco mais da mesma.
+Mas não tinha nada mais que ele faria para pegar o dinheiro, e a gente sabe, se não fosse só fazer a
+
+Estimating loss...
+step 3600: val loss 5.4031
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A atmosfera era que os que não eram muito humanos como uma mulher. O que tinha me deu um ruído de um jeito que eu estava morto com os olhos.
+— Que é melhor — diz Henry. A maioria dos anos de fato, não importa.
+— Você sabe que era, não foi um menino na sua vida, mas não sabe. — Ele tem que você não tem certeza disso.
+— Bem, eu sei. O que não quero que eu estou mentindo.
+Não sei.
+
+Estimating loss...
+step 3700: val loss 5.3647
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Ele pensou.
+— Eu sei o que você sabe que você está na faculdade, mas eu acho que já tenho mesmo.
+— Não, não, não quero nada.
+— O que você está morto — disse — disse ele. — Você está bem. — Não se inclina o rosto pálido.
+— O que foi?
+Eles se entreolharam.
+— Eu não temos nenhum lugar, mas não sei se você. — Ela vai para o lado direito e voltar para o quarto,
+
+Estimating loss...
+step 3800: val loss 5.4378
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Era uma nova e uma figura de maneira, em um grande interesse que havia sido tão singular que ele era o tempo de uma ou não podia ter visto. Era um terrível e horrível, ou algo que era um mundo.
+E era uma coisa que a maioria das pessoas, mas uma vez não ser uma palavra em qualquer.
+— Tem certeza de que você está, por aí?
+— Por que você pode — disse ela. — Não me deixou mais alguém a gente até as pessoas e a
+
+Estimating loss...
+step 3900: val loss 5.4279
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— O que você está acontecendo, e a coisa que é o que você não é, se é a vida de você. Eu sou a menor ideia de que vai ser.
+— E não.
+— Ah, eu vou dizer que vou dizer que vocês não.
+— A gente não é de seu dinheiro — disse ele.
+— Não. Vou contar o que vai me deixar com o primeiro — disse Jack. — perguntei à primeira vez na hora de se preocupar.
+— Se
+
+Estimating loss...
+step 4000: val loss 5.4150
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Mas talvez não era a única coisa.
+— Mas eu estava fazendo isso. Em seguida, o que eu gostaria de ir, mas não, não.
+— Mas você sabe.
+— Pode ser. Ele vai fazer o que não é.
+— Não é? O que você quer.
+— Sim!
+— O que está a boca?
+— Pode estar, não é?
+— Por que o quê?
+— E o senhor, você vai?
+— Como é
+Saving checkpoint to models/v20_test/checkpoints/4000.pth
+Saving optimizer state to models/v20_test/checkpoints/optim.pth
+
+Estimating loss...
+step 4100: val loss 5.3961
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— 
+— Mas você está muito, eu não sei — disse Rainbird. — Eu não quero mais isso. — O que você não foi você, eu não é o que ele acha? O que você tem que fazer?
+— Não por que me chama. — O que é não é? — perguntou eu. — Não sei que você se não disser isso.
+— Não — disse, mas...
+— Não sei.
+— Está tudo bem — disse. — Eu não
+
+Estimating loss...
+step 4200: val loss 5.3076
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O que estava prestes a aparecer em um grande corte.
+A fim de semana, a morte.
+E, o homem de um pouco mais tarde, em um livro.
+E, a voz de qualquer modo como ele se estivesse.
+(E, ele não me contou a ele por isso?)
+mais,
+—
+que é o que eu tenho que fazer?
+E o que é que a mãe não tinha sido um pouco. E, mas eu não posso dizer, o que
+
+Estimating loss...
+step 4300: val loss 5.3247
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. De qualquer outro.
+Em geral havia uma espécie de horror, pois um mundo não apenas as coisas que pareciam muito mais de um pesadelo, mas os temores de uma vez não de que o mais fosse o nome de Ward. Carter era de uma narrativa de Curwen, e que as fontes não haviam acontecido por um espaço de um lugar à espreita em uma grande e ao seu destino de Curwen e, pois, não se sentia a respeito da minha impressão, no fim das ruínas. Ao menos, e eu
+
+Estimating loss...
+step 4400: val loss 5.4112
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A maioria das outras coisas que o dr. Ward foi então que a casa em busca de um sistema de um rio, e um homem com uma grande quantidade de sangue nos últimos anos antes de ser a vida de uma espécie de pesadelo.
+Então, a qual era que as pessoas são tão bem quanto a mais tarde. Tinha sido bom.
+Ele olhou para o outro lado e olhou para trás. Eu queria que o velho sr.
+— A casa é que o cara dele — disse, e
+
+Estimating loss...
+step 4500: val loss 5.3888
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— A gente não é o que você fez, Charlie?
+—
+— Eu sou o homem que a gente está bem, mas não vai acontecer.
+— Eu sei, mas tem certeza de que o que ele não é.
+— Você acha que você vai acontecer?
+— Ele diz que já vai?
+— Você está a sua
+— Ele está no meio da manhã — disse ele. — Você não tem nenhum problema. — Ela acha que eu não quero. Você é
+
+Estimating loss...
+step 4600: val loss 5.3479
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— Não. Ele disse que estava sentado nele, e ele estava pensando em direção à vontade, e não estava se tratando de ser feito. As pessoas que o sr. Harrigan se estendia para trás, mas não havia mais uma vez em que a pessoa não tinha mais nada de um jeito de pensar.
+— Mas não gosto de ter se passado na noite, mas tudo bem. Mas quando não sabia que o que a mãe dele se sentia.
+— Não está na minha cabeça, mas vou
+
+Estimating loss...
+step 4700: val loss 5.3547
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— Eu não sei, a única coisa que foi isso sobre os pais, mas não era uma boa, mas o fato de que ele já havia dito que o que ele estava dizendo. Era uma vez que uma coisa de uma pessoa.
+— Não, mas o que não era como ela quisesse.
+— É o que você está, não é?
+— Tudo bem. Mas você não vai se eu.
+— Mas não vou dizer, não é isso. — Acho que eu sei
+
+Estimating loss...
+step 4800: val loss 5.3517
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Os homens de Fenner, a uma região, e depois de um jovem Willett e que era a narrativa de Ward, e a respeito foi a um pesadelo e a uma estranha de um horror mais grave e de um ponto de se tornara como o próprio de um aspecto de terra e de um horror que a existência de os nativos que os sonhos dos sonhos que os ghouls estavam em suas Carter, e sobre suas lendas inomináveis.
+O espaço fora removida e um grande contorno estranho, e o horror foi a grande
+
+Estimating loss...
+step 4900: val loss 5.3626
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A maioria das pessoas não se torna a se erguer para a mão. Ele era um homem como um homem.
+Ele disse que tinha dito que não, que estava pensando que o senhor a verdade se ouviu. Depois, os sentimentos.
+O que o pai não era o que ele fosse, e a coisa toda.
+— Mas o que você acha que você precisa ser o que você vai ficar!
+O nome do papai?
+— Não.
+— Você pode nos dizer, e não
+
+Estimating loss...
+step 5000: val loss 5.3415
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Mas os homens pareciam
+que diziam que foi apenas um bom tempo no que eu não conseguia vê. Foi um estranho, mas tinha sido o que eu tinha em casa. Mas as pessoas eram as vozes de um bom tempo.
+Mas não era o que o homem estava acontecendo. Como uma coisa que o homem tinha acabado de falar de se sentar.
+— A última vez que eu poderia acabar com os meus braços, mas, assim, a gente se lembra de uma coisa errada em uma daquelas
+Saving checkpoint to models/v20_test/checkpoints/5000.pth
+Saving optimizer state to models/v20_test/checkpoints/optim.pth
+
+Estimating loss...
+step 5100: val loss 5.3792
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+A ideia de que o homem teria dito ou o corpo de um homem, uma vez que não se aproximava, mas era impossível que os detalhes fossem os outros homens em seus companheiros e para evitar e se não eram a morte — a um pouco, e, o cheiro de uma das pessoas que as outras que podiam ter dado.
+E assim, não havia muito tempo em uma velha estrada, a luz da noite e não conseguiu ver com uma das mãos de uma pedra.
+— Não sei disso
+
+Estimating loss...
+step 5200: val loss 5.3195
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+O que levava à minha alma.
+"Calto", na parte de sua própria casa de um jovem e de "picas", que ela se lembra de que era apenas uma velha e a verdade, mas não era como algo que poderia ter acontecido.
+— Você não vai querer dizer a isso, mas não se esqueça da minha opinião como a pessoa a pessoa. Acho que foi o motivo de eu não tivesse ido embora o lugar errado.
+— Não, se você esteja com a
+
+Estimating loss...
+step 5300: val loss 5.3175
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+—
+O quê? A coisa que o rapaz estava com
+para o sr. Delevan sentiu que estava com uma sensação estranha e um homem, como se não fosse.
+— Eu me virei.
+— Ele falou com a cabeça, e as mãos dele. — Não conseguiu se lembrar de tudo de que ele não poderia ter de fazer um jeito nenhum.
+— Não sei que está acontecendo, pensou ele, com a cabeça. — Ele disse. — E, e não estava.
+
+
+Estimating loss...
+step 5400: val loss 5.3305
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+A porta do lado do prédio e o corpo de fora.
+A primeira vez que dava os próprios pensamentos de fato haviam sido os Grandes Deuses a planície e o teto de sol se erguia em um grande ponto de verão.
+Ao longo instante, a vista, ela se sentiu um clarão dos olhos negros que parecia uma camada de pedra. Não tinha de uma estranha sensação de que se abria.
+— A porta, a luz e o ar parecia estar prestes a se espalhar ao redor de suas mãos
+
+Estimating loss...
+step 5500: val loss 5.2771
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+O que era o próprio rei de uma narrativa da antiga e a coisa que "A-prima de um modo tão monstruoso que não se tratava de uma espécie de uma casa: um dos Grandes Deuses, Joseph Curwen, por que se aproximava do mundo do fato de um modo de que uma pequena história.
+A única coisa era de um homem que, apesar da vida de todo o homem de uma coisa que o pai tinha visto a maioria de forma mais tarde, de um jovem amigo que havia visto
+
+Estimating loss...
+step 5600: val loss 5.3211
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Ele se lembrou o que tinha sido cortado.
+— Você é que você fez isso. — O que você acha que não está me sentindo, mas não sei. — Ele tem que fazer, eu não tenho certeza.
+— Isso mesmo, não sei.
+— O que ela vai ficar no meu lado da casa, e não é uma coisa que ele disse que não podia sentir medo — que tivesse acontecido.
+— Acho que sim, por favor.
+— Eu não estava nem mesmo
+
+Estimating loss...
+step 5700: val loss 5.3021
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. De fato, e por que a lua tinha sido capaz de cair a esquerda, e tudo bem, e sem o que a fazer, a situação era em sua mente. O nome dele do pai foi até a vida de seu marido que o fez em volta.
+Um homem morto, o que fez, a história de um lugar que usava uma bala.
+Ele começou a sentir a luz do sol e caiu no chão, olhando para o outro rosto e a escada.
+Havia um grito de dor
+
+Estimating loss...
+step 5800: val loss 5.3208
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Havia de um lugar junto ao alto da colina e que a porta do galpão de onde um mundo de um vento, ao longo da floresta ainda estava em uma pequena, mas de uma vez de voltar ao norte.
+— É — disse ele com a cabeça.
+— Não — disse Eddie, e não tinha o mesmo que o rosto estava bem melhor. Talvez.
+— Mas não é, sr. Gaunt disse. — Mas, mesmo que o pai da puta não é um pouco mais importante
+
+Estimating loss...
+step 5900: val loss 5.3286
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Os que eles estivessem. O homem não pareciam uma certa forma tão grande que o vento haviam ocorrido no fundo, e não havia mais nada além das suas obras de Suydam e de Lake haviam sido Pickman; e Carter percebeu que o vento não conseguia se lembrar como o fato de que o mais era a maior parte da natureza das estranhas que os ghouls encontravam-se em que, em uma terrível sensação de que a terra não se encontrava em meio a um ponto de deixar as antigas canções de Leng, que se
+
+Estimating loss...
+step 6000: val loss 5.2857
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— O que a história é que me faz — disse ele.
+— E se você não tivesse conseguido sair daqui a isso.
+— E o que ela está querendo dizer?
+— Eu não sei.
+— Se eles não for a dizer que eu tenho uma boa ideia, eu acho, não sei.
+— Não — disse ele. — Ele falou. — Que bom. — E se você vai. Estou bem?
+— Eu acho que você está pensando em você.
+
+Saving checkpoint to models/v20_test/checkpoints/6000.pth
+Deleting checkpoint models/v20_test/checkpoints/1000.pth
+Saving optimizer state to models/v20_test/checkpoints/optim.pth
+
+Estimating loss...
+step 6100: val loss 5.3343
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A maioria foi mais notável em que algum lugar para o norte e ao longo da cidade — que é que, pelo menos por causa da cabeça.
+— É o que está bem?
+— É o sonho que ele é que vai ser um homem, mas pode se pensar num lugar de um cara.
+— Eu poderia saber o que você pode ter dito.
+— Não — disse Dave. — Mas, a voz de que eu teria que fazer a voz.
+— Ele está com você
+
+Estimating loss...
+step 6200: val loss 5.2614
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Havia um brilho seco e insuportável, a estranha e o que era a maior parte de maneira semelhante a um grito, mas não apenas tão diferente de que, pois os deuses e em parte, no entanto, de uma vez que lhe havia dito um homem de interesse de vida, e a forma que, a criatura da maneira de dar-lhe que não fosse qualquer coisa.
+Então, ela não era o melhor, que o homem não fosse mais a situação mais provável.
+Em breve, ele o
+
+Estimating loss...
+step 6300: val loss 5.2394
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O horror do que ele teria que me deu um som, uma espécie de alívio, no entanto, o que fiz o que havia a maior parte de uma das terras oníricas é um livro para o que há muito tempo todo o meu ou a respeito.
+A grande casa de uma mulher que se encontrava no seu próprio rio.
+"Uma voz estava a pouco mais do que eu estava sendo o próprio amigo e a gente em seu curso. Eu estava no escuro sem dúvida.
+— Ele estava vendo
+
+Estimating loss...
+step 6400: val loss 5.1963
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— Não — disse ele. — Vamos para o seu lado.
+— Você é um pouco. — ele fez o que eu disse, em voz baixa e a voz se ele não sabia que eu teria de ir para a cidade, mas não sei se isso não tem nada que tenha sido.
+— Ela não tinha ido embora — disse Louis. — Ela passou a cabeça dela na cara dele. — Eu nunca vi ninguém.
+— Acho que sim.
+—
+Sim — disse.
+
+Estimating loss...
+step 6500: val loss 5.2834
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Os dois dois foram uma das mãos e, muito mais alto do que se escondia.
+— Acho que não estou fazendo. — Ele vai sair daqui a hora.
+— Ele está sendo capaz de descobrir — disse ele, e o que aconteceu. — Você é muito tempo, mas também não tem nada de um homem.
+— Você pode ser bem — respondeu Tom. — Ele
+— E se eu não for? — perguntou Vince.
+— A gente está que eu, acho que
+
+Estimating loss...
+step 6600: val loss 5.2260
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Enquanto a morte que havia uma sensação de
+Que o que se aproximava.
+No entanto, se estendia, Carter pensou, mas não havia sequer a acreditar que um tanto os seres humanos.
+O que se encontrava se tornado a noite anterior, e com um grande temor — e a que a forma não parecia um sonho.
+O senhor era muito interessante.
+O sr. Ward foi que as coisas eram, que os Grandes Deuses haviam sido feitas por um único espaço vazio e da tarde ainda
+
+Estimating loss...
+step 6700: val loss 5.2454
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Se os homens, eu me vi me sinto mais nada. E me diga se eu não tivesse se dito. Eu não me lembro de ver, mas isso foi para o que eu me lembrei de me sentar na cela e vi que eu não estava — o meu filho de Deus, não consigo.
+Eu estava em minha direção ao ponto.
+Eu não me lembro. Ele o levei para o prédio principal da cozinha. Eu estava ao lado da varanda e vi que a casa de Joe, e ela
+
+Estimating loss...
+step 6800: val loss 5.3200
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Em 1769
+Na biblioteca do Colorado, uma grande quantidade de lixo entre dois blocos de concreto. O sr, de um garoto que podia deixar de pé na frente da cozinha.
+Uma hora de estar na rua, como se fosse uma cidade de verão, mas não era nada.
+Os dois a parte do tempo, e os olhos se arregalaram, com o ar-z, e o velho amigo o fez ouvir o sorriso.
+— Mas eu não quero dizer, não foi bem, mas
+
+Estimating loss...
+step 6900: val loss 5.2362
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Não havia nem medo de que o senhor poderia estar com ele. O que ele não estava fazendo com o seu trabalho. Ele viu com sua aparência mais fina que a pele da barriga, e sua mãe, por que a parte inferior de uma mulher bonita do outro lado.
+Foi o que ele disse que estava morto, mas o que estava tentando pegar o carro e os braços da garota lhe fez uma pausa.
+— Não estou falando em sua cara?
+—
+Não, é a coisa mais
+
+Estimating loss...
+step 7000: val loss 5.2852
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A maioria dos dias e a coisa que ela se sentia de medo.
+— O que aconteceu?
+— Como era uma mulher que uma mulher é que você não sabe nada.
+— Eu sei — disse a minha mãe. — Eu não quero dizer que ela não sei, se eu quero que eu vou saber. O que você está bem?
+— É que você vai ficar aqui — falei. — Foi o que vou ter medo de você.
+— O senhor?
+— Por favor
+Saving checkpoint to models/v20_test/checkpoints/7000.pth
+Deleting checkpoint models/v20_test/checkpoints/2000.pth
+Saving optimizer state to models/v20_test/checkpoints/optim.pth
+
+Estimating loss...
+step 7100: val loss 5.2792
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+A primeira parte da cidade é de todos os homens.
+O dr. Johnson, e o sr. Harrigan o senhor sabe, e é apenas uma coisa que me convenceu a falar do filho da mãe. 'O nome dele foi o que ele não poderia dizer, mas se é, a mulher não ser um deles. E eu sou o que ele não quer dizer com você, por que ele queria dizer, se isso não estivesse se sentia muito mais, ou menos. O que você fez,
+
+Estimating loss...
+step 7200: val loss 5.2756
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— Eu sei que eu não estou falando para ele e o que eu quero dizer, e, eu sou um sujeito que vai passar.
+— Ah, senhor.
+— Não, que você vai dizer a ele diz. — Mas, quando você me disse que era. — E você sabe que sim. — Mas o senhor não pode ser a gente, mas se você não é tão ruim quanto a gente.
+— E isso está acontecendo! — gritou ela, e olha para o banheiro
+
+Estimating loss...
+step 7300: val loss 5.2710
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+—
+Você está aqui?
+— Eu sei o que foi tão ruim.
+— O que você quer? — perguntei.
+Ela olhou de volta para casa. — Ela não viu ninguém que tinha feito o suficiente na cadeira de rodas e a parte da sala, depois de uma vez, mas o que está bem?
+— Não — disse Dave. — Ele está ferido. — O que está indo no chão, mas não é?
+— Não sei se você quer dizer isso.
+
+Estimating loss...
+step 7400: val loss 5.2296
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O fato de que o fato de os gatos estavam de estranhos e de um novo castelo de janeiro de janeiro no vilarejo.
+O caminho do porto de Pawtuxet.
+E o que o dia era muito bom, em "Latismo".
+Eu tinha sido o que estava no fundo de um homem que dava a ter levado a uma longa corrida com um lado para a frente, o que fazia lembrar de uma coisa que o próprio
+De qualquer coisa em que não era a mulher, mas não conseguia
+
+Estimating loss...
+step 7500: val loss 5.2463
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+— É, como você está bem?
+—
+Você vai morrer — diz Danny. — Acho que não, é? A verdade, e você é um
+o.
+—
+A voz de Jack pensa que não vai. — Ele se sente um sorriso.
+— Sim — disse Henry.
+—
+Não sei — disse ela.
+— Não sei — diz Jack. — Então, não é? — pergunta Beezer.
+— Acho que o garoto está fazendo.
+—
+
+Estimating loss...
+step 7600: val loss 5.2304
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+De onde os homens se encontravam em uma encosta, e a lua cheia de luz do mundo, com uma espécie de grande intensidade. Lá
+E, que as nuvens estavam ali, no interior do fundo que havia mais ou mais a outra, e sem uma vez.
+—
+E,
+E os dois 
+e-se a um dos Grandes Deuses, e eu não gostei de tudo, e a visão de sua própria cabeça e a
+do lado do lago, a escuridão, a
+
+Estimating loss...
+step 7700: val loss 5.2312
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A cada vez mais que a gente não se chama de fato de que o sr. Thomas, que não é como a minha mãe, mas não consigo mesmo. Você é o que me diz que as palavras estão fazendo a palavra que não sabe.
+— Mas o assunto é de verdade.
+— E se a pessoa que é a sua. Mas o que não é que estou fazendo.
+— Se o senhor não puder me contar — diz a ela, eu não sei.
+— Você é
+
+Estimating loss...
+step 7800: val loss 5.2044
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+A noite,
+E o seu último momento
+Não há nada,
+E não é verdade, mas
+e, não é?
+O garoto que pode fazer,
+o cair a
+que é um dia ruim. E se não.
+E, então, quando eles chegaram a casa,
+estava em
+de
+sua frente,
+como o velho Buick da Floresta.
+Ele olhou para a frente do volante para o lado.
+—
+Que é? — perguntou ele,
+
+Estimating loss...
+step 7900: val loss 5.2753
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+"Em abril", em que a "Eu acho que você quer fazer a minha ideia, mas vou contar a que o que eu fiz. Não sei. É o que a esposa tem de que fazer a mesma coisa, não é? Se eu tiver certeza de que vou fazer isso.
+— A isso é um bom nome de um outro, é a última vez que as mulheres são que não podem ser tão comuns. Mas, eu não quero que eu não vou me impedir de dizer que não
+
+Estimating loss...
+step 8000: val loss 5.2536
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. Se estivessem todos eles, eles tinham a vida de uma criatura assim, os outros nos arredores das cidades de Nova Inglaterra, e o povoava. No fim, que era o homem que tinha que ser o tipo de literatura de homem. As pessoas como o dr. Willett, como foi o tipo de ficção científica, que foi o que, e no primeiro segundo em um lugar para a humanidade. No meio de todas as vezes, o pai e a maioria dos nossos amigos e as pessoas que foram,
+Saving checkpoint to models/v20_test/checkpoints/8000.pth
+Deleting checkpoint models/v20_test/checkpoints/3000.pth
+Saving optimizer state to models/v20_test/checkpoints/optim.pth
+
+Estimating loss...
+step 8100: val loss 5.2054
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. O dr. Blackwood está acontecendo. Willett disse que não se tratava de um culto no entanto, embora não a existência de tais criaturas. O que se seguiu em uma cidade de Curwen, e talvez não houvesse se tornado como a um homem que não estava se tornando a deixar de ser o mundo que se aproximava e a galé negra, que o povo da jornada em meio à Terra, e ao longo da desconhecida Kadath.
+"Um homem do velho se seguiu em seu lugar, porém, porém, pois
+
+Estimating loss...
+step 8200: val loss 5.2101
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+A srta. Desjardin estava lá. Mas a gente tem o que vê? — perguntou ela. — Já não vai querer mais.
+— E não vai saber o que você está fazendo?
+— Não.
+— Não, você, ele não é um bom, e não tem nada que fazer, talvez seja assim.
+— Não sei o que eu quero.
+Ele se eu possa ter que ir para o banheiro e eu ainda só tivesse feito.
+— Eu sei um pouco e
+
+Estimating loss...
+step 8300: val loss 5.2237
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis. A maior parte da cidade era a cidade de Innsmouth. De qualquer modo o tempo, um homem na época, a maioria de homens do tempo, os homens, não estavam de pé, e os dois estavam cobertas por um tempo. O velho era um homem que não era uma espécie de ataque cardíaco. Não era uma boa vontade. Em geral, o tempo era mais mais que uma coisa de que eu tivesse sido a sensação de que ela não era uma única coisa que ele tinha visto o que estava no
+
+Estimating loss...
+step 8400: val loss 5.2061
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Por fim, a maioria das pessoas, a gente não é um tipo de coisa mais importante, mas também não tem nada.
+— É assim que eu me surpreende.
+Quando a gente entra no banco, o que vai ficar aqui, eu não vou querer.
+— Eu quero dizer — disse ele.
+— Não.
+— Não sei — disse ele, porque o que você vai deixar de pé na boca.
+— O que você quer dizer, eu.
+— Vou te
+
+Estimating loss...
+step 8500: val loss 5.1935
+Generating 100 tokens from context='Escrevo sob efeito de horrores inimagináveis.'
+generated_text: Escrevo sob efeito de horrores inimagináveis.
+Quando os aldeões chegaram à vista, Carter viu os deuses que tinham a curiosidade e a
+Um instante chegou a ser um tanto supremo;
+Em algum lugar, era a fim; e o que em que ele não tinha conseguido, mas não havia mais de uma estranha batalha no fim de Leng, e com uma espécie de terror, que se aproximava das janelas haviam caído em uma pedra em lugar,
+Quando o ghoul que os ghouls havia trazido um templo de pedra e a galé tornou a fazer-
