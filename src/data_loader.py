@@ -408,7 +408,7 @@ class DataLoaderBpeV3:
 
         print("Dataset...")
         print(f"{self.vocab_size_tokenizer=}")
-        self.df_full = pd.read_parquet(path_input).query("train").sample(frac=texts_sample_frac, random_state=1).reset_index(drop=True)
+        self.df_full = pd.read_parquet(path_input).sample(frac=texts_sample_frac, random_state=1).reset_index(drop=True)
         print(f"{self.df_full.shape=}")
         print(f"{self.df_full.value_counts(['author']).sort_index().reset_index()=}")
         print(f"{self.df_full.value_counts(['author','class']).sort_index().reset_index()=}")
