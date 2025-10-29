@@ -1,7 +1,7 @@
 
 # transformers-fun
 Treinamento de modelo GPT do zero com PyTorch, derivado do nanoGPT do Andrej Karpathy.  
-Os dados utilizados são textos de alguns autores de horror na linguagem portuguesa.  
+Os dados utilizados são textos de alguns autores de horror/ficção na linguagem portuguesa.  
 Referência principal: Andrej Karpathy's nanogpt-lecture  
 [Neural Networks: Zero To Hero](https://karpathy.ai/zero-to-hero.html)  
 [nanoGPT model.py](https://github.com/karpathy/nanoGPT/blob/master/model.py)
@@ -13,6 +13,8 @@ Referência principal: Andrej Karpathy's nanogpt-lecture
 * ~~Acúmulo de gradiente~~
 * ~~Attention is all you need learning rate~~
 * Adicionar mais autores no dataset
+    * ~~Tolkien~~
+    * Poe
 * Treinar com as duas T4 no kaggle
 * Early stopping
 * Colocar no chatbot do telegram
@@ -24,6 +26,31 @@ Referência principal: Andrej Karpathy's nanogpt-lecture
 MIT
 
 # Referências de parâmetros
+## Base atual - v21
+Tokens in tokenizer:  
+vocab_size_tokenizer=50257  
+estimated_starting_loss_=10.824905395507812  
+
+Chars/Tokens statistics:  
+Chars:  
+len_corpus=68.180796 M chars  
+len_splits={'eval': 13.120932, 'train': 55.184733} M chars  
+Tokens:  
+len_corpus=15.136549 M tokens  
+len_splits={'eval': 2.905144, 'train': 12.231405} M tokens  
+
+Autores:  
+0       king           bachman      6  
+1       king            contos     12  
+2       king              king     40  
+3       king       torre_negra      7  
+4  lovecraft         Apêndices     12  
+5  lovecraft  Ciclo de Cthulhu     20  
+6  lovecraft  Ciclo dos Sonhos     20  
+7  lovecraft        Miscelânea     24  
+8  lovecraft           Poesias     38  
+9    tolkien           tolkien     10  
+
 ## Attention is all you need
 ### Dataset
 English-German  
