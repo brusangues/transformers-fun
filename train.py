@@ -3,6 +3,7 @@ import sys
 import shutil
 import argparse
 import datetime
+import glob
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
@@ -228,6 +229,7 @@ def training_loop(
 
     print("\nStarting training...")
     checkpoints = []
+    losses_list = []
     model.train()
     for iter in tqdm(
         range(start_iter, max_iters),
@@ -267,6 +269,7 @@ def training_loop(
         if iter % eval_interval == 0 or iter == max_iters - 1:
             print()
             losses = estimate_loss(iter, splits=["val"])
+            losses_list.append(losses["val"])
             # writer.add_scalar("loss/train_estimated", losses["train"], iter)
             writer.add_scalar("loss/val", losses["val"], iter)
             generated_text = generate_sample(context)
@@ -274,10 +277,20 @@ def training_loop(
 
         if (iter % save_interval == 0 or iter == max_iters - 1) and iter != start_iter:
             checkpoint_name = f"{path_full}/checkpoints/{iter}.pth"
+            best_checkpoint_name = f"{path_full}/checkpoints/best_{iter}.pth"
             checkpoints.append(checkpoint_name)
             print(f"Saving checkpoint to {checkpoint_name}")
             os.makedirs(os.path.dirname(checkpoint_name), exist_ok=True)
             torch.save(m.state_dict(), checkpoint_name)
+            if losses_list and losses_list[-1] == min(losses_list):
+                print("Deleting previous best checkpoints...")
+                for checkpoint_delete in glob.glob(f"{path_full}/checkpoints/best_*.pth"):
+                    try:
+                        os.remove(checkpoint_delete)
+                    except Exception as e:
+                        print(f"Error deleting checkpoint {checkpoint_delete}: {e}")
+                print(f"New best model at iter {iter} with val loss {losses_list[-1]:.4f}. Saving to {best_checkpoint_name}")
+                shutil.copy2(checkpoint_name, best_checkpoint_name)
             while len(checkpoints) > n_checkpoints_keep:
                 checkpoint_delete = checkpoints.pop(0)
                 print(f"Deleting checkpoint {checkpoint_delete}")

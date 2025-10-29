@@ -1,15 +1,15 @@
 # Model parameters
-batch_size: 20  # independent sequences processed in parallel
-context_len: 100  # maximum token context length
-n_embd: 100  # linear layers size
-n_feed_forward: 200
+batch_size: 10  # independent sequences processed in parallel
+context_len: 10  # maximum token context length
+n_embd: 10  # linear layers size
+n_feed_forward: 100
 n_head: 2  # parallel attention heads
 n_layer: 1  # attention blocks in sequence
-dropout: 0.1
+dropout: 0.0
 
 # Optimizer parameters
-grad_accum_steps: 5
-learning_rate: 0.0001
+grad_accum_steps: 1
+learning_rate: 0.01
 betas: [0.9, 0.98]
 eps: 0.000_000_001
 weight_decay: 0.01
@@ -18,9 +18,9 @@ warmup_steps: 1000 # 4000
 
 # Iteration loop parameters
 start_iter: 0
-max_iters: 500
-eval_interval: 100
-save_interval: 1000
+max_iters: 2000
+eval_interval: 50
+save_interval: 50
 eval_iters: 20
 texts_sample_frac: 1.0
 split_frac: 0.85
@@ -44,3 +44,5 @@ context: "Escrevo sob efeito de horrores inimagináveis."
 # path_load_model: "/kaggle/input/v18-colab/4600.pth"
 # path_load_optim: "models/v18_test/checkpoints/optim.pth"
 # dummy: true
+tqdm_train: true
+tqdm_eval: true

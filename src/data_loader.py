@@ -463,16 +463,18 @@ class DataLoaderBpeV3:
                 self.df_full.to_parquet(self.path_input_encoded)
 
         print("\nChars/Tokens statistics:")
-        self.df_full["text_len"] = self.df_full.text_clean.str.len()
-        len_corpus = int(self.df_full["text_len"].sum()) / 1e6
+        self.df_full["text_clean_len"] = self.df_full.text_clean.str.len()
+        len_corpus = int(self.df_full["text_clean_len"].sum()) / 1e6
         len_splits = (self.df_full.groupby("split").text_len.sum() / 1e6).to_dict()
         print("Chars:")
-        print(f"{len_corpus=} {len_splits=} M chars")
+        print(f"{len_corpus=} M chars")
+        print(f"{len_splits=} M chars")
 
         len_corpus = int(self.df_full["text_encoded_len"].sum()) / 1e6
         len_splits = (self.df_full.groupby("split").text_encoded_len.sum() / 1e6).to_dict()
         print("Tokens:")
-        print(f"{len_corpus=} {len_splits=} M tokens")
+        print(f"{len_corpus=} M tokens")
+        print(f"{len_splits=} M tokens")
 
         batch_size_tokens = self.batch_size * self.context_len
         batch_size_tokens_accum = batch_size_tokens * self.grad_accum_steps
