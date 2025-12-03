@@ -38,7 +38,7 @@ path_input: "data/df_full_encoded_v21.pq"
 # encode_input: true  # false
 
 path_models: "models"
-name: "v22_test"
+name: "v22_test_2"
 n_tokens_generate: 600
 context: "Escrevo sob efeito de horrores inimagináveis."
 # path_load_model: "/kaggle/input/v18-colab/4600.pth"
@@ -46,3 +46,5 @@ context: "Escrevo sob efeito de horrores inimagináveis."
 # dummy: true
 tqdm_train: true
 tqdm_eval: true
+
+early_stopping: 5

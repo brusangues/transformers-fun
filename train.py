@@ -4,6 +4,7 @@ import shutil
 import argparse
 import datetime
 import glob
+import numpy as np
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
@@ -89,6 +90,7 @@ def training_loop(
     dynamic_lr=False,
     tqdm_train=False,
     tqdm_eval=False,
+    early_stopping=20,
     **kwargs,
 ):
     print("Starting training loop...")
@@ -229,7 +231,8 @@ def training_loop(
 
     print("\nStarting training...")
     checkpoints = []
-    losses_list = []
+    losses_list = [1000000.0]
+    losses_save_list = []
     model.train()
     for iter in tqdm(
         range(start_iter, max_iters),
@@ -241,6 +244,7 @@ def training_loop(
         leave=True,
         disable=not tqdm_train,
     ):
+        writer.flush()
         if dynamic_lr:
             lr = get_lr(iter)
             for param_group in optimizer.param_groups:
@@ -276,20 +280,21 @@ def training_loop(
             writer.add_text("generated_text", generated_text, iter)
 
         if (iter % save_interval == 0 or iter == max_iters - 1) and iter != start_iter:
+            losses_save_list.append(losses_list[-1])
             checkpoint_name = f"{path_full}/checkpoints/{iter}.pth"
             best_checkpoint_name = f"{path_full}/checkpoints/best_{iter}.pth"
             checkpoints.append(checkpoint_name)
             print(f"Saving checkpoint to {checkpoint_name}")
             os.makedirs(os.path.dirname(checkpoint_name), exist_ok=True)
             torch.save(m.state_dict(), checkpoint_name)
-            if losses_list and losses_list[-1] == min(losses_list):
+            if losses_save_list and losses_save_list[-1] == min(losses_save_list):
                 print("Deleting previous best checkpoints...")
                 for checkpoint_delete in glob.glob(f"{path_full}/checkpoints/best_*.pth"):
                     try:
                         os.remove(checkpoint_delete)
                     except Exception as e:
                         print(f"Error deleting checkpoint {checkpoint_delete}: {e}")
-                print(f"New best model at iter {iter} with val loss {losses_list[-1]:.4f}. Saving to {best_checkpoint_name}")
+                print(f"New best model at iter {iter} with val loss {losses_save_list[-1]:.4f}. Saving to {best_checkpoint_name}")
                 shutil.copy2(checkpoint_name, best_checkpoint_name)
             while len(checkpoints) > n_checkpoints_keep:
                 checkpoint_delete = checkpoints.pop(0)
@@ -304,7 +309,14 @@ def training_loop(
             print(f"Saving optimizer state to {checkpoint_optim_name}")
             torch.save(optimizer.state_dict(), checkpoint_optim_name)
 
-        writer.flush()
+            # Early stopping
+            if early_stopping and len(losses_list) > early_stopping+1:
+                best_loss_iter = torch.argmin(torch.tensor(losses_list)).item()
+                current_loss_iter = len(losses_list)
+                print(f"Checking for early stopping: {best_loss_iter=} {current_loss_iter=} {early_stopping=}")
+                if best_loss_iter < current_loss_iter - early_stopping:
+                    print(f"Validation loss did not improve over the last {early_stopping} evaluations. Early stopping.")
+                    break
 
     print("\nTraining finished. Generating text...")
     generated_text = generate_sample(context, n_tokens_generate)
