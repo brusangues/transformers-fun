@@ -1,0 +1,217 @@
+from datetime import datetime
+import time
+import os
+import torch
+import transformers
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFacePipeline
+from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
+from langchain_openai import ChatOpenAI
+from langchain_core.outputs import Generation, LLMResult
+from google.api_core.exceptions import ResourceExhausted
+
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+
+MAX_NEW_TOKENS = 8192
+RESOURCE_EXAUSTED_BACKOFF_SECONDS = 60
+GOOGLE_API_KEYS = [
+    os.environ["GEMINI_API_KEY1"],
+    os.environ["GEMINI_API_KEY2"],
+    os.environ["GEMINI_API_KEY3"],
+    os.environ["GEMINI_API_KEY4"],
+]
+
+
+# fmt: off
+models_text = {
+    "llama1b": ("local", "unsloth/Llama-3.2-1B-Instruct-bnb-4bit"),
+    "llama3b": ("local", "unsloth/Llama-3.2-3B-Instruct-bnb-4bit"),
+    "gemma2b": ("local", "unsloth/gemma-2-2b-it-bnb-4bit"),
+    "phi":     ("local", "unsloth/Phi-3.5-mini-instruct-bnb-4bit"),
+
+    "gemini-2.0-flash":      ("google", "gemini-2.0-flash"),
+    "gemini-2.0-flash-lite": ("google", "gemini-2.0-flash-lite"),
+    "gemini-1.5-flash":      ("google", "gemini-1.5-flash"),
+    "gemini-1.5-flash-8b":   ("google", "gemini-1.5-flash-8b"),
+    "gemini-1.5-pro":        ("google", "gemini-1.5-pro"),
+    "gemini-2.0-pro":        ("google", "gemini-2.0-pro-exp"),
+    "gemini-2.0-flash-thinking": ("google", "gemini-2.0-flash-thinking-exp"),
+    "gemma3":                ("google", "gemma-3-27b-it"),
+    "gemini-2.5-flash": ("google", "models/gemini-2.5-flash"),
+
+    # "gemini-2.0-pro": ("open_router", "google/gemini-2.0-pro-exp-02-05:free", "https://openrouter.ai/api/v1"),
+    # "gemini-2.0-flash-thinking": ("open_router", "google/gemini-2.0-flash-thinking-exp:free", "https://openrouter.ai/api/v1"),
+    "or-llama70b":    ("open_router", "meta-llama/llama-3.3-70b-instruct:free", "https://openrouter.ai/api/v1"),
+    "or-r1":          ("open_router", "deepseek/deepseek-r1:free", "https://openrouter.ai/api/v1"),
+    "qwen2.5":        ("open_router", "qwen/qwen2.5-vl-72b-instruct:free", "https://openrouter.ai/api/v1"),
+
+    "gpt-4o":      ("github", "gpt-4o", "https://models.inference.ai.azure.com"),
+    "gpt-4o-mini": ("github", "gpt-4o-mini", "https://models.inference.ai.azure.com"),
+    "gh-r1":       ("github", "DeepSeek-R1", "https://models.inference.ai.azure.com"),
+    "gh-llama70b": ("github", "Llama-3.3-70B-Instruct", "https://models.inference.ai.azure.com"),
+}
+models_embedding = {
+    "gte":         ("local", "Alibaba-NLP/gte-multilingual-base"),
+    "modernbert":  ("local", "nomic-ai/modernbert-embed-base"),
+    "e5":          ("local", "intfloat/multilingual-e5-large"),
+    "e5-instruct": ("local", "intfloat/multilingual-e5-large-instruct"),
+    "arctic":      ("local", "Snowflake/snowflake-arctic-embed-l-v2.0"),
+    "google-4":    ("google", "models/text-embedding-004"),
+    "gemini":      ("google", "models/gemini-embedding-exp-03-07"),
+}
+# fmt: on
+
+
+class GenericHuggingFacePipeline:
+    def __init__(self, models):
+        self.model_i = 0
+        self.model = models[0]
+        self.models = models
+        self.pipeline = None
+
+    def switch_models(self):
+        key = self.model.google_api_key.get_secret_value()
+        print(f"Current model: {self.model_i} {self.model.model} {key[-4:]}")
+        len_models = len(self.models)
+        self.model_i = (self.model_i + 1) % len_models
+        self.model = self.models[self.model_i]
+        key = self.model.google_api_key.get_secret_value()
+        print(f"Next model:    {self.model_i} {self.model.model} {key[-4:]}")
+
+    def generate(self, prompts, **kwargs):
+        results = []
+        for prompt in prompts:
+            response = self.model.invoke(prompt)
+            metadata = {}
+            try:
+                metadata = response.usage_metadata
+                metadata = metadata | response.response_metadata
+            except:
+                pass
+            generation = Generation(text=response.content, generation_info=metadata)
+            results.append([generation])
+        return LLMResult(generations=results)
+
+
+def load_model(model_alias="gemini-2.0-flash", max_new_tokens=MAX_NEW_TOKENS):
+    print("load_model...")
+    model_data = models_text.get(model_alias, models_text["gemini-2.0-flash"])
+    print(f"{model_alias=} {max_new_tokens=} {model_data=}")
+
+    provider = model_data[0]
+    model_name = model_data[1]
+
+    if provider in ["open_router", "github"]:
+        print("Loading OpenRouter or Github model...")
+        open_router_key = os.environ["OPEN_ROUTER_API_KEY"]
+        github_key = os.environ["GITHUB_TOKEN"]
+        api_key = github_key if provider == "github" else open_router_key
+        base_url = model_data[2]
+        llm = ChatOpenAI(
+            model_name=model_name,
+            api_key=api_key,
+            base_url=base_url,
+            # max_new_tokens=max_new_tokens,
+            max_completion_tokens=max_new_tokens,
+        )
+        print(f"{llm=}")
+        hf_pipe = GenericHuggingFacePipeline(models=[llm])
+    elif provider == "google":
+        print("Loading ChatGoogleGenerativeAI model...")
+        models = []
+        for key in GOOGLE_API_KEYS:
+            llm = ChatGoogleGenerativeAI(
+                model=model_name,
+                temperature=0,
+                max_output_tokens=max_new_tokens,
+                timeout=60,
+                max_retries=3,
+                google_api_key=key,
+            )
+            print(f"{llm=}")
+            models.append(llm)
+        hf_pipe = GenericHuggingFacePipeline(models=models)
+    else:
+        print("Loading transformers.pipeline local model...")
+        pipe = transformers.pipeline(
+            task="text-generation",
+            # temperature=1e-10,
+            # device=0,
+            model=model_name,
+            # pad_token_id=128001,
+            max_new_tokens=max_new_tokens,
+            return_full_text=False,
+            # truncation=True, do_sample=True,
+            # top_k=50, top_p=0.95,
+        )
+        hf_pipe = HuggingFacePipeline(pipeline=pipe)
+    print(f"{hf_pipe=}")
+    return hf_pipe, model_name, max_new_tokens
+
+
+def query_model(llm: HuggingFacePipeline, prompt: str):
+    if isinstance(llm.model, ChatGoogleGenerativeAI):
+        return query_model_google(llm, prompt)
+    print("query_model...")
+    print(f"{len(prompt)=}")
+    # print(f"{len(prompt)=} {prompt=}")
+    # Calculate the number of input tokens using the model tokenizer
+    if llm.pipeline is None:
+        num_input_tokens = len(prompt.split())
+    else:
+        num_input_tokens = len(llm.pipeline.tokenizer.encode(prompt))
+    print(f"{num_input_tokens=}")
+    llmresult = None
+    for i in range(10, 61, 10):
+        try:
+            llmresult = llm.generate([prompt])
+            break
+        except Exception as e:
+            print(f"Retrying in {i} seconds: {e}")
+            time.sleep(i)
+            print("Trying again...")
+    if llmresult is None:
+        llmresult = llm.generate([prompt])
+    response = llmresult.generations[0][0].text
+    try:
+        info = llmresult.generations[0][0].generation_info
+    except Exception as e:
+        print(f"Failed to get generation_info: {e}")
+        info = {}
+    print(f"{len(response)=}")
+    print(f"{response=}")
+    print(f"{info=}")
+    return response, info
+
+
+def query_model_google(llm: HuggingFacePipeline, prompt: str):
+    print("query_model_google...")
+    llmresult = None
+    key = llm.model.google_api_key.get_secret_value()
+    len_keys = len(GOOGLE_API_KEYS)
+    key_index = GOOGLE_API_KEYS.index(key)
+    model_name = llm.model.model
+
+    print(f"{len(prompt)=} {model_name=} {key_index=} {key[-4:]=}")
+    for s in range(10, 61, 10):
+        for i in range(len_keys):
+            try:
+                llmresult = llm.generate([prompt])
+                break
+            except ResourceExhausted as e:
+                key = llm.model.google_api_key.get_secret_value()
+                key_index = GOOGLE_API_KEYS.index(key)
+                print(f"ResourceExhausted! With key {key_index=} {key[-4:]=}")
+                llm.switch_models()
+        if llmresult is not None:
+            break
+        print(f"ResourceExhausted! With all keys. Waiting {s} seconds...")
+        time.sleep(s)
+        print("Trying again...")
+
+    response = llmresult.generations[0][0].text
+    info = llmresult.generations[0][0].generation_info
+    print(f"{len(response)=}")
+    print(f"{response=}")
+    print(f"{info=}")
+    return response, info
