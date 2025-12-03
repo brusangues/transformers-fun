@@ -16,7 +16,7 @@ Referência principal: Andrej Karpathy's nanogpt-lecture
     * ~~Tolkien~~
     * Poe
 * Treinar com as duas T4 no kaggle
-* Early stopping
+* ~~Early stopping~~
 * ~~Colocar no chatbot do telegram~~
 * Classificação de autor ou tipo de texto
 * Logar estatísticas sobre os pesos para debugar o treinamento das redes
