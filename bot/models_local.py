@@ -13,6 +13,7 @@ print(f"{DEVICE=}")
 LOCAL_MODELS = {
     "v22": ("models/v22_kaggle_0/params.yaml", "models/v22_kaggle_0/checkpoints/best_15000.pth"),
     "v22_test": ("models/v22_test/params.yaml", "models/v22_test/checkpoints/1999.pth"),
+    "v23": ("models/v23_kaggle_0/params.yaml", "models/v23_kaggle_0/checkpoints/best_16000.pth"),
 }
 
 
