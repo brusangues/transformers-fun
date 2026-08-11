@@ -14,6 +14,8 @@ import yaml
 import json
 from copy import deepcopy
 from pynvml import nvmlInit, nvmlDeviceGetHandleByIndex, nvmlDeviceGetMemoryInfo
+import time
+from collections import deque
 
 from src.data_loader import DataLoaderBpeV3
 from src.gpt_v0 import GPTLanguageModel
@@ -234,6 +236,7 @@ def training_loop(
     losses_list = [1000000.0]
     losses_save_list = []
     model.train()
+    speed_times = deque(maxlen=20)  # janela p/ mediana do tempo por batch
     for iter in tqdm(
         range(start_iter, max_iters),
         desc="Training",
@@ -253,6 +256,7 @@ def training_loop(
         lr = optimizer.param_groups[0]['lr']
         writer.add_scalar("optim/lr", lr, iter)
 
+        t0 = time.perf_counter()
         # sample a batch of data
         xb, yb = data_loader.get_batch("train")
 
@@ -268,6 +272,12 @@ def training_loop(
             optimizer.step()
         writer.add_scalar("loss/train", float(loss.mean()) * grad_accum_steps, iter)
         profile(iter)
+
+        # velocidade por batch (mediana da janela filtra outliers de eval/save)
+        speed_times.append(time.perf_counter() - t0)
+        batch_s = float(np.median(speed_times))
+        writer.add_scalar("speed/batch_s", batch_s, iter)
+        writer.add_scalar("speed/toks_per_s", (batch_size * context_len) / batch_s, iter)
 
         # every once in a while evaluate the loss on train and val sets
         if iter % eval_interval == 0 or iter == max_iters - 1:
