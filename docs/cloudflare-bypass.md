@@ -108,24 +108,69 @@ Uso real no repo: `crawler_liga.py`, `crawler_liga_bulk.py`,
 Playwright com Cloudflare ("Just a moment...") mas passa com `get_driver()`.
 Playwright ficou proibido lá para validar links (regra registrada na skill).
 
-## Aplicação ao Domínio Público BR
+## Aplicação ao Domínio Público BR — fluxo VALIDADO (12/08/2026)
 
-Alvo: `http://www.dominiopublico.gov.br/pesquisa/PesquisaObraForm.do`
-(HTTP, não HTTPS — o site do governo). Bloqueio atual: Cloudflare "Just a moment..."
-até para Chromium headless.
+Alvo: `https://www.dominiopublico.gov.br/pesquisa/PesquisaObraForm.do`
+(redireciona de http → https). Teste real com `undetected_chromedriver`
+(chrome 150, `version_main=150`) — challenge limpa em **4–6s**.
 
-Roteiro com `selenium_get` adaptado:
+Mecânica exata do site (medida no teste):
 
-1. `driver.get('http://www.dominiopublico.gov.br/pesquisa/PesquisaObraForm.do')`
-2. Aguardar o `_cf_chl_opt` sumir do source (mesmo polling do `selenium_get`).
-3. Preencher o form de busca via Selenium (campos: título/autor/idioma) e
-   `submit()` — o site faz POST normal (não-JS) depois do challenge.
-4. Na página de resultados, extrair os links de download — padrão conhecido:
-   `http://www.dominiopublico.gov.br/download/texto/<id>.pdf` — via
-   `driver.find_elements(By.CSS_SELECTOR, 'a[href*="/download/texto/"]')`.
-5. Baixar os PDFs com requests COMUM (o download direto não passa pelo
-   challenge, só o formulário de busca) — ou via `driver` se bloquear.
-6. `data/<autor>/` + playground_3 (pipeline existente) → próxima base vXX.
+1. **Cloudflare challenge**: some o `_cf_chl_opt` do source em ~4–6s com o
+   undetected_chromedriver (janela visível). Playwright/requests = bloqueados.
+2. **Turnstile INVISÍVEL**: o submit do form é gated por
+   `window.__cfRLUnblockHandlers` (o botão tem
+   `onclick="if (!window.__cfRLUnblockHandlers) return false; return validar();"`).
+   O Turnstile completa sozinho em 1–2s em navegador real — **esperar o handler
+   existir antes de submeter** (poll via `execute_script`).
+3. **Form** (nome `PesquisaObraActionForm`, `document.forms[1]`):
+   - `no_autor` (text) / `ds_titulo` (text) — busca
+   - **`co_midia` é OBRIGATÓRIO** (validação `validar()`: "Preencha o(s) Campo(s)
+     Obrigatório(s)") — `2` = Texto, `3` = Som, `5` = Imagem, `6` = Video
+   - `co_idioma`: `1` = Português, `2` = Inglês, `7` = Espanhol…
+   - **Acentos importam na busca**: `Dracula` → 0 resultados, `Drácula` → 3
+   - Botão `select_action` (class `myhidden` — oculto) → **click via JS**
+     (`document.querySelector('input[name=select_action]').click()`), nunca
+     `resetfull_action` (Reset)
+   - Setar selects via JS direto (`co_midia.value='2'`) NÃO dispara o `onchange`
+     (que clicaria `refresh_action` e limparia o form)
+4. **Resultados**: página `ResultadoPesquisaObraForm.do`, 50 obras/página,
+   paginação `?first=50&skip=N`. Cada obra: `DetalheObraForm.do?co_obra=<id>`.
+5. **Download**: `DetalheObraDownload.do?select_action=&co_obra=<id>&co_midia=2`
+   redireciona para o arquivo real — padrão **`/download/texto/<id>.pdf`**
+   (ex: `gu000345.pdf`). O requests/urllib simples leva **403** (TLS fingerprint);
+   o caminho que funciona: **`fetch()` dentro do driver** (mesma sessão/TLS do
+   Chrome) → base64 → salvar:
+
+```python
+b64 = driver.execute_async_script("""
+    var url = arguments[0], done = arguments[1];
+    fetch(url).then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.arrayBuffer();
+    }).then(function(buf) {
+        var bytes = new Uint8Array(buf), binary = '';
+        for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+        done(btoa(binary));
+    }).catch(function(e) { done('ERR:' + e.message); });
+""", pdf_url)
+```
+
+6. **Conteúdo real (medido)**: autor `Stoker` → 7 obras (Dracula ×2, Dracula's
+   Guest, The Lady of Shroud, The Lair of the White Worm, The Man) — mas o
+   "Dracula" baixado é o **Project Gutenberg em INGLÊS** (header do Gutenberg no
+   PDF). Autor `Edgar Allan Poe` → 50+ obras na página 1 (EN/ES; títulos como
+   "A Descent into the Maesltrom", "Annabel Lee", "El Cuervo", "El Corazón
+   Delator"). **Traduções pt-BR de terror estrangeiro são escassas no acervo** —
+   o DP BR tem originais EN/ES + autores BR; buscar com `co_idioma=1` + título
+   acentuado e filtrar o diagnóstico (o notebook detecta EN/PT-PT/arcaico).
+   PDFs do Gutenberg embutidos no DP BR são conteúdo público — ok, mas em EN
+   não entram na base pt (o pipeline já filtra por variante).
+
+Scripts de referência (teste validado): o fluxo completo está nos arquivos
+`dpbr_*.py` usados na validação (busca → resultados → fetch → pdfplumber →
+diagnóstico `arch_per_mil` + variante). Depois do teste: PDF em `data/<autor>/`
++ `playground_3.ipynb` → base vXX.
 
 Dependências (no env `transformers-fun`):
 
