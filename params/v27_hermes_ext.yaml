@@ -1,0 +1,45 @@
+# Model params — v27 EXTENSÃO +20k steps (30k -> 50k) a partir do best_29999
+# O best do run original foi no ÚLTIMO step (4.6689, ainda descendo) — estender.
+# Mesma rede 384/6, batch 8, base v25 (split corrigido).
+batch_size: 8
+context_len: 512
+n_embd: 384
+n_feed_forward: 1536
+n_head: 6
+n_layer: 6
+dropout: 0.1
+
+# Optimizer
+grad_accum_steps: 12
+learning_rate: 0.0008
+betas: [0.9, 0.98]
+eps: 0.000_000_001
+weight_decay: 0.01
+dynamic_lr: true
+warmup_steps: 2000
+
+# Loop — continua do best (step 30k) até 50k
+start_iter: 30000
+max_iters: 50000
+eval_interval: 200
+save_interval: 1000
+eval_iters: 50
+texts_sample_frac: 1.0
+split_frac: 0.85
+n_checkpoints_keep: 3
+early_stopping: 30       # paciência maior p/ extensão (6000 iters)
+
+# Geração
+top_k: 30
+temperature: 0.7
+
+# Paths (LOCAIS) — mesma pasta v27_hermes (checkpoints continuam lá)
+path_tokenizer: "artifacts/tokenizers/gpt2_ptbr_50k_v2"
+path_input: "data/df_full_encoded_v25.pq"
+path_models: "models"
+name: "v27_hermes"
+n_tokens_generate: 600
+context: "Escrevo sob efeito de horrores inimagináveis."
+path_load_model: "models/v27_hermes/checkpoints/best_29999.pth"
+path_load_optim: "models/v27_hermes/checkpoints/optim.pth"
+# dummy: true              # smoke-test (1 batch)
